@@ -1,6 +1,24 @@
-# gym==0.21.0
+# Core dependencies
+gym>=0.21.0
 lmdb>=1.3.0
 mpmath>=1.2.1
 numpy>=1.21.5
 PyYAML>=6.0
 sympy>=1.10.1
+
+# Deep Learning frameworks
+torch>=1.10.0
+torchvision>=0.11.0
+
+# Traffic simulators
+traci  # SUMO Python API
+
+# RL libraries
+pfrl>=0.3.0  # For PPO agent
+stable-baselines3>=1.5.0
+
+# Utilities
+matplotlib>=3.5.0
+pandas>=1.3.0
+seaborn>=0.11.0
+tqdm>=4.62.0
