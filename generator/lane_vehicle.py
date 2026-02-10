@@ -1,6 +1,6 @@
 import numpy as np
 from . import BaseGenerator
-from world import world_cityflow, world_sumo #, world_openengine
+from world import world_sumo #, world_openengine, world_cityflow
 
 
 class LaneVehicleGenerator(BaseGenerator):
