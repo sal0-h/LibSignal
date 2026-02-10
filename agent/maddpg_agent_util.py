@@ -4,7 +4,7 @@ import os
 import tensorflow as tf
 from tensorflow.python.ops import math_ops
 # from multiagent.multi_discrete import MultiDiscrete
-import gym
+import gymnasium as gym
 import random
 # from gym.spaces import prng
 

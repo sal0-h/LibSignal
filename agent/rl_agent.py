@@ -1,6 +1,6 @@
 from . import BaseAgent
 from common.registry import Registry
-import gym
+import gymnasium as gym
 from generator import LaneVehicleGenerator, IntersectionPhaseGenerator, IntersectionVehicleGenerator
 import random
 import numpy as np

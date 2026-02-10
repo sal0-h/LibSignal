@@ -8,7 +8,7 @@ import os
 from generator import LaneVehicleGenerator, IntersectionPhaseGenerator
 from agent import utils
 
-import gym
+import gymnasium as gym
 import numpy as np
 
 from torch import nn

@@ -1,0 +1,201 @@
+Gym has been unmaintained since 2022 and does not support NumPy 2.0 amongst other critical functionality.
+Please upgrade to Gymnasium, the maintained drop-in replacement of Gym, or contact the authors of your software and request that they upgrade.
+Users of this version of Gym should be able to simply replace 'import gym' with 'import gymnasium as gym' in the vast majority of cases.
+See the migration guide at https://gymnasium.farama.org/introduction/migration_guide/ for additional information.
+building world...
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #25700.00 (0ms ?*RT. ?UPS, TraCI: 26ms, vehicles TOT 342 ACT 69 BUF 9)               
+Connection ID debug
+DQNNet(
+  (dense_1): Linear(in_features=12, out_features=20, bias=True)
+  (dense_2): Linear(in_features=20, out_features=20, bias=True)
+  (dense_3): Linear(in_features=20, out_features=4, bias=True)
+)
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~70000.00UPS, TraCI: 24ms, vehicle2026-02-03 15:08:09 (INFO): step:3600/3600, q_loss:0, rewards:-61.184163411458336, queue:41.025, delay:0.6212233649359808, throughput:1940
+2026-02-03 15:08:09 (INFO): episode:0/200, real avg travel time:113.73865979381443
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 15ms, vehicles TOT 1971 ACT 31 BUF 44)             
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~188000.00UPS, TraCI: 38ms, vehicl2026-02-03 15:10:13 (INFO): Test step:0/200, travel time :67.5909090909091, rewards:-150.925, queue:100.89722222222223, delay:0.7940260993109809, throughput:506
+Step #28800.00 (1ms ~= 1000.00*RT, ~190000.00UPS, TraCI: 33ms, vehicles TOT 696 ACT 190 BU
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 22ms, vehicles TOT 1843 ACT 732026-02-03 15:11:19 (INFO): step:3600/3600, q_loss:0, rewards:-69.43462456597223, queue:46.55, delay:0.6601689656575521, throughput:1903
+2026-02-03 15:11:19 (INFO): episode:1/200, real avg travel time:118.5249605885444
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 24ms, vehicles TOT 1979 ACT 76 BUF 36)             
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~188000.00UPS, TraCI: 41ms, vehicl2026-02-03 15:13:19 (INFO): Test step:1/200, travel time :67.5909090909091, rewards:-150.925, queue:100.89722222222223, delay:0.7940260993109809, throughput:506
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 21ms, vehicles TOT 696 ACT 190 BUF 1319)           
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~122000.00UPS, TraCI: 44ms, vehicl2026-02-03 15:14:24 (INFO): step:3600/3600, q_loss:1169.8172607421875, rewards:-60.72708875868056, queue:40.81944444444444, delay:0.5810362921820746, throughput:1783
+2026-02-03 15:14:24 (INFO): episode:2/200, real avg travel time:88.03140773976445
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 42ms, vehicles TOT 1915 ACT 132 BUF 100)           
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~138000.00UPS, TraCI: 25ms, vehicl2026-02-03 15:16:01 (INFO): Test step:2/200, travel time :26.240759240759242, rewards:-122.76416015625, queue:81.95555555555555, delay:0.5576166788736979, throughput:1001
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 16ms, vehicles TOT 1135 ACT 134 BUF 880)           
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~93000.00UPS, TraCI: 17ms, vehicle2026-02-03 15:17:44 (INFO): step:3600/3600, q_loss:891.4257202148438, rewards:-108.40583767361112, queue:72.36666666666666, delay:0.6165480295817057, throughput:1532
+2026-02-03 15:17:44 (INFO): episode:3/200, real avg travel time:236.5789817232376
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 35ms, vehicles TOT 1628 ACT 96 BUF 387)            
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~100000.00UPS, TraCI: 25ms, vehicl2026-02-03 15:19:01 (INFO): Test step:3/200, travel time :33.693306693306695, rewards:-65.29208441840278, queue:43.58888888888889, delay:0.5446064843071832, throughput:1001
+Step #28800.00 (1ms ~= 1000.00*RT, ~109000.00UPS, TraCI: 13ms, vehicles TOT 1110 ACT 109 B
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 15ms, vehicles TOT 1104 ACT 852026-02-03 15:20:29 (INFO): step:3600/3600, q_loss:516.3285522460938, rewards:-61.05831705729167, queue:40.75833333333333, delay:0.5416455586751302, throughput:1234
+2026-02-03 15:20:29 (INFO): episode:4/200, real avg travel time:202.78038897893032
+Step #28800.00 (1ms ~= 1000.00*RT, ~99000.00UPS, TraCI: 26ms, vehicles TOT 1333 ACT 99 BUF
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 23ms, vehicles TOT 1492 ACT 842026-02-03 15:21:42 (INFO): Test step:4/200, travel time :98.23374827109267, rewards:-48.95791558159722, queue:32.727777777777774, delay:0.5398164537217882, throughput:1446
+Step #28800.00 (1ms ~= 1000.00*RT, ~94000.00UPS, TraCI: 28ms, vehicles TOT 1540 ACT 94 BUF
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~25000.00UPS, TraCI: 18ms, vehicle2026-02-03 15:22:38 (INFO): step:3600/3600, q_loss:741.7623291015625, rewards:-9.47250027126736, queue:6.741666666666666, delay:0.34021176232231987, throughput:1988
+2026-02-03 15:22:38 (INFO): episode:5/200, real avg travel time:47.47686116700201
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 19ms, vehicles TOT 2010 ACT 22 BUF 5)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 6ms, vehicles TOT 1847 ACT 23 2026-02-03 15:23:12 (INFO): Test step:5/200, travel time :44.73336745138178, rewards:-9.087917073567708, queue:6.527777777777778, delay:0.32958331637912325, throughput:1954
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 7ms, vehicles TOT 1974 ACT 20 BUF 41)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 21ms, vehicles TOT 1865 ACT 142026-02-03 15:24:06 (INFO): step:3600/3600, q_loss:351.6609802246094, rewards:-6.223748779296875, queue:4.658333333333333, delay:0.3123726314968533, throughput:1996
+2026-02-03 15:24:06 (INFO): episode:6/200, real avg travel time:42.26152304609219
+Step #28800.00 (1ms ~= 1000.00*RT, ~18000.00UPS, TraCI: 34ms, vehicles TOT 2014 ACT 18 BUF
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 9ms, vehicles TOT 1865 ACT 14 2026-02-03 15:24:42 (INFO): Test step:6/200, travel time :40.75551102204409, rewards:-5.189998033311632, queue:4.008333333333334, delay:0.30093072255452474, throughput:1996
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 13ms, vehicles TOT 2014 ACT 18 BUF 1)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~9000.00UPS, TraCI: 24ms, vehicles2026-02-03 15:25:37 (INFO): step:3600/3600, q_loss:140.28155517578125, rewards:-4.541668362087673, queue:3.5972222222222223, delay:0.3009008831448025, throughput:1999
+2026-02-03 15:25:37 (INFO): episode:7/200, real avg travel time:39.77688844422211
+Step #28800.00 (1ms ~= 1000.00*RT, ~16000.00UPS, TraCI: 41ms, vehicles TOT 2015 ACT 16 BUF
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 5ms, vehicles TOT 1865 ACT 8 B2026-02-03 15:26:22 (INFO): Test step:7/200, travel time :39.53703703703704, rewards:-4.297498914930555, queue:3.4916666666666667, delay:0.2945780012342665, throughput:1998
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 12ms, vehicles TOT 2015 ACT 17 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 15ms, vehicles TOT 1866 ACT 102026-02-03 15:27:07 (INFO): step:3600/3600, q_loss:113.0527572631836, rewards:-3.94958258734809, queue:3.2194444444444446, delay:0.2860995398627387, throughput:1999
+2026-02-03 15:27:07 (INFO): episode:8/200, real avg travel time:39.11055527763882
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 19ms, vehicles TOT 2014 ACT 15 BUF 1)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 8ms, vehicles TOT 1865 ACT 11 2026-02-03 15:27:39 (INFO): Test step:8/200, travel time :38.8042063094642, rewards:-3.857083468967014, queue:3.2305555555555556, delay:0.28645222981770835, throughput:1997
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 9ms, vehicles TOT 2015 ACT 18 BUF 0)               
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 18ms, vehicles TOT 1866 ACT 122026-02-03 15:28:24 (INFO): step:3600/3600, q_loss:106.1249771118164, rewards:-4.060415310329861, queue:3.352777777777778, delay:0.2955372068617079, throughput:1998
+2026-02-03 15:28:24 (INFO): episode:9/200, real avg travel time:39.3008008008008
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 16ms, vehicles TOT 2015 ACT 17 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 8ms, vehicles TOT 1865 ACT 11 2026-02-03 15:28:58 (INFO): Test step:9/200, travel time :39.276138069034516, rewards:-4.102917141384548, queue:3.3805555555555555, delay:0.28582994672987194, throughput:1999
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 10ms, vehicles TOT 2015 ACT 16 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 17ms, vehicles TOT 1865 ACT 112026-02-03 15:29:46 (INFO): step:3600/3600, q_loss:99.39151763916016, rewards:-4.161247762044271, queue:3.388888888888889, delay:0.29391322665744357, throughput:1998
+2026-02-03 15:29:46 (INFO): episode:10/200, real avg travel time:39.34134134134134
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 37ms, vehicles TOT 2015 ACT 17 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 17ms, vehicles TOT 1866 ACT 122026-02-03 15:30:33 (INFO): Test step:10/200, travel time :38.76038019009505, rewards:-3.6799997965494793, queue:3.1083333333333334, delay:0.28288084665934243, throughput:1999
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 18ms, vehicles TOT 2015 ACT 16 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 18ms, vehicles TOT 1866 ACT 122026-02-03 15:31:30 (INFO): step:3600/3600, q_loss:95.6214828491211, rewards:-4.091250271267361, queue:3.386111111111111, delay:0.2911270989312066, throughput:1998
+2026-02-03 15:31:30 (INFO): episode:11/200, real avg travel time:39.286786786786784
+Step #28800.00 (1ms ~= 1000.00*RT, ~17000.00UPS, TraCI: 26ms, vehicles TOT 2015 ACT 17 BUF
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 11ms, vehicles TOT 1866 ACT 122026-02-03 15:32:23 (INFO): Test step:11/200, travel time :38.8744372186093, rewards:-3.892501491970486, queue:3.283333333333333, delay:0.2864783181084527, throughput:1999
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 25ms, vehicles TOT 2015 ACT 16 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~76000.00UPS, TraCI: 45ms, vehicle2026-02-03 15:33:38 (INFO): step:3600/3600, q_loss:91.48558807373047, rewards:-15.666251627604167, queue:11.061111111111112, delay:0.38385565016004775, throughput:1733
+2026-02-03 15:33:38 (INFO): episode:12/200, real avg travel time:40.33064050778996
+Step #28800.00 (1ms ~= 1000.00*RT, ~96000.00UPS, TraCI: 50ms, vehicles TOT 1829 ACT 96 BUF
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 8ms, vehicles TOT 1865 ACT 11 2026-02-03 15:34:17 (INFO): Test step:12/200, travel time :38.716358179089546, rewards:-3.722501966688368, queue:3.1222222222222222, delay:0.29020216200086807, throughput:1999
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 11ms, vehicles TOT 2015 ACT 16 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 16ms, vehicles TOT 1865 ACT 112026-02-03 15:35:10 (INFO): step:3600/3600, q_loss:113.57380676269531, rewards:-4.178333875868056, queue:3.441666666666667, delay:0.29319284227159287, throughput:1998
+2026-02-03 15:35:10 (INFO): episode:13/200, real avg travel time:39.67717717717718
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 22ms, vehicles TOT 2015 ACT 17 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (1ms ~= 1000.00*RT, ~12000.00UPS, TraCI: 11ms, vehicle2026-02-03 15:35:58 (INFO): Test step:13/200, travel time :38.96648324162081, rewards:-3.732083468967014, queue:3.158333333333333, delay:0.27774639129638673, throughput:1999
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 13ms, vehicles TOT 2015 ACT 16 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 27ms, vehicles TOT 1865 ACT 9 2026-02-03 15:36:51 (INFO): step:3600/3600, q_loss:106.0742416381836, rewards:-4.353333197699653, queue:3.533333333333333, delay:0.2932017644246419, throughput:1999
+2026-02-03 15:36:51 (INFO): episode:14/200, real avg travel time:39.728864432216106
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 34ms, vehicles TOT 2015 ACT 16 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 10ms, vehicles TOT 1866 ACT 102026-02-03 15:37:38 (INFO): Test step:14/200, travel time :39.40911367050576, rewards:-4.004582044813368, queue:3.308333333333333, delay:0.2883644527859158, throughput:1997
+Step #28800.00 (1ms ~= 1000.00*RT, ~18000.00UPS, TraCI: 13ms, vehicles TOT 2015 ACT 18 BUF
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 20ms, vehicles TOT 1865 ACT 112026-02-03 15:38:36 (INFO): step:3600/3600, q_loss:101.27147674560547, rewards:-3.7174991183810766, queue:3.15, delay:0.2839014689127604, throughput:1999
+2026-02-03 15:38:36 (INFO): episode:15/200, real avg travel time:38.410205102551274
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 43ms, vehicles TOT 2015 ACT 16 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 11ms, vehicles TOT 1866 ACT 122026-02-03 15:39:14 (INFO): Test step:15/200, travel time :39.451451451451454, rewards:-3.862498982747396, queue:3.275, delay:0.28393414815266926, throughput:1998
+Step #28800.00 (1ms ~= 1000.00*RT, ~17000.00UPS, TraCI: 12ms, vehicles TOT 2015 ACT 17 BUF
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Step #28500.00 (0ms ?*RT. ?UPS, TraCI: 22ms, vehicles TOT 1865 ACT 9 2026-02-03 15:40:10 (INFO): step:3600/3600, q_loss:96.9931411743164, rewards:-3.5966668023003474, queue:3.075, delay:0.28512299855550133, throughput:1998
+2026-02-03 15:40:10 (INFO): episode:16/200, real avg travel time:38.68268268268268
+Step #28800.00 (0ms ?*RT. ?UPS, TraCI: 21ms, vehicles TOT 2015 ACT 17 BUF 0)              
+ Retrying in 1 seconds
+Warning: Environment variable SUMO_HOME is not set properly, disabling XML validation. Set 'auto' or 'always' for web lookups.
+Interrupt signal received, trying to exit gracefully.I: 42ms, vehicles TOT 597 ACT 226 BUFUF
+Traceback (most recent call last):
+  File "/home/salman/coding/LibSignal/run.py", line 81, in <module>
+    test.run()
+  File "/home/salman/coding/LibSignal/run.py", line 75, in run
+    self.task.run()
+  File "/home/salman/coding/LibSignal/task/task.py", line 43, in run
+    self.trainer.train()
+  File "/home/salman/coding/LibSignal/trainer/tsc_trainer.py", line 200, in train
+    self.train_test(e)
+  File "/home/salman/coding/LibSignal/trainer/tsc_trainer.py", line 225, in train_test
+    obs, rewards, dones, _ = self.env.step(actions.flatten())  # make sure action is [intersection]
+  File "/home/salman/coding/LibSignal/environment.py", line 44, in step
+    self.world.step(actions)
+  File "/home/salman/coding/LibSignal/world/world_sumo.py", line 556, in step
+    self.vehicle_trajectory, self.vehicle_maxspeed = self.get_vehicle_trajectory()
+  File "/home/salman/coding/LibSignal/world/world_sumo.py", line 905, in get_vehicle_trajectory
+    vehicle_lane, self.vehicle_maxspeed = self.get_vehicle_lane() # get vehicles on tne roads except turning
+  File "/home/salman/coding/LibSignal/world/world_sumo.py", line 889, in get_vehicle_lane
+    vehicles =  self.eng.lane.getLastStepVehicleIDs(lane)
+  File "/home/salman/.conda/envs/traffic/lib/python3.10/site-packages/traci/_lane.py", line 277, in getLastStepVehicleIDs
+    return self._getUniversal(tc.LAST_STEP_VEHICLE_ID_LIST, laneID)
+  File "/home/salman/.conda/envs/traffic/lib/python3.10/site-packages/traci/domain.py", line 152, in _getUniversal
+    return _parse(self._retValFunc, varID, self._getCmd(varID, objectID, format, *values))
+  File "/home/salman/.conda/envs/traffic/lib/python3.10/site-packages/traci/domain.py", line 157, in _getCmd
+    r = self._connection._sendCmd(self._cmdGetID, varID, objID, format, *values)
+  File "/home/salman/.conda/envs/traffic/lib/python3.10/site-packages/traci/connection.py", line 232, in _sendCmd
+    return self._sendExact()
+  File "/home/salman/.conda/envs/traffic/lib/python3.10/site-packages/traci/connection.py", line 131, in _sendExact
+    result = self._recvExact()
+  File "/home/salman/.conda/envs/traffic/lib/python3.10/site-packages/traci/connection.py", line 115, in _recvExact
+    while len(result) < length:
+KeyboardInterrupt
+ ls -la /home/salman/coding/LibSignal/data/raw_data/syn_1x1_uniform_1600_1h/ | head -20
+Error: tcpip::Socket::recvAndCheck @ recv: peer shutdown
+Quitting (on error).

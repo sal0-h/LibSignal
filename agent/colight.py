@@ -4,7 +4,7 @@ import numpy as np
 import os
 import random
 from collections import OrderedDict, deque
-import gym
+import gymnasium as gym
 
 from generator.lane_vehicle import LaneVehicleGenerator
 from generator.intersection_phase import IntersectionPhaseGenerator

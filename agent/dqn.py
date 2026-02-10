@@ -5,7 +5,7 @@ import numpy as np
 import os
 import random
 from collections import deque
-import gym
+import gymnasium as gym
 
 from generator import LaneVehicleGenerator, IntersectionPhaseGenerator, IntersectionVehicleGenerator
 

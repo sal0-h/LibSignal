@@ -19,7 +19,10 @@ import re
 import copy
 
 import sumolib
-import libsumo
+try:
+    import libsumo
+except ImportError:
+    libsumo = None
 import traci
 
 class Intersection(object):
@@ -380,13 +383,25 @@ class World(object):
             sumo_cmd = [sumolib.checkBinary('sumo-gui')]
         else:
             sumo_cmd = [sumolib.checkBinary('sumo')]
+        # Realistic SUMO physics settings for real-world transfer
+        # (Keeps CityFlow calibration's realistic defaults but enables rerouting)
+        realistic_physics = [
+            '--time-to-teleport', '-1',            # Never teleport stuck vehicles (realistic—real traffic stays stuck)
+            '--collision.action', 'warn',          # Log collisions instead of teleporting
+            '--lanechange.duration', '2',          # Realistic lane change duration
+            '--device.rerouting.probability', '0.8',  # 80% of vehicles can reroute (real drivers find alternate routes)
+            '--device.rerouting.period', '60',     # Check for better routes every 60s
+        ]
+        
         if not sumo_dict.get('combined_file'):
             sumo_cmd += ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
                          '-r', os.path.join(sumo_dict['dir'], sumo_dict['flowFile']),
-                         '--no-warnings', str(sumo_dict['no_warning'])]
+                         '--no-warnings', str(sumo_dict['no_warning'])] \
+                            #  + realistic_physics
         else:
             sumo_cmd += ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
-                         '--no-warnings', str(sumo_dict['no_warning'])]
+                         '--no-warnings', str(sumo_dict['no_warning'])] \
+                            #  + realistic_physics
         self.net = os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile'])
         self.route = os.path.join(sumo_dict['dir'], sumo_dict['flowFile'])
         self.sumo_cmd = sumo_cmd

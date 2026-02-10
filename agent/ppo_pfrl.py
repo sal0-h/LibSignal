@@ -12,7 +12,7 @@ from generator.intersection_phase import IntersectionPhaseGenerator
 from generator.intersection_vehicle import IntersectionVehicleGenerator
 from agent import utils
 
-import gym
+import gymnasium as gym
 import os
 from collections import deque
 
