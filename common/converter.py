@@ -111,6 +111,7 @@ def parse_args():
     # parser.add_argument("--sumocfg", type=str,
     #                     default='cologne1/cologne1.sumocfg')
 
+    # sumo2cityflow args
     parser.add_argument("--or_sumonet", type=str,
                         default='cologne3/cologne3.net.xml')
     parser.add_argument("--cityflownet", type=str,
@@ -122,26 +123,15 @@ def parse_args():
     parser.add_argument("--sumocfg", type=str,
                         default='cologne3/cologne3.sumocfg')
 
-    # cityflow2sumo
-    # parser.add_argument("--or_cityflownet", type=str,
-    #                     default='hangzhou_1x1_bc-tyc_18041610_1h/roadnet.json')
-    # parser.add_argument("--sumonet", type=str,
-    #                     default='hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.net.xml')
-    # parser.add_argument("--or_cityflowtraffic", type=str,
-    #                     default='hangzhou_1x1_bc-tyc_18041610_1h/flow.json')
-    # parser.add_argument("--sumotraffic", type=str,
-    #                     default='hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.rou.xml')
-
-
-
-    # parser.add_argument("--or_cityflownet", type=str,
-    #                     default='hangzhou_4x4_gudang_18041610_1h/roadnet_4X4.json')
-    # parser.add_argument("--sumonet", type=str,
-    #                     default='hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml')
-    # parser.add_argument("--or_cityflowtraffic", type=str,
-    #                     default='hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.json')
-    # parser.add_argument("--sumotraffic", type=str,
-    #                     default='hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml')
+    # cityflow2sumo args
+    parser.add_argument("--or_cityflownet", type=str,
+                        default='grid4x4/grid4x4_roadnet_red.json')
+    parser.add_argument("--sumonet", type=str,
+                        default='grid4x4/grid4x4.net.xml')
+    parser.add_argument("--or_cityflowtraffic", type=str,
+                        default='grid4x4/grid4x4_flow.json')
+    parser.add_argument("--sumotraffic", type=str,
+                        default='grid4x4/grid4x4.rou.xml')
 
     return parser.parse_args()
 
@@ -1065,8 +1055,8 @@ def cityflow2sumo_net(args):
                     tll.appendChild(phase_y)
                     root_tll.appendChild(tll)
                 if light['time'] <= 5:
-                    # first should set yellow phase, then can add this yellow phase when adding a green phase
-                    assert idx == 0
+                    # set yellow phase state for use after the next green phase
+                    yellow_state = ['r'] * phase_num_all
                     for act_roadlink in light['availableRoadLinks']:
                         yellow_state[phase_dic[act_roadlink][0]:sum(phase_dic[act_roadlink])] = ['s']*phase_dic[act_roadlink][1]
                       
