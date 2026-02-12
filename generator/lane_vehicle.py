@@ -127,7 +127,7 @@ class LaneVehicleGenerator(BaseGenerator):
         elif average == "all":
             size = 1
         self.ob_length = len(fns) * size
-        if self.ob_length == 3:
+        if self.ob_length in (2, 3):
             self.ob_length = 4
 
         self.average = average
