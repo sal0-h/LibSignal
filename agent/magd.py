@@ -102,6 +102,14 @@ class MAGDAgent(RLAgent):
         self.q_optimizer = optim.Adam(self.q_model.parameters(), lr=self.learning_rate)
         self.p_optimizer = optim.Adam(self.p_model.parameters(), lr=self.learning_rate)
 
+    def to_device(self, device):
+        self.device = device
+        if self.q_model is not None:
+            self.q_model.to(device)
+            self.target_q_model.to(device)
+            self.p_model.to(device)
+            self.target_p_model.to(device)
+
     def __repr__(self):
         return self.p_model.__repr__() + '\n' + self.q_model.__repr__()
 
@@ -150,12 +158,12 @@ class MAGDAgent(RLAgent):
                 feature = np.concatenate([ob, phase], axis=1)
         else:
             feature = ob
-        observation = torch.tensor(feature, dtype=torch.float32)
+        observation = torch.tensor(feature, dtype=torch.float32, device=self.device)
         actions_o = self.p_model(observation, train=False)
         #actions = torch.argmax(actions_o, dim=1)
         actions_prob = self.G_softmax(actions_o)
         actions = torch.argmax(actions_prob, dim=1)
-        actions = actions.clone().detach().numpy()
+        actions = actions.cpu().detach().numpy()
         self.last_action = self.action
         self.action = actions
         return actions
@@ -168,7 +176,7 @@ class MAGDAgent(RLAgent):
                 feature = np.concatenate([ob, phase], axis=1)
         else:
             feature = ob
-        observation = torch.tensor(feature, dtype=torch.float32)
+        observation = torch.tensor(feature, dtype=torch.float32, device=self.device)
         actions = self.p_model(observation, train=False)
         actions_prob = self.G_softmax(actions)
         return actions_prob
@@ -177,7 +185,7 @@ class MAGDAgent(RLAgent):
         return np.random.randint(0, self.action_space.n, self.sub_agents)
 
     def G_softmax(self, p):
-        u = torch.rand(self.action_space.n)
+        u = torch.rand(self.action_space.n, device=self.device)
         prob = F.softmax((p - torch.log(-torch.log(u))/1), dim=1)
         #prob = F.softmax(p, dim=1)
         return prob
@@ -197,10 +205,10 @@ class MAGDAgent(RLAgent):
         else:
             feature_t = obs_t
             feature_tp = obs_tp
-        state_t = torch.tensor(feature_t, dtype=torch.float32)
-        state_tp = torch.tensor(feature_tp, dtype=torch.float32)
+        state_t = torch.tensor(feature_t, dtype=torch.float32, device=self.device)
+        state_tp = torch.tensor(feature_tp, dtype=torch.float32, device=self.device)
         t = [item[1][3] for item in samples]
-        rewards = torch.tensor(np.concatenate([item[1][3] for item in samples])[:, np.newaxis], dtype=torch.float32)  # TODO: BETTER WA
+        rewards = torch.tensor(np.concatenate([item[1][3] for item in samples])[:, np.newaxis], dtype=torch.float32, device=self.device)  # TODO: BETTER WA
 
         # TODO: reshape
         actions_prob = torch.cat([item[1][2] for item in samples], dim=0)
@@ -277,7 +285,7 @@ class MAGDAgent(RLAgent):
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
 
-        return loss_of_q.clone().detach().numpy()
+        return loss_of_q.cpu().detach().numpy()
 
     def remember(self, last_obs, last_phase, actions, actions_prob, rewards, obs, cur_phase, done, key):
         self.replay_buffer.append((key, (last_obs, last_phase, actions_prob, rewards, obs, cur_phase)))
@@ -310,8 +318,10 @@ class MAGDAgent(RLAgent):
                                     'model_q', f'{e}_{self.rank}.pt')
         self.model_q = self._build_model(self.q_length, 1)
         self.model_p = self._build_model(self.ob_length, self.action_space.n)
-        self.model_q.load_state_dict(torch.load(model_q_name))
-        self.model_p.load_state_dict(torch.load(model_p_name))
+        self.model_q.load_state_dict(torch.load(model_q_name, map_location=self.device))
+        self.model_p.load_state_dict(torch.load(model_p_name, map_location=self.device))
+        self.model_q.to(self.device)
+        self.model_p.to(self.device)
         self.sync_network()
 
     def save_model(self, e):
@@ -331,8 +341,8 @@ class MAGDAgent(RLAgent):
                                     'model_p', f'{self.best_epoch}_{self.rank}.pt')
         model_q_name = os.path.join(Registry.mapping['logger_mapping']['path'].path,
                                     'model_q', f'{self.best_epoch}_{self.rank}.pt')
-        self.q_model.load_state_dict(torch.load(model_q_name))
-        self.p_model.load_state_dict(torch.load(model_p_name))
+        self.q_model.load_state_dict(torch.load(model_q_name, map_location=self.device))
+        self.p_model.load_state_dict(torch.load(model_p_name, map_location=self.device))
         self.sync_network()
 
 

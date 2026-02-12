@@ -1,3 +1,4 @@
+import torch
 from common.registry import Registry
 
 
@@ -10,6 +11,17 @@ class BaseAgent(object):
         # revise if it is multi-agents in one model
         self.world = world
         self.sub_agents = 1
+        self.device = torch.device('cpu')
+
+    def to_device(self, device):
+        '''
+        to_device
+        Move agent's models to the specified device (CPU/GPU).
+
+        :param device: torch.device to move models to
+        :return: None
+        '''
+        self.device = device
 
     def get_ob(self):
         raise NotImplementedError()

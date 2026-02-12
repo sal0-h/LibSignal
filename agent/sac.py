@@ -77,6 +77,14 @@ class SACAgent(RLAgent):
     def __repr__(self):
         return self.actor_net.__repr__()
 
+    def to_device(self, device):
+        self.device = device
+        self.actor_net.to(device)
+        self.v_evaluate_net.to(device)
+        self.v_target_net.to(device)
+        self.q0_net.to(device)
+        self.q1_net.to(device)
+
     def reset(self):
         '''
         reset
@@ -156,11 +164,11 @@ class SACAgent(RLAgent):
                 feature = np.concatenate([ob, phase], axis=1)
         else:
             feature = ob
-        observation = torch.tensor(feature, dtype=torch.float32)
+        observation = torch.tensor(feature, dtype=torch.float32, device=self.device)
         # TODO: no need to calculate gradient when interacting with environment
         prob_tensor = self.actor_net(observation, train=False)
         action_tensor = distributions.Categorical(prob_tensor).sample()
-        action = action_tensor.numpy()
+        action = action_tensor.cpu().numpy()
         return action
 
     def sample(self):
@@ -233,10 +241,10 @@ class SACAgent(RLAgent):
         else:
             feature_t = obs_t
             feature_tp = obs_tp
-        state_t = torch.tensor(feature_t, dtype=torch.float32)
-        state_tp = torch.tensor(feature_tp, dtype=torch.float32)
-        rewards = torch.tensor(np.array([item[1][3] for item in samples]), dtype=torch.float32)  # TODO: BETTER WA
-        actions = torch.tensor(np.array([item[1][2] for item in samples]), dtype=torch.long)
+        state_t = torch.tensor(feature_t, dtype=torch.float32, device=self.device)
+        state_tp = torch.tensor(feature_tp, dtype=torch.float32, device=self.device)
+        rewards = torch.tensor(np.array([item[1][3] for item in samples]), dtype=torch.float32, device=self.device)  # TODO: BETTER WA
+        actions = torch.tensor(np.array([item[1][2] for item in samples]), dtype=torch.long, device=self.device)
         return state_t, state_tp, rewards, actions
 
     def update_net(self, target_net, evaluate_net, learning_rate=0.001):
@@ -309,7 +317,7 @@ class SACAgent(RLAgent):
         self.actor_optimizer.step()
         # return actor_loss_tensor.clone().detach().numpy(),q0_loss_tensor.clone().detach().numpy(), \
         #     v_loss_tensor.clone().detach().numpy(), self.add_act_to_buffer
-        return actor_loss_tensor.clone().detach().numpy()
+        return actor_loss_tensor.cpu().detach().numpy()
 
 
     def update_target_network(self):
@@ -333,7 +341,8 @@ class SACAgent(RLAgent):
         '''
         model_name = os.path.join(Registry.mapping['logger_mapping']['path'].path,
                                   'model', f'{e}_{self.rank}.pt')
-        self.actor_net.load_state_dict(torch.load(model_name))
+        self.actor_net.load_state_dict(torch.load(model_name, map_location=self.device))
+        self.actor_net.to(self.device)
 
     def save_model(self, e):
         '''

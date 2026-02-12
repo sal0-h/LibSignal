@@ -143,6 +143,12 @@ class MPLightAgent(RLAgent):
     def __repr__(self):
         return self.agents_iner.__repr__()
 
+    def to_device(self, device):
+        self.device = device
+        if self.model is not None:
+            self.model.to(device)
+        self.comp_mask = self.comp_mask.to(device)
+
     def reset(self):
         '''
         reset
@@ -603,7 +609,7 @@ class FRAP(nn.Module):
         super(FRAP, self).__init__()
         self.oshape = output_shape
         self.phase_pairs = phase_pairs
-        self.comp_mask = competition_mask
+        self.register_buffer('comp_mask', competition_mask)
         self.demand_shape = dic_agent_conf.param['demand_shape']      # Allows more than just queue to be used
         self.one_hot = dic_agent_conf.param['one_hot']
         self.d_out = 4      # units in demand input layer

@@ -111,6 +111,15 @@ class MADDPGAgent(RLAgent):
                                          alpha=0.9, centered=False, eps=1e-7)
 
         """
+
+    def to_device(self, device):
+        self.device = device
+        if self.q_model is not None:
+            self.q_model.to(device)
+            self.target_q_model.to(device)
+            self.p_model.to(device)
+            self.target_p_model.to(device)
+
     def reset(self):
         inter_id = self.world.intersection_ids[self.rank]
         inter_obj = self.world.id2intersection[inter_id]
@@ -156,12 +165,12 @@ class MADDPGAgent(RLAgent):
                 feature = np.concatenate([ob, phase], axis=1)
         else:
             feature = ob
-        observation = torch.tensor(feature, dtype=torch.float32)
+        observation = torch.tensor(feature, dtype=torch.float32, device=self.device)
         actions_o = self.p_model(observation, train=False)
         #actions = torch.argmax(actions_o, dim=1)
         actions_prob = self.G_softmax(actions_o)
         actions = torch.argmax(actions_prob, dim=1)
-        actions = actions.clone().detach().numpy()
+        actions = actions.cpu().detach().numpy()
         self.last_action = self.action
         self.action = actions
         return actions
@@ -174,7 +183,7 @@ class MADDPGAgent(RLAgent):
                 feature = np.concatenate([ob, phase], axis=1)
         else:
             feature = ob
-        observation = torch.tensor(feature, dtype=torch.float32)
+        observation = torch.tensor(feature, dtype=torch.float32, device=self.device)
         actions = self.p_model(observation, train=False)
         actions_prob = self.G_softmax(actions)
         return actions_prob
@@ -183,7 +192,7 @@ class MADDPGAgent(RLAgent):
         return np.random.randint(0, self.action_space.n, self.sub_agents)
 
     def G_softmax(self, p):
-        u = torch.rand(self.action_space.n)
+        u = torch.rand(self.action_space.n, device=self.device)
         prob = F.softmax((p - torch.log(-torch.log(u))/1), dim=1)
         #prob = F.softmax(p, dim=1)
         return prob
@@ -203,10 +212,10 @@ class MADDPGAgent(RLAgent):
         else:
             feature_t = obs_t
             feature_tp = obs_tp
-        state_t = torch.tensor(feature_t, dtype=torch.float32)
-        state_tp = torch.tensor(feature_tp, dtype=torch.float32)
+        state_t = torch.tensor(feature_t, dtype=torch.float32, device=self.device)
+        state_tp = torch.tensor(feature_tp, dtype=torch.float32, device=self.device)
         t = [item[1][3] for item in samples]
-        rewards = torch.tensor(np.concatenate([item[1][3] for item in samples])[:, np.newaxis], dtype=torch.float32)  # TODO: BETTER WA
+        rewards = torch.tensor(np.concatenate([item[1][3] for item in samples])[:, np.newaxis], dtype=torch.float32, device=self.device)  # TODO: BETTER WA
 
         # TODO: reshape
         actions_prob = torch.cat([item[1][2] for item in samples], dim=0)
@@ -287,7 +296,7 @@ class MADDPGAgent(RLAgent):
         #self.pr(loss_of_q, loss_of_p, rewards_list[self.rank], q, target_q)
         # TODO: q loss or p loss ?
         print('test')
-        return loss_of_q.clone().detach().numpy()
+        return loss_of_q.cpu().detach().numpy()
 
     def pr(self, loss_of_q, loss_of_p, reward, q, target_q):
         print(loss_of_q.data, loss_of_p.data, torch.mean(reward).data, torch.mean(q).data, torch.mean(target_q).data)
@@ -323,8 +332,10 @@ class MADDPGAgent(RLAgent):
                                     'model_q', f'{e}_{self.rank}.pt')
         self.model_q = self._build_model(self.q_length, 1)
         self.model_p = self._build_model(self.ob_length, self.action_space.n)
-        self.model_q.load_state_dict(torch.load(model_q_name))
-        self.model_p.load_state_dict(torch.load(model_p_name))
+        self.model_q.load_state_dict(torch.load(model_q_name, map_location=self.device))
+        self.model_p.load_state_dict(torch.load(model_p_name, map_location=self.device))
+        self.model_q.to(self.device)
+        self.model_p.to(self.device)
         self.sync_network()
 
     def save_model(self, e):
@@ -344,8 +355,8 @@ class MADDPGAgent(RLAgent):
                                     'model_p', f'{self.best_epoch}_{self.rank}.pt')
         model_q_name = os.path.join(Registry.mapping['logger_mapping']['output_path'].path,
                                     'model_q', f'{self.best_epoch}_{self.rank}.pt')
-        self.q_model.load_state_dict(torch.load(model_q_name))
-        self.p_model.load_state_dict(torch.load(model_p_name))
+        self.q_model.load_state_dict(torch.load(model_q_name, map_location=self.device))
+        self.p_model.load_state_dict(torch.load(model_p_name, map_location=self.device))
         self.sync_network()
 
 

@@ -68,6 +68,11 @@ class PressLightAgent(RLAgent):
     def __repr__(self):
         return self.model.__repr__()
 
+    def to_device(self, device):
+        self.device = device
+        self.model.to(device)
+        self.target_model.to(device)
+
     def reset(self):
         '''
         reset
@@ -148,9 +153,9 @@ class PressLightAgent(RLAgent):
                 feature = np.concatenate([ob, phase], axis=1)
         else:
             feature = ob
-        observation = torch.tensor(feature, dtype=torch.float32)
+        observation = torch.tensor(feature, dtype=torch.float32, device=self.device)
         actions = self.model(observation, train=False)
-        actions = actions.clone().detach().numpy()
+        actions = actions.cpu().detach().numpy()
         return np.argmax(actions, axis=1)
 
     def sample(self):
@@ -216,12 +221,12 @@ class PressLightAgent(RLAgent):
             feature_t = obs_t
             feature_tp = obs_tp
         # (batch_size,32)
-        state_t = torch.tensor(feature_t, dtype=torch.float32)
-        state_tp = torch.tensor(feature_tp, dtype=torch.float32)
+        state_t = torch.tensor(feature_t, dtype=torch.float32, device=self.device)
+        state_tp = torch.tensor(feature_tp, dtype=torch.float32, device=self.device)
         # rewards:(64)
-        rewards = torch.tensor(np.array([item[1][3] for item in samples]), dtype=torch.float32)  # TODO: BETTER WA
+        rewards = torch.tensor(np.array([item[1][3] for item in samples]), dtype=torch.float32, device=self.device)  # TODO: BETTER WA
         # actions:(64,1)
-        actions = torch.tensor(np.array([item[1][2] for item in samples]), dtype=torch.long)
+        actions = torch.tensor(np.array([item[1][2] for item in samples]), dtype=torch.long, device=self.device)
         return state_t, state_tp, rewards, actions
 
     def train(self):
@@ -246,7 +251,7 @@ class PressLightAgent(RLAgent):
         self.optimizer.step()
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
-        return loss.clone().detach().numpy()
+        return loss.cpu().detach().numpy()
 
     def update_target_network(self):
         '''
@@ -270,9 +275,11 @@ class PressLightAgent(RLAgent):
         model_name = os.path.join(
             Registry.mapping['logger_mapping']['path'].path, 'model', f'{e}_{self.rank}.pt')
         self.model = self._build_model()
-        self.model.load_state_dict(torch.load(model_name))
+        self.model.load_state_dict(torch.load(model_name, map_location=self.device))
         self.target_model = self._build_model()
-        self.target_model.load_state_dict(torch.load(model_name))
+        self.target_model.load_state_dict(torch.load(model_name, map_location=self.device))
+        self.model.to(self.device)
+        self.target_model.to(self.device)
     
     def save_model(self, e):
         '''

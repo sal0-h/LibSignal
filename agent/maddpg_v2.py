@@ -45,6 +45,11 @@ class MADDPGAgent(RLAgent):
         for ag in self.agents:
             ag.create_model(obs_dim, actions_dim)
 
+    def to_device(self, device):
+        self.device = device
+        for ag in self.agents:
+            ag.to_device(device)
+
     def reset(self):
         for ag in self.agents:
             ag.reset()
@@ -130,10 +135,10 @@ class MADDPGAgent(RLAgent):
             [reward_list[i].append(val) for i, val in enumerate(item[1][3])]
         for same_state, same_action, same_n_state, same_reward\
                 in zip(state_list, action_list, next_state_list, reward_list):
-            state_batch.append(torch.tensor(np.stack(same_state), dtype=torch.float32))
-            action_batch.append(torch.tensor(np.stack(same_action), dtype=torch.float32))
-            next_state_batch.append(torch.tensor(np.stack(same_n_state), dtype=torch.float32))
-            reward_batch.append(torch.tensor(np.concatenate(same_reward), dtype=torch.float32))
+            state_batch.append(torch.tensor(np.stack(same_state), dtype=torch.float32, device=self.device))
+            action_batch.append(torch.tensor(np.stack(same_action), dtype=torch.float32, device=self.device))
+            next_state_batch.append(torch.tensor(np.stack(same_n_state), dtype=torch.float32, device=self.device))
+            reward_batch.append(torch.tensor(np.concatenate(same_reward), dtype=torch.float32, device=self.device))
         return state_batch, action_batch, next_state_batch, reward_batch
 
     def train(self):
@@ -254,6 +259,14 @@ class MADDPG_SUBAgent(object):
 
         self.update_network_parameters(tau=1)
 
+    def to_device(self, device):
+        self.device = device
+        if self.actor is not None:
+            self.actor.to(device)
+            self.target_actor.to(device)
+            self.critic.to(device)
+            self.target_critic.to(device)
+
     def reset(self):
         inter_obj = self.world.id2intersection[self.inter]
         self.ob_generator = LaneVehicleGenerator(self.world, inter_obj, ['lane_count'], in_only=True, average=None)
@@ -273,7 +286,7 @@ class MADDPG_SUBAgent(object):
         return actions
     """
     def choose_action(self, observation, test=False):
-        state = torch.tensor(observation[np.newaxis], dtype=torch.float32)
+        state = torch.tensor(observation[np.newaxis], dtype=torch.float32, device=self.device)
         actions = self.actor.forward(state)
         actions = actions.detach().cpu().numpy()[0]
         return actions
@@ -340,7 +353,7 @@ class ActorNetwork(nn.Module):
         torch.save(self.state_dict(), self.chkpt_file)
 
     def load_checkpoint(self):
-        self.load_state_dict(torch.load(self.chkpt_file))
+        self.load_state_dict(torch.load(self.chkpt_file, map_location=next(self.parameters()).device))
 
 
 class CriticNetwork(nn.Module):
@@ -365,4 +378,4 @@ class CriticNetwork(nn.Module):
         torch.save(self.state_dict(), self.chkpt_file)
 
     def load_checkpoint(self):
-        self.load_state_dict(torch.load(self.chkpt_file))
+        self.load_state_dict(torch.load(self.chkpt_file, map_location=next(self.parameters()).device))

@@ -74,6 +74,10 @@ class PPOAgent(RLAgent):
                                        lr=self.learning_rate,
                                        alpha=0.9, centered=False, eps=1e-7)
 
+    def to_device(self, device):
+        self.device = device
+        self.actor.model.to(device)
+        self.critic.model.to(device)
 
     def reset(self):
         inter_id = self.world.intersection_ids[self.rank]
@@ -114,9 +118,9 @@ class PPOAgent(RLAgent):
                 feature = np.concatenate([ob, phase], axis=1)
         else:
             feature = ob
-        observation = torch.tensor(feature, dtype=torch.float32)
+        observation = torch.tensor(feature, dtype=torch.float32, device=self.device)
         actions = self.model(observation, train=True)
-        actions = actions.clone().detach().numpy()
+        actions = actions.cpu().detach().numpy()
         return np.argmax(actions, axis=1)
 
     def sample(self):
@@ -157,8 +161,8 @@ class PPOAgent(RLAgent):
         else:
             feature_t = obs_t
             feature_tp = obs_tp
-        state_t = torch.tensor(feature_t, dtype=torch.float32)
-        state_tp = torch.tensor(feature_tp, dtype=torch.float32)
+        state_t = torch.tensor(feature_t, dtype=torch.float32, device=self.device)
+        state_tp = torch.tensor(feature_tp, dtype=torch.float32, device=self.device)
 
     def train(self):
         # TODO: we do not train here
@@ -171,9 +175,9 @@ class PPOAgent(RLAgent):
         model_name = os.path.join(Registry.mapping['logger_mapping']['output_path'].path,
                                   'model', f'{e}_{self.rank}.pt')
         self.model = self._build_model()
-        self.model.load_state_dict(torch.load(model_name))
+        self.model.load_state_dict(torch.load(model_name, map_location=self.device))
         self.target_model = self._build_model()
-        self.target_model.load_state_dict(torch.load(model_name))
+        self.target_model.load_state_dict(torch.load(model_name, map_location=self.device))
 
     def save_model(self, e):
         path = os.path.join(Registry.mapping['logger_mapping']['output_path'].path, 'model')

@@ -94,10 +94,18 @@ class TSCTrainer(BaseTrainer):
         for i in range(1, num_agent):
             self.agents.append(Registry.mapping['model_mapping'][Registry.mapping['command_mapping']['setting'].param['agent']](self.world, i))
 
-        # for magd agents should share information 
+        # pass device from trainer to all agents for GPU support
+        for ag in self.agents:
+            ag.to_device(self.device)
+        print(f"[Device] Moved {len(self.agents)} agent(s) to {self.device}")
+
+        # for magd agents should share information
         if Registry.mapping['model_mapping']['setting'].param['name'] == 'magd':
             for ag in self.agents:
                 ag.link_agents(self.agents)
+            # re-apply device after link_agents builds models
+            for ag in self.agents:
+                ag.to_device(self.device)
 
     def create_env(self):
         '''

@@ -133,6 +133,12 @@ class CoLightAgent(RLAgent):
                                        lr=self.learning_rate,
                                        alpha=0.9, centered=False, eps=1e-7)
 
+    def to_device(self, device):
+        self.device = device
+        self.model.to(device)
+        self.target_model.to(device)
+        self.edge_idx = self.edge_idx.to(device)
+
     def reset(self):
         observation_generators = []
         for inter in self.world.intersections:
@@ -250,7 +256,7 @@ class CoLightAgent(RLAgent):
         if not test:
             if np.random.rand() <= self.epsilon:
                 return self.sample()
-        observation = torch.tensor(ob, dtype=torch.float32)
+        observation = torch.tensor(ob, dtype=torch.float32, device=self.device)
         edge = self.edge_idx
         dp = Data(x=observation, edge_index=edge)
         # TODO: not phase not used
@@ -259,7 +265,7 @@ class CoLightAgent(RLAgent):
             # TODO: collect attention matrix later
             actions = self.model(x=dp.x, edge_index=dp.edge_index, train=False)
             att = None
-            actions = actions.clone().detach().numpy()
+            actions = actions.cpu().detach().numpy()
             # action = np.argmax(actions, axis=1)
             action_list = []
             for action_vec, phase_length in zip(actions, self.phase_lengths):
@@ -270,7 +276,7 @@ class CoLightAgent(RLAgent):
             return action, att  # [batch, agents], [batch, agents, nv, neighbor]
         else:
             actions = self.model(x=dp.x, edge_index=dp.edge_index, train=False)
-            actions = actions.clone().detach().numpy()
+            actions = actions.cpu().detach().numpy()
             
             action_list = []
             for action_vec, phase_length in zip(actions, self.phase_lengths):
@@ -301,18 +307,18 @@ class CoLightAgent(RLAgent):
         rewards = []
         for item in samples:
             dp = item[1]
-            state = torch.tensor(dp[0], dtype=torch.float32)
+            state = torch.tensor(dp[0], dtype=torch.float32, device=self.device)
             batch_list.append(Data(x=state, edge_index=self.edge_idx))
 
-            state_p = torch.tensor(dp[4], dtype=torch.float32)
+            state_p = torch.tensor(dp[4], dtype=torch.float32, device=self.device)
             batch_list_p.append(Data(x=state_p, edge_index=self.edge_idx))
             rewards.append(dp[3])
             actions.append(dp[2])
         batch_t = Batch.from_data_list(batch_list)
         batch_tp = Batch.from_data_list(batch_list_p)
         # TODO reshape slow warning
-        rewards = torch.tensor(np.array(rewards), dtype=torch.float32)
-        actions = torch.tensor(np.array(actions), dtype=torch.long)
+        rewards = torch.tensor(np.array(rewards), dtype=torch.float32, device=self.device)
+        actions = torch.tensor(np.array(actions), dtype=torch.long, device=self.device)
         if self.sub_agents > 1:
             rewards = rewards.view(rewards.shape[0] * rewards.shape[1])
             actions = actions.view(actions.shape[0] * actions.shape[1])  # TODO: check all dimensions here
@@ -339,7 +345,7 @@ class CoLightAgent(RLAgent):
         self.optimizer.step()
         if self.epsilon > self.epsilon_min:
             self.epsilon *= self.epsilon_decay
-        return loss.clone().detach().numpy()
+        return loss.cpu().detach().numpy()
 
     def update_target_network(self):
         weights = self.model.state_dict()
@@ -348,8 +354,10 @@ class CoLightAgent(RLAgent):
     def load_model(self, e):
         model_name = os.path.join(Registry.mapping['logger_mapping']['path'].path,
                                 'model', f'{e}_{self.rank}.pt')
-        self.model.load_state_dict(torch.load(model_name))
-        self.target_model.load_state_dict(torch.load(model_name))
+        self.model.load_state_dict(torch.load(model_name, map_location=self.device))
+        self.target_model.load_state_dict(torch.load(model_name, map_location=self.device))
+        self.model.to(self.device)
+        self.target_model.to(self.device)
 
     def save_model(self, e):
         path = os.path.join(Registry.mapping['logger_mapping']['path'].path, 'model')
@@ -421,7 +429,7 @@ class MaskedOutput(nn.Module):
     def __init__(self, mask, batch_size, action_space):
         super(MaskedOutput, self).__init__()
         self.batch_size = batch_size
-        self.mask = mask
+        self.register_buffer('mask', mask)
         self.action_space = action_space
 
     def forward(self, x):
