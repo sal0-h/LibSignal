@@ -61,11 +61,19 @@ create_env() {
     conda_base="$(conda info --base 2>/dev/null || echo "${HOME}/miniconda3")"
     source "${conda_base}/etc/profile.d/conda.sh"
 
+    # Accept Anaconda TOS if required (conda >= 25.x)
+    if conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main &>/dev/null; then
+        true
+    fi
+    if conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r &>/dev/null; then
+        true
+    fi
+
     if conda env list | grep -qw "^${CONDA_ENV} "; then
         warn "Conda env '${CONDA_ENV}' already exists. Skipping creation."
     else
         info "Creating conda env '${CONDA_ENV}' with Python ${PYTHON_VERSION}..."
-        conda create -y -n "${CONDA_ENV}" python="${PYTHON_VERSION}"
+        conda create -y -n "${CONDA_ENV}" -c conda-forge python="${PYTHON_VERSION}"
     fi
 
     info "Activating '${CONDA_ENV}'..."
