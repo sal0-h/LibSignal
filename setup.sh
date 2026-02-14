@@ -42,7 +42,20 @@ install_conda() {
     done
 
     info "Installing Miniconda..."
-    local installer="Miniconda3-latest-Linux-x86_64.sh"
+    local os_name arch installer
+    os_name="$(uname -s)"
+    arch="$(uname -m)"
+    case "${os_name}" in
+        Linux)  os_name="Linux" ;;
+        Darwin) os_name="MacOSX" ;;
+        *)      error "Unsupported OS: ${os_name}" ;;
+    esac
+    # Normalize arch (aarch64 -> arm64 for macOS)
+    case "${arch}" in
+        aarch64) arch="arm64" ;;
+    esac
+    installer="Miniconda3-latest-${os_name}-${arch}.sh"
+    info "Downloading ${installer}..."
     curl -fsSL "https://repo.anaconda.com/miniconda/${installer}" -o "/tmp/${installer}"
     bash "/tmp/${installer}" -b -p "${HOME}/miniconda3"
     rm -f "/tmp/${installer}"
@@ -84,13 +97,14 @@ create_env() {
 # ── 3. Install PyTorch (with CUDA if available) ────────────────────────────
 install_pytorch() {
     info "Detecting GPU..."
-    if command -v nvidia-smi &>/dev/null && nvidia-smi &>/dev/null; then
-        # Get CUDA version from nvidia-smi
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+        # macOS: default PyTorch supports MPS (Apple Silicon) automatically
+        info "macOS detected. Installing PyTorch (MPS will be used on Apple Silicon)..."
+        pip install torch torchvision
+    elif command -v nvidia-smi &>/dev/null && nvidia-smi &>/dev/null; then
         local cuda_version
         cuda_version=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader | head -1)
         info "NVIDIA GPU detected (driver: ${cuda_version})"
-
-        # Install PyTorch with CUDA 12.1 (broadly compatible)
         info "Installing PyTorch with CUDA support..."
         pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
     else
@@ -110,8 +124,17 @@ install_torch_geometric() {
 # ── 5. Install SUMO packages (aligned versions) ────────────────────────────
 install_sumo() {
     info "Installing SUMO packages (version ${SUMO_VERSION})..."
-    # Install all SUMO packages at the same version to avoid conflicts
-    pip install libsumo=="${SUMO_VERSION}" sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}" eclipse-sumo=="${SUMO_VERSION}"
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+        # libsumo and eclipse-sumo don't have macOS wheels — use traci interface
+        # User should install SUMO via: brew install sumo
+        warn "macOS detected: libsumo wheels not available for macOS."
+        warn "Install SUMO via Homebrew: brew install sumo"
+        warn "The framework will use traci (slower but compatible)."
+        pip install sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}"
+    else
+        # Install all SUMO packages at the same version to avoid conflicts
+        pip install libsumo=="${SUMO_VERSION}" sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}" eclipse-sumo=="${SUMO_VERSION}"
+    fi
 
     # Set SUMO_HOME to the pip-installed eclipse-sumo
     local sumo_home
@@ -161,7 +184,11 @@ verify() {
     python -c "import torch; print(f'  PyTorch {torch.__version__} — CUDA: {torch.cuda.is_available()}')" || { warn "PyTorch import failed"; failed=1; }
     python -c "import torch_geometric; print(f'  torch-geometric {torch_geometric.__version__}')" || { warn "torch-geometric import failed"; failed=1; }
     python -c "import pfrl; print(f'  pfrl {pfrl.__version__}')" || { warn "pfrl import failed"; failed=1; }
-    python -c "import libsumo; print(f'  libsumo OK')" || { warn "libsumo import failed"; failed=1; }
+    if [[ "$(uname -s)" == "Darwin" ]]; then
+        warn "libsumo: skipped (not available on macOS — using traci instead)"
+    else
+        python -c "import libsumo; print(f'  libsumo OK')" || { warn "libsumo import failed"; failed=1; }
+    fi
     python -c "import sumolib; print(f'  sumolib OK')" || { warn "sumolib import failed"; failed=1; }
     python -c "import traci; print(f'  traci OK')" || { warn "traci import failed"; failed=1; }
     python -c "import gym; print(f'  gym {gym.__version__}')" || { warn "gym import failed"; failed=1; }
