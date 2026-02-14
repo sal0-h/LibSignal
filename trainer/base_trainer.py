@@ -41,7 +41,7 @@ class BaseTrainer(ABC):
         if torch.cuda.is_available() and not self.cpu:
             self.device = torch.device(f"cuda:{gpu}")
             print(f"[Device] Using GPU: {torch.cuda.get_device_name(gpu)} (cuda:{gpu})")
-            print(f"[Device] GPU Memory: {torch.cuda.get_device_properties(gpu).total_mem / 1024**3:.1f} GB")
+            print(f"[Device] GPU Memory: {torch.cuda.get_device_properties(gpu).total_memory / 1024**3:.1f} GB")
         else:
             self.device = torch.device("cpu")
             self.cpu = True
