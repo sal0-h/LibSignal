@@ -115,10 +115,12 @@ install_pytorch() {
 
 # ── 4. Install torch-geometric + torch-scatter ─────────────────────────────
 install_torch_geometric() {
-    info "Installing torch-geometric and torch-scatter..."
-    # Let pyg find the right binary for our torch + cuda combo
-    pip install torch-scatter torch-sparse -f "https://data.pyg.org/whl/torch-$(python -c 'import torch; print(torch.__version__.split("+")[0])')+$(python -c 'import torch; print("cu121" if torch.cuda.is_available() else "cpu")').html"
+    info "Installing torch-geometric..."
+    # Modern pyg (>=2.4) includes scatter/sparse natively — no separate packages needed
     pip install torch-geometric
+    # Install pyg-lib for optimized ops (optional, best-effort)
+    pip install pyg-lib -f "https://data.pyg.org/whl/torch-$(python -c 'import torch; print(torch.__version__.split("+")[0])')+$(python -c 'import torch; print("cu121" if torch.cuda.is_available() else "cpu")').html" 2>/dev/null \
+        || warn "pyg-lib prebuilt wheel not available — torch-geometric will still work fine"
 }
 
 # ── 5. Install SUMO packages (aligned versions) ────────────────────────────
