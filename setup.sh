@@ -22,10 +22,24 @@ error() { echo -e "${RED}[ERROR]${NC} $*"; exit 1; }
 
 # ── 1. Install Miniconda if not present ─────────────────────────────────────
 install_conda() {
+    # Check if conda is on PATH or installed at common locations
     if command -v conda &>/dev/null; then
         info "Conda already installed: $(conda --version)"
         return 0
     fi
+
+    # Check common install locations (conda may exist but not be on PATH yet)
+    local conda_paths=("${HOME}/miniconda3" "${HOME}/anaconda3" "${HOME}/miniforge3" "/opt/conda")
+    for cpath in "${conda_paths[@]}"; do
+        if [ -f "${cpath}/bin/conda" ]; then
+            info "Found existing conda at ${cpath} (not on PATH). Initializing..."
+            eval "$("${cpath}/bin/conda" shell.bash hook)"
+            conda init bash 2>/dev/null || true
+            conda init zsh  2>/dev/null || true
+            info "Conda initialized: $(conda --version)"
+            return 0
+        fi
+    done
 
     info "Installing Miniconda..."
     local installer="Miniconda3-latest-Linux-x86_64.sh"
