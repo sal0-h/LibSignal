@@ -55,6 +55,8 @@ class MPLightAgent(RLAgent):
         self.ob_order = None
         if 'lane_order' in self.dic_traffic_env_conf.param['signal_config'][map_name].keys():
             self.ob_order = self.dic_traffic_env_conf.param['signal_config'][map_name]['lane_order']
+        # Store per-intersection phase counts to clip actions for heterogeneous networks
+        self.phase_lengths = np.array([len(x.phases) for x in self.world.intersections])
         self.model = None
         self.optimizer = None
         self.num_phases = len(self.phase_pairs)
@@ -130,15 +132,8 @@ class MPLightAgent(RLAgent):
         sorted(delays, key=lambda x: x[0])
         self.delay = delays
 
-        # TODO check ob_length, compared with presslight and original mplight and RESCO-mplight
-        # this is extracted from presslight so far
-        # if self.phase:
-        #     if self.one_hot:
-        #         self.ob_length = self.ob_generator.ob_length + len(self.inter_obj.phases) # 32
-        #     else:
-        #         self.ob_length = self.ob_generator.ob_length + 1 # 25
-        # else:
-        #     self.ob_length = self.ob_generator.ob_length # 24
+        # Compute ob_length as max across all intersections to handle heterogeneous networks
+        self.ob_length = max([ob[1].ob_length for ob in self.ob_generator])
 
     def __repr__(self):
         return self.agents_iner.__repr__()
@@ -258,10 +253,9 @@ class MPLightAgent(RLAgent):
                         tt.append(0.)
                 x_obs.append(np.array(tt))     
             else:
-                x_obs.append(tmp)
+                x_obs.append(np.pad(tmp, (0, self.ob_length - tmp.shape[-1])))
             
-        if self.ob_order != None:
-            x_obs = np.array(x_obs, dtype=np.float32)
+        x_obs = np.array(x_obs, dtype=np.float32)
         return x_obs
 
     def get_reward(self):
@@ -372,16 +366,17 @@ class MPLightAgent(RLAgent):
                                 valid_acts=batch_valid,
                                 reverse_valid=batch_reverse, test=test)
         acts = np.array(batch_acts)
+        # Clip actions to valid phase range for each intersection (handles heterogeneous networks)
+        acts = np.minimum(acts, self.phase_lengths - 1)
         return acts
         
 
     def sample(self):
-        pass
-        # """Applicable to various traffic light plans at each intersection."""
-        # ran_phase = []
-        # for x in self.action_space_list:
-        #     ran_phase.append(np.random.randint(0, x.n))
-        # return ran_phase
+        """Applicable to various traffic light plans at each intersection."""
+        ran_phase = []
+        for x in self.action_space_list:
+            ran_phase.append(np.random.randint(0, x.n))
+        return np.array(ran_phase)
 
     def remember(self, last_obs, last_phase, actions, actions_prob, rewards, obs, cur_phase, done, key):
         '''
@@ -413,11 +408,12 @@ class MPLightAgent(RLAgent):
         :param done: boolean, decide whether the process is done
         :return: None
         '''
-        # TODO how to handle inregular lane length?
-        # # padding ob length
-        # max_len = max([len(x) for x in ob])
-        # ob_uni = list(map(lambda l:list(l) + [0.]*(max_len - len(l)), ob))
-        # last_ob_uni = list(map(lambda l:list(l) + [0.]*(max_len - len(l)), last_ob))
+        # Pad observations to uniform length for heterogeneous networks
+        if not isinstance(ob, np.ndarray):
+            ob = [np.pad(x, (0, self.ob_length - len(x))) for x in ob]
+            ob = np.array(ob, dtype=np.float32)
+        elif ob.ndim == 1 or (ob.ndim == 2 and ob.shape[1] < self.ob_length):
+            ob = np.array([np.pad(x, (0, self.ob_length - x.shape[-1])) for x in ob], dtype=np.float32)
 
         # concate ob and phase
         if self.phase:
