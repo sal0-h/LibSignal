@@ -116,8 +116,12 @@ install_pytorch() {
 # ── 4. Install torch-geometric + torch-scatter ─────────────────────────────
 install_torch_geometric() {
     info "Installing torch-geometric..."
-    # Modern pyg (>=2.4) includes scatter/sparse natively — no separate packages needed
     pip install torch-geometric
+
+    info "Installing torch-scatter (required for CoLight agent)..."
+    # Use conda for torch-scatter as pip installation often fails
+    conda install torch-scatter=2.1.1 -c conda-forge -y
+
     # Install pyg-lib for optimized ops (optional, best-effort)
     pip install pyg-lib -f "https://data.pyg.org/whl/torch-$(python -c 'import torch; print(torch.__version__.split("+")[0])')+$(python -c 'import torch; print("cu121" if torch.cuda.is_available() else "cpu")').html" 2>/dev/null \
         || warn "pyg-lib prebuilt wheel not available — torch-geometric will still work fine"
@@ -209,6 +213,7 @@ verify() {
 
     python -c "import torch; print(f'  PyTorch {torch.__version__} — CUDA: {torch.cuda.is_available()}')" || { warn "PyTorch import failed"; failed=1; }
     python -c "import torch_geometric; print(f'  torch-geometric {torch_geometric.__version__}')" || { warn "torch-geometric import failed"; failed=1; }
+    python -c "import torch_scatter; print(f'  torch-scatter OK')" || { warn "torch-scatter import failed"; failed=1; }
     python -c "import pfrl; print(f'  pfrl {pfrl.__version__}')" || { warn "pfrl import failed"; failed=1; }
     if [[ "$(uname -s)" == "Darwin" ]]; then
         warn "libsumo: skipped (not available on macOS — using traci instead)"
