@@ -126,16 +126,40 @@ install_torch_geometric() {
 # ── 5. Install SUMO packages (aligned versions) ────────────────────────────
 install_sumo() {
     info "Installing SUMO packages (version ${SUMO_VERSION})..."
+
     if [[ "$(uname -s)" == "Darwin" ]]; then
-        # libsumo and eclipse-sumo don't have macOS wheels — use traci interface
-        # User should install SUMO via: brew install sumo
         warn "macOS detected: libsumo wheels not available for macOS."
         warn "Install SUMO via Homebrew: brew install sumo"
         warn "The framework will use traci (slower but compatible)."
         pip install sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}"
     else
-        # Install all SUMO packages at the same version to avoid conflicts
-        pip install libsumo=="${SUMO_VERSION}" sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}" eclipse-sumo=="${SUMO_VERSION}"
+        # Uninstall any existing SUMO packages first to avoid version conflicts
+        info "Cleaning existing SUMO packages..."
+        pip uninstall -y libsumo sumolib traci eclipse-sumo 2>/dev/null || true
+
+        # Install libsumo FIRST, then align the rest to the same version
+        info "Installing libsumo==${SUMO_VERSION}..."
+        pip install libsumo=="${SUMO_VERSION}"
+
+        info "Installing sumolib, traci, eclipse-sumo (force-reinstall to align versions)..."
+        pip install --force-reinstall sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}" eclipse-sumo=="${SUMO_VERSION}"
+
+        # Verify libsumo actually loads (it needs system libs like libGL on some distros)
+        if python -c "import libsumo" 2>/dev/null; then
+            info "libsumo verified — fast simulation mode available"
+        else
+            warn "libsumo installed but won't load. Installing system dependencies..."
+            # Common missing libs on Ubuntu/Debian
+            if command -v apt-get &>/dev/null; then
+                sudo apt-get update -qq && sudo apt-get install -y -qq libgl1 libglib2.0-0 libxrender1 libfontconfig1 2>/dev/null || true
+            fi
+            # Re-check
+            if python -c "import libsumo" 2>/dev/null; then
+                info "libsumo verified after installing system deps"
+            else
+                warn "libsumo still won't load. Use --interface traci as fallback."
+            fi
+        fi
     fi
 
     # Set SUMO_HOME to the pip-installed eclipse-sumo
