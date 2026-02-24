@@ -1,0 +1,5 @@
+step:3600/3600, q_loss:0, rewards:-53.92515182495117, queue:9.73888874053955, delay:0.43422237038612366, throughput:2767
+episode:0/200, real avg travel time:114.12865919768703
+intersection:0, mean_episode_reward:-12.277222633361816, mean_queue:5.458333492279053
+intersection:1, mean_episode_reward:-17.141674041748047, mean_queue:6.969444274902344
+intersection:2, mean_episode_reward:-24.506256103515625, mean_queue:16.788888931274414

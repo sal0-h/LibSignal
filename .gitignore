@@ -2,6 +2,13 @@ __pycache__/
 *.DS_Store
 .idea/
 .vscode/
-data/output_data
+# keep generated output data checked in, but ignore model weights
+# data/output_data (commented out so we can add finer-grained ignores)
+
+# ignore model directories and files within output_data
+data/output_data/**/model/
+data/output_data/**/model/*.pt
+data/output_data/**/model/*.pth
 .ipynb
 *.ipynb
+*.mdb
