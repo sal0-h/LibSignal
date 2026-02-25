@@ -425,7 +425,9 @@ class MPLightAgent(RLAgent):
             obs = ob
         reset = [False] * self.sub_agents
         dones = [done] * self.sub_agents if isinstance(done, bool) else done
-        rewards = [reward] if isinstance(reward, float) else reward
+        
+        # --- FIXED CODE --- CHANGED BY MADINA
+        rewards = [reward] if np.isscalar(reward) else reward
         self.agents_iner.observe(obs, rewards, dones, reset)
 
     def _build_model(self):
@@ -474,16 +476,16 @@ class MPLightAgent(RLAgent):
         '''
         load_model
         Load model params of an episode.
-
-        :param e: specified episode
-        :return: None
         '''
         model_name = os.path.join(Registry.mapping['logger_mapping']['path'].path,
                                   'model', f'{e}_{self.rank}.pt')
         self.agents_iner = self._build_model()
-        # self.agents_iner.load_state_dict(torch.load(model_name))
-        tmp_dict = {}
-        tmp_dict.load_state_dict(torch.load(model_name))
+        
+        # --- FIXED CODE --- MADINA CHANGED THIS
+        checkpoint = torch.load(model_name)
+        self.model.load_state_dict(checkpoint['model_state_dict'])
+        self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        
 
     def save_model(self, e):
         '''
