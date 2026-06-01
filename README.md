@@ -47,129 +47,49 @@ We have also included two sim-to-real for RL - TSC tasks:
 
 # Install
 
-## Source
+This fork is developed and tested with **SUMO** (`--world sumo`). CityFlow code paths remain in the tree but are not actively maintained here.
 
-LibSignal provides installation from the source code.
-Please execute the following command to install and configure  our environment.
+## Quick setup (recommended)
 
-```
+```bash
 git clone https://github.com/sal0-h/LibSignal.git
 cd LibSignal
+chmod +x setup.sh
+./setup.sh
 ```
 
-## Simulator environment configuration
-<br />
-Though CityFlow and SUMO are stable under Windows and Linux systems, we still recommend users work under the Linux system. Currently, CBEngine is stable under the Linux system.<br><br>
+`setup.sh` creates the conda env `traffic` (Python 3.10), installs PyTorch (CUDA if available), SUMO 1.26 (`libsumo` / `traci`), `torch-geometric`, `torch-scatter` (for CoLight), and the Python packages in `requirements.txt`.
 
-### CityFlow Environment
-<br />
+On a shared server where system packages are already installed:
 
-To install CityFlow simulator, please follow the instructions on [CityFlow Doc](https://cityflow.readthedocs.io/en/latest/install.html#)
-
-
-```
-sudo apt update && sudo apt install -y build-essential cmake
-
-git clone https://github.com/cityflow-project/CityFlow.git
-cd CityFlow
-pip install .
-```
-To test configuration:
-```
-import cityflow
-env = cityflow.Engine
-```
-<br>
-
-### SUMO Environment
-<br />
-
-To install SUMO environment, please follow the instructions on [SUMO Doc](https://epics-sumo.sourceforge.io/sumo-install.html#)
-
-```
-sudo apt-get install cmake python g++ libxerces-c-dev libfox-1.6-dev libgdal-dev libproj-dev libgl2ps-dev swig
-
-git clone --recursive https://github.com/eclipse/sumo
-
-export SUMO_HOME="$PWD/sumo"
-mkdir sumo/build/cmake-build && cd sumo/build/cmake-build
-cmake ../..
-make -j$(nproc)
-```
-To test installation:
-```
-cd ~/DaRL/sumo/bin
-./sumo
+```bash
+./setup.sh --no-sudo
 ```
 
-To add SUMO and traci model into the system PATH, execute the code below:
-```
-export SUMO_HOME=~/DaRL/sumo
-export PYTHONPATH="$SUMO_HOME/tools:$PYTHONPATH"
-```
-To test configuration:
-```
-import libsumo
-import traci
-```
-<br>
+Activate before running experiments:
 
-### CBEngine
-<br />
-
-CBEngine currently works stably under the Linux system; we highly recommend users choose Linux if we plan to conduct experiments under the CBEinge simulation environment. (Currently not available)
-
-<br>
-
-### Converter
-<br />
-
-We provide a converter to transform configurations including road net and traffic flow files across CityFlow and SUMO. More details in [converter.py](./common/converter.py)
-
-To convert from CityFlow to SUMO: 
-
+```bash
+conda activate traffic
+python run.py --task tsc --agent presslight --world sumo --network sumo1x1 --prefix test
 ```
 
-python converter.py --typ c2s --or_cityflownet CityFlowNetPath --sumonet ConvertedSUMONetPath --or_cityflowtraffic CityFlowTrafficPath --sumotraffic ConvertedSUMOTrafficPath 
+## Manual / partial install
 
-```
+If you already have conda and CUDA, you can install pip dependencies after PyTorch and SUMO:
 
-To convert from SUMO to CityFlow: 
-```
-python converter.py --typ s2c --or_sumonet SUMONetPath --cityflownet ConvertedCityFlowNetPath --or_sumotraffic SUMOTrafficPath --cityflowtraffic ConvertedCityFlowTrafficPath --sumocfg SUMOConfigs
-```
-After running the code, the converted traffic network files, traffic flow files, and some intermediate files will be generated in the specified folder.
-
-<br>
-
-## Requirement
-<br />
-
-Our code is based on Python version 3.9 and Pytorch version 1.11.0. For example, if your CUDA version is 11.3 you can follow the instructions on [PyTorch](https://pytorch.org/get-started/locally/)
-
-```
-pip3 install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
-
+```bash
 pip install -r requirements.txt
 ```
 
-## Selective agents
-<br />
+CoLight also needs `torch-scatter` (the setup script installs it via conda-forge). See [team_instructions.pdf](./team_instructions.pdf) for Colab and lab-server workflows.
 
-We also support agents implemented based on other libraries
-```
-# Colight Geometric implementation based on default environment mentioned in Requirement
+## Optional: CityFlow
 
-pip install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.11.0+cu113.html
+Upstream LibSignal supports `--world cityflow` if [CityFlow](https://github.com/cityflow-project/CityFlow) is installed. We do not test that path in this fork today; use SUMO for team experiments. A CityFlow ↔ SUMO converter lives in [common/converter.py](./common/converter.py).
 
-# ppo_pfrl implementation
-pip install pfrl
-```
-Detailed instructions can be found on page [Pytorch_geometric](https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html) and [PFRL](https://pfrl.readthedocs.io/en/latest/install.html). After installation, user should uncomment code in PATH ./agent/\_\_init\_\_.py 
-```
-# from .ppo_pfrl import IPPO_pfrl
-# from colight import CoLightAgent
-```
+## Agents
+
+RL agents are imported automatically from `agent/__init__.py` when dependencies are present (e.g. CoLight needs `torch_scatter` + `torch_geometric`). Baselines (`maxpressure`, `fixedtime`, `sotl`) work without those extras.
 # Start
 
 ## Run Model Pipeline

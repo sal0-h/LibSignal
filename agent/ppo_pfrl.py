@@ -77,6 +77,11 @@ class IPPO_pfrl(RLAgent):
     def __repr__(self):
         return self.model.__repr__()
 
+    def to_device(self, device):
+        self.device = device
+        if self.model is not None:
+            self.model.to(device)
+
     def reset(self):
         inter_id = self.world.intersection_ids[self.rank]
         inter_obj = self.world.id2intersection[inter_id]
@@ -120,7 +125,7 @@ class IPPO_pfrl(RLAgent):
                 obs = np.concatenate([ob, phase], axis=1)
         else:
             obs = ob
-        obs = torch.tensor(obs, dtype=torch.float32)
+        obs = torch.tensor(obs, dtype=torch.float32, device=self.device)
         action = self.agent.act(obs)
         return action
 
@@ -132,7 +137,7 @@ class IPPO_pfrl(RLAgent):
                 obs = np.concatenate([ob, phase], axis=1)
         else:
             obs = ob
-        obs = torch.tensor(obs, dtype=torch.float32)
+        obs = torch.tensor(obs, dtype=torch.float32, device=self.device)
         self.agent.observe(obs, reward, done, False)
 
     def train(self):
@@ -196,10 +201,12 @@ class IPPO_pfrl(RLAgent):
                          max_grad_norm=0.5)
 
     def load_model(self, e):
-        model_name = os.path.join(Registry.mapping['logger_mapping']['output_path'].path,
+        model_name = os.path.join(Registry.mapping['logger_mapping']['path'].path,
                                   'model', f'{e}_{self.rank}.pt')
-        self._build_model()
-        self.model.load_state_dict(torch.load(model_name))
+        if self.model is None:
+            self._build_model()
+        self.model.load_state_dict(torch.load(model_name, map_location=self.device))
+        self.to_device(self.device)
 
     def save_model(self, e):
         path = os.path.join(Registry.mapping['logger_mapping']['path'].path, 'model')
