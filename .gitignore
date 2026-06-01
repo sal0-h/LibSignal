@@ -1,14 +1,24 @@
 __pycache__/
+*.py[cod]
 *.DS_Store
 .idea/
 .vscode/
-# keep generated output data checked in, but ignore model weights
-# data/output_data (commented out so we can add finer-grained ignores)
 
-# ignore model directories and files within output_data
+# Experiment outputs (logs, checkpoints, local summaries)
+data/output_data/**/logger/
 data/output_data/**/model/
-data/output_data/**/model/*.pt
-data/output_data/**/model/*.pth
-.ipynb
+data/output_data/**/*.pt
+data/output_data/**/*.pth
+data/output_data/tsc/processed_results*.csv
+
+# LaTeX build artifacts (source: team_instructions.tex)
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+
 *.ipynb
 *.mdb

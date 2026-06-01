@@ -2,8 +2,9 @@
 
 ![visitors](https://visitor-badge.laobi.icu/badge?page_id=wingsweihua.LibSignal&style=flat)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fdarl-libsignal.github.io%2F&up_message=LibSignal&style=flat)](https://darl-libsignal.github.io/)
-![GitHub Repo stars](https://img.shields.io/github/stars/DaRL-LibSignal/LibSignal?style=flat&color=red)
+![GitHub Repo stars](https://img.shields.io/github/stars/sal0-h/LibSignal?style=flat&color=red)
 
+> **Note:** This repository continues [DaRL-LibSignal/LibSignal](https://github.com/DaRL-LibSignal/LibSignal) with Python 3.11+ compatibility, setup improvements, and ongoing maintenance. Use this repo for installs and experiments; the original upstream is largely inactive.
 
 This repo provides OpenAI Gym-compatible environments for traffic light control scenarios and a bunch of baseline methods. 
 
@@ -52,9 +53,8 @@ LibSignal provides installation from the source code.
 Please execute the following command to install and configure  our environment.
 
 ```
-mkdir DaRL
-cd DaRL
-git clone git@github.com:DaRL-LibSignal/LibSignal.git
+git clone https://github.com/sal0-h/LibSignal.git
+cd LibSignal
 ```
 
 ## Simulator environment configuration

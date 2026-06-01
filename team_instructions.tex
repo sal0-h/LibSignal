@@ -76,7 +76,7 @@
 {\large \today\par}
 \vfill
 {\normalsize
-Repository: \url{https://github.com/sal0-h/LibSignalFork}\\[0.3cm]
+Repository: \url{https://github.com/sal0-h/LibSignal}\\[0.3cm]
 Framework: LibSignal --- Reinforcement Learning for Traffic Signal Control}
 \end{titlepage}
 
@@ -90,7 +90,7 @@ Framework: LibSignal --- Reinforcement Learning for Traffic Signal Control}
 LibSignal is an open-source reinforcement learning framework for \textbf{Traffic Signal Control (TSC)}.
 It wraps traffic simulators (SUMO, CityFlow) behind a unified interface so that different RL agents can be trained and evaluated on various road networks without rewriting glue code.
 
-We are using a \textbf{fork} of the original repository with small fixes for Python~3.11+ compatibility and realistic SUMO physics.
+This repository continues the original \href{https://github.com/DaRL-LibSignal/LibSignal}{DaRL-LibSignal/LibSignal} project with Python~3.11+ compatibility, setup improvements, and realistic SUMO physics. The upstream project is no longer actively maintained; use this repository for all team work.
 
 \subsection{Key Concepts}
 \begin{description}[leftmargin=3cm, style=nextline]
@@ -130,7 +130,7 @@ Click the play button.  The cell will:
     \item Mount Google Drive.
     \item Create your personal output folder (if it doesn't exist).
     \item Install SUMO (first run only, takes $\sim$2 minutes).
-    \item Clone or update the LibSignal fork.
+    \item Clone or update LibSignal.
     \item Install Python dependencies.
     \item Create a \textbf{symlink} from the local \texttt{data/output\_data} directory to your Drive folder, so all logs and model checkpoints are automatically saved to the cloud.
 \end{enumerate}
@@ -170,7 +170,7 @@ This is the most reliable method.
 
 \begin{enumerate}
     \item Open the Colab \textbf{file explorer} (folder icon on the left sidebar).
-    \item Navigate to \texttt{LibSignalFork/configs/tsc/}.
+    \item Navigate to \texttt{LibSignal/configs/tsc/}.
     \item Open the YAML file for your agent (e.g.\ \texttt{presslight.yml}).
     \item Edit the hyperparameters to match the values from the paper.
     \item Save the file (\texttt{Ctrl+S}).
@@ -178,7 +178,7 @@ This is the most reliable method.
 \end{enumerate}
 
 \begin{lstlisting}[language=bash]
-!cd /content/LibSignalFork && python run.py \
+!cd /content/LibSignal && python run.py \
     --task tsc \
     --agent presslight \
     --world sumo \
@@ -404,6 +404,165 @@ output_data/
 \end{lstlisting}
     \item If you see the \texttt{model/} folder appearing, your setup is working correctly.
 \end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════
+\section{Lab Server Setup (Alternative to Colab)}
+\label{sec:server}
+
+Instead of Google Colab you can run experiments directly on the lab server.
+Each team member works from \textbf{their own clone} of the repository under their own home directory.
+There is no shared directory.
+
+% ── Step 1 ───────────────────────────────────────────────────────
+\subsection{Step 1: Log In}
+
+Open a terminal and SSH in with the username and password Salman sent you on WhatsApp:
+
+\begin{lstlisting}[language=bash]
+ssh rashid@<server-address>
+# enter the password when prompted
+\end{lstlisting}
+
+\begin{warningbox}
+Change your password immediately after first login:
+\begin{lstlisting}[language=bash]
+passwd
+\end{lstlisting}
+Enter the old password, then choose a new one.
+\end{warningbox}
+
+% ── Step 2 ───────────────────────────────────────────────────────
+\subsection{Step 2: Clone the Repository}
+
+Clone your own copy of the repo into your home directory:
+
+\begin{lstlisting}[language=bash]
+git clone https://github.com/sal0-h/LibSignal.git ~/LibSignal
+cd ~/LibSignal
+\end{lstlisting}
+
+% ── Step 3 ───────────────────────────────────────────────────────
+\subsection{Step 3: Run the Setup Script}
+
+Run the setup script with the \texttt{--no-sudo} flag.
+This installs Miniconda (if needed), creates the \texttt{traffic} conda environment, installs PyTorch, SUMO, and all Python dependencies.
+
+\begin{lstlisting}[language=bash]
+chmod +x setup.sh
+./setup.sh --no-sudo
+\end{lstlisting}
+
+The \texttt{--no-sudo} flag causes the script to skip any privileged system-package steps.
+The administrator has already installed the required system libraries, so the script will complete successfully without root access.
+
+\begin{infobox}
+You only need to run the setup script \textbf{once} after cloning.
+The environment persists across logins --- unlike Colab, nothing is reset when you log out.
+\end{infobox}
+
+% ── Step 4 ───────────────────────────────────────────────────────
+\subsection{Step 4: Activate the Environment}
+
+Every new terminal session, activate the conda environment before running anything:
+
+\begin{lstlisting}[language=bash]
+conda activate traffic
+\end{lstlisting}
+
+Verify it is working:
+
+\begin{lstlisting}[language=bash]
+which python       # should point to .../envs/traffic/bin/python
+python -V          # Python 3.10.x
+\end{lstlisting}
+
+% ── Step 5 ───────────────────────────────────────────────────────
+\subsection{Step 5: Run Experiments}
+
+Experiments are run exactly the same way as on Colab, just without the \texttt{!} prefix:
+
+\begin{lstlisting}[language=bash]
+cd ~/LibSignal
+python run.py \
+    --task tsc \
+    --agent presslight \
+    --world sumo \
+    --network sumo4x4 \
+    --prefix rashid_run1 \
+    --dataset onfly
+\end{lstlisting}
+
+Outputs are saved under your clone at:
+
+\begin{center}
+\texttt{\textasciitilde/LibSignal/data/output\_data/tsc/sumo\_\{agent\}/\{network\}/\{prefix\}/}
+\end{center}
+
+There is no symlink to Google Drive; results stay on the server.
+Use \texttt{git add / commit / push} to share results with the team.
+
+% ── Step 6 ───────────────────────────────────────────────────────
+\subsection{Step 6: Keep Experiments Running After Logout}
+
+Unlike Colab, the server does not kill your process when you disconnect.
+Use \texttt{nohup} or \texttt{tmux} so training continues in the background:
+
+\begin{lstlisting}[language=bash]
+# option A: nohup (simplest)
+nohup python run.py --task tsc --agent colight \
+      --world sumo --network sumo4x4 \
+      --prefix rashid_colight1 --dataset onfly \
+      > run.log 2>&1 &
+
+# then check progress at any time with:
+tail -f run.log
+
+# option B: tmux (recommended: you can re-attach the session)
+tmux new -s train
+python run.py ...      # start the run inside tmux
+# detach: Ctrl+B then D
+# re-attach later:
+tmux attach -t train
+\end{lstlisting}
+
+% ── Step 7 ───────────────────────────────────────────────────────
+\subsection{Step 7: Commit and Share Results}
+
+After a run finishes, commit the output data (model weights are excluded by \texttt{.gitignore};
+only logs and CSVs are committed):
+
+\begin{lstlisting}[language=bash]
+cd ~/LibSignal
+git add data/output_data/
+git commit -m "rashid: presslight sumo4x4 run1 results"
+git push
+\end{lstlisting}
+
+% ── Verification checklist ────────────────────────────────────────
+\subsection{Quick Verification Checklist}
+
+\begin{enumerate}
+    \item You can SSH in and \texttt{passwd} has been changed.
+    \item \texttt{./setup.sh --no-sudo} completed with no errors.
+    \item \texttt{conda activate traffic} works.
+    \item A short test run completes:
+\begin{lstlisting}[language=bash]
+python run.py --task tsc --agent maxpressure \
+    --world sumo --network sumo1x1 --dataset onfly --prefix test
+\end{lstlisting}
+    \item You see output in \texttt{data/output\_data/tsc/sumo\_maxpressure/sumo1x1/test/}.
+\end{enumerate}
+
+% ── Gotchas ──────────────────────────────────────────────────────
+\subsection{Gotchas}
+
+\begin{itemize}
+    \item \textbf{Do not} run experiments with \texttt{sudo} --- the conda environment does not live under root.
+    \item \textbf{Do not} delete \texttt{\textasciitilde/miniconda3} or \texttt{\textasciitilde/.conda} unless you intend to redo the full setup.
+    \item If you see \texttt{SUMO\_HOME not set}, the conda env was activated \emph{after} the setup script wrote the activation hook.  Run \texttt{conda deactivate \&\& conda activate traffic} to reload it.
+    \item Model weight files (\texttt{*.pt}) are in \texttt{.gitignore} and will not be pushed.  Only logs and metric CSVs are committed.
+    \item Always use a unique \texttt{--prefix} per run to avoid overwriting previous results.
+\end{itemize}
 
 % ═══════════════════════════════════════════════════════════════════
 \section{Important Warnings}
