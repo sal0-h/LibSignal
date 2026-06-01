@@ -1,23 +1,34 @@
-# Introduction
+# LibSignal
 
-![visitors](https://visitor-badge.laobi.icu/badge?page_id=wingsweihua.LibSignal&style=flat)
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fdarl-libsignal.github.io%2F&up_message=LibSignal&style=flat)](https://darl-libsignal.github.io/)
-![GitHub Repo stars](https://img.shields.io/github/stars/sal0-h/LibSignal?style=flat&color=red)
+[Website](https://darl-libsignal.github.io/)
+GitHub Repo stars
 
-> **Note:** This repository continues [DaRL-LibSignal/LibSignal](https://github.com/DaRL-LibSignal/LibSignal) with Python 3.11+ compatibility, setup improvements, and ongoing maintenance. Use this repo for installs and experiments; the original upstream is largely inactive.
+OpenAI Gymnasium-compatible environments for **traffic signal control (TSC)** with classical and reinforcement-learning baselines.
 
-This repo provides OpenAI Gym-compatible environments for traffic light control scenarios and a bunch of baseline methods. 
+**Maintained at:** [sal0-h/LibSignal](https://github.com/sal0-h/LibSignal) — standalone project with Python 3.10+ tooling, SUMO-focused workflows, and team/server setup (`setup.sh`, [team_instructions.pdf](./team_instructions.pdf)).
 
-Environments include single intersections (single-agent) and multi-intersections (multi-agents) with different road networks and traffic flow settings.
+### Upstream LibSignal (please cite)
 
-Baselines include traditional Traffic Signal Control algorithms and reinforcement learning-based methods.
+This codebase is based on the open-source **[LibSignal](https://github.com/DaRL-LibSignal/LibSignal)** library by the DaRL group ([project site](https://darl-libsignal.github.io/)). We gratefully use their environments, baselines, and simulator integrations; **academic work should cite the original publication** (see [Citation](#citation) below), not only this maintained copy.
 
-LibSignal is a cross-simulator environment that provides multiple traditional and Reinforcement Learning models in traffic control tasks. Currently, we support SUMO, CityFlow, and CBEine simulation environments. Conversion between SUMO and CityFlow is carefully calibrated.
+
+|                         |                                                                                                                                                                                |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Original repository** | [https://github.com/DaRL-LibSignal/LibSignal](https://github.com/DaRL-LibSignal/LibSignal)                                                                                     |
+| **Paper**               | Mei, H. et al., *Libsignal: an open library for traffic signal control*, Machine Learning (2023). [doi:10.1007/s10994-023-06412-y](https://doi.org/10.1007/s10994-023-06412-y) |
+
+
+The upstream repository is largely inactive; use **this repo** for installs and day-to-day experiments.
+
+Environments cover single- and multi-intersection networks. Baselines include MaxPressure, fixed-time, SOTL, DQN, PressLight, CoLight, MPLight, and others.
+
+**Simulator focus here:** SUMO (`--world sumo`). CityFlow/OpenEngine paths exist in the codebase from upstream but are not actively tested in this repo.
 
 ## 🚀 🚀 🚀
-## We have created a docker image for your convenience 
-## <span style="color:red">(Run LibSignal, multiple sim2real baselines by one line)!</span>
 
+## We have created a docker image for your convenience
+
+## (Run LibSignal, multiple sim2real baselines by one line)!
 
 This docker code base contains three projects, first pull from docker hub: 
 
@@ -33,13 +44,13 @@ For LibSignal - Then go to the terminal:
 
 We have also included two sim-to-real for RL - TSC tasks:  
 
-> CDC23: Uncertainty-aware Grounded Action Transformation towards Sim-to-Real Transfer for Traffic Signal Control (https://github.com/darl-libsignal/ugat)
+> CDC23: Uncertainty-aware Grounded Action Transformation towards Sim-to-Real Transfer for Traffic Signal Control ([https://github.com/darl-libsignal/ugat](https://github.com/darl-libsignal/ugat))
 
 `cd /DaRL/UGAT_Docker/`
 
 `python sim2real.py`
 
-> AAAI24: Prompt to Transfer: Sim-to-Real Transfer for Traffic Signal Control with Prompt Learning (https://github.com/DaRL-LibSignal/PromptGAT)
+> AAAI24: Prompt to Transfer: Sim-to-Real Transfer for Traffic Signal Control with Prompt Learning ([https://github.com/DaRL-LibSignal/PromptGAT](https://github.com/DaRL-LibSignal/PromptGAT))
 
 `cd /DaRL/PromptGAT`
 
@@ -47,7 +58,7 @@ We have also included two sim-to-real for RL - TSC tasks:
 
 # Install
 
-This fork is developed and tested with **SUMO** (`--world sumo`). CityFlow code paths remain in the tree but are not actively maintained here.
+Developed and tested with **SUMO** (`--world sumo`).
 
 ## Quick setup (recommended)
 
@@ -85,11 +96,12 @@ CoLight also needs `torch-scatter` (the setup script installs it via conda-forge
 
 ## Optional: CityFlow
 
-Upstream LibSignal supports `--world cityflow` if [CityFlow](https://github.com/cityflow-project/CityFlow) is installed. We do not test that path in this fork today; use SUMO for team experiments. A CityFlow ↔ SUMO converter lives in [common/converter.py](./common/converter.py).
+Upstream LibSignal supports `--world cityflow` if [CityFlow](https://github.com/cityflow-project/CityFlow) is installed. We do not test that path here; use SUMO for experiments. A CityFlow ↔ SUMO converter lives in [common/converter.py](./common/converter.py).
 
 ## Agents
 
 RL agents are imported automatically from `agent/__init__.py` when dependencies are present (e.g. CoLight needs `torch_scatter` + `torch_geometric`). Baselines (`maxpressure`, `fixedtime`, `sotl`) work without those extras.
+
 # Start
 
 ## Run Model Pipeline
@@ -102,53 +114,34 @@ python run.py
 
 Supporting parameters:
 
-- <font color=red> thread_num:  </font> number of threads for cityflow simulation
-
-- <font color=red> ngpu:  </font> how many gpu resources used in this experiment
-
-- <font color=red> task:  </font> task type to run
-
-- <font color=red> agent:  </font> agent type of agents in RL environment
-
-- <font color=red> world:  </font> simulator type
-
-- <font color=red> dataset:  </font> type of dataset in training process
-
-- <font color=red> path:  </font> path to configuration file
-
-- <font color=red> prefix:  </font> the number of predix in this running process
-
-- <font color=red> seed:  </font> seed for pytorch backend
-  </br></br>
-
-
-# Maintaining plan
-
-*<font size=4>To ensure the stability of our traffic signal testbed, we will first push new code onto **dev** branch, after validation, then merge it into the master branch. </font>*
-
-| **UPdate index**           | **Date**      | **Status** | **Merged** |
-|----------------------------|---------------|------------|------------|
-| **MPLight implementation** | July-18-2022  | developed  | √          |
-| **Libsumo integration**    | August-8-2022 | developed | √          |
-| **Delay calculation**      | August-8-2022 | developed |  √          |
-| **CoLight adaptation for heterogenous network** | November-2-2024 | developed | √  |
-| **Optimize FRAP and MPLight**      | October-4-2022 | developed |  √          |
-| **FRAP adaptation for irregular intersections**      | October-18-2022 | developed |  √          |
-| **PettingZoo envrionment to better support MARL**      | Jul-18-2023 | developed |       |
-| **RLFX Agent controlling phase and duration**      | Jul-18-2023 | developed |    |
-| **Ray rllib support**      | Jul-18-2023 | developling |   |
+- thread_num: number of threads for cityflow simulation
+- ngpu: how many gpu resources used in this experiment
+- task: task type to run
+- agent: agent type of agents in RL environment
+- world: simulator type
+- dataset: type of dataset in training process
+- path: path to configuration file
+- prefix: the number of predix in this running process
+- seed: seed for pytorch backend
 
 # Citation
 
-LibSignal is accepted by the Machine Learning Journal by Springer: ```Mei, H., Lei, X., Da, L. et al. Libsignal: an open library for traffic signal control. Mach Learn (2023). https://doi.org/10.1007/s10994-023-06412-y``` and can be cited with the following BibTeX entry (A short version is accepted by NeurIPS 2022 Workshop: Reinforcement Learning for Real Life):
+If you use LibSignal (including this maintained repository) in research, **cite the original LibSignal paper and reference the upstream repository**:
 
-```
+- **Paper:** Mei, H., Lei, X., Da, L. et al. Libsignal: an open library for traffic signal control. *Machine Learning* (2023). [https://doi.org/10.1007/s10994-023-06412-y](https://doi.org/10.1007/s10994-023-06412-y)  
+- **Code (original):** [https://github.com/DaRL-LibSignal/LibSignal](https://github.com/DaRL-LibSignal/LibSignal)
+
+A short version was also presented at the NeurIPS 2022 Workshop *Reinforcement Learning for Real Life*.
+
+```bibtex
 @article{mei2023libsignal,
   title={Libsignal: an open library for traffic signal control},
   author={Mei, Hao and Lei, Xiaoliang and Da, Longchao and Shi, Bin and Wei, Hua},
   journal={Machine Learning},
   pages={1--37},
   year={2023},
-  publisher={Springer}
+  publisher={Springer},
+  doi={10.1007/s10994-023-06412-y}
 }
 ```
+
