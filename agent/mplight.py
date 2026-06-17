@@ -479,13 +479,14 @@ class MPLightAgent(RLAgent):
         '''
         model_name = os.path.join(Registry.mapping['logger_mapping']['path'].path,
                                   'model', f'{e}_{self.rank}.pt')
-        self.agents_iner = self._build_model()
+        if self.model is None:
+            self.agents_iner = self._build_model()
         
         # --- FIXED CODE --- MADINA CHANGED THIS
-        checkpoint = torch.load(model_name)
+        checkpoint = torch.load(model_name, map_location=self.device)
         self.model.load_state_dict(checkpoint['model_state_dict'])
         self.optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-        
+        self.to_device(self.device)
 
     def save_model(self, e):
         '''

@@ -1,6 +1,6 @@
 import numpy as np
 from . import BaseGenerator
-from world import world_sumo #, world_openengine, world_cityflow
+from world import world_sumo, world_cityflow
 
 
 class LaneVehicleGenerator(BaseGenerator):
@@ -104,6 +104,8 @@ class LaneVehicleGenerator(BaseGenerator):
             for road in roads:
                 from_zero = (road["startIntersection"] == I.id) if self.world.RIGHT else (road["endIntersection"] == I.id)
                 self.lanes.append([road["id"] + "_" + str(i) for i in range(len(road["lanes"]))[::(1 if from_zero else -1)]])
+        else:
+            raise NotImplementedError(f"Unsupported world type: {type(world)}")
         # ---------------------------------------------------------------------------------------------------------------
         
         # elif isinstance(world, world_openengine.World):
@@ -182,11 +184,4 @@ class LaneVehicleGenerator(BaseGenerator):
             ret = np.array(ret_list)
         return ret
 
-if __name__ == "__main__":
-    from world.world_cityflow import World
-    world = World("examples/configs.json", thread_num=1)
-    laneVehicle = LaneVehicleGenerator(world, world.intersections[0], ["count"], False, "road")
-    for _ in range(100):
-        world.step()
-    print(laneVehicle.generate())
 

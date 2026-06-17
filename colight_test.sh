@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "=== CoLight Import Test ==="
-cd /home/salman/LibSignalFork
+cd "$(dirname "$0")"
 
 conda activate traffic
 

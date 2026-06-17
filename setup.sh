@@ -6,9 +6,26 @@
 # ============================================================================
 set -euo pipefail
 
+# command‑line options
+NO_SUDO=0
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --no-sudo) NO_SUDO=1; shift ;;  # skip any operations requiring sudo
+        *) break ;;
+    esac
+done
+
 CONDA_ENV="traffic"
 PYTHON_VERSION="3.10"
 SUMO_VERSION="1.26.0"
+
+# Usage notes:
+#   run as a non-root user after an administrator has preinstalled system
+#   packages; supply --no-sudo to skip any privileged steps.
+#
+# To prevent unbounded CPU/RAM use on a shared server you can launch the
+# training/evaluation commands inside a container or cgroup, or use shell
+# ulimit(1) settings.  The script itself does not manage resource caps.
 
 # Colors for output
 GREEN='\033[0;32m'
@@ -155,7 +172,12 @@ install_sumo() {
             warn "libsumo installed but won't load. Installing system dependencies..."
             # Common missing libs on Ubuntu/Debian
             if command -v apt-get &>/dev/null; then
-                sudo apt-get update -qq && sudo apt-get install -y -qq libgl1 libglib2.0-0 libxrender1 libfontconfig1 2>/dev/null || true
+                if [ "$NO_SUDO" -eq 1 ]; then
+                    warn "would install system packages (libgl, etc.) here but --no-sudo was specified."
+                    warn "ask a sysadmin to install them or run this script again with sudo."
+                else
+                    sudo apt-get update -qq && sudo apt-get install -y -qq libgl1 libglib2.0-0 libxrender1 libfontconfig1 2>/dev/null || true
+                fi
             fi
             # Re-check
             if python -c "import libsumo" 2>/dev/null; then

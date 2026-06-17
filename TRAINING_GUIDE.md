@@ -2,6 +2,8 @@
 
 A practical guide to training RL agents and running inference with trained models.
 
+**Environment:** Use `./setup.sh` (see [README.md](./README.md)) to create the `traffic` conda env. Team experiments use **`--world sumo`**; CityFlow may work upstream-style but is not validated in this fork.
+
 ## Quick Start
 
 ### Run a Baseline (No Training Needed)
@@ -31,7 +33,7 @@ Then modify the config to test without retraining (see below).
 When you run with a RL agent (dqn, ppo, etc.), here's what happens:
 
 **1. Environment Setup**
-- Simulator initializes (SUMO/CityFlow) based on `configs/sim/{network}.cfg`
+- Simulator initializes (SUMO) based on `configs/sim/{network}.cfg`
 - Agents created from registered model type
 - TSCEnv wraps everything into OpenAI Gym interface
 
