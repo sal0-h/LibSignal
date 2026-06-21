@@ -557,7 +557,8 @@ class MPLight_InerAgent(DQN):
         :param test: boolean, decide whether is test process
         :return valid_batch_action: valid action taken by environment in batch form
         '''
-        # self.training = not test
+        # uncommented the line below to make sure the agent is in training mode when test=False, which is important for exploration
+        self.training = not test
         if valid_acts is None: 
             return super(MPLight_InerAgent, self).batch_act(batch_obs)
         with torch.no_grad(), evaluating(self.model):
