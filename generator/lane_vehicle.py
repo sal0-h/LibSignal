@@ -1,7 +1,10 @@
 import numpy as np
 from . import BaseGenerator
-from world import world_sumo, world_cityflow
-
+from world import world_sumo
+try:
+    from world import world_cityflow
+except (ModuleNotFoundError, ImportError):
+    world_cityflow = None
 
 class LaneVehicleGenerator(BaseGenerator):
     '''
