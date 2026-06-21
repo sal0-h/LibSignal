@@ -115,9 +115,7 @@ class LaneVehicleGenerator(BaseGenerator):
         #         else:
         #             tmp = sorted(I.road_lane_mapping[r], key=lambda ob: int(str(ob)[-1]))
         #         self.lanes.append(tmp)
-        else:
-            raise Exception('NOT IMPLEMENTED YET')
-
+        
         # subscribe functions
         self.world.subscribe(fns)
         self.fns = fns
