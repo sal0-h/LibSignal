@@ -109,6 +109,13 @@ create_env() {
     info "Activating '${CONDA_ENV}'..."
     conda activate "${CONDA_ENV}"
     info "Active Python: $(which python) ($(python --version))"
+
+    # Ensure pip lives inside the conda env (not system/user pip on PATH)
+    if ! python -m pip --version &>/dev/null; then
+        info "Installing pip into '${CONDA_ENV}'..."
+        conda install -y -n "${CONDA_ENV}" pip
+    fi
+    info "Active pip: $(python -m pip --version)"
 }
 
 # ── 3. Install PyTorch (with CUDA if available) ────────────────────────────
@@ -117,30 +124,30 @@ install_pytorch() {
     if [[ "$(uname -s)" == "Darwin" ]]; then
         # macOS: default PyTorch supports MPS (Apple Silicon) automatically
         info "macOS detected. Installing PyTorch (MPS will be used on Apple Silicon)..."
-        pip install torch torchvision
+        python -m pip install torch torchvision
     elif command -v nvidia-smi &>/dev/null && nvidia-smi &>/dev/null; then
         local cuda_version
         cuda_version=$(nvidia-smi --query-gpu=driver_version --format=csv,noheader | head -1)
         info "NVIDIA GPU detected (driver: ${cuda_version})"
         info "Installing PyTorch with CUDA support..."
-        pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+        python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
     else
         warn "No NVIDIA GPU detected. Installing CPU-only PyTorch."
-        pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+        python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
     fi
 }
 
 # ── 4. Install torch-geometric + torch-scatter ─────────────────────────────
 install_torch_geometric() {
     info "Installing torch-geometric..."
-    pip install torch-geometric
+    python -m pip install torch-geometric
 
     info "Installing torch-scatter (required for CoLight agent)..."
     # Use conda for torch-scatter as pip installation often fails
     conda install torch-scatter=2.1.1 -c conda-forge -y
 
     # Install pyg-lib for optimized ops (optional, best-effort)
-    pip install pyg-lib -f "https://data.pyg.org/whl/torch-$(python -c 'import torch; print(torch.__version__.split("+")[0])')+$(python -c 'import torch; print("cu121" if torch.cuda.is_available() else "cpu")').html" 2>/dev/null \
+    python -m pip install pyg-lib -f "https://data.pyg.org/whl/torch-$(python -c 'import torch; print(torch.__version__.split("+")[0])')+$(python -c 'import torch; print("cu121" if torch.cuda.is_available() else "cpu")').html" 2>/dev/null \
         || warn "pyg-lib prebuilt wheel not available — torch-geometric will still work fine"
 }
 
@@ -152,18 +159,18 @@ install_sumo() {
         warn "macOS detected: libsumo wheels not available for macOS."
         warn "Install SUMO via Homebrew: brew install sumo"
         warn "The framework will use traci (slower but compatible)."
-        pip install sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}"
+        python -m pip install sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}"
     else
         # Uninstall any existing SUMO packages first to avoid version conflicts
         info "Cleaning existing SUMO packages..."
-        pip uninstall -y libsumo sumolib traci eclipse-sumo 2>/dev/null || true
+        python -m pip uninstall -y libsumo sumolib traci eclipse-sumo 2>/dev/null || true
 
         # Install libsumo FIRST, then align the rest to the same version
         info "Installing libsumo==${SUMO_VERSION}..."
-        pip install libsumo=="${SUMO_VERSION}"
+        python -m pip install libsumo=="${SUMO_VERSION}"
 
         info "Installing sumolib, traci, eclipse-sumo (force-reinstall to align versions)..."
-        pip install --force-reinstall sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}" eclipse-sumo=="${SUMO_VERSION}"
+        python -m pip install --force-reinstall sumolib=="${SUMO_VERSION}" traci=="${SUMO_VERSION}" eclipse-sumo=="${SUMO_VERSION}"
 
         # Verify libsumo actually loads (it needs system libs like libGL on some distros)
         if python -c "import libsumo" 2>/dev/null; then
@@ -212,7 +219,7 @@ EOF
 # ── 6. Install remaining Python dependencies ───────────────────────────────
 install_deps() {
     info "Installing Python dependencies..."
-    pip install \
+    python -m pip install \
         "gym>=0.21.0" \
         "gymnasium>=0.26.0" \
         "numpy<2.0" \
