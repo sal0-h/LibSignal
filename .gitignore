@@ -5,11 +5,11 @@ __pycache__/
 .vscode/
 
 # Experiment outputs (logs, checkpoints, local summaries)
-data/output_data/**/logger/
 data/output_data/**/model/
 data/output_data/**/*.pt
 data/output_data/**/*.pth
 data/output_data/tsc/processed_results*.csv
+
 
 # LaTeX build artifacts (source: team_instructions.tex)
 *.aux
@@ -22,3 +22,6 @@ data/output_data/tsc/processed_results*.csv
 
 *.ipynb
 *.mdb
+
+# keep experiment DTL/BRF logs even though *.log is ignored for LaTeX
+!data/output_data/**/*.log
