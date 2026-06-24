@@ -190,7 +190,7 @@ class IPPO_pfrl(RLAgent):
         )
         self.optimizer = torch.optim.Adam(self.model.parameters(), lr=2.5e-4, eps=1e-5)
         self.agent = PPO(self.model, self.optimizer,
-                         phi=lambda x: np.asarray(x, dtype=np.float32),
+                         phi=lambda x: np.asarray(x.cpu() if hasattr(x, 'cpu') else x, dtype=np.float32),
                          clip_eps=0.1,
                          clip_eps_vf=0.2,
                          update_interval=360,
