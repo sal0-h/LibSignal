@@ -20,6 +20,7 @@ model:
   phase: True
 
 trainer: 
+  episodes: 500
   learning_start: -1
   buffer_size: 10000
 
