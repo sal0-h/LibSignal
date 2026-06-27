@@ -4,6 +4,9 @@ __pycache__/
 .idea/
 .vscode/
 
+# Python virtual environment (Cursor Cloud dev setup)
+.venv/
+
 # Experiment outputs (logs, checkpoints, local summaries)
 data/output_data/**/model/
 data/output_data/**/*.pt
