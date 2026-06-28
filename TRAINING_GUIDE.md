@@ -24,6 +24,24 @@ python run.py --agent dqn --world sumo --network sumo1x1 --seed 42 --ngpu 0
 ```
 Then modify the config to test without retraining (see below).
 
+### Ghost-Physics Ceiling Baselines (Unrealistic Benchmark)
+
+These baselines use `physics_mode: ghost` so vehicles **ignore each other** (no car-following, no right-of-way conflicts) but **still obey red lights**. Signal control still matters; only vehicle interaction is removed. This is an unrealistic ceiling for comparing how close real methods get.
+
+Requires **libsumo** (`--interface libsumo`, the default).
+
+```bash
+# Fixed-time + ghost physics
+python run.py --agent fixedtime_ncollision --world sumo --network sumo1x1 --interface libsumo --prefix ceiling
+
+# MaxPressure + ghost physics
+python run.py --agent maxpressure_ncollision --world sumo --network sumo1x1 --interface libsumo --prefix ceiling
+```
+
+Configs: `configs/tsc/fixedtime_ncollision.yml` and `configs/tsc/maxpressure_ncollision.yml` (set `world.physics_mode: ghost`).
+
+**Do not compare** standard RL agents directly to ghost baselines without noting the physics difference — ghost runs use different SUMO vehicle behavior. Use ghost results as a ceiling, not as peers.
+
 ---
 
 ## Understanding Training vs Testing

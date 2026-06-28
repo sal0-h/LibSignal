@@ -17,6 +17,8 @@ world:
 
   rlTrafficLight: True
 
+  physics_mode: standard   # standard | ghost
+
 trainer:
   thread: 4
   ngpu: -1

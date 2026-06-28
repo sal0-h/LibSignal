@@ -87,12 +87,13 @@ class TSCTrainer(BaseTrainer):
         :return: None
         '''
         self.agents = []
-        agent = Registry.mapping['model_mapping'][Registry.mapping['command_mapping']['setting'].param['agent']](self.world, 0)
+        model_name = Registry.mapping['model_mapping']['setting'].param['name']
+        agent = Registry.mapping['model_mapping'][model_name](self.world, 0)
         print(agent)
         num_agent = int(len(self.world.intersections) / agent.sub_agents)
         self.agents.append(agent)  # initialized N agents for traffic light control
         for i in range(1, num_agent):
-            self.agents.append(Registry.mapping['model_mapping'][Registry.mapping['command_mapping']['setting'].param['agent']](self.world, i))
+            self.agents.append(Registry.mapping['model_mapping'][model_name](self.world, i))
 
         # pass device from trainer to all agents for GPU support
         for ag in self.agents:
