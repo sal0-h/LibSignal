@@ -363,6 +363,17 @@ class Intersection(object):
         return new_phases, yellow_dict
 
 
+# Ghost: speedMode 22 + setSpeed ignores car-following; getAllowedSpeed gates red lights.
+GHOST_SPEED_MODE = 22
+
+
+def _physics_flags(mode):
+    """Return SUMO CLI flags for the given physics mode."""
+    if mode == 'standard':
+        return []
+    if mode == 'ghost':
+        return ['--collision.action', 'none', '--time-to-teleport', '-1']
+    raise ValueError(f"Unknown physics_mode: {mode}")
 
 
 @Registry.register_world('sumo')
@@ -377,41 +388,48 @@ class World(object):
             self.interface_flag = False
         else:
             raise Exception('NOT IMPORTED YET')
+
+        world_param = Registry.mapping['world_mapping']['setting'].param
+        self.physics_mode = world_param.get('physics_mode', 'standard')
+        # Only implemented for libusmo for now
+        if self.physics_mode == 'ghost' and kwargs['interface'] != 'libsumo':
+            raise ValueError("physics_mode='ghost' requires --interface libsumo")
+
         with open(sumo_config) as f:
             sumo_dict = json.load(f)
-        if sumo_dict['gui'] == "True" or sumo_dict['gui'] == True:
-            sumo_cmd = [sumolib.checkBinary('sumo-gui')]
-        else:
-            sumo_cmd = [sumolib.checkBinary('sumo')]
-        # Realistic SUMO physics settings for real-world transfer
-        # (Keeps CityFlow calibration's realistic defaults but enables rerouting)
-        realistic_physics = [
-            '--time-to-teleport', '-1',            # Never teleport stuck vehicles (realistic—real traffic stays stuck)
-            '--collision.action', 'warn',          # Log collisions instead of teleporting
-            '--lanechange.duration', '2',          # Realistic lane change duration
-            '--device.rerouting.probability', '0.8',  # 80% of vehicles can reroute (real drivers find alternate routes)
-            '--device.rerouting.period', '60',     # Check for better routes every 60s
-        ]
-        
+        self._use_gui = sumo_dict['gui'] == "True" or sumo_dict['gui'] == True
+
+        physics_flags = _physics_flags(self.physics_mode)
+        if self.physics_mode == 'ghost':
+            print("[Physics] mode=ghost (libsumo, obey signals, ignore other cars)")
+
+        # Shared simulation arguments (network/route + flags); the binary is chosen per use.
         if not sumo_dict.get('combined_file'):
-            sumo_cmd += ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
-                         '-r', os.path.join(sumo_dict['dir'], sumo_dict['flowFile']),
-                         '--no-warnings', str(sumo_dict['no_warning'])] \
-                            #  + realistic_physics
+            sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
+                        '-r', os.path.join(sumo_dict['dir'], sumo_dict['flowFile']),
+                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags
         else:
-            sumo_cmd += ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
-                         '--no-warnings', str(sumo_dict['no_warning'])] \
-                            #  + realistic_physics
+            sim_args = ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
+                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags
+
+        headless_bin = sumolib.checkBinary('sumo')
+        # Real run uses sumo-gui when requested. libsumo cannot reopen a GUI window
+        # in-process, so the __init__ warm-up (which only reads TLS phases) always runs
+        # headless; the GUI window then opens exactly once, in reset().
+        if self._use_gui:
+            self.sumo_cmd = [sumolib.checkBinary('sumo-gui'), '--delay', '0'] + sim_args
+        else:
+            self.sumo_cmd = [headless_bin] + sim_args
+        self.warmup_cmd = [headless_bin] + sim_args
         self.net = os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile'])
         self.route = os.path.join(sumo_dict['dir'], sumo_dict['flowFile'])
-        self.sumo_cmd = sumo_cmd
         self.warning = sumo_dict['no_warning']
         print("building world...")
         self.connection_name = sumo_dict['name']
         self.map = sumo_dict['roadnetFile'].split('/')[-1].split('.')[0]
         
         if self.interface_flag:
-            libsumo.start(sumo_cmd)
+            libsumo.start(self.warmup_cmd)
             self.eng = libsumo
         else:
             if not sumo_dict['name']:
@@ -429,6 +447,7 @@ class World(object):
         # get all intersections (dict here)
         self.intersection_ids = self.eng.trafficlight.getIDList()
         # prepare phase information for each intersections
+        self._sim_ready = False
         self.green_phases = self.generate_valid_phase()
 
         # creating all intersections
@@ -499,6 +518,7 @@ class World(object):
 
         # get in_lanes and out_lanes
         self.in_lanes, self.out_lanes = self.get_in_out_lanes()
+        self._sim_ready = True
 
     def generate_valid_phase(self):
         '''
@@ -509,18 +529,14 @@ class World(object):
         :return valid_phases: valid phases that will be executed by intersections later.
         '''
         valid_phases = dict()
-        for i in range(0, 500):    # TODO grab info. directly from tllogic python interface
-            for lightID in self.intersection_ids:
-                current_phase = self.eng.trafficlight.getRedYellowGreenState(lightID)
-                if not lightID in valid_phases:
-                    valid_phases[lightID] = []
-                has_phase = False
-                for phase in valid_phases[lightID]:
-                    if phase == current_phase:
-                        has_phase = True
-                if not has_phase:
-                    valid_phases[lightID].append(current_phase)
-            self.step_sim()
+        for lightID in self.intersection_ids:
+            logic = self.eng.trafficlight.getAllProgramLogics(lightID)[0]
+            seen_states = []
+            for phase in logic.phases:
+                state = phase.state
+                if state not in seen_states:
+                    seen_states.append(state)
+            valid_phases[lightID] = seen_states
         for ts in valid_phases:
             green_phases = []
             for phase in valid_phases[ts]:     # Convert to SUMO phase type
@@ -538,9 +554,47 @@ class World(object):
         :param: None
         :return: None
         '''
-        # 
+        if self.physics_mode == 'ghost' and self._sim_ready:
+            self._enforce_ghost_physics_all()
+            self._collapse_ghost_lanes()
         for _ in range(self.step_ratio):
             self.eng.simulationStep()
+        if self.physics_mode == 'ghost' and self._sim_ready:
+            self._enforce_ghost_physics_all()
+            self._collapse_ghost_lanes()
+
+    def _enforce_ghost_vehicle(self, veh_id):
+        """Ignore other vehicles but obey signals via getAllowedSpeed + setSpeed."""
+        self.eng.vehicle.setSpeedMode(veh_id, GHOST_SPEED_MODE)
+        self.eng.vehicle.setMinGap(veh_id, 0)
+        self.eng.vehicle.setTau(veh_id, 0)
+        allowed = self.eng.vehicle.getAllowedSpeed(veh_id)
+        if allowed < 0.1:
+            self.eng.vehicle.setSpeed(veh_id, 0)
+        else:
+            self.eng.vehicle.setSpeed(veh_id, self.eng.vehicle.getMaxSpeed(veh_id))
+
+    def _enforce_ghost_physics_all(self):
+        for veh_id in self.eng.vehicle.getIDList():
+            self._enforce_ghost_vehicle(veh_id)
+
+    def _collapse_ghost_lanes(self):
+        """Teleport same-lane followers onto the lead vehicle so gaps stay at 0."""
+        by_lane = {}
+        for veh_id in self.eng.vehicle.getIDList():
+            lane = self.eng.vehicle.getLaneID(veh_id)
+            if lane.startswith(':'):
+                continue
+            by_lane.setdefault(lane, []).append(veh_id)
+        for lane, veh_ids in by_lane.items():
+            if len(veh_ids) < 2:
+                continue
+            lead = max(veh_ids, key=lambda v: self.eng.vehicle.getLanePosition(v))
+            lead_pos = self.eng.vehicle.getLanePosition(lead)
+            for veh_id in veh_ids:
+                if veh_id == lead:
+                    continue
+                self.eng.vehicle.moveTo(veh_id, lane, lead_pos)
 
     def step(self, action=None):
         '''
@@ -561,9 +615,16 @@ class World(object):
         entering_v = self.eng.simulation.getDepartedIDList()
         for v in entering_v:
             self.inside_vehicles.update({v: self.get_current_time()})
+            if self.physics_mode == 'ghost':
+                self._enforce_ghost_vehicle(v)
+        if self.physics_mode == 'ghost' and entering_v:
+            self._collapse_ghost_lanes()
         exiting_v = self.eng.simulation.getArrivedIDList()
         for v in exiting_v:
+            if v not in self.inside_vehicles:
+                continue
             self.vehicles.update({v: self.get_current_time() - self.inside_vehicles[v]})
+            del self.inside_vehicles[v]
         self._update_infos()
         self.vehicle_trajectory, self.vehicle_maxspeed = self.get_vehicle_trajectory()
         self.run += 1
@@ -607,6 +668,10 @@ class World(object):
         entering_v = self.eng.simulation.getDepartedIDList()
         for v in entering_v:
             self.inside_vehicles.update({v: self.get_current_time()})
+            if self.physics_mode == 'ghost':
+                self._enforce_ghost_vehicle(v)
+        if self.physics_mode == 'ghost' and entering_v:
+            self._collapse_ghost_lanes()
         self.vehicle_trajectory = {}
         self.vehicle_maxspeed = {}
         self.real_delay= {}
