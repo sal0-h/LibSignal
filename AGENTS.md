@@ -9,7 +9,9 @@ no web server, API, frontend, or database. See `README.md` and `TRAINING_GUIDE.m
 ### Environment
 - The dev environment is a Python 3.12 virtualenv at `.venv/` (the repo's `setup.sh` uses a
   conda env named `traffic`, but on Cursor Cloud we use a plain venv instead — it is lighter
-  and more reliable). The venv is created/refreshed by the startup update script.
+  and more reliable). The venv is created/refreshed on startup by the `install` command in
+  `.cursor/environment.json` (committed so every Cloud Agent on this repo gets it, regardless
+  of personal/team snapshot scope).
 - Always work inside the venv: `source .venv/bin/activate`.
 - There is **no GPU** on Cloud VMs — always run with `--ngpu -1` (CPU). The code prints
   `[Device] No CUDA GPU detected, using CPU`.
