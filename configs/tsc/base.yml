@@ -19,6 +19,10 @@ world:
 
   physics_mode: standard   # standard | ghost
 
+  hetero: false             # false = uniform vType baseline; true = mixed cars+trucks
+  flowFileHetero: ""        # route file with mixed vTypes (used when hetero: true)
+  heteroAdditional: ""      # additional-files (vTypes_mixed.add.xml) for hetero mode
+
 trainer:
   thread: 4
   ngpu: -1

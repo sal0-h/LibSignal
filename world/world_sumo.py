@@ -383,7 +383,12 @@ class World(object):
     '''
     def __init__(self, sumo_config, placeholder=0, **kwargs):
         if kwargs['interface'] == 'libsumo':
-            self.interface_flag = True
+            if libsumo is None:
+                print("[Warning] libsumo Python module not found; falling back to traci.")
+                kwargs['interface'] = 'traci'
+                self.interface_flag = False
+            else:
+                self.interface_flag = True
         elif kwargs['interface'] == 'traci':
             self.interface_flag = False
         else:
@@ -395,6 +400,10 @@ class World(object):
         if self.physics_mode == 'ghost' and kwargs['interface'] != 'libsumo':
             raise ValueError("physics_mode='ghost' requires --interface libsumo")
 
+        # Heterogeneous vehicles: load mixed vTypes + hetero routes when enabled.
+        # All agents stay unchanged — they see lane counts/pressure, never vType.
+        self.hetero = world_param.get('hetero', False)
+
         with open(sumo_config) as f:
             sumo_dict = json.load(f)
         self._use_gui = sumo_dict['gui'] == "True" or sumo_dict['gui'] == True
@@ -403,26 +412,42 @@ class World(object):
         if self.physics_mode == 'ghost':
             print("[Physics] mode=ghost (libsumo, obey signals, ignore other cars)")
 
+        # Pick route file: hetero routes when enabled, else default.
+        route_file = sumo_dict['flowFile']
+        hetero_flags = []
+        if self.hetero:
+            if not sumo_dict.get('flowFileHetero'):
+                raise ValueError("hetero=true but flowFileHetero not set in .cfg")
+            route_file = sumo_dict['flowFileHetero']
+            add_file = sumo_dict.get('heteroAdditional', '')
+            if add_file:
+                hetero_flags = ['--additional-files', os.path.join(sumo_dict['dir'], add_file)]
+            print(f"[Hetero] enabled — routes={route_file}, vTypes={add_file}")
+
         # Shared simulation arguments (network/route + flags); the binary is chosen per use.
         if not sumo_dict.get('combined_file'):
             sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
-                        '-r', os.path.join(sumo_dict['dir'], sumo_dict['flowFile']),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags
+                        '-r', os.path.join(sumo_dict['dir'], route_file),
+                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + hetero_flags
         else:
             sim_args = ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags
+                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + hetero_flags
 
         headless_bin = sumolib.checkBinary('sumo')
         # Real run uses sumo-gui when requested. libsumo cannot reopen a GUI window
         # in-process, so the __init__ warm-up (which only reads TLS phases) always runs
         # headless; the GUI window then opens exactly once, in reset().
         if self._use_gui:
-            self.sumo_cmd = [sumolib.checkBinary('sumo-gui'), '--delay', '0'] + sim_args
+            gui_flags = ['--delay', '0', '--threads', '4']
+            # Optional in sim .cfg: advance N simulation seconds per step (GUI only).
+            if sumo_dict.get('gui_step_length'):
+                gui_flags += ['--step-length', str(sumo_dict['gui_step_length'])]
+            self.sumo_cmd = [sumolib.checkBinary('sumo-gui')] + gui_flags + sim_args
         else:
             self.sumo_cmd = [headless_bin] + sim_args
         self.warmup_cmd = [headless_bin] + sim_args
         self.net = os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile'])
-        self.route = os.path.join(sumo_dict['dir'], sumo_dict['flowFile'])
+        self.route = os.path.join(sumo_dict['dir'], route_file)
         self.warning = sumo_dict['no_warning']
         print("building world...")
         self.connection_name = sumo_dict['name']
@@ -433,10 +458,10 @@ class World(object):
             self.eng = libsumo
         else:
             if not sumo_dict['name']:
-                traci.start(sumo_cmd)
+                traci.start(self.warmup_cmd)
                 self.eng = traci
             else:
-                traci.start(sumo_cmd, label=sumo_dict['name'])
+                traci.start(self.warmup_cmd, label=sumo_dict['name'])
                 self.eng = traci.getConnection(sumo_dict['name'])
         # TODO: roadnet not implemented but not necessary
         self.RIGHT = True  # TODO: currently set to be true

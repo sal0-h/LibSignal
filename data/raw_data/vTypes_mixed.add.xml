@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Shared vehicle-type definitions for heterogeneous traffic experiments.
+  Loaded via additional-files when hetero is true.
+
+  Design (TLC-grounded):
+    - Cars and trucks differ in length, accel, maxSpeed -> real capacity and
+      discharge effects (heavy-vehicle headway / saturation flow).
+    - Total demand (veh/h) is kept fixed by the route file; only the mix changes
+      (e.g. 80% car / 20% truck) so ablations are fair.
+    - Agents never see vType: they use lane counts / pressure.
+
+  Car  (type="car"):  matches the default "pkw" used in baseline routes.
+  Truck (type="truck"): longer, slower accel, lower maxSpeed, larger minGap.
+-->
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+
+    <vType id="car"  vClass="passenger"  length="5.0"  width="2.0"
+           accel="2.6"  decel="4.5"  maxSpeed="13.89"
+           minGap="2.5"  tau="1.0"  color="0.0,0.0,1.0"/>
+
+    <vType id="truck" vClass="truck"      length="10.0" width="2.5"
+           accel="1.4"  decel="3.5"  maxSpeed="8.33"
+           minGap="3.0"  tau="1.5"  color="1.0,0.0,0.0"/>
+</additional>
