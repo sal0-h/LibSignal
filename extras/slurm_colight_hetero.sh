@@ -2,7 +2,7 @@
 #SBATCH --job-name=colight_hetero_4x4
 #SBATCH --output=logs/colight_hetero_4x4_%j.out
 #SBATCH --error=logs/colight_hetero_4x4_%j.err
-#SBATCH --time=02:00:00
+#SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 #SBATCH --nodes=1
