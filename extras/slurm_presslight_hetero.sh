@@ -11,10 +11,10 @@
 set -euo pipefail
 
 cd ~/LibSignalFork
-eval "$(conda shell.bash hook)"
-conda activate libsignal
-export SUMO_HOME=${CONDA_PREFIX}/share/sumo
-export PATH=${SUMO_HOME}/bin:${PATH}
+
+CONDA_PREFIX="/data1/mmirzata/.conda/envs/libsignal"
+export SUMO_HOME="${CONDA_PREFIX}/share/sumo"
+export PATH="${CONDA_PREFIX}/bin:${SUMO_HOME}/bin:${PATH}"
 
 echo "Host: $(hostname)"
 echo "Agent: presslight_hetero  Network: sumo4x4  Seed: 42"
