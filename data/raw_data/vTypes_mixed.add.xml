@@ -10,17 +10,18 @@
       (e.g. 80% car / 20% truck) so ablations are fair.
     - Agents never see vType: they use lane counts / pressure.
 
-  Car  (type="car"):  matches the default "pkw" used in baseline routes.
+  Car  (type="car"):  matches the baseline "pkw" from grid4x4 / manhattan_28x7
+                      so that hetero=false vs hetero=true is a fair comparison.
   Truck (type="truck"): longer, slower accel, lower maxSpeed, larger minGap.
 -->
 <additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
 
     <vType id="car"  vClass="passenger"  length="5.0"  width="2.0"
-           accel="2.6"  decel="4.5"  maxSpeed="13.89"
-           minGap="2.5"  tau="1.0"  color="0.0,0.0,1.0"/>
+           accel="2.0"  decel="4.5"  maxSpeed="11.111"
+           minGap="2.5"  color="0.0,0.0,1.0"/>
 
     <vType id="truck" vClass="truck"      length="10.0" width="2.5"
            accel="1.4"  decel="3.5"  maxSpeed="8.33"
-           minGap="3.0"  tau="1.5"  color="1.0,0.0,0.0"/>
+           minGap="3.0"  color="1.0,0.0,0.0"/>
 </additional>
