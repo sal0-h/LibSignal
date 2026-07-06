@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-#SBATCH --job-name=ppo_hetero_4x4
-#SBATCH --output=logs/ppo_hetero_4x4_%j.out
-#SBATCH --error=logs/ppo_hetero_4x4_%j.err
+#SBATCH --job-name=ippo_hetero_4x4
+#SBATCH --output=logs/ippo_hetero_4x4_%j.out
+#SBATCH --error=logs/ippo_hetero_4x4_%j.err
 #SBATCH --time=12:00:00
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
@@ -17,6 +17,6 @@ export SUMO_HOME="${CONDA_PREFIX}/share/sumo"
 export PATH="${CONDA_PREFIX}/bin:${SUMO_HOME}/bin:${PATH}"
 
 echo "Host: $(hostname)"
-echo "Agent: ppo_hetero  Network: sumo4x4  Seed: 42"
+echo "Agent: ppo_pfrl_hetero  Network: sumo4x4  Seed: 42"
 
-python run.py -a ppo_hetero -w sumo -n sumo4x4 --seed 42 --interface libsumo --prefix hetero_test
+python run.py -a ppo_pfrl_hetero -w sumo -n sumo4x4 --seed 42 --interface libsumo --prefix hetero_test
