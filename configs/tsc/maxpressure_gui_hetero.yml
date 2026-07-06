@@ -1,0 +1,13 @@
+includes:
+  - configs/tsc/maxpressure.yml
+
+world:
+  gui: True
+  hetero: true
+
+trainer:
+  test_steps: 3600
+  steps: 3600
+
+model:
+  name: maxpressure
