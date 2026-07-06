@@ -19,6 +19,8 @@ world:
 
   physics_mode: standard   # standard | ghost
 
+  slow_start: false         # false = default tau (1.0s reaction); true = higher tau (startup-lost-time)
+
 trainer:
   thread: 4
   ngpu: -1

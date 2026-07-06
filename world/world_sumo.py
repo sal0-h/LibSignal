@@ -395,6 +395,10 @@ class World(object):
         if self.physics_mode == 'ghost' and kwargs['interface'] != 'libsumo':
             raise ValueError("physics_mode='ghost' requires --interface libsumo")
 
+        # Slow start: higher driver reaction time (tau) to model startup-lost-time
+        # at queue discharge. Loaded via --additional-files, no route changes needed.
+        self.slow_start = world_param.get('slow_start', False)
+
         with open(sumo_config) as f:
             sumo_dict = json.load(f)
         self._use_gui = sumo_dict['gui'] == "True" or sumo_dict['gui'] == True
@@ -403,14 +407,22 @@ class World(object):
         if self.physics_mode == 'ghost':
             print("[Physics] mode=ghost (libsumo, obey signals, ignore other cars)")
 
+        # Slow start: load vTypes with higher tau via additional-files
+        slow_start_flags = []
+        if self.slow_start:
+            add_file = sumo_dict.get('slowStartAdditional', '')
+            if add_file:
+                slow_start_flags = ['--additional-files', os.path.join(sumo_dict['dir'], add_file)]
+                print(f"[SlowStart] enabled — tau override via {add_file}")
+
         # Shared simulation arguments (network/route + flags); the binary is chosen per use.
         if not sumo_dict.get('combined_file'):
             sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
                         '-r', os.path.join(sumo_dict['dir'], sumo_dict['flowFile']),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags
+                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + slow_start_flags
         else:
             sim_args = ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags
+                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + slow_start_flags
 
         headless_bin = sumolib.checkBinary('sumo')
         # Real run uses sumo-gui when requested. libsumo cannot reopen a GUI window

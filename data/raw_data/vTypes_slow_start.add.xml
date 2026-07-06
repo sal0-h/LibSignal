@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Slow-start vehicle-type override for startup-lost-time experiments.
+  Loaded via additional-files when slow_start is true.
+
+  Design choice: tau = 1.8s
+  ========================
+  In SUMO's Krauss car-following model, tau is the driver's desired minimum
+  time headway (seconds). The default is tau=1.0s, which yields an unrealistically
+  high saturation flow:
+
+    SUMO default:  headway = tau + minGap/v = 1.0 + 2.5/11.1 ~ 1.23s -> ~2930 veh/h
+    With tau=1.8:  headway = 1.8 + 2.5/11.1 ~ 2.03s                -> ~1776 veh/h
+
+  The HCM (Highway Capacity Manual) default saturation flow rate is
+  1900 veh/h/ln (headway ~ 1.89s). tau=1.8 brings SUMO within the realistic
+  HCM range (1700-2200 veh/h depending on conditions).
+
+  Additional justification:
+    - HCM startup lost time default: 2.0s per phase (the total extra time
+      for the first ~4 queue vehicles to react and accelerate).
+    - Field calibration (Chowdhury & Chakraborty 2024, Khulna): tau=1.4s
+      under normal conditions; higher under distraction.
+    - ElDessouki & AlManeea (2023): smartphone usage at signals increases
+      startup lost time beyond HCM's 2.0s default.
+    - Auerbach et al. (arXiv 2307.11357): identifies tau as a key sim-to-real
+      transfer gap for TSC policies; default tau=1.0 is idealized.
+    - UNECE AEBS report: driver reaction time 0.86-1.39s (normal), higher
+      under surprise conditions; 1.8s accounts for perception + decision +
+      motor response at queue discharge.
+
+  Effect on traffic:
+    - Startup lost time: each vehicle in a queue waits ~1.8s before following
+      the one ahead when the light turns green (vs 1.0s default).
+    - Reduced saturation flow: effective green time wasted on reaction gaps.
+    - Queue discharge takes longer, compounding across intersections.
+
+  Topology agnostic: overrides the "pkw" vType used by all three networks
+  (grid4x4, manhattan_28x7, cologne1) without changing route files.
+  All other vType params (length, maxSpeed, accel, decel, minGap) stay
+  identical to baseline so the only variable is reaction time.
+
+  Agents stay unchanged: they see lane counts/pressure, never tau.
+-->
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+
+    <vType id="pkw" length="5.0" width="2.0" minGap="2.5"
+           maxSpeed="11.111" accel="2.0" decel="4.5"
+           tau="1.8" color="1.0,0.5,0.0"/>
+</additional>
