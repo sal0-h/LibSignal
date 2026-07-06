@@ -3,6 +3,3 @@ includes:
 
 world:
   hetero: true
-
-trainer:
-  episodes: 500
