@@ -422,7 +422,9 @@ class World(object):
                 print(f"[SlowStart] route file: {route_file}")
 
         # Shared simulation arguments (network/route + flags); the binary is chosen per use.
-        if not sumo_dict.get('combined_file'):
+        # When slow_start is on, force -n/-r instead of -c so we can use the slow_start
+        # route file (without inline vType) and the additional vType override.
+        if not sumo_dict.get('combined_file') or slow_start_flags:
             sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
                         '-r', os.path.join(sumo_dict['dir'], route_file),
                         '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + slow_start_flags
