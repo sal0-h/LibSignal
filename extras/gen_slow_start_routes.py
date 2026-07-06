@@ -32,7 +32,8 @@ NETWORKS = [
 
 
 def gen_slow_start(src_path, dst_path):
-    """Remove inline <vType> so it can be loaded via --additional-files."""
+    """Remove inline <vType> and set type='pkw' on all vehicles so the
+    vType from vTypes_slow_start.add.xml (with tau=1.8) is actually used."""
     tree = ET.parse(src_path)
     root = tree.getroot()
 
@@ -41,9 +42,15 @@ def gen_slow_start(src_path, dst_path):
         root.remove(vtype)
         removed += 1
 
+    # Ensure every vehicle explicitly references type="pkw"
+    # (without this, SUMO uses its built-in default vType, ignoring our tau override)
+    for veh in root.findall("vehicle"):
+        if "type" not in veh.attrib:
+            veh.set("type", "pkw")
+
     tree.write(dst_path, encoding="utf-8", xml_declaration=True)
     vehicles = root.findall("vehicle")
-    print(f"[{os.path.basename(dst_path)}] {removed} vType(s) removed, {len(vehicles)} vehicles kept")
+    print(f"[{os.path.basename(dst_path)}] {removed} vType(s) removed, {len(vehicles)} vehicles tagged type='pkw'")
     return len(vehicles)
 
 
