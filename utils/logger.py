@@ -37,13 +37,16 @@ def modify_config_file(path, config):
     elif config['command']['world'] == 'sumo':
         with open(path, 'r') as f:
             path_config = json.load(f)
-        # config step 1
+        # config step 1: update existing .cfg keys from yml world params
         for k in path_config.keys():
             if param.get(k) is not None:
                 path_config[k] = param.get(k)
-        # config step 2
-        #path_config['roadnetLogFile'] = file_name + f"/{datetime.now().strftime('%Y_%m_%d-%H_%M_%S')}.json"
-        #path_config['replayLogFile'] = file_name + f"/{datetime.now().strftime('%Y_%m_%d-%H_%M_%S')}.txt"
+        # config step 2: inject yml-only world settings (slow_start, hetero, physics_mode)
+        # that don't exist in the .cfg but need to be in world_param
+        for k, v in param.items():
+            if k not in path_config:
+                path_config[k] = v
+        # config step 3
         path_config['interval'] = param['interval']
         with open(path, 'w') as f:
             json.dump(path_config, f, indent=2)
