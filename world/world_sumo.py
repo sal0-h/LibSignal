@@ -409,16 +409,22 @@ class World(object):
 
         # Slow start: load vTypes with higher tau via additional-files
         slow_start_flags = []
+        route_file = sumo_dict['flowFile']
         if self.slow_start:
             add_file = sumo_dict.get('slowStartAdditional', '')
             if add_file:
                 slow_start_flags = ['--additional-files', os.path.join(sumo_dict['dir'], add_file)]
                 print(f"[SlowStart] enabled — tau override via {add_file}")
+            # Use route file without inline vType (vType comes from additional file)
+            slow_route = sumo_dict.get('flowFileSlowStart', '')
+            if slow_route:
+                route_file = slow_route
+                print(f"[SlowStart] route file: {route_file}")
 
         # Shared simulation arguments (network/route + flags); the binary is chosen per use.
         if not sumo_dict.get('combined_file'):
             sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
-                        '-r', os.path.join(sumo_dict['dir'], sumo_dict['flowFile']),
+                        '-r', os.path.join(sumo_dict['dir'], route_file),
                         '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + slow_start_flags
         else:
             sim_args = ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
