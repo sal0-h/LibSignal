@@ -400,7 +400,9 @@ class World(object):
 
         with open(sumo_config) as f:
             sumo_dict = json.load(f)
-        self._use_gui = sumo_dict['gui'] == "True" or sumo_dict['gui'] == True
+        world_gui = world_param.get('gui', False)
+        sim_gui = sumo_dict.get('gui') in (True, "True", "true")
+        self._use_gui = bool(world_gui) or sim_gui
 
         physics_flags = _physics_flags(self.physics_mode)
         if self.physics_mode == 'ghost':
@@ -425,7 +427,11 @@ class World(object):
         # in-process, so the __init__ warm-up (which only reads TLS phases) always runs
         # headless; the GUI window then opens exactly once, in reset().
         if self._use_gui:
-            self.sumo_cmd = [sumolib.checkBinary('sumo-gui'), '--delay', '0'] + sim_args
+            gui_delay = os.environ.get('SUMO_GUI_DELAY', '0')
+            gui_flags = ['--delay', gui_delay, '--start']
+            if os.environ.get('SUMO_GUI_QUIT_ON_END', '0') == '1':
+                gui_flags.append('--quit-on-end')
+            self.sumo_cmd = [sumolib.checkBinary('sumo-gui')] + gui_flags + sim_args
         else:
             self.sumo_cmd = [headless_bin] + sim_args
         self.warmup_cmd = [headless_bin] + sim_args

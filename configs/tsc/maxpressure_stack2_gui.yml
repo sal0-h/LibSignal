@@ -5,5 +5,6 @@ world:
   gui: True
 
 trainer:
+  episodes: 1
   steps: 120
   test_steps: 120
