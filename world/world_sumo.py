@@ -453,10 +453,10 @@ class World(object):
             self.eng = libsumo
         else:
             if not sumo_dict['name']:
-                traci.start(sumo_cmd)
+                traci.start(self.warmup_cmd)
                 self.eng = traci
             else:
-                traci.start(sumo_cmd, label=sumo_dict['name'])
+                traci.start(self.warmup_cmd, label=sumo_dict['name'])
                 self.eng = traci.getConnection(sumo_dict['name'])
         # TODO: roadnet not implemented but not necessary
         self.RIGHT = True  # TODO: currently set to be true
