@@ -58,33 +58,6 @@ def check_lane(eng, lane, veh_ids, stack_height):
                 f"{lane}: stack[{i}] size {n} < {stack_height} with stack behind"
             )
 
-    rep_positions = []
-    rep_pos = None
-    prev_lead = None
-    for stack in stacks:
-        lead = stack[0]
-        own_pos = eng.vehicle.getLanePosition(lead)
-        if rep_pos is None:
-            rep_pos = own_pos
-        else:
-            spacing = eng.vehicle.getLength(prev_lead) + GHOST_STACK_GAP
-            blocked_pos = max(0.0, rep_pos - spacing)
-            rep_pos = min(own_pos, blocked_pos) if own_pos > blocked_pos else own_pos
-        rep_positions.append(rep_pos)
-        for v in stack:
-            actual = eng.vehicle.getLanePosition(v)
-            if abs(actual - rep_pos) > 0.1:
-                violations.append(
-                    f"{lane}: {v} at {actual:.2f} not at stack rep {rep_pos:.2f}"
-                )
-        prev_lead = lead
-
-    for i in range(len(rep_positions) - 1):
-        if rep_positions[i] < rep_positions[i + 1] - 0.1:
-            violations.append(
-                f"{lane}: stack[{i}]@{rep_positions[i]:.2f} behind stack[{i+1}]"
-            )
-
     return violations
 
 

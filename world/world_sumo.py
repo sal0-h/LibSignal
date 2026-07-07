@@ -564,7 +564,6 @@ class World(object):
         '''
         if self.physics_mode == 'ghost' and self._sim_ready:
             self._enforce_ghost_physics_all()
-            self._apply_ghost_stacks()
         for _ in range(self.step_ratio):
             self.eng.simulationStep()
         if self.physics_mode == 'ghost' and self._sim_ready:
@@ -619,31 +618,46 @@ class World(object):
                 continue
             veh_ids = self._sort_lane_vehicles_front_first(veh_ids)
             stacks = self._partition_ghost_stacks(veh_ids, stack_height)
+            lane_len = self.eng.lane.getLength(lane)
+            spacing = self.eng.vehicle.getLength(veh_ids[0]) + GHOST_STACK_GAP
+            max_slots = max(1, int(lane_len // spacing))
 
             rep_pos = None
             rep_speed = None
             prev_lead_id = None
-            for stack in stacks:
+            for stack_idx, stack in enumerate(stacks):
                 lead_id = stack[0]
                 own_lead_pos = self.eng.vehicle.getLanePosition(lead_id)
+
+                if stack_idx >= max_slots:
+                    # Lane cannot fit more spaced stacks — only overlap within each pair.
+                    for veh_id in stack[1:]:
+                        self.eng.vehicle.moveTo(veh_id, lane, own_lead_pos)
+                    continue
+
                 blocked = False
                 if rep_pos is None:
-                    rep_pos = own_lead_pos
+                    slot_pos = own_lead_pos
                     rep_speed = self.eng.vehicle.getSpeed(lead_id)
                 else:
-                    spacing = self.eng.vehicle.getLength(prev_lead_id) + GHOST_STACK_GAP
                     blocked_pos = max(0.0, rep_pos - spacing)
                     if own_lead_pos > blocked_pos:
-                        rep_pos = blocked_pos
+                        slot_pos = blocked_pos
                         blocked = True
                     else:
-                        rep_pos = own_lead_pos
+                        slot_pos = own_lead_pos
                         rep_speed = self.eng.vehicle.getSpeed(lead_id)
 
+                    if abs(slot_pos - rep_pos) < 0.5:
+                        slot_pos = own_lead_pos
+                        blocked = False
+                        rep_speed = self.eng.vehicle.getSpeed(lead_id)
+
+                rep_pos = slot_pos
                 for veh_id in stack:
-                    if veh_id == lead_id and not blocked and rep_pos == own_lead_pos:
+                    if veh_id == lead_id and not blocked and slot_pos == own_lead_pos:
                         continue
-                    self.eng.vehicle.moveTo(veh_id, lane, rep_pos)
+                    self.eng.vehicle.moveTo(veh_id, lane, slot_pos)
                     if blocked:
                         self.eng.vehicle.setSpeed(veh_id, rep_speed)
 

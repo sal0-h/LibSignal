@@ -1,0 +1,9 @@
+includes:
+  - configs/tsc/maxpressure_stack2.yml
+
+world:
+  gui: True
+
+trainer:
+  steps: 120
+  test_steps: 120
