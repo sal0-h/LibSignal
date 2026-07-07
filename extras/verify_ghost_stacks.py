@@ -136,7 +136,6 @@ def main():
     )
 
     config, _ = build_config(ns)
-    config['world']['ghost_debug'] = True
     if args.height != 2 or args.agent == 'maxpressure':
         config['world']['physics_mode'] = 'ghost'
         config['world']['ghost_stack_height'] = args.height

@@ -58,8 +58,6 @@ world:
 | `1` | One vehicle per slot — normal-looking queue spacing (closest to standard physics) |
 | `k > 1` | Up to `k` vehicles overlap per slot; lane behaves like `ceil(N/k)` cars |
 
-Set `ghost_debug: True` under `world:` to print per-lane stack layout and assert both invariants each apply (stack cap `h`, partial stacks only at rear).
-
 Example configs with limited stacking: `configs/tsc/maxpressure_stack1.yml`, `maxpressure_stack2.yml`, `maxpressure_stack5.yml`.
 
 Verify invariants headlessly:

@@ -19,7 +19,6 @@ world:
 
   physics_mode: standard   # standard | ghost
   ghost_stack_height: -1   # ghost only: max vehicles overlapping per lane slot (-1/0 = unlimited full ghost, 1 = one car per slot)
-  ghost_debug: False       # ghost only: print stack layout and assert invariants each apply
 
 trainer:
   thread: 4
