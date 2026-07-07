@@ -1,5 +1,0 @@
-includes:
-  - configs/tsc/ppo.yml
-
-world:
-  hetero: true
