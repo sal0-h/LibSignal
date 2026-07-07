@@ -40,6 +40,26 @@ python run.py --agent maxpressure_ncollision --world sumo --network sumo1x1 --in
 
 Configs: `configs/tsc/fixedtime_ncollision.yml` and `configs/tsc/maxpressure_ncollision.yml` (set `world.physics_mode: ghost`).
 
+#### Ghost stack height (`ghost_stack_height`)
+
+Ghost mode does not rely on SUMO flags alone for pass-through behavior. LibSignal groups same-lane vehicles into **stacks** of up to `h` vehicles that fully overlap, spaces each stack one car-slot behind the one ahead, and blocks later stacks behind earlier ones. Signal control still matters; only within-stack overlap is unrealistic.
+
+Set in YAML under `world:` (default `-1`):
+
+```yaml
+world:
+  physics_mode: ghost
+  ghost_stack_height: 2   # up to 2 vehicles overlap per slot; 3rd starts a new stack behind
+```
+
+| Value | Effect |
+|-------|--------|
+| `-1`, `0`, or omitted | Unlimited — all lane vehicles collapse to one slot (full ghost ceiling) |
+| `1` | One vehicle per slot — normal-looking queue spacing (closest to standard physics) |
+| `k > 1` | Up to `k` vehicles overlap per slot; lane behaves like `ceil(N/k)` cars |
+
+Example configs with limited stacking: `configs/tsc/maxpressure_stack1.yml`, `maxpressure_stack2.yml`, `maxpressure_stack5.yml`.
+
 **Do not compare** standard RL agents directly to ghost baselines without noting the physics difference — ghost runs use different SUMO vehicle behavior. Use ghost results as a ceiling, not as peers.
 
 ---

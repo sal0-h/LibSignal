@@ -1,0 +1,5 @@
+includes:
+  - configs/tsc/maxpressure_ncollision.yml
+
+world:
+  ghost_stack_height: 5
