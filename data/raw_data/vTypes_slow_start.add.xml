@@ -3,11 +3,13 @@
   Slow-start vehicle-type override for startup-lost-time experiments.
   Loaded via additional-files when slow_start is true.
 
-  Design choice: tau=1.8s + actionStepLength=1.5s + sigma=0.5
+  Design choice: tau=1.8s + actionStepLength=1.5s + accel=1.2 m/s² + sigma=0.5
   ============================================================
-  Startup lost time in real traffic comes from two mechanisms:
+  Startup lost time in real traffic comes from three mechanisms:
     1. Reaction delay: time to perceive green + decide to accelerate.
     2. Headway gap: minimum following distance at queue discharge.
+    3. Slow acceleration: real vehicles accelerate slower from a stop than
+       the theoretical max (driver comfort, engine lag, weight).
 
   SUMO's Krauss model has three relevant parameters:
 
@@ -23,17 +25,26 @@
     startup lost time at green lights. This is the key parameter for the
     "first vehicle takes longer to go" effect.
 
+  accel (maximum acceleration):
+    Default 2.0 m/s² is the theoretical max for a passenger car.
+    accel=1.2 models realistic comfortable acceleration from a stop,
+    accounting for driver caution, engine response lag, and vehicle weight.
+    Field studies show real-world acceleration from stop is 0.8-1.5 m/s²
+    (HCM: ~1.1 m/s² for comfortable start). Lower accel means vehicles
+    take longer to reach saturation speed, extending startup lost time.
+
   sigma (driver imperfection):
     Default 0.5 (Krauss) randomly varies acceleration to model driver
     inconsistency. Setting sigma=0.5 explicitly ensures stochastic variation
     in reaction times, matching field observations (ElDessouki & AlManeea 2023).
 
   Combined effect:
-    - First vehicle at green waits ~1.5s to react (actionStepLength) instead
-      of reacting instantly.
-    - Each subsequent vehicle maintains ~1.8s headway (tau) instead of ~1.0s.
-    - Over a 4-vehicle queue: ~2s extra startup lost time per phase (HCM: 2.0s).
-    - Saturation flow drops from ~2930 to ~1776 veh/h (HCM: 1900).
+    - First vehicle at green waits ~1.5s to react (actionStepLength).
+    - Accelerates at 1.2 m/s² (vs 2.0 default) — takes ~9s to reach 11 m/s
+      instead of ~5.5s, adding ~3.5s to clear the stop line.
+    - Each subsequent vehicle maintains ~1.8s headway (tau).
+    - Over a 4-vehicle queue: ~4-5s extra startup lost time per phase.
+    - Saturation flow drops from ~2930 to ~1400 veh/h (well below HCM 1900).
 
   Justification:
     - HCM startup lost time default: 2.0s per phase.
@@ -59,7 +70,7 @@
             xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
 
     <vType id="pkw" length="5.0" width="2.0" minGap="2.5"
-           maxSpeed="11.111" accel="2.0" decel="4.5"
+           maxSpeed="11.111" accel="1.2" decel="4.5"
            tau="1.8" sigma="0.5" actionStepLength="1.5"
            color="1.0,0.5,0.0"/>
 </additional>
