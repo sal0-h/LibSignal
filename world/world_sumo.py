@@ -367,6 +367,8 @@ class Intersection(object):
 GHOST_SPEED_MODE = 22
 # Spacing between ghost stacks along a lane (vehicle length + gap).
 GHOST_STACK_GAP = 2.5
+# Set True (or world.ghost_debug in YAML) to print per-lane stack state and run invariant checks.
+GHOST_DEBUG = False
 
 
 def _physics_flags(mode):
@@ -394,6 +396,7 @@ class World(object):
         world_param = Registry.mapping['world_mapping']['setting'].param
         self.physics_mode = world_param.get('physics_mode', 'standard')
         self.ghost_stack_height = world_param.get('ghost_stack_height', -1)
+        self.ghost_debug = bool(world_param.get('ghost_debug', GHOST_DEBUG))
         # Only implemented for libusmo for now
         if self.physics_mode == 'ghost' and kwargs['interface'] != 'libsumo':
             raise ValueError("physics_mode='ghost' requires --interface libsumo")
@@ -563,11 +566,13 @@ class World(object):
         :return: None
         '''
         if self.physics_mode == 'ghost' and self._sim_ready:
+            self._ghost_apply_pass = 'pre'
             self._enforce_ghost_physics_all()
             self._apply_ghost_stacks()
         for _ in range(self.step_ratio):
             self.eng.simulationStep()
         if self.physics_mode == 'ghost' and self._sim_ready:
+            self._ghost_apply_pass = 'post'
             self._enforce_ghost_physics_all()
             self._apply_ghost_stacks()
 
@@ -597,6 +602,65 @@ class World(object):
             return [veh_ids]
         return [veh_ids[i:i + stack_height] for i in range(0, len(veh_ids), stack_height)]
 
+    def _sort_lane_vehicles_front_first(self, veh_ids):
+        """Stable front-to-back ordering; tie-break on veh_id so stack membership does not shuffle."""
+        return sorted(
+            veh_ids,
+            key=lambda v: (-self.eng.vehicle.getLanePosition(v), v),
+        )
+
+    def _verify_ghost_partition(self, lane, veh_ids, stacks, stack_height):
+        """[ghost_debug] Assert stack cap h and full-fill before next stack (partial only at rear)."""
+        if stack_height is None:
+            assert len(stacks) == 1 and stacks[0] == veh_ids, (
+                f"{lane}: unlimited mode must be a single stack"
+            )
+            return
+
+        flat = [v for s in stacks for v in s]
+        assert flat == veh_ids, f"{lane}: partition must preserve sorted vehicle order"
+        assert sum(len(s) for s in stacks) == len(veh_ids)
+
+        for i, stack in enumerate(stacks):
+            assert 1 <= len(stack) <= stack_height, (
+                f"{lane}: stack[{i}] size {len(stack)} outside 1..{stack_height}"
+            )
+            # Invariant 2: no partial stack may have another stack behind it.
+            if i < len(stacks) - 1:
+                assert len(stack) == stack_height, (
+                    f"{lane}: stack[{i}] size {len(stack)} < {stack_height} "
+                    f"but stack[{i + 1}] exists behind it"
+                )
+
+    def _verify_ghost_spatial(self, lane, stacks, rep_positions):
+        """[ghost_debug] Assert within-stack overlap and front-to-back stack ordering."""
+        for stack, pos in zip(stacks, rep_positions):
+            for veh_id in stack:
+                actual = self.eng.vehicle.getLanePosition(veh_id)
+                assert abs(actual - pos) < 0.05, (
+                    f"{lane}: {veh_id} at {actual:.2f}, expected stack rep {pos:.2f}"
+                )
+        for i in range(len(rep_positions) - 1):
+            assert rep_positions[i] >= rep_positions[i + 1] - 0.05, (
+                f"{lane}: stack[{i}]@{rep_positions[i]:.2f} must be ahead of "
+                f"stack[{i + 1}]@{rep_positions[i + 1]:.2f}"
+            )
+
+    def _debug_log_ghost_lane(self, lane, stacks, rep_positions, stack_height, sim_time):
+        """[ghost_debug] Print lane stack layout when interesting (multi-stack or partial front stack)."""
+        if not stacks:
+            return
+        if stack_height is not None and len(stacks) == 1 and len(stacks[0]) <= 1:
+            return
+        h_label = 'unlimited' if stack_height is None else str(stack_height)
+        parts = []
+        for i, (stack, pos) in enumerate(zip(stacks, rep_positions)):
+            parts.append(f"s{i}[n={len(stack)}@{pos:.1f}]={stack}")
+        print(
+            f"[GhostDebug] t={sim_time:.0f} lane={lane} h={h_label} "
+            f"stacks={len(stacks)} | " + " | ".join(parts)
+        )
+
     def _apply_ghost_stacks(self):
         """Overlap vehicles within each stack; space stacks one car-slot apart with blocking."""
         stack_height = self._normalize_ghost_stack_height(self.ghost_stack_height)
@@ -607,15 +671,20 @@ class World(object):
                 continue
             by_lane.setdefault(lane, []).append(veh_id)
 
+        sim_time = self.eng.simulation.getTime() if self._sim_ready else 0.0
         for lane, veh_ids in by_lane.items():
             if not veh_ids:
                 continue
-            veh_ids.sort(key=lambda v: self.eng.vehicle.getLanePosition(v), reverse=True)
+            veh_ids = self._sort_lane_vehicles_front_first(veh_ids)
             stacks = self._partition_ghost_stacks(veh_ids, stack_height)
+
+            if self.ghost_debug:
+                self._verify_ghost_partition(lane, veh_ids, stacks, stack_height)
 
             rep_pos = None
             rep_speed = None
             prev_lead_id = None
+            rep_positions = []
             for stack in stacks:
                 lead_id = stack[0]
                 own_lead_pos = self.eng.vehicle.getLanePosition(lead_id)
@@ -633,6 +702,7 @@ class World(object):
                         rep_pos = own_lead_pos
                         rep_speed = self.eng.vehicle.getSpeed(lead_id)
 
+                rep_positions.append(rep_pos)
                 for veh_id in stack:
                     if veh_id == lead_id and not blocked and rep_pos == own_lead_pos:
                         continue
@@ -641,6 +711,11 @@ class World(object):
                         self.eng.vehicle.setSpeed(veh_id, rep_speed)
 
                 prev_lead_id = lead_id
+
+            if self.ghost_debug:
+                self._verify_ghost_spatial(lane, stacks, rep_positions)
+                if getattr(self, '_ghost_apply_pass', 'post') == 'post':
+                    self._debug_log_ghost_lane(lane, stacks, rep_positions, stack_height, sim_time)
 
     def step(self, action=None):
         '''
@@ -664,6 +739,7 @@ class World(object):
             if self.physics_mode == 'ghost':
                 self._enforce_ghost_vehicle(v)
         if self.physics_mode == 'ghost' and entering_v:
+            self._ghost_apply_pass = 'enter'
             self._apply_ghost_stacks()
         exiting_v = self.eng.simulation.getArrivedIDList()
         for v in exiting_v:
@@ -717,6 +793,7 @@ class World(object):
             if self.physics_mode == 'ghost':
                 self._enforce_ghost_vehicle(v)
         if self.physics_mode == 'ghost' and entering_v:
+            self._ghost_apply_pass = 'enter'
             self._apply_ghost_stacks()
         self.vehicle_trajectory = {}
         self.vehicle_maxspeed = {}

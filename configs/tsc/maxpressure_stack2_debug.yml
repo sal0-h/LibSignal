@@ -1,0 +1,9 @@
+includes:
+  - configs/tsc/maxpressure_stack2.yml
+
+world:
+  ghost_debug: True
+
+trainer:
+  steps: 300
+  test_steps: 300
