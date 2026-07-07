@@ -1,515 +1,243 @@
-<?xml version="1.0" encoding="utf-8"?>
-<tlLogics version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tllogic_file.xsd">
+<?xml version='1.0' encoding='utf-8'?>
+<tlLogics version="1.1">
 	<tlLogic id="A0" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="A1" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="A2" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="A3" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="B0" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="B1" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="B2" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="B3" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="C0" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="C1" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="C2" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="C3" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="D0" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="D1" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="D2" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
 	</tlLogic>
 	<tlLogic id="D3" type="static" programID="0" offset="0">
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrryyyyyyyyyyyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="rrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrssssssssssssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="rrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrryyyyyyyyy"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGG"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrsssssssss"/>
-		<phase duration="10" state="GGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGrrrrrrrrrrrrrrrrrrGGGGGGGGGrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="3" state="yyyyyyyyyrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrryyyyyyyyyrrrrrrrrrrrrrrrrrr"/>
-		<phase duration="5" state="sssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrsssssssssrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr"/>
+		<phase duration="30" state="rrrGGGsssrrrrrrsssrrrGGGsssrrrrrrsss" />
+		<phase duration="30" state="GGGrrrsssrrrrrrsssGGGrrrsssrrrrrrsss" />
+		<phase duration="30" state="GGGGGGsssrrrrrrsssrrrrrrsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssGGGGGGsssrrrrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrGGGsssrrrrrrsssrrrGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGrrrsssrrrrrrsssGGGrrrsss" />
+		<phase duration="30" state="rrrrrrsssrrrrrrsssrrrrrrsssGGGGGGsss" />
+		<phase duration="30" state="rrrrrrsssGGGGGGsssrrrrrrsssrrrrrrsss" />
+	</tlLogic>
+	<tlLogic id="bottom0" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="bottom1" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="bottom2" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="bottom3" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="left0" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="left1" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="left2" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="left3" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="right0" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="right1" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="right2" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="right3" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="top0" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="top1" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="top2" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
+	</tlLogic>
+	<tlLogic id="top3" type="static" programID="0" offset="0">
+		<phase duration="82" state="G" />
+		<phase duration="3" state="y" />
+		<phase duration="5" state="r" />
 	</tlLogic>
 </tlLogics>
