@@ -6,18 +6,18 @@ All available SUMO networks with their paths, road network topology, and traffic
 
 | Network Name | Type | Intersections | Config File | Road Network | Traffic Flow |
 |---|---|---|---|---|---|
-| sumo1x1 | Grid | 1×1 | [configs/sim/sumo1x1.cfg](configs/sim/sumo1x1.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
-| sumo1x3 | Grid | 1×3 | [configs/sim/sumo1x3.cfg](configs/sim/sumo1x3.cfg) | data/raw_data/arterial_1x6/arterial_1x6.net.xml | data/raw_data/arterial_1x6/arterial_1x6.rou.xml |
-| sumo1x21 | Arterial | 1×21 | [configs/sim/sumo1x21.cfg](configs/sim/sumo1x21.cfg) | data/raw_data/arterial1x6/arterial1x6.net.xml | data/raw_data/arterial1x6/arterial1x6.rou.xml |
-| sumo4x4 | Grid | 4×4 | [configs/sim/sumo4x4.cfg](configs/sim/sumo4x4.cfg) | data/raw_data/grid4x4/grid4x4.net.xml | data/raw_data/grid4x4/grid4x4.rou.xml |
-| sumo7x28 | Grid | 7×28 | [configs/sim/sumo7x28.cfg](configs/sim/sumo7x28.cfg) | data/raw_data/cologne7x28/cologne7x28.net.xml | data/raw_data/cologne7x28/cologne7x28.rou.xml |
-| sumo1x1_colight | Grid | 1×1 (CoLight) | [configs/sim/sumo1x1_colight.cfg](configs/sim/sumo1x1_colight.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
-| sumohz1x1 | Urban | 1×1 (Hangzhou) | [configs/sim/sumohz1x1.cfg](configs/sim/sumohz1x1.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.rou.xml |
-| sumohz1x1_config2 | Urban | 1×1 (Hangzhou v2) | [configs/sim/sumohz1x1_config2.cfg](configs/sim/sumohz1x1_config2.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041608_1h/hangzhou_1x1_bc-tyc_18041608_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041608_1h/hangzhou_1x1_bc-tyc_18041608_1h.rou.xml |
-| sumohz1x1_config3 | Urban | 1×1 (Hangzhou v3) | [configs/sim/sumohz1x1_config3.cfg](configs/sim/sumohz1x1_config3.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041607_1h/hangzhou_1x1_bc-tyc_18041607_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041607_1h/hangzhou_1x1_bc-tyc_18041607_1h.rou.xml |
-| sumohz1x1_config4 | Urban | 1×1 (Hangzhou v4) | [configs/sim/sumohz1x1_config4.cfg](configs/sim/sumohz1x1_config4.cfg) | data/raw_data/hangzhou_1x1_kn-hz_18041610_1h/hangzhou_1x1_kn-hz_18041610_1h.net.xml | data/raw_data/hangzhou_1x1_kn-hz_18041610_1h/hangzhou_1x1_kn-hz_18041610_1h.rou.xml |
-| sumohz4x4 | Urban | 4×4 (Hangzhou) | [configs/sim/sumohz4x4.cfg](configs/sim/sumohz4x4.cfg) | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml |
-| sumohz4x4_hetero | Urban | 4×4 (Hangzhou, heterogeneous) | [configs/sim/sumohz4x4_hetero.cfg](configs/sim/sumohz4x4_hetero.cfg) | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml |
+| sumo1x1 | Grid | 1×1 | [configs/sim/sumo1x1.cfg](../configs/sim/sumo1x1.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
+| sumo1x3 | Grid | 1×3 | [configs/sim/sumo1x3.cfg](../configs/sim/sumo1x3.cfg) | data/raw_data/arterial_1x6/arterial_1x6.net.xml | data/raw_data/arterial_1x6/arterial_1x6.rou.xml |
+| sumo1x21 | Arterial | 1×21 | [configs/sim/sumo1x21.cfg](../configs/sim/sumo1x21.cfg) | data/raw_data/arterial1x6/arterial1x6.net.xml | data/raw_data/arterial1x6/arterial1x6.rou.xml |
+| sumo4x4 | Grid | 4×4 | [configs/sim/sumo4x4.cfg](../configs/sim/sumo4x4.cfg) | data/raw_data/grid4x4/grid4x4.net.xml | data/raw_data/grid4x4/grid4x4.rou.xml |
+| sumo7x28 | Grid | 7×28 | [configs/sim/sumo7x28.cfg](../configs/sim/sumo7x28.cfg) | data/raw_data/cologne7x28/cologne7x28.net.xml | data/raw_data/cologne7x28/cologne7x28.rou.xml |
+| sumo1x1_colight | Grid | 1×1 (CoLight) | [configs/sim/sumo1x1_colight.cfg](../configs/sim/sumo1x1_colight.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
+| sumohz1x1 | Urban | 1×1 (Hangzhou) | [configs/sim/sumohz1x1.cfg](../configs/sim/sumohz1x1.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.rou.xml |
+| sumohz1x1_config2 | Urban | 1×1 (Hangzhou v2) | [configs/sim/sumohz1x1_config2.cfg](../configs/sim/sumohz1x1_config2.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041608_1h/hangzhou_1x1_bc-tyc_18041608_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041608_1h/hangzhou_1x1_bc-tyc_18041608_1h.rou.xml |
+| sumohz1x1_config3 | Urban | 1×1 (Hangzhou v3) | [configs/sim/sumohz1x1_config3.cfg](../configs/sim/sumohz1x1_config3.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041607_1h/hangzhou_1x1_bc-tyc_18041607_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041607_1h/hangzhou_1x1_bc-tyc_18041607_1h.rou.xml |
+| sumohz1x1_config4 | Urban | 1×1 (Hangzhou v4) | [configs/sim/sumohz1x1_config4.cfg](../configs/sim/sumohz1x1_config4.cfg) | data/raw_data/hangzhou_1x1_kn-hz_18041610_1h/hangzhou_1x1_kn-hz_18041610_1h.net.xml | data/raw_data/hangzhou_1x1_kn-hz_18041610_1h/hangzhou_1x1_kn-hz_18041610_1h.rou.xml |
+| sumohz4x4 | Urban | 4×4 (Hangzhou) | [configs/sim/sumohz4x4.cfg](../configs/sim/sumohz4x4.cfg) | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml |
+| sumohz4x4_hetero | Urban | 4×4 (Hangzhou, heterogeneous) | [configs/sim/sumohz4x4_hetero.cfg](../configs/sim/sumohz4x4_hetero.cfg) | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml |
 
 ---
 

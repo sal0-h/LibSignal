@@ -134,8 +134,8 @@ For each demand pattern:
 ## 3. How LibSignal Reads These Files
 
 ### In Code
-- [world/world_sumo.py](world/world_sumo.py#L380): Reads JSON config
-- [trainer/tsc_trainer.py](trainer/tsc_trainer.py#L40): Sets simulation parameters
+- [world/world_sumo.py](../world/world_sumo.py#L380): Reads JSON config
+- [trainer/tsc_trainer.py](../trainer/tsc_trainer.py#L40): Sets simulation parameters
 
 ```python
 # Example from world_sumo.py:

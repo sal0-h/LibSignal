@@ -5,7 +5,7 @@ GitHub Repo stars
 
 OpenAI Gymnasium-compatible environments for **traffic signal control (TSC)** with classical and reinforcement-learning baselines.
 
-**Maintained at:** [sal0-h/LibSignal](https://github.com/sal0-h/LibSignal) — standalone project with Python 3.10+ tooling, SUMO-focused workflows, and team/server setup (`setup.sh`, [team_instructions.pdf](./team_instructions.pdf)).
+**Maintained at:** [sal0-h/LibSignal](https://github.com/sal0-h/LibSignal) — standalone project with Python 3.10+ tooling, SUMO-focused workflows, and team/server setup (`setup.sh`, [docs/team_instructions.pdf](./docs/team_instructions.pdf)).
 
 ### Upstream LibSignal (please cite)
 
@@ -24,37 +24,10 @@ Environments cover single- and multi-intersection networks. Baselines include Ma
 
 **Simulator focus here:** SUMO (`--world sumo`). CityFlow/OpenEngine paths exist in the codebase from upstream but are not actively tested in this repo.
 
-## 🚀 🚀 🚀
-
-## We have created a docker image for your convenience
-
-## (Run LibSignal, multiple sim2real baselines by one line)!
-
-This docker code base contains three projects, first pull from docker hub: 
-
-`docker pull danielda1/ugat:latest`
-
-`docker run -it --name ugat_case danielda1/ugat:latest`
-
-For LibSignal - Then go to the terminal: 
-
-`cd /DaRL/LibSignal`
-
-`python run.py`
-
-We have also included two sim-to-real for RL - TSC tasks:  
-
-> CDC23: Uncertainty-aware Grounded Action Transformation towards Sim-to-Real Transfer for Traffic Signal Control ([https://github.com/darl-libsignal/ugat](https://github.com/darl-libsignal/ugat))
-
-`cd /DaRL/UGAT_Docker/`
-
-`python sim2real.py`
-
-> AAAI24: Prompt to Transfer: Sim-to-Real Transfer for Traffic Signal Control with Prompt Learning ([https://github.com/DaRL-LibSignal/PromptGAT](https://github.com/DaRL-LibSignal/PromptGAT))
-
-`cd /DaRL/PromptGAT`
-
-`python sim2real.py`
+> **Upstream Docker (optional, not maintained here):** the upstream DaRL group publishes a
+> Docker image bundling LibSignal with two sim-to-real projects (UGAT, PromptGAT):
+> `docker pull danielda1/ugat:latest`. It is unrelated to this fork's SUMO workflow — use the
+> [install steps below](#install) for day-to-day experiments.
 
 # Install
 
@@ -92,7 +65,7 @@ If you already have conda and CUDA, you can install pip dependencies after PyTor
 pip install -r requirements.txt
 ```
 
-CoLight also needs `torch-scatter` (the setup script installs it via conda-forge). See [team_instructions.pdf](./team_instructions.pdf) for Colab and lab-server workflows.
+CoLight also needs `torch-scatter` (the setup script installs it via conda-forge). See [docs/team_instructions.pdf](./docs/team_instructions.pdf) for Colab and lab-server workflows.
 
 ## Optional: CityFlow
 
@@ -100,7 +73,22 @@ Upstream LibSignal supports `--world cityflow` if [CityFlow](https://github.com/
 
 ## Agents
 
-RL agents are imported automatically from `agent/__init__.py` when dependencies are present (e.g. CoLight needs `torch_scatter` + `torch_geometric`). Baselines (`maxpressure`, `fixedtime`, `sotl`) work without those extras.
+RL agents are imported automatically from `agent/__init__.py` when their dependencies are
+present (e.g. CoLight needs `torch_scatter` + `torch_geometric`). Classical baselines
+(`maxpressure`, `fixedtime`, `sotl`) work without those extras.
+
+**Agent status** (registered name → usable via `--agent`):
+
+| Agent | Status | Notes |
+|-------|--------|-------|
+| `maxpressure`, `fixedtime`, `sotl` | ✅ baseline | No RL deps required. |
+| `dqn`, `presslight`, `frap`, `mplight`, `magd` | ✅ RL | Standard PyTorch. |
+| `ppo_pfrl` | ✅ RL | IPPO via `pfrl`. This is the working PPO. |
+| `colight` | ✅ RL | Needs `torch_scatter` (installed by `setup.sh`; not present on the Cloud `.venv`). |
+| `maddpg_v2` | ✅ RL | The working MADDPG implementation. |
+| `ppo`, `sac`, `maddpg` | ❌ not wired | Registered in their files but **not imported** in `agent/__init__.py`, so they are not in the registry (and `ppo`/`maddpg` reference config keys that are never created). Kept for reference; use `ppo_pfrl` / `maddpg_v2` instead. |
+
+Run `bash scripts/diagnostic.sh` to print the live registry and verify your environment.
 
 # Start
 
@@ -114,15 +102,30 @@ python run.py
 
 Supporting parameters:
 
-- thread_num: number of threads for cityflow simulation
-- ngpu: how many gpu resources used in this experiment
-- task: task type to run
-- agent: agent type of agents in RL environment
-- world: simulator type
-- dataset: type of dataset in training process
-- path: path to configuration file
-- prefix: the number of predix in this running process
-- seed: seed for pytorch backend
+- `--task`: task type to run (default `tsc`).
+- `--agent`: agent type — see the [Agents](#agents) table (default `dqn`).
+- `--world`: simulator, `sumo` or `cityflow` (use `sumo`; default is `cityflow` from upstream).
+- `--network`: network name, maps to `configs/sim/<network>.cfg` (e.g. `sumo1x1`, `sumo4x4`).
+- `--prefix`: run name used in the output path.
+- `--seed`: seed for the PyTorch/NumPy backend.
+- `--ngpu`: GPU id to use; `-1` forces CPU.
+- `--interface`: SUMO backend, `libsumo` (fast, default) or `traci` (slower).
+- `--delay_type`: delay metric, `apx` (default) or `real`.
+- `--thread_num`: worker threads (CityFlow only).
+- `--dataset`: dataset handler in training (default `onfly`).
+
+# Documentation
+
+Deep-dive docs live in [`docs/`](./docs/README.md):
+
+- [docs/TRAINING_GUIDE.md](./docs/TRAINING_GUIDE.md) — train/test workflow, config system, ghost-physics baselines.
+- [docs/SUMO_NETWORKS.md](./docs/SUMO_NETWORKS.md) — catalogue of available SUMO networks.
+- [docs/SUMO_FILE_STRUCTURE_GUIDE.md](./docs/SUMO_FILE_STRUCTURE_GUIDE.md) — SUMO roadnet/flow file structure.
+- [docs/TSC_CONFIG_REPORT.md](./docs/TSC_CONFIG_REPORT.md) — code-traced reference for every `configs/tsc/*.yml` parameter.
+- [docs/SIGNAL_CONTROL_THEORY.md](./docs/SIGNAL_CONTROL_THEORY.md) — signal-control / NEMA theory + cross-network audit.
+- [docs/TECHNICAL_ANALYSIS.md](./docs/TECHNICAL_ANALYSIS.md) — architecture deep-dive.
+
+For the Cursor-Cloud agent environment, see [AGENTS.md](./AGENTS.md).
 
 # Citation
 

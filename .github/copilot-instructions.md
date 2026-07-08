@@ -1,7 +1,7 @@
 # LibSignal Copilot Instructions
 
 ## Project Overview
-LibSignal is a reinforcement learning research framework for traffic signal control (TSC). It provides cross-simulator environments (SUMO, CityFlow, OpenEngine) with configurable road networks, multiple baseline agents, and a modular architecture for training and evaluating TSC policies.
+LibSignal is a reinforcement learning research framework for traffic signal control (TSC). The `world/` layer wraps three simulator backends from upstream (SUMO, CityFlow, OpenEngine), but **this fork develops and tests only the SUMO path (`--world sumo`)** — CityFlow/OpenEngine are retained from upstream and are not validated here. It provides configurable road networks, multiple baseline agents, and a modular architecture for training and evaluating TSC policies.
 
 ## Architecture Overview
 
@@ -54,19 +54,21 @@ Worlds implement simulator-specific logic but expose unified interface:
 
 ### Running Experiments
 ```bash
-python run.py --task tsc --agent dqn --world sumo --network sumo1x1 --seed 42 --ngpu 0
+python run.py --task tsc --agent dqn --world sumo --network sumo1x1 --seed 42 --ngpu -1
 ```
 Common variations:
-- `--agent`: dqn, ppo, maddpg, maxpressure, sotl (baselines), etc.
-- `--world`: sumo, cityflow
-- `--network`: sumo1x1, cityflow1x1, sumo4x4, grid4x4, etc. (maps to configs/sim/{network}.cfg)
+- `--agent`: baselines `maxpressure`, `fixedtime`, `sotl`; RL `dqn`, `presslight`, `frap`, `mplight`, `magd`, `colight`, `ppo_pfrl`, `maddpg_v2`. (Note: `ppo`, `sac`, `maddpg` exist as files but are **not** wired into `agent/__init__.py` — use `ppo_pfrl` / `maddpg_v2`.)
+- `--world`: `sumo` (supported); `cityflow` exists from upstream but is untested here.
+- `--network`: sumo1x1, sumo4x4, grid4x4, sumo7x28, etc. (maps to configs/sim/{network}.cfg)
+- `--ngpu`: `-1` forces CPU.
 
 ### Adding New Agents
 1. Create `agent/my_agent.py` inheriting `BaseAgent`
 2. Implement `get_ob()`, `get_reward()`, `get_action()`
 3. Register via `@Registry.register_model('my_agent_name')` decorator
-4. Add YAML config to `configs/tsc/my_agent_name.yml`
-5. Run: `python run.py --agent my_agent_name`
+4. **Import it in `agent/__init__.py`** (otherwise the decorator never runs and the agent won't be in the registry)
+5. Add YAML config to `configs/tsc/my_agent_name.yml`
+6. Run: `python run.py --agent my_agent_name`
 
 ### Debugging Tips
 - Set `--debug True` for verbose logging
