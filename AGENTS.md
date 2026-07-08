@@ -2,7 +2,7 @@
 
 LibSignal — OpenAI Gymnasium-compatible library for traffic signal control (TSC) with
 classical and RL baselines. It is a single Python CLI tool (entry point `run.py`); there is
-no web server, API, frontend, or database. See `README.md` and `TRAINING_GUIDE.md` for usage.
+no web server, API, frontend, or database. See `README.md` and `docs/TRAINING_GUIDE.md` for usage.
 
 ## Cursor Cloud specific instructions
 

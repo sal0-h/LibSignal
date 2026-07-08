@@ -2,7 +2,7 @@
 
 A practical guide to training RL agents and running inference with trained models.
 
-**Environment:** Use `./setup.sh` (see [README.md](./README.md)) to create the `traffic` conda env. Team experiments use **`--world sumo`**; CityFlow may work upstream-style but is not validated in this fork.
+**Environment:** Use `./setup.sh` (see [README.md](../README.md)) to create the `traffic` conda env. Team experiments use **`--world sumo`**; CityFlow may work upstream-style but is not validated in this fork.
 
 ## Quick Start
 
