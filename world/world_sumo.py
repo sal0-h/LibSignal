@@ -370,10 +370,6 @@ GHOST_STACK_GAP = 2.5
 
 # Shrink mode: finite stand-in for h=infinity when the config value is <=0/None.
 SHRINK_UNLIMITED = 1000.0
-# Floor for the effective follow-time headway. SUMO's step length is 1s and the Krauss
-# car-follow model misbehaves with tau far below the step; clamp to avoid instability and
-# division-by-zero (tau=0). This is a documented limitation for large h.
-SHRINK_MIN_TAU = 0.1
 
 
 def _physics_flags(mode):
@@ -383,15 +379,14 @@ def _physics_flags(mode):
     if mode == 'ghost':
         return ['--collision.action', 'none', '--time-to-teleport', '-1']
     if mode == 'shrink':
-        # Vehicles keep real car-following; they are just physically smaller. tau is
-        # divided by h and floored at SHRINK_MIN_TAU (0.1s), which is below SUMO's 1s
-        # step, so the Krauss model can produce overlaps at h>=2. We therefore run with
-        # collision.action=warn (colliding vehicles keep their real routes instead of
-        # being teleported/removed) and time-to-teleport=-1 (jammed vehicles are never
-        # teleported). Nothing is overridden per-step and no vehicle is removed, so every
-        # metric stays valid and responds to h. At h=1 no shrink is applied and neither
-        # collisions nor >300s jams occur, so shrink(h=1) still matches 'standard'.
-        return ['--collision.action', 'warn', '--time-to-teleport', '-1']
+        # Tiny cars can over-commit onto junction internal lanes; because the sim configs
+        # disable jam-teleport (time-to-teleport=-1), one car stuck on a junction blocks
+        # crossing traffic permanently -> ~40% of high-h runs deadlock into gridlock.
+        # --ignore-junction-blocker lets crossing streams pass a junction-blocker after N
+        # seconds, breaking the cascade WITHOUT teleporting (metrics stay valid) and
+        # WITHOUT changing tau. Only activates during a real deadlock, so normal flow
+        # (incl. h=1) is untouched. Canonical SUMO anti-junction-deadlock flag.
+        return ['--ignore-junction-blocker', '5']
     raise ValueError(f"Unknown physics_mode: {mode}")
 
 
@@ -433,8 +428,7 @@ class World(object):
         elif self.physics_mode == 'shrink':
             self._shrink_factor = self._normalize_shrink_factor(self.ghost_stack_height)
             print(f"[Physics] mode=shrink (h={self._shrink_factor:g}, real car-following, "
-                  f"vehicles shrunk: length/{self._shrink_factor:g}, minGap/{self._shrink_factor:g}, "
-                  f"tau/{self._shrink_factor:g} floored at {SHRINK_MIN_TAU:g}s)")
+                  f"vehicles shrunk: length/{self._shrink_factor:g}, minGap/{self._shrink_factor:g}")
 
         # Shared simulation arguments (network/route + flags); the binary is chosen per use.
         if not sumo_dict.get('combined_file'):
@@ -623,8 +617,8 @@ class World(object):
     def _enforce_shrink_vehicle(self, veh_id):
         """Physically shrink one newly-departed vehicle by factor h.
 
-        Divides length, minGap and tau by h so more vehicles fit per lane (higher
-        capacity). Car-following, speed and signal obedience are left untouched, so
+        Divides length and min_gap by h so more vehicles fit per lane (higher
+        capacity). Car-following, speed, tau and signal obedience are left untouched, so
         every metric (queue, waiting, delay, timeLoss, travel time) stays valid and
         responds to h. Called exactly once per vehicle (from the departed-list hook),
         because the values are divided in place rather than set to an absolute target.
@@ -634,10 +628,8 @@ class World(object):
             return
         length = self.eng.vehicle.getLength(veh_id)
         min_gap = self.eng.vehicle.getMinGap(veh_id)
-        tau = self.eng.vehicle.getTau(veh_id)
         self.eng.vehicle.setLength(veh_id, length / h)
         self.eng.vehicle.setMinGap(veh_id, min_gap / h)
-        self.eng.vehicle.setTau(veh_id, max(SHRINK_MIN_TAU, tau / h))
 
     def _normalize_ghost_stack_height(self, height):
         """Return stack size, or None for unlimited (-1, 0, None)."""
