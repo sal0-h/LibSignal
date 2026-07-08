@@ -365,6 +365,8 @@ class Intersection(object):
 
 # Ghost: speedMode 22 + setSpeed ignores car-following; getAllowedSpeed gates red lights.
 GHOST_SPEED_MODE = 22
+# Spacing between ghost stacks along a lane (vehicle length + gap).
+GHOST_STACK_GAP = 2.5
 
 
 def _physics_flags(mode):
@@ -391,17 +393,25 @@ class World(object):
 
         world_param = Registry.mapping['world_mapping']['setting'].param
         self.physics_mode = world_param.get('physics_mode', 'standard')
+        self.ghost_stack_height = world_param.get('ghost_stack_height', -1)
         # Only implemented for libusmo for now
         if self.physics_mode == 'ghost' and kwargs['interface'] != 'libsumo':
             raise ValueError("physics_mode='ghost' requires --interface libsumo")
 
         with open(sumo_config) as f:
             sumo_dict = json.load(f)
-        self._use_gui = sumo_dict['gui'] == "True" or sumo_dict['gui'] == True
+        world_gui = world_param.get('gui', False)
+        sim_gui = sumo_dict.get('gui') in (True, "True", "true")
+        self._use_gui = bool(world_gui) or sim_gui
 
         physics_flags = _physics_flags(self.physics_mode)
         if self.physics_mode == 'ghost':
-            print("[Physics] mode=ghost (libsumo, obey signals, ignore other cars)")
+            stack_h = self._normalize_ghost_stack_height(self.ghost_stack_height)
+            if stack_h is None:
+                stack_msg = "unlimited"
+            else:
+                stack_msg = str(stack_h)
+            print(f"[Physics] mode=ghost (libsumo, obey signals, ignore other cars, stack_height={stack_msg})")
 
         # Shared simulation arguments (network/route + flags); the binary is chosen per use.
         if not sumo_dict.get('combined_file'):
@@ -417,7 +427,11 @@ class World(object):
         # in-process, so the __init__ warm-up (which only reads TLS phases) always runs
         # headless; the GUI window then opens exactly once, in reset().
         if self._use_gui:
-            self.sumo_cmd = [sumolib.checkBinary('sumo-gui'), '--delay', '0'] + sim_args
+            gui_delay = os.environ.get('SUMO_GUI_DELAY', '0')
+            gui_flags = ['--delay', gui_delay, '--start']
+            if os.environ.get('SUMO_GUI_QUIT_ON_END', '0') == '1':
+                gui_flags.append('--quit-on-end')
+            self.sumo_cmd = [sumolib.checkBinary('sumo-gui')] + gui_flags + sim_args
         else:
             self.sumo_cmd = [headless_bin] + sim_args
         self.warmup_cmd = [headless_bin] + sim_args
@@ -556,12 +570,11 @@ class World(object):
         '''
         if self.physics_mode == 'ghost' and self._sim_ready:
             self._enforce_ghost_physics_all()
-            self._collapse_ghost_lanes()
         for _ in range(self.step_ratio):
             self.eng.simulationStep()
         if self.physics_mode == 'ghost' and self._sim_ready:
             self._enforce_ghost_physics_all()
-            self._collapse_ghost_lanes()
+            self._apply_ghost_stacks()
 
     def _enforce_ghost_vehicle(self, veh_id):
         """Ignore other vehicles but obey signals via getAllowedSpeed + setSpeed."""
@@ -578,23 +591,83 @@ class World(object):
         for veh_id in self.eng.vehicle.getIDList():
             self._enforce_ghost_vehicle(veh_id)
 
-    def _collapse_ghost_lanes(self):
-        """Teleport same-lane followers onto the lead vehicle so gaps stay at 0."""
+    def _normalize_ghost_stack_height(self, height):
+        """Return stack size, or None for unlimited (-1, 0, None)."""
+        if height is None or height <= 0:
+            return None
+        return int(height)
+
+    def _partition_ghost_stacks(self, veh_ids, stack_height):
+        if stack_height is None:
+            return [veh_ids]
+        return [veh_ids[i:i + stack_height] for i in range(0, len(veh_ids), stack_height)]
+
+    def _sort_lane_vehicles_front_first(self, veh_ids):
+        """Stable front-to-back ordering; tie-break on veh_id so stack membership does not shuffle."""
+        return sorted(
+            veh_ids,
+            key=lambda v: (-self.eng.vehicle.getLanePosition(v), v),
+        )
+
+    def _apply_ghost_stacks(self):
+        """Overlap vehicles within each stack; space stacks one car-slot apart with blocking."""
+        stack_height = self._normalize_ghost_stack_height(self.ghost_stack_height)
         by_lane = {}
         for veh_id in self.eng.vehicle.getIDList():
             lane = self.eng.vehicle.getLaneID(veh_id)
             if lane.startswith(':'):
                 continue
             by_lane.setdefault(lane, []).append(veh_id)
+
         for lane, veh_ids in by_lane.items():
-            if len(veh_ids) < 2:
+            if not veh_ids:
                 continue
-            lead = max(veh_ids, key=lambda v: self.eng.vehicle.getLanePosition(v))
-            lead_pos = self.eng.vehicle.getLanePosition(lead)
-            for veh_id in veh_ids:
-                if veh_id == lead:
+            veh_ids = self._sort_lane_vehicles_front_first(veh_ids)
+            stacks = self._partition_ghost_stacks(veh_ids, stack_height)
+            lane_len = self.eng.lane.getLength(lane)
+            spacing = self.eng.vehicle.getLength(veh_ids[0]) + GHOST_STACK_GAP
+            max_slots = max(1, int(lane_len // spacing))
+
+            rep_pos = None
+            rep_speed = None
+            prev_lead_id = None
+            for stack_idx, stack in enumerate(stacks):
+                lead_id = stack[0]
+                own_lead_pos = self.eng.vehicle.getLanePosition(lead_id)
+
+                if stack_idx >= max_slots:
+                    # Lane cannot fit more spaced stacks — only overlap within each pair.
+                    for veh_id in stack[1:]:
+                        self.eng.vehicle.moveTo(veh_id, lane, own_lead_pos)
                     continue
-                self.eng.vehicle.moveTo(veh_id, lane, lead_pos)
+
+                blocked = False
+                if rep_pos is None:
+                    slot_pos = own_lead_pos
+                    rep_speed = self.eng.vehicle.getSpeed(lead_id)
+                else:
+                    blocked_pos = max(0.0, rep_pos - spacing)
+                    if own_lead_pos > blocked_pos:
+                        slot_pos = blocked_pos
+                        blocked = True
+                    else:
+                        slot_pos = own_lead_pos
+                        rep_speed = self.eng.vehicle.getSpeed(lead_id)
+
+                    if abs(slot_pos - rep_pos) < 0.5:
+                        slot_pos = own_lead_pos
+                        blocked = False
+                        rep_speed = self.eng.vehicle.getSpeed(lead_id)
+
+                rep_pos = slot_pos
+                for veh_id in stack:
+                    if veh_id == lead_id and not blocked and slot_pos == own_lead_pos:
+                        continue
+                    self.eng.vehicle.moveTo(veh_id, lane, slot_pos)
+                    if blocked:
+                        self.eng.vehicle.setSpeed(veh_id, rep_speed)
+
+                prev_lead_id = lead_id
 
     def step(self, action=None):
         '''
@@ -618,7 +691,7 @@ class World(object):
             if self.physics_mode == 'ghost':
                 self._enforce_ghost_vehicle(v)
         if self.physics_mode == 'ghost' and entering_v:
-            self._collapse_ghost_lanes()
+            self._apply_ghost_stacks()
         exiting_v = self.eng.simulation.getArrivedIDList()
         for v in exiting_v:
             if v not in self.inside_vehicles:
@@ -671,7 +744,7 @@ class World(object):
             if self.physics_mode == 'ghost':
                 self._enforce_ghost_vehicle(v)
         if self.physics_mode == 'ghost' and entering_v:
-            self._collapse_ghost_lanes()
+            self._apply_ghost_stacks()
         self.vehicle_trajectory = {}
         self.vehicle_maxspeed = {}
         self.real_delay= {}
