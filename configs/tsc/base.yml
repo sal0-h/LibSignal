@@ -17,8 +17,9 @@ world:
 
   rlTrafficLight: True
 
-  physics_mode: standard   # standard | ghost
-  ghost_stack_height: -1   # ghost only: max vehicles overlapping per lane slot (-1/0 = unlimited full ghost, 1 = one car per slot)
+  physics_mode: standard   # standard | ghost | shrink
+  ghost_stack_height: -1   # ghost: max vehicles overlapping per lane slot (-1/0 = unlimited, 1 = one car/slot).
+                           # shrink: reused as the shrink factor h (length/minGap/tau divided by h; -1/0 = unlimited ~1000).
 
 trainer:
   thread: 4

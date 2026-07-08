@@ -368,6 +368,13 @@ GHOST_SPEED_MODE = 22
 # Spacing between ghost stacks along a lane (vehicle length + gap).
 GHOST_STACK_GAP = 2.5
 
+# Shrink mode: finite stand-in for h=infinity when the config value is <=0/None.
+SHRINK_UNLIMITED = 1000.0
+# Floor for the effective follow-time headway. SUMO's step length is 1s and the Krauss
+# car-follow model misbehaves with tau far below the step; clamp to avoid instability and
+# division-by-zero (tau=0). This is a documented limitation for large h.
+SHRINK_MIN_TAU = 0.1
+
 
 def _physics_flags(mode):
     """Return SUMO CLI flags for the given physics mode."""
@@ -375,6 +382,16 @@ def _physics_flags(mode):
         return []
     if mode == 'ghost':
         return ['--collision.action', 'none', '--time-to-teleport', '-1']
+    if mode == 'shrink':
+        # Vehicles keep real car-following; they are just physically smaller. tau is
+        # divided by h and floored at SHRINK_MIN_TAU (0.1s), which is below SUMO's 1s
+        # step, so the Krauss model can produce overlaps at h>=2. We therefore run with
+        # collision.action=warn (colliding vehicles keep their real routes instead of
+        # being teleported/removed) and time-to-teleport=-1 (jammed vehicles are never
+        # teleported). Nothing is overridden per-step and no vehicle is removed, so every
+        # metric stays valid and responds to h. At h=1 no shrink is applied and neither
+        # collisions nor >300s jams occur, so shrink(h=1) still matches 'standard'.
+        return ['--collision.action', 'warn', '--time-to-teleport', '-1']
     raise ValueError(f"Unknown physics_mode: {mode}")
 
 
@@ -394,6 +411,7 @@ class World(object):
         world_param = Registry.mapping['world_mapping']['setting'].param
         self.physics_mode = world_param.get('physics_mode', 'standard')
         self.ghost_stack_height = world_param.get('ghost_stack_height', -1)
+        self._shrink_factor = 1.0
         # Only implemented for libusmo for now
         if self.physics_mode == 'ghost' and kwargs['interface'] != 'libsumo':
             raise ValueError("physics_mode='ghost' requires --interface libsumo")
@@ -412,6 +430,11 @@ class World(object):
             else:
                 stack_msg = str(stack_h)
             print(f"[Physics] mode=ghost (libsumo, obey signals, ignore other cars, stack_height={stack_msg})")
+        elif self.physics_mode == 'shrink':
+            self._shrink_factor = self._normalize_shrink_factor(self.ghost_stack_height)
+            print(f"[Physics] mode=shrink (h={self._shrink_factor:g}, real car-following, "
+                  f"vehicles shrunk: length/{self._shrink_factor:g}, minGap/{self._shrink_factor:g}, "
+                  f"tau/{self._shrink_factor:g} floored at {SHRINK_MIN_TAU:g}s)")
 
         # Shared simulation arguments (network/route + flags); the binary is chosen per use.
         if not sumo_dict.get('combined_file'):
@@ -591,6 +614,31 @@ class World(object):
         for veh_id in self.eng.vehicle.getIDList():
             self._enforce_ghost_vehicle(veh_id)
 
+    def _normalize_shrink_factor(self, height):
+        """Return the shrink factor h. h<=0 or None means 'unlimited' → a large finite value."""
+        if height is None or height <= 0:
+            return SHRINK_UNLIMITED
+        return float(height)
+
+    def _enforce_shrink_vehicle(self, veh_id):
+        """Physically shrink one newly-departed vehicle by factor h.
+
+        Divides length, minGap and tau by h so more vehicles fit per lane (higher
+        capacity). Car-following, speed and signal obedience are left untouched, so
+        every metric (queue, waiting, delay, timeLoss, travel time) stays valid and
+        responds to h. Called exactly once per vehicle (from the departed-list hook),
+        because the values are divided in place rather than set to an absolute target.
+        """
+        h = self._shrink_factor
+        if h == 1.0:
+            return
+        length = self.eng.vehicle.getLength(veh_id)
+        min_gap = self.eng.vehicle.getMinGap(veh_id)
+        tau = self.eng.vehicle.getTau(veh_id)
+        self.eng.vehicle.setLength(veh_id, length / h)
+        self.eng.vehicle.setMinGap(veh_id, min_gap / h)
+        self.eng.vehicle.setTau(veh_id, max(SHRINK_MIN_TAU, tau / h))
+
     def _normalize_ghost_stack_height(self, height):
         """Return stack size, or None for unlimited (-1, 0, None)."""
         if height is None or height <= 0:
@@ -690,6 +738,8 @@ class World(object):
             self.inside_vehicles.update({v: self.get_current_time()})
             if self.physics_mode == 'ghost':
                 self._enforce_ghost_vehicle(v)
+            elif self.physics_mode == 'shrink':
+                self._enforce_shrink_vehicle(v)
         if self.physics_mode == 'ghost' and entering_v:
             self._apply_ghost_stacks()
         exiting_v = self.eng.simulation.getArrivedIDList()
@@ -743,6 +793,8 @@ class World(object):
             self.inside_vehicles.update({v: self.get_current_time()})
             if self.physics_mode == 'ghost':
                 self._enforce_ghost_vehicle(v)
+            elif self.physics_mode == 'shrink':
+                self._enforce_shrink_vehicle(v)
         if self.physics_mode == 'ghost' and entering_v:
             self._apply_ghost_stacks()
         self.vehicle_trajectory = {}

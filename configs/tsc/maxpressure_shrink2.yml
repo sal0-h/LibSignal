@@ -1,0 +1,6 @@
+includes:
+  - configs/tsc/maxpressure.yml
+
+world:
+  physics_mode: shrink
+  ghost_stack_height: 2
