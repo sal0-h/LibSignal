@@ -4,6 +4,12 @@ __pycache__/
 .idea/
 .vscode/
 
+# Stray tool artifact (literal dir from a mis-expanded variable)
+%OUTDIR%/
+
+# Python virtual environment (Cursor Cloud dev setup)
+.venv/
+
 # Experiment outputs (logs, checkpoints, local summaries)
 data/output_data/**/model/
 data/output_data/**/*.pt
@@ -11,7 +17,7 @@ data/output_data/**/*.pth
 data/output_data/tsc/processed_results*.csv
 
 
-# LaTeX build artifacts (source: team_instructions.tex)
+# LaTeX build artifacts (source: docs/team_instructions.tex)
 *.aux
 *.log
 *.out

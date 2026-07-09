@@ -2,6 +2,12 @@
 
 Deep dive into LibSignal's architecture, state/reward/action definitions, and extensibility for advanced traffic scenarios.
 
+> **Scope note:** the `world/` layer contains three simulator backends from upstream
+> (`world_sumo.py`, `world_cityflow.py`, `world_openengine.py`), and this document describes
+> all three where relevant. In **this fork, only the SUMO path (`--world sumo`) is tested and
+> supported**; CityFlow/OpenEngine references are retained for architectural completeness and
+> upstream compatibility, not as validated workflows.
+
 ---
 
 ## 1. Folder Structure & Component Roles
@@ -11,8 +17,18 @@ Deep dive into LibSignal's architecture, state/reward/action definitions, and ex
 #### `agent/`
 **Role**: Policy implementations (RL and baseline algorithms)
 - **Base classes**: `BaseAgent` (all agents), `RLAgent` (RL-specific)
-- **RL agents**: `dqn.py`, `ppo.py`, `sac.py`, `maddpg_v2.py`, `magd.py`, `colight.py`, `frap.py`, `presslight.py`, `mplight.py`
+- **RL agents (wired & usable)**: `dqn.py`, `presslight.py`, `frap.py`, `mplight.py`, `magd.py`, `colight.py`, `ppo_pfrl.py` (IPPO), `maddpg_v2.py`
 - **Baselines**: `maxpressure.py` (queue-based pressure), `sotl.py` (self-optimizing), `fixedtime.py` (static timing)
+- **Orphan / superseded files (present but NOT wired into `agent/__init__.py`)** — kept for
+  reference/history, not usable via `--agent`:
+  - `ppo.py` (`@register('ppo')`), `sac.py` (`@register('sac')`), `maddpg.py` (`@register('maddpg')`)
+    — decorators never run (not imported), so these names are **absent from the registry**;
+    `ppo.py`/`maddpg.py` also read config keys (`model_setting`/`traffic_setting`) that are never
+    created. Use `ppo_pfrl` / `maddpg_v2` instead.
+  - `colight_pytorch_agent.py`, `dqn_torch_agent.py` — earlier implementations superseded by
+    `colight.py` / `dqn.py` (zero references).
+  - `maddpg_agent.py` + `maddpg_agent_util.py` — legacy MADDPG helper cluster (only referenced by
+    each other), superseded by `maddpg_v2.py`.
 - **Key methods each agent must implement**:
   - `get_ob()`: Extract observation from world state
   - `get_reward()`: Compute reward signal
