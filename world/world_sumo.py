@@ -17,6 +17,7 @@ from common.registry import Registry
 import json
 import re
 import copy
+import hashlib
 
 import sumolib
 try:
@@ -325,7 +326,10 @@ class Intersection(object):
                 next_light = path[0]
                 distance = next_light[2]
                 if distance <= max_distance:
-                    detectable.append(v)
+                    # Partial observability: only "connected"/detected vehicles are
+                    # counted. At p=1.0 this is a no-op (every vehicle visible).
+                    if self.world._vehicle_visible(v):
+                        detectable.append(v)
         return detectable
 
     # TODO: revert x and y
@@ -403,6 +407,24 @@ class World(object):
         # Heterogeneous vehicles: load mixed vTypes + hetero routes when enabled.
         # All agents stay unchanged — they see lane counts/pressure, never vType.
         self.hetero = world_param.get('hetero', False)
+
+        # Partial observability (penetration rate). Each vehicle is independently
+        # "visible"/connected with probability p, PERSISTENT for its whole trip (a car
+        # either carries the tech or it does not). Lane stats are then built from visible
+        # vehicles only. Physics is unchanged — SUMO runs identically; only what the
+        # controller perceives changes, so it decides with incomplete information. The
+        # mask is seeded and identical for every agent, so ground-truth ATT stays
+        # comparable across DQN/PressLight/CoLight/MaxPressure. p=1.0 => full observability
+        # (exact baseline behaviour, no filtering, no RNG draws).
+        self.obs_penetration = float(world_param.get('obs_penetration', 1.0))
+        # Resolve the mask seed identically to SUMO/trainer: CLI --seed first, else the
+        # config world.seed. So --seed overrides the mask exactly as it does everywhere else
+        # (single unified global seed; no independent observation seed).
+        _obs_cmd_seed = Registry.mapping['command_mapping']['setting'].param.get('seed')
+        self.obs_seed = int(_obs_cmd_seed if _obs_cmd_seed is not None else world_param.get('seed', 0))
+        if self.obs_penetration < 1.0:
+            print(f"[PartialObs] penetration rate p={self.obs_penetration} "
+                  f"(persistent per-vehicle, seed={self.obs_seed})")
 
         with open(sumo_config) as f:
             sumo_dict = json.load(f)
@@ -776,6 +798,26 @@ class World(object):
         self.info = {}
         for fn in self.fns:
             self.info[fn] = self.info_functions[fn]()
+
+    def _vehicle_visible(self, veh_id):
+        '''
+        _vehicle_visible
+        Partial-observability gate: return True if this vehicle is "connected"/detected
+        under the current penetration rate. Visibility is PERSISTENT per vehicle (decided
+        once, deterministically, from a seeded hash of the vehicle id) so a car is either
+        observed for its whole trip or never — matching real connected-vehicle fleets.
+        At p>=1.0 this short-circuits to True (no hashing, exact baseline behaviour).
+
+        :param veh_id: SUMO vehicle id
+        :return: bool, whether the vehicle is observable
+        '''
+        if self.obs_penetration >= 1.0:
+            return True
+        if self.obs_penetration <= 0.0:
+            return False
+        h = hashlib.md5(f"{self.obs_seed}:{veh_id}".encode()).digest()
+        frac = int.from_bytes(h[:4], 'big') / 0xFFFFFFFF
+        return frac < self.obs_penetration
 
     def get_lane_vehicle_count(self):
         '''

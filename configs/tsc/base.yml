@@ -21,6 +21,12 @@ world:
 
   hetero: false             # false = uniform vType baseline; true = mixed cars+trucks
 
+  obs_penetration: 1.0      # partial observability: fraction of vehicles that are "visible"
+                            # to the controller (connected-vehicle penetration rate).
+                            # 1.0 = full observability (baseline); e.g. 0.1 = only 10% of
+                            # cars are detected. Physics unchanged; same seeded mask for
+                            # every agent so ATT stays comparable. Persistent per vehicle.
+
 trainer:
   thread: 4
   ngpu: -1
