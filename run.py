@@ -1,3 +1,11 @@
+# Pin PYTHONHASHSEED=0 for reproducible str/dict/set ordering. Hash randomization can only
+# be fixed before the interpreter starts, so re-exec once with the env var set. Guarded by
+# __main__ so importing run.py (e.g. extras/) never re-execs; runs before other imports.
+import os as _os, sys as _sys
+if __name__ == '__main__' and _os.environ.get('PYTHONHASHSEED') != '0':
+    _os.environ['PYTHONHASHSEED'] = '0'
+    _os.execv(_sys.executable, [_sys.executable] + _sys.argv)
+
 import task
 import trainer
 import agent
@@ -16,7 +24,7 @@ parser = argparse.ArgumentParser(description='Run Experiment')
 parser.add_argument('--thread_num', type=int, default=4, help='number of threads')  # used in cityflow
 parser.add_argument('--ngpu', type=str, default="-1", help='gpu to be used')  # choose gpu card
 parser.add_argument('--prefix', type=str, default='test', help="the number of prefix in this running process")
-parser.add_argument('--seed', type=int, default=None, help="seed for pytorch backend")
+parser.add_argument('--seed', type=int, default=None, help="global random seed for random/numpy/torch and SUMO; defaults to world.seed in the config when omitted")
 parser.add_argument('--debug', type=bool, default=True)
 parser.add_argument('--interface', type=str, default="libsumo", choices=['libsumo','traci'], help="interface type") # libsumo(fast) or traci(slow)
 parser.add_argument('--delay_type', type=str, default="apx", choices=['apx','real'], help="method of calculating delay") # apx(approximate) or real

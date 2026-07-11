@@ -425,13 +425,20 @@ class World(object):
             print(f"[Hetero] enabled — routes={route_file}, vTypes={add_file}")
 
         # Shared simulation arguments (network/route + flags); the binary is chosen per use.
+        # Tie SUMO's RNG (vehicle insertion, etc.) to the global seed so demand stochasticity
+        # is reproducible. Resolve the seed identically to the trainer: the CLI --seed takes
+        # precedence, falling back to the config world.seed (default 0). So --seed overrides
+        # the config for SUMO exactly as it does for random/numpy/torch.
+        _cmd_seed = Registry.mapping['command_mapping']['setting'].param.get('seed')
+        effective_seed = _cmd_seed if _cmd_seed is not None else world_param.get('seed', 0)
+        seed_flags = ['--seed', str(int(effective_seed))]
         if not sumo_dict.get('combined_file'):
             sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
                         '-r', os.path.join(sumo_dict['dir'], route_file),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + hetero_flags
+                        '--no-warnings', str(sumo_dict['no_warning'])] + seed_flags + physics_flags + hetero_flags
         else:
             sim_args = ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + hetero_flags
+                        '--no-warnings', str(sumo_dict['no_warning'])] + seed_flags + physics_flags + hetero_flags
 
         headless_bin = sumolib.checkBinary('sumo')
         # Real run uses sumo-gui when requested. libsumo cannot reopen a GUI window
