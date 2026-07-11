@@ -19,6 +19,8 @@ world:
 
   physics_mode: standard   # standard | ghost
 
+  hetero: false             # false = uniform vType baseline; true = mixed cars+trucks
+
 trainer:
   thread: 4
   ngpu: -1

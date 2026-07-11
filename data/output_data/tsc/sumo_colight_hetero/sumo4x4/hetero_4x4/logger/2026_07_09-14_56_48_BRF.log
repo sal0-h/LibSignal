@@ -1,0 +1,34 @@
+step:3600/3600, q_loss:0, rewards:-50.27944878472222, queue:1.64765625, delay:0.06745391421847874, throughput:1429
+episode:0/200, real avg travel time:274.70888733379985
+intersection:0, mean_episode_reward:-2.9897212982177734, mean_queue:3.1416666507720947
+intersection:1, mean_episode_reward:-2.6833338737487793, mean_queue:2.88611102104187
+intersection:2, mean_episode_reward:-4.100834846496582, mean_queue:4.25
+intersection:3, mean_episode_reward:-3.682500123977661, mean_queue:3.836111068725586
+intersection:4, mean_episode_reward:-2.631944417953491, mean_queue:2.7750000953674316
+intersection:5, mean_episode_reward:-2.714165687561035, mean_queue:2.8527777194976807
+intersection:6, mean_episode_reward:-2.794999599456787, mean_queue:2.9277777671813965
+intersection:7, mean_episode_reward:-2.803889274597168, mean_queue:2.950000047683716
+intersection:8, mean_episode_reward:-3.4572222232818604, mean_queue:3.616666555404663
+intersection:9, mean_episode_reward:-3.348611354827881, mean_queue:3.5027778148651123
+intersection:10, mean_episode_reward:-2.7294442653656006, mean_queue:2.8694443702697754
+intersection:11, mean_episode_reward:-3.2216665744781494, mean_queue:3.366666555404663
+intersection:12, mean_episode_reward:-4.138888835906982, mean_queue:4.30555534362793
+intersection:13, mean_episode_reward:-3.846944570541382, mean_queue:4.0
+intersection:14, mean_episode_reward:-2.7158334255218506, mean_queue:2.8416666984558105
+intersection:15, mean_episode_reward:-2.4194445610046387, mean_queue:2.6027777194976807
+intersection:16, mean_episode_reward:0.0, mean_queue:0.0
+intersection:17, mean_episode_reward:0.0, mean_queue:0.0
+intersection:18, mean_episode_reward:0.0, mean_queue:0.0
+intersection:19, mean_episode_reward:0.0, mean_queue:0.0
+intersection:20, mean_episode_reward:0.0, mean_queue:0.0
+intersection:21, mean_episode_reward:0.0, mean_queue:0.0
+intersection:22, mean_episode_reward:0.0, mean_queue:0.0
+intersection:23, mean_episode_reward:0.0, mean_queue:0.0
+intersection:24, mean_episode_reward:0.0, mean_queue:0.0
+intersection:25, mean_episode_reward:0.0, mean_queue:0.0
+intersection:26, mean_episode_reward:0.0, mean_queue:0.0
+intersection:27, mean_episode_reward:0.0, mean_queue:0.0
+intersection:28, mean_episode_reward:0.0, mean_queue:0.0
+intersection:29, mean_episode_reward:0.0, mean_queue:0.0
+intersection:30, mean_episode_reward:0.0, mean_queue:0.0
+intersection:31, mean_episode_reward:0.0, mean_queue:0.0
