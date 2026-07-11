@@ -21,6 +21,13 @@ world:
 
   hetero: false             # false = uniform vType baseline; true = mixed cars+trucks
 
+  obs_count_noise_std: 0.0  # partial observability: Gaussian measurement noise on the
+                            # per-lane vehicle counts the controller reads (noisy loop/
+                            # camera detectors). 0.0 = exact counts (baseline). Re-sampled
+                            # each step, unbiased (E[observed]=true), rounded & clamped >=0.
+                            # Same seeded noise for every agent so ATT stays comparable.
+  obs_noise_mode: additive  # 'additive' -> N(0, sigma^2); 'proportional' -> N(0,(sigma*true)^2)
+
 trainer:
   thread: 4
   ngpu: -1
