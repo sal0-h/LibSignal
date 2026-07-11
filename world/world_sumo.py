@@ -432,7 +432,11 @@ class World(object):
             if not add_file:
                 raise ValueError("slow_start=true but slowStartAdditional not set in .cfg")
             additional_files.append(os.path.join(sumo_dict['dir'], add_file))
-            print(f"[SlowStart] enabled — vTypes={add_file} (same routes as baseline)")
+            slow_route = sumo_dict.get('flowFileSlowStart', '')
+            if not slow_route:
+                raise ValueError("slow_start=true but flowFileSlowStart not set in .cfg")
+            route_file = slow_route
+            print(f"[SlowStart] enabled — routes={route_file}, vTypes={add_file}")
 
         additional_flags = []
         if additional_files:
