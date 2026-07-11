@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Slow-start vType override (slow_start=true).
-  Loaded via --additional-files; overrides baseline "pkw" on all networks.
-
-  Goal: model startup lost time through realistic driving physics, NOT by
-  freezing vehicle decisions after green (no actionStepLength > step length).
-
-  Mechanisms (literature-backed):
-    1. accel — comfortable acceleration from stop (HCM / Akçelik & Besley 2003:
-       field profiles ~0.8–1.5 m/s²; default SUMO 2.0 m/s² is optimistic).
-    2. tau — desired time headway in Krauss car-following (HCM saturation
-       headway ~1.89 s → ~1900 veh/h/lane; default tau=1.0 over-estimates
-       discharge rate).
-
-  References:
-    - HCM 6th ed.: startup lost time ~2.0 s/phase; saturation flow 1900 veh/h/ln.
-    - Krauss (1998): tau as minimum gap time in safety-distance model.
-    - Akçelik & Besley (2003): acceleration from stop in urban traffic.
-    - Auerbach et al. (arXiv:2307.11357): SUMO accel/tau calibration for TSC sim-to-real.
-    - ElDessouki & AlManeea (2023): startup lost time exceeds HCM default under distraction.
-
-  Deliberately NOT used:
-    - actionStepLength > 1.0 s — that throttles model updates and mimics a fixed
-      post-green hold rather than continuous slow acceleration.
--->
+<!-- Slow-start vType override (slow_start=true). Overrides baseline pkw via additional-files.
+     accel=1.0 m/s2 (comfortable startup), tau=1.9 s (HCM saturation headway).
+     See docs in feat/slow-start-v2 branch commit message for literature references. -->
 <additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
 
