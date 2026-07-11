@@ -400,9 +400,13 @@ class World(object):
         if self.physics_mode == 'ghost' and kwargs['interface'] != 'libsumo':
             raise ValueError("physics_mode='ghost' requires --interface libsumo")
 
-        # Heterogeneous vehicles: load mixed vTypes + hetero routes when enabled.
-        # All agents stay unchanged — they see lane counts/pressure, never vType.
+        # Realism toggles (independent ablations; agents never see vType).
         self.hetero = world_param.get('hetero', False)
+        self.slow_start = world_param.get('slow_start', False)
+        if self.hetero and self.slow_start:
+            raise ValueError(
+                "hetero and slow_start are separate ablations — enable one at a time"
+            )
 
         with open(sumo_config) as f:
             sumo_dict = json.load(f)
@@ -412,26 +416,39 @@ class World(object):
         if self.physics_mode == 'ghost':
             print("[Physics] mode=ghost (libsumo, obey signals, ignore other cars)")
 
-        # Pick route file: hetero routes when enabled, else default.
         route_file = sumo_dict['flowFile']
-        hetero_flags = []
+        additional_files = []
         if self.hetero:
             if not sumo_dict.get('flowFileHetero'):
                 raise ValueError("hetero=true but flowFileHetero not set in .cfg")
             route_file = sumo_dict['flowFileHetero']
             add_file = sumo_dict.get('heteroAdditional', '')
             if add_file:
-                hetero_flags = ['--additional-files', os.path.join(sumo_dict['dir'], add_file)]
+                additional_files.append(os.path.join(sumo_dict['dir'], add_file))
             print(f"[Hetero] enabled — routes={route_file}, vTypes={add_file}")
 
-        # Shared simulation arguments (network/route + flags); the binary is chosen per use.
-        if not sumo_dict.get('combined_file'):
+        if self.slow_start:
+            add_file = sumo_dict.get('slowStartAdditional', '')
+            if not add_file:
+                raise ValueError("slow_start=true but slowStartAdditional not set in .cfg")
+            additional_files.append(os.path.join(sumo_dict['dir'], add_file))
+            print(f"[SlowStart] enabled — vTypes={add_file} (same routes as baseline)")
+
+        additional_flags = []
+        if additional_files:
+            additional_flags = ['--additional-files', ','.join(additional_files)]
+
+        # Use explicit -n/-r when realism toggles need additional-files or alternate routes.
+        use_explicit_net_route = (
+            not sumo_dict.get('combined_file') or self.hetero or self.slow_start
+        )
+        if use_explicit_net_route:
             sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
                         '-r', os.path.join(sumo_dict['dir'], route_file),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + hetero_flags
+                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + additional_flags
         else:
             sim_args = ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + hetero_flags
+                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + additional_flags
 
         headless_bin = sumolib.checkBinary('sumo')
         # Real run uses sumo-gui when requested. libsumo cannot reopen a GUI window
