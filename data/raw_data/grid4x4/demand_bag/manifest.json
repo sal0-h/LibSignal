@@ -1,0 +1,24 @@
+{
+  "network": "sumo4x4",
+  "episode_len_s": 1200,
+  "n_vehicles_per_file": 339,
+  "fixed": "raw_data/grid4x4/demand_bag/fixed_1200.rou.xml",
+  "train_bag": [
+    "raw_data/grid4x4/demand_bag/train_00.rou.xml",
+    "raw_data/grid4x4/demand_bag/train_01.rou.xml",
+    "raw_data/grid4x4/demand_bag/train_02.rou.xml",
+    "raw_data/grid4x4/demand_bag/train_03.rou.xml",
+    "raw_data/grid4x4/demand_bag/train_04.rou.xml",
+    "raw_data/grid4x4/demand_bag/train_05.rou.xml",
+    "raw_data/grid4x4/demand_bag/train_06.rou.xml",
+    "raw_data/grid4x4/demand_bag/train_07.rou.xml",
+    "raw_data/grid4x4/demand_bag/train_08.rou.xml",
+    "raw_data/grid4x4/demand_bag/train_09.rou.xml"
+  ],
+  "heldout": [
+    "raw_data/grid4x4/demand_bag/hold_00.rou.xml",
+    "raw_data/grid4x4/demand_bag/hold_01.rou.xml",
+    "raw_data/grid4x4/demand_bag/hold_02.rou.xml"
+  ],
+  "note": "fixed = first 20 min of baseline movie; train/hold keep the same depart times but resample routes from the full hour pool."
+}

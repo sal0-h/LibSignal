@@ -1,0 +1,19 @@
+# Shared settings for Grid4x4 1200s fixed-vs-bag experiment.
+# Included by dqn_fixed1200 / dqn_bag1200 / presslight_* / refs.
+
+trainer:
+  steps: 1200
+  test_steps: 1200
+  episodes: 100
+  action_interval: 10
+  # Skip every-episode same-demand TEST (saves ~2x wall time).
+  # Held-out eval is the main signal.
+  test_when_train: False
+  heldout_eval_every: 10
+
+world:
+  demand_train_file: raw_data/grid4x4/demand_bag/fixed_1200.rou.xml
+  demand_heldout:
+    - raw_data/grid4x4/demand_bag/hold_00.rou.xml
+    - raw_data/grid4x4/demand_bag/hold_01.rou.xml
+    - raw_data/grid4x4/demand_bag/hold_02.rou.xml

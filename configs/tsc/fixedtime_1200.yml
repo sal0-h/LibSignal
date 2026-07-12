@@ -1,0 +1,9 @@
+# Flat reference on held-out demand (no learning).
+includes:
+  - configs/tsc/fixedtime.yml
+  - configs/tsc/demand_bag_1200_base.yml
+
+trainer:
+  episodes: 1
+  test_when_train: False
+  heldout_eval_every: 1

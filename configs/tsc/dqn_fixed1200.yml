@@ -1,0 +1,4 @@
+# Condition B: 1200s episodes, same demand file every reset.
+includes:
+  - configs/tsc/dqn.yml
+  - configs/tsc/demand_bag_1200_base.yml

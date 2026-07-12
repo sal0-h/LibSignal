@@ -1,0 +1,8 @@
+# Tiny smoke config (2 episodes) — not for cluster jobs.
+includes:
+  - configs/tsc/dqn_bag1200.yml
+
+trainer:
+  episodes: 2
+  heldout_eval_every: 1
+  learning_start: 50

@@ -34,6 +34,13 @@ class TSCTrainer(BaseTrainer):
         self.update_model_rate = Registry.mapping['trainer_mapping']['setting'].param['update_model_rate']
         self.update_target_rate = Registry.mapping['trainer_mapping']['setting'].param['update_target_rate']
         self.test_when_train = Registry.mapping['trainer_mapping']['setting'].param['test_when_train']
+        # Demand-bag / held-out eval (optional; default off for existing configs)
+        world_param = Registry.mapping['world_mapping']['setting'].param
+        trainer_param = Registry.mapping['trainer_mapping']['setting'].param
+        self.demand_bag = world_param.get('demand_bag') or []
+        self.demand_heldout = world_param.get('demand_heldout') or []
+        self.demand_train_file = world_param.get('demand_train_file')
+        self.heldout_eval_every = int(trainer_param.get('heldout_eval_every') or 0)
         # replay file is only valid in cityflow now. 
         # TODO: support SUMO and Openengine later
         
@@ -131,6 +138,7 @@ class TSCTrainer(BaseTrainer):
         flush = 0
         for e in range(self.episodes):
             # TODO: check this reset agent
+            self._select_train_demand(e)
             self.metric.clear()
             last_obs = self.env.reset()  # agent * [sub_agent, feature]
 
@@ -207,17 +215,24 @@ class TSCTrainer(BaseTrainer):
                      self.metric.lane_queue()[j]))
             if self.test_when_train:
                 self.train_test(e)
+            if self.heldout_eval_every > 0 and self.demand_heldout and (e % self.heldout_eval_every == 0):
+                self.heldout_eval(e)
         # self.dataset.flush([ag.replay_buffer for ag in self.agents])
         [ag.save_model(e=self.episodes) for ag in self.agents]
 
-    def train_test(self, e):
-        '''
-        train_test
-        Evaluate model performance after each episode training process.
+    def _select_train_demand(self, e):
+        '''Pick route file for this training episode (fixed or bag rotation).'''
+        if not hasattr(self.world, 'set_route_file'):
+            return
+        if self.demand_bag:
+            route = self.demand_bag[e % len(self.demand_bag)]
+            self.world.set_route_file(route)
+            self.logger.info("episode:{}/{}, train_demand:{}".format(e, self.episodes, route))
+        elif self.demand_train_file:
+            self.world.set_route_file(self.demand_train_file)
 
-        :param e: number of episode
-        :return self.metric.real_average_travel_time: travel time of vehicles
-        '''
+    def _run_eval_episode(self):
+        '''Greedy rollout for test_steps; returns real avg travel time.'''
         obs = self.env.reset()
         self.metric.clear()
         for a in self.agents:
@@ -231,19 +246,56 @@ class TSCTrainer(BaseTrainer):
                 actions = np.stack(actions)
                 rewards_list = []
                 for _ in range(self.action_interval):
-                    obs, rewards, dones, _ = self.env.step(actions.flatten())  # make sure action is [intersection]
+                    obs, rewards, dones, _ = self.env.step(actions.flatten())
                     i += 1
                     rewards_list.append(np.stack(rewards))
-                rewards = np.mean(rewards_list, axis=0)  # [agent, intersection]
+                rewards = np.mean(rewards_list, axis=0)
                 self.metric.update(rewards)
             if all(dones):
                 break
-        self.logger.info("Test step:{}/{}, travel time :{}, rewards:{}, queue:{}, delay:{}, throughput:{}".format(\
-            e, self.episodes, self.metric.real_average_travel_time(), self.metric.rewards(),\
-            self.metric.queue(), self.metric.delay(), int(self.metric.throughput())))
-        self.writeLog("TEST", e, self.metric.real_average_travel_time(),\
-            100, self.metric.rewards(),self.metric.queue(),self.metric.delay(), self.metric.throughput())
         return self.metric.real_average_travel_time()
+
+    def heldout_eval(self, e):
+        '''
+        Evaluate (no learning) on held-out demand files and log mean ATT.
+        '''
+        atts = []
+        for route in self.demand_heldout:
+            if hasattr(self.world, 'set_route_file'):
+                self.world.set_route_file(route)
+            att = self._run_eval_episode()
+            atts.append(att)
+            self.logger.info(
+                "HELDOUT episode:{}/{}, demand:{}, travel time:{}, rewards:{}, queue:{}, delay:{}, throughput:{}".format(
+                    e, self.episodes, route, att, self.metric.rewards(),
+                    self.metric.queue(), self.metric.delay(), int(self.metric.throughput()))
+            )
+            self.writeLog("HELDOUT", e, att, 100, self.metric.rewards(),
+                          self.metric.queue(), self.metric.delay(), self.metric.throughput())
+        mean_att = float(np.mean(atts)) if atts else 0.0
+        self.logger.info(
+            "HELDOUT_MEAN episode:{}/{}, travel time:{} (n={})".format(
+                e, self.episodes, mean_att, len(atts))
+        )
+        self.writeLog("HELDOUT_MEAN", e, mean_att, 100, 0, 0, 0, 0)
+        return mean_att
+
+    def train_test(self, e):
+        '''
+        train_test
+        Evaluate model performance after each episode training process.
+
+        :param e: number of episode
+        :return self.metric.real_average_travel_time: travel time of vehicles
+        '''
+        # Keep whatever demand is currently selected (same-file TEST).
+        att = self._run_eval_episode()
+        self.logger.info("Test step:{}/{}, travel time :{}, rewards:{}, queue:{}, delay:{}, throughput:{}".format(\
+            e, self.episodes, att, self.metric.rewards(),\
+            self.metric.queue(), self.metric.delay(), int(self.metric.throughput())))
+        self.writeLog("TEST", e, att,\
+            100, self.metric.rewards(),self.metric.queue(),self.metric.delay(), self.metric.throughput())
+        return att
 
     def test(self, drop_load=True):
         '''
@@ -263,6 +315,12 @@ class TSCTrainer(BaseTrainer):
         if not drop_load:
             [ag.load_model(self.episodes) for ag in self.agents]
         attention_mat_list = []
+        if self.demand_heldout and hasattr(self.world, 'set_route_file'):
+            # Final test: average held-out if configured, else single train file.
+            self.heldout_eval(self.episodes)
+            return self.metric
+        if self.demand_train_file and hasattr(self.world, 'set_route_file'):
+            self.world.set_route_file(self.demand_train_file)
         obs = self.env.reset()
         for a in self.agents:
             a.reset()

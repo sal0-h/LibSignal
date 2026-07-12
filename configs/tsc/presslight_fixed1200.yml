@@ -1,0 +1,4 @@
+# Condition B (PressLight): 1200s, fixed demand.
+includes:
+  - configs/tsc/presslight.yml
+  - configs/tsc/demand_bag_1200_base.yml
