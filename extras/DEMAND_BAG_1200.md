@@ -11,10 +11,18 @@ rotating demand bag improves held-out ATT.
 | `dqn_bag1200` | 1200 s | `train_00..09` rotate | held-out every 10 ep |
 | `maxpressure_1200` / `fixedtime_1200` | 1200 s | — | held-out once (flat refs) |
 
-PressLight twins: `presslight_fixed1200`, `presslight_bag1200`.
+PressLight twins: `presslight_fixed1200`, `presslight_bag1200`.  
+CoLight twins: `colight_fixed1200`, `colight_bag1200`.
 
 Pilot defaults: **100 episodes**, **2 seeds** (42, 43), **3 held-out files**.
 Bump `trainer.episodes` to 200 and add seed 44 when the gap looks real.
+
+PressLight + CoLight (4 jobs, seed 42 only):
+
+```bash
+sbatch --mcs-label="${MCS_LABEL}" extras/slurm_demand_bag_1200_pl_colight.sh
+# 0 PL fixed | 1 PL bag | 2 CL fixed | 3 CL bag
+```
 
 ## One-time: generate demand files
 

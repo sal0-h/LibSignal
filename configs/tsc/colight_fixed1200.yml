@@ -1,0 +1,4 @@
+# Condition B (CoLight): 1200s, fixed demand.
+includes:
+  - configs/tsc/colight.yml
+  - configs/tsc/demand_bag_1200_base.yml
