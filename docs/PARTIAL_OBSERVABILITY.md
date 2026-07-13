@@ -1,99 +1,103 @@
-# Partial Observability — Approach 1: Penetration Rate (`obs_penetration`)
+# Partial / Noisy Observability
 
-Spike branch: `spike/obs-penetration`. Throwaway / research; **not** a PR.
+A realism axis for the realism-decomposed RL-TSC benchmark (after `hetero` fleet-mix and
+slow-start). Real controllers never see every car: they read loops, cameras, connected
+vehicles, and nav-app probes — incomplete, noisy, uneven coverage. This module corrupts
+**what the signal policy perceives** while leaving the SUMO **physics unchanged**, so the
+controller "decides with bad information." The current phase is always known.
 
-## Idea
+Two **composable** axes, both living in `world/world_sumo.py`, both a **no-op at their
+default** (exact baseline), and both applying the **same seeded corruption for every agent**
+so ground-truth ATT stays comparable across DQN / PressLight / CoLight / MaxPressure:
 
-Third realism toggle (after `hetero` fleet-mix and slow-start): **partial observability /
-penetration rate**. Real controllers never see every car — they see loops, cameras,
-connected vehicles, and nav-app probes with incomplete coverage. Here each vehicle is
-independently **"visible"/connected with probability `p`, persistent for its whole trip**
-(a car either carries the tech or it does not). Lane statistics are built only from visible
-vehicles, so the signal policy **decides with incomplete information**.
+| Axis | Param (`world:`) | Default | Mechanism |
+|---|---|---|---|
+| Penetration rate | `obs_penetration` | `1.0` | each vehicle is visible w.p. `p`, persistent per trip |
+| Gaussian count noise | `obs_count_noise_std` (+ `obs_noise_mode`) | `0.0` / `additive` | zero-mean Gaussian on per-lane counts, per step |
 
-- **Physics is unchanged** — SUMO runs identically; only what the controller *perceives*
-  changes. The current phase is still known (the controller sets the lights).
-- **Same seeded mask for every agent** → ground-truth ATT stays comparable across
-  DQN / PressLight / CoLight / MaxPressure.
-- `p = 1.0` → full observability = **exact baseline** (no filtering, no RNG draw).
+Ground-truth **ATT/throughput** are computed from a separate path (`self.vehicles`) and are
+**never** corrupted — they remain the honest comparison metric. Logged **queue/delay/reward**
+become *observed* (corrupted) quantities, which is the intended semantics (what the
+controller's sensors report). `--seed`/`world.seed` seed the corruption identically to SUMO
+and the RNGs (single unified seed; `--seed` overrides `world.seed`).
 
-> This axis operationalizes the "uncertainty in detection" challenge from the Chen et al.
-> (2022) review:
->
-> **Chen, Fang & Sadeh (2022)**, *The Real Deal: A Review of Challenges and Opportunities in
-> Moving RL-Based Traffic Signal Control Systems Towards Reality*, ATT '22 Workshop on Agents
-> in Traffic and Transportation, Vienna. CEUR-WS Vol. 3173, ISSN 1613-0073.
->
-> §3.2 notes that connected-vehicle "**penetration remains low**," and cites [49] showing
-> connected-vehicle data helps adaptive control "**even with limited penetration**." This
-> axis models exactly that low-penetration regime.
+## Literature grounding
 
-## Implementation (minimal diff, `world/world_sumo.py`)
+- **Chen, Fang & Sadeh (2022)**, *The Real Deal: A Review of Challenges and Opportunities in
+  Moving RL-Based Traffic Signal Control Systems Towards Reality*, ATT '22 Workshop on Agents
+  in Traffic and Transportation, Vienna. CEUR-WS Vol. 3173, ISSN 1613-0073. — §3 ("Uncertainty
+  in detection") is exactly this axis; §3.2 notes connected-vehicle **penetration remains low**
+  ([49]); §3.3 cites Gaussian noise on queue length ([59]) and detector failure ([58], [61]).
+- **Tan, Sharma & Sarkar (2020)**, *Robust Deep Reinforcement Learning for Traffic Signal
+  Control*, J. Big Data Analytics in Transportation 2(3):263–274,
+  doi:10.1007/s42421-020-00029-6 (ref [59] above). — inject a **discrete zero-mean Gaussian
+  into the queue-length state** (per element, floored at 0); our `additive` mode reproduces it.
 
-- `World.__init__`: reads `obs_penetration` (default 1.0) from the world config; the mask
-  seed is inherited from the global `world.seed`.
-- `World._vehicle_visible(veh_id)`: persistent, seeded per-vehicle gate —
-  `frac = md5(seed:veh_id)[:4] / 2^32; visible iff frac < p`. Short-circuits to `True` at
-  `p >= 1.0` and `False` at `p <= 0.0`.
-- `Intersection._get_vehicles()`: one added line — keep a vehicle only if
-  `self.world._vehicle_visible(v)`. Because every lane statistic (`lane_count`,
-  `lane_waiting_count`, `lane_waiting_time_count`, `queue_length`) and both `pressure`
-  variants derive from this vehicle list, the whole observation + reward pipeline inherits
-  the same consistent mask.
-- `configs/tsc/base.yml`: `obs_penetration: 1.0` default.
-- Example configs: `maxpressure_obs.yml`, `fixedtime_obs.yml`, `dqn_obs.yml` (p=0.1).
+---
 
-Ground-truth **ATT** and **throughput** are computed from a separate path
-(`self.vehicles[v] = exit − entry`), untouched by the mask — so they remain the honest
-comparison metric. Logged **queue/delay/reward** become *observed* quantities (what the
-controller's sensors report), which is the intended semantics.
+## Axis 1 — Penetration rate (`obs_penetration`)
+
+Each vehicle is independently **visible/connected with probability `p`, persistent for its
+whole trip** (a car either carries the tech or it doesn't), via a seeded per-vehicle hash
+`frac = md5(seed:veh_id)[:4]/2^32; visible iff frac < p`. Lane stats are built from visible
+vehicles only (one added condition in `Intersection._get_vehicles`). `p=1.0` short-circuits to
+"all visible" (exact baseline, no draws). `E[observed_count] ≈ p·true` (multiplicative
+under-count; pressure, a difference of counts, stays directionally meaningful).
+
+## Axis 2 — Gaussian count noise (`obs_count_noise_std`, `obs_noise_mode`)
+
+Each per-lane count is corrupted by zero-mean Gaussian measurement noise, **re-sampled every
+step**, rounded, clamped `>= 0` (`World._apply_obs_count_noise`, a single per-step post-pass in
+`_update_infos`, so counts / queue / waiting-count / both pressures inherit one consistent
+realization). `additive`: `observed = true + N(0, σ²)`; `proportional`:
+`observed = true + N(0, (σ·true)²)`. `σ=0` is the exact baseline. Faithful to Tan et al.
+(2020); `additive` is their mechanism, `proportional` is our extension. (A ≥0 clamp gives a
+tiny positive bias only when true counts are near 0 — same as the source.)
+
+Both axes compose: penetration first reduces counts to the visible subset, then Gaussian noise
+perturbs them.
+
+## Discarded axis — Bernoulli lane dropout
+
+A third axis (whole-lane sensor dropout with a fill value) was prototyped and **discarded**.
+Reason: a dead sensor emits *absence of data*, not a value — "fill 0" conflates the failure
+with a naive controller policy that treats silence as "empty," so it models a specific
+worst-case (starvation) rather than a faithful missing-sensor. The two axes above cover the
+detection-uncertainty challenge cleanly. (History on branch `spike/obs-lane-dropout`, SHA
+`75fc260`, if ever needed.)
+
+---
 
 ## How to run
 
 ```bash
-# baseline (full observability)
+# baseline (full observability, exact counts)
 python run.py --task tsc --agent maxpressure --world sumo --network sumo1x1 --interface libsumo --ngpu -1
-# 10% penetration example
-python run.py --task tsc --agent maxpressure_obs --world sumo --network sumo1x1 --interface libsumo --ngpu -1
+# 10% penetration
+python run.py --task tsc --agent maxpressure_obs   --world sumo --network sumo1x1 --interface libsumo --ngpu -1
+# sigma=2 additive count noise
+python run.py --task tsc --agent maxpressure_noise --world sumo --network sumo1x1 --interface libsumo --ngpu -1
 ```
-Sweep by setting `world.obs_penetration` in a config that includes the agent's yml.
+Example configs ship for both axes: `{maxpressure,fixedtime,dqn}_obs.yml` (penetration) and
+`{maxpressure,fixedtime,dqn}_noise.yml` (noise). Sweep by setting `world.obs_penetration` /
+`world.obs_count_noise_std` in a config that includes the agent's yml; set both to combine.
 
-## Validation results (baselines, CPU, libsumo)
+## Behaviour (indicative; formal results tracked in #17)
 
-**sumo1x1** — ground-truth ATT (lower = better):
+- **MaxPressure** (observation-driven) degrades as realism rises. sumo1x1: penetration
+  ATT 39→154 (throughput 1997→243 at p=0.05); noise ATT 39→54 (gentler — unbiased noise
+  partly cancels in the pressure difference). sumo4x4 penetration ATT 173→571.
+- **FixedTime** (ignores observations) has **invariant ground-truth ATT** across every setting
+  — confirming physics is unchanged and ATT is honest ground truth; its *observed* queue still
+  shifts with the corruption.
 
-| p    | MaxPressure ATT | MaxPressure thru | FixedTime ATT |
-|------|-----------------|------------------|---------------|
-| 1.0  | 39.40           | 1997             | 76.72         |
-| 0.5  | 45.27           | 1995             | 78.33         |
-| 0.2  | 84.27           | 1903             | 76.72         |
-| 0.05 | 153.92          | 243              | 76.72         |
+## Verification (mechanisms confirmed by instrumentation)
 
-**sumo4x4** — ground-truth ATT:
-
-| p    | MaxPressure ATT | MaxPressure thru | FixedTime ATT |
-|------|-----------------|------------------|---------------|
-| 1.0  | 173.26          | 1453             | 219.14        |
-| 0.5  | 220.96          | 1432             | —             |
-| 0.2  | 335.54          | 1401             | 219.14        |
-| 0.05 | 571.27          | 1066             | —             |
-
-**Reading:**
-- **MaxPressure** (observation-driven) degrades monotonically and sharply as penetration
-  drops — at p=0.05 on sumo1x1 it is effectively blind and throughput collapses
-  (1997 → 243). This is the core benchmark signal: a controller tuned on perfect counts
-  fails on sparse sensors.
-- **FixedTime** (ignores observations) has **invariant ground-truth ATT** across all p
-  (identical 219.14 on sumo4x4) — confirming (a) physics is unchanged and (b) ATT is true
-  ground truth, not an observed quantity. Its *observed* queue shrinks with p (fewer cars
-  seen), exactly as intended.
-- **Identity check:** `p = 1.0` reproduces the baseline within its natural run-to-run
-  jitter (SUMO has small residual non-determinism even at a fixed seed).
-
-## Character of this dial
-
-- Single, physically-meaningful, monotonic knob; faithful to connected-vehicle framing.
-- Multiplicative under-count: `E[observed_count] ≈ p · true`. Pressure (a *difference* of
-  counts) stays directionally meaningful even when under-counted.
-- Only mechanism where visibility is genuinely per-vehicle & persistent — the cleanest of
-  the three approaches for a "penetration rate" story.
+- **Penetration.** Cumulative visible fraction over the full vehicle population tracks `p`
+  (p=0.1→0.104, 0.5→0.488, 0.9→0.891, 1.0→1.000); **zero persistence violations** (a vehicle's
+  visibility never flips across its trip); true active-vehicle count is independent of `p`
+  (physics untouched — the cars are all there, just uncounted).
+- **Gaussian.** Isolating the noise at non-trivial counts gives mean(observed−true)≈0.00 and
+  std≈σ (e.g. σ=2 → 2.02); the small positive bias at tiny counts is exactly the documented ≥0
+  clamp. Noise is re-sampled each step (flickers) and is deterministic given (seed, time)
+  (identical run-to-run on deterministic nets).
