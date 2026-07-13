@@ -40,7 +40,15 @@ class World_param_Interface(Interface):
     """
     def __init__(self, config):
         super(World_param_Interface, self).__init__()
-        path = os.path.join(os.getcwd(), 'configs/sim', config['command']['network'] + '.cfg')
+        import shutil
+        import tempfile
+        # Shared configs/sim/*.cfg must not be rewritten in place: parallel SLURM
+        # tasks race and can leave an empty/corrupt JSON (JSONDecodeError).
+        shared = os.path.join(os.getcwd(), 'configs/sim', config['command']['network'] + '.cfg')
+        cmd = config['command']
+        unique = f"{cmd['network']}_{cmd.get('agent', 'agent')}_{cmd.get('prefix', 'run')}_{os.getpid()}.cfg"
+        path = os.path.join(tempfile.gettempdir(), unique)
+        shutil.copy2(shared, path)
         other_world_settings = modify_config_file(path, config)
         World_param_Interface.param = load_config_dict(path, other_world_settings)
         
