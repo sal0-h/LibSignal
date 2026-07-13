@@ -19,8 +19,8 @@ class IntersectionPhaseGenerator():
         self.world = world
         self.I = I
 
-        # get cur phase of the intersection
-        self.phase = I.current_phase
+        # get cur phase of the intersection (green index for RL agents)
+        self.phase = getattr(I, 'virtual_phase', I.current_phase)
 
         # subscribe functions
         self.world.subscribe(fns)
@@ -38,7 +38,10 @@ class IntersectionPhaseGenerator():
         :param: None
         :return ret: result based on current phase
         '''
-        ret = [self.I.current_phase]
+        # SUMO stores raw TLS indices (including yellow) in current_phase; agents
+        # expect green-only indices (0..n-1). virtual_phase holds that mapping.
+        phase = getattr(self.I, 'virtual_phase', self.I.current_phase)
+        ret = [phase]
 
         if self.negative:
             ret = ret * (-1)
