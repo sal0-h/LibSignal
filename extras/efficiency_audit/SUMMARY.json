@@ -1,0 +1,27 @@
+{
+  "summary": "Training wall time is env/observation-bound; GPU helps little for default DQN. Optimizations: gate unused trajectory, faster generators, skip intermediate obs, DQN single forward.",
+  "hardware": {
+    "cpus": 4,
+    "torch": "2.13.0+cpu",
+    "cuda": false
+  },
+  "speedups_wall_seconds": {
+    "sumo1x1_maxpressure": {"before": 1.9, "after": 1.463, "speedup": 1.3},
+    "cologne3_maxpressure": {"before": 3.144, "after": 2.005, "speedup": 1.57},
+    "sumo4x4_maxpressure": {"before": 10.412, "after": 6.084, "speedup": 1.71},
+    "sumo1x1_dqn_2ep_no_test": {"before": 4.686, "after": 3.63, "speedup": 1.29}
+  },
+  "behavior_check_sumo1x1_maxpressure_seed42": {
+    "att": 39.007,
+    "rewards": -14.2042,
+    "queue": 3.4639,
+    "delay": 2.4064,
+    "throughput": 1998,
+    "unchanged_vs_baseline": true
+  },
+  "dqn_mlp_microbench_ms": {
+    "train_batch64": 0.653,
+    "get_action_batch1": 0.019,
+    "params": 1008
+  }
+}

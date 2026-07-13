@@ -1,0 +1,97 @@
+{
+  "torch_version": "2.13.0+cpu",
+  "device": "cpu",
+  "cpu_threads": 4,
+  "architecture": {
+    "class": "DQNNet",
+    "layers": [
+      {
+        "name": "dense_1",
+        "in": 20,
+        "out": 20,
+        "activation": "relu"
+      },
+      {
+        "name": "dense_2",
+        "in": 20,
+        "out": 20,
+        "activation": "relu"
+      },
+      {
+        "name": "dense_3",
+        "in": 20,
+        "out": 8,
+        "activation": "linear"
+      }
+    ],
+    "hidden_size": 20,
+    "n_parameters": 1008,
+    "source_file": "agent/dqn.py::_build_model / DQNNet"
+  },
+  "benchmark_config": {
+    "lane_ob_length": 12,
+    "n_actions_phases": 8,
+    "input_dim": 20,
+    "batch_size": 64,
+    "warmup_iters": 50,
+    "bench_iters": 200,
+    "gamma": 0.95,
+    "learning_rate": 0.001,
+    "grad_clip": 5.0
+  },
+  "sumo1x1_probe": {
+    "error": "[Errno 2] No such file or directory: './configs/agents/tsc/dqn.yml'",
+    "source": "probe_failed"
+  },
+  "flops_estimate": {
+    "forward_batch1": 1920,
+    "forward_batch64": 122880,
+    "train_step_approx": 737280,
+    "note": "GEMM-only; ReLU/backward counted roughly as 3x forward in train_step_approx"
+  },
+  "timing_ms": {
+    "train_step": {
+      "mean": 0.6527,
+      "median": 0.6484,
+      "std": 0.0197,
+      "p5": 0.631,
+      "p95": 0.6912,
+      "min": 0.6214,
+      "max": 0.7268,
+      "n": 200
+    },
+    "get_action_forward_batch1": {
+      "mean": 0.0188,
+      "median": 0.0185,
+      "std": 0.0022,
+      "p5": 0.018,
+      "p95": 0.0194,
+      "min": 0.0178,
+      "max": 0.0418,
+      "n": 200
+    }
+  },
+  "episode_estimate": {
+    "decisions_per_episode": 360,
+    "assumption": "train() every decision after learning_start (steady-state)",
+    "observed_env_episode_s": 1.0,
+    "rl_train_s_per_episode": 0.235,
+    "rl_get_action_s_per_episode": 0.0068,
+    "rl_total_s_per_episode": 0.2418,
+    "rl_fraction_of_episode_wall_time": 0.2418,
+    "env_dominates": true
+  },
+  "gpu_analysis": {
+    "model_size_bytes": 4032,
+    "pcie_transfer_est_ms": {
+      "per_train_step_batch64_roundtrip": 0.00128,
+      "per_get_action_batch1_roundtrip": 1e-05
+    },
+    "theoretical_gpu_compute_floor_ms": {
+      "train_step_at_0p5_tflops": 0.05,
+      "get_action_at_0p5_tflops": 0.05
+    },
+    "cpu_train_ms_mean": 0.6527,
+    "verdict": "GPU unlikely to help wall-clock training on sumo1x1: model is 1008 params (737280 FLOPs/train), CPU completes train in ~0.65ms while env episode is ~1.0s. PCIe sync/launch overhead (~0.05ms) exceeds compute savings for batch=64; RL is env-bound not compute-bound."
+  }
+}

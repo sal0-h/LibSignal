@@ -1,0 +1,135 @@
+{
+  "summed_seconds": 2.6891,
+  "breakdown": [
+    {
+      "name": "task_run",
+      "seconds": 0.9293,
+      "calls": 1,
+      "pct_of_summed": 34.56,
+      "ms_per_call": 929.2513
+    },
+    {
+      "name": "env.step_total",
+      "seconds": 0.8682,
+      "calls": 3600,
+      "pct_of_summed": 32.29,
+      "ms_per_call": 0.2412
+    },
+    {
+      "name": "simulationStep",
+      "seconds": 0.2572,
+      "calls": 3600,
+      "pct_of_summed": 9.57,
+      "ms_per_call": 0.0715
+    },
+    {
+      "name": "observe",
+      "seconds": 0.1499,
+      "calls": 3601,
+      "pct_of_summed": 5.57,
+      "ms_per_call": 0.0416
+    },
+    {
+      "name": "agent.get_reward",
+      "seconds": 0.1455,
+      "calls": 3600,
+      "pct_of_summed": 5.41,
+      "ms_per_call": 0.0404
+    },
+    {
+      "name": "get_vehicle_trajectory",
+      "seconds": 0.1154,
+      "calls": 3600,
+      "pct_of_summed": 4.29,
+      "ms_per_call": 0.0321
+    },
+    {
+      "name": "_update_infos",
+      "seconds": 0.0834,
+      "calls": 3601,
+      "pct_of_summed": 3.1,
+      "ms_per_call": 0.0232
+    },
+    {
+      "name": "agent.get_ob",
+      "seconds": 0.0541,
+      "calls": 3601,
+      "pct_of_summed": 2.01,
+      "ms_per_call": 0.015
+    },
+    {
+      "name": "info.lane_delay",
+      "seconds": 0.0376,
+      "calls": 3601,
+      "pct_of_summed": 1.4,
+      "ms_per_call": 0.0105
+    },
+    {
+      "name": "info.lane_count",
+      "seconds": 0.0105,
+      "calls": 3601,
+      "pct_of_summed": 0.39,
+      "ms_per_call": 0.0029
+    },
+    {
+      "name": "pseudo_step",
+      "seconds": 0.0104,
+      "calls": 3600,
+      "pct_of_summed": 0.39,
+      "ms_per_call": 0.0029
+    },
+    {
+      "name": "info.lane_waiting_count",
+      "seconds": 0.0084,
+      "calls": 3601,
+      "pct_of_summed": 0.31,
+      "ms_per_call": 0.0023
+    },
+    {
+      "name": "depart_arrive_bookkeeping",
+      "seconds": 0.0081,
+      "calls": 3600,
+      "pct_of_summed": 0.3,
+      "ms_per_call": 0.0022
+    },
+    {
+      "name": "reset",
+      "seconds": 0.0051,
+      "calls": 1,
+      "pct_of_summed": 0.19,
+      "ms_per_call": 5.0835
+    },
+    {
+      "name": "info.phase",
+      "seconds": 0.0039,
+      "calls": 3601,
+      "pct_of_summed": 0.14,
+      "ms_per_call": 0.0011
+    },
+    {
+      "name": "agent.get_action",
+      "seconds": 0.0019,
+      "calls": 360,
+      "pct_of_summed": 0.07,
+      "ms_per_call": 0.0053
+    }
+  ],
+  "wall_seconds": 1.9002,
+  "config": {
+    "agent": "maxpressure",
+    "network": "sumo1x1",
+    "episodes": 1,
+    "steps": 3600,
+    "skip_test": false,
+    "skip_trajectory": false,
+    "train_model": false,
+    "n_intersections": 1,
+    "n_lanes": 52,
+    "subscribed_fns": [
+      "lane_count",
+      "phase",
+      "lane_waiting_count",
+      "lane_delay"
+    ]
+  }
+}

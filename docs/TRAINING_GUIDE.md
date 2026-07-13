@@ -18,6 +18,11 @@ python run.py --agent dqn --world sumo --network sumo1x1 --seed 42 --ngpu 0
 ```
 Models save to: `data/output_data/tsc/sumo_dqn_test/model/`
 
+**Speed tips:** Training is env-bound (SUMO + observation plumbing), not GPU-bound for
+default DQN — prefer `--ngpu -1` on CPU-only hosts. Set `trainer.test_when_train: False`
+in the agent YAML to skip the per-episode eval rollout (~2× less simulation). See
+[EFFICIENCY_AUDIT.md](./EFFICIENCY_AUDIT.md) for the full breakdown and profiling scripts.
+
 ### Test a Pre-trained Model
 ```bash
 python run.py --agent dqn --world sumo --network sumo1x1 --seed 42 --ngpu 0

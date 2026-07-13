@@ -245,10 +245,14 @@ class DQNAgent(RLAgent):
         b_t, b_tp, rewards, actions = self._batchwise(samples)
         out = self.target_model(b_tp, train=False)
         target = rewards + self.gamma * torch.max(out, dim=1)[0]
-        target_f = self.model(b_t, train=False)
-        for i, action in enumerate(actions):
-            target_f[i][action] = target[i]
-        loss = self.criterion(self.model(b_t, train=True), target_f)
+        # Single forward on b_t (train=True); scatter targets into a detached clone.
+        # Previously this did two forwards on b_t (eval then train).
+        q_values = self.model(b_t, train=True)
+        target_f = q_values.detach().clone()
+        actions_flat = actions.view(-1)
+        target_flat = target.view(-1)
+        target_f[torch.arange(actions_flat.size(0), device=self.device), actions_flat] = target_flat
+        loss = self.criterion(q_values, target_f)
         self.optimizer.zero_grad()
         loss.backward()
         clip_grad_norm_(self.model.parameters(), self.grad_clip)

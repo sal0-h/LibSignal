@@ -32,9 +32,12 @@ class TSCEnv(gym.Env):
         self.action_space = gym.spaces.MultiDiscrete(action_dims)
         self.metric = metric
 
-    def step(self, actions):
+    def step(self, actions, collect_obs=True):
         """
         :param actions: keep action as N_agents * 1
+        :param collect_obs: if False, skip agent.get_ob() (intermediate action_interval
+            steps discard observations; only the last obs of the interval is kept).
+            Rewards are still collected so interval averaging is unchanged.
         """
         if not actions.shape:
             assert(self.n_agents == 1)
@@ -44,12 +47,12 @@ class TSCEnv(gym.Env):
         self.world.step(actions)
 
         if not len(self.agents) == 1:
-            obs = [agent.get_ob() for agent in self.agents]
+            obs = [agent.get_ob() for agent in self.agents] if collect_obs else None
             # obs = np.expand_dims(np.array(obs),axis=1)
             rewards = [agent.get_reward() for agent in self.agents]
             # rewards = np.expand_dims(np.array(rewards),axis=1)
         else:
-            obs = [self.agents[0].get_ob()]
+            obs = [self.agents[0].get_ob()] if collect_obs else None
             rewards = [self.agents[0].get_reward()]
         dones = [False] * self.n_agents
         # infos = {"metric": self.metric.update()}
