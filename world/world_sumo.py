@@ -17,6 +17,8 @@ from common.registry import Registry
 import json
 import re
 import copy
+import hashlib
+import random
 
 import sumolib
 try:
@@ -325,7 +327,10 @@ class Intersection(object):
                 next_light = path[0]
                 distance = next_light[2]
                 if distance <= max_distance:
-                    detectable.append(v)
+                    # Partial observability: only "connected"/detected vehicles are
+                    # counted. At p=1.0 this is a no-op (every vehicle visible).
+                    if self.world._vehicle_visible(v):
+                        detectable.append(v)
         return detectable
 
     # TODO: revert x and y
@@ -408,6 +413,32 @@ class World(object):
                 "hetero and slow_start are separate ablations — enable one at a time"
             )
 
+        # Partial observability (see docs/PARTIAL_OBSERVABILITY.md). Two composable axes that
+        # corrupt what the controller perceives while leaving the SUMO physics untouched:
+        #   (1) penetration rate — each vehicle is independently "visible"/connected with
+        #       probability p, PERSISTENT for its whole trip; lane stats are built from
+        #       visible vehicles only. p=1.0 => full observability (exact baseline, no draws).
+        #   (2) Gaussian count noise — each per-lane vehicle count is corrupted by zero-mean
+        #       Gaussian measurement noise (noisy loop/camera detectors), re-sampled each
+        #       step, rounded and clamped >=0. sigma=0.0 => exact counts (baseline).
+        #       obs_noise_mode: 'additive' -> N(0,sigma^2); 'proportional' -> N(0,(sigma*true)^2).
+        # Both compose: penetration reduces counts to the visible subset, then noise perturbs
+        # them. The seed is resolved identically to SUMO/trainer (CLI --seed first, else the
+        # config world.seed) so --seed overrides the corruption exactly as it does everywhere
+        # else, and the same seeded corruption is applied for every agent so ground-truth ATT
+        # stays comparable across DQN/PressLight/CoLight/MaxPressure.
+        _obs_cmd_seed = Registry.mapping['command_mapping']['setting'].param.get('seed')
+        self.obs_seed = int(_obs_cmd_seed if _obs_cmd_seed is not None else world_param.get('seed', 0))
+        self.obs_penetration = float(world_param.get('obs_penetration', 1.0))
+        self.obs_count_noise_std = float(world_param.get('obs_count_noise_std', 0.0))
+        self.obs_noise_mode = str(world_param.get('obs_noise_mode', 'additive'))
+        if self.obs_penetration < 1.0:
+            print(f"[PartialObs] penetration rate p={self.obs_penetration} "
+                  f"(persistent per-vehicle, seed={self.obs_seed})")
+        if self.obs_count_noise_std > 0.0:
+            print(f"[PartialObs] Gaussian count noise sigma={self.obs_count_noise_std} "
+                  f"mode={self.obs_noise_mode} (per-step, seed={self.obs_seed})")
+
         with open(sumo_config) as f:
             sumo_dict = json.load(f)
         self._use_gui = sumo_dict['gui'] == "True" or sumo_dict['gui'] == True
@@ -442,6 +473,14 @@ class World(object):
         if additional_files:
             additional_flags = ['--additional-files', ','.join(additional_files)]
 
+        # Shared simulation arguments (network/route + flags); the binary is chosen per use.
+        # Tie SUMO's RNG (vehicle insertion, etc.) to the global seed so demand stochasticity
+        # is reproducible. Resolve the seed identically to the trainer: the CLI --seed takes
+        # precedence, falling back to the config world.seed (default 0). So --seed overrides
+        # the config for SUMO exactly as it does for random/numpy/torch.
+        _cmd_seed = Registry.mapping['command_mapping']['setting'].param.get('seed')
+        effective_seed = _cmd_seed if _cmd_seed is not None else world_param.get('seed', 0)
+        seed_flags = ['--seed', str(int(effective_seed))]
         # Use explicit -n/-r when realism toggles need additional-files or alternate routes.
         use_explicit_net_route = (
             not sumo_dict.get('combined_file') or self.hetero or self.slow_start
@@ -449,10 +488,10 @@ class World(object):
         if use_explicit_net_route:
             sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
                         '-r', os.path.join(sumo_dict['dir'], route_file),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + additional_flags
+                        '--no-warnings', str(sumo_dict['no_warning'])] + seed_flags + physics_flags + additional_flags
         else:
             sim_args = ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + physics_flags + additional_flags
+                        '--no-warnings', str(sumo_dict['no_warning'])] + seed_flags + physics_flags + additional_flags
 
         headless_bin = sumolib.checkBinary('sumo')
         # Real run uses sumo-gui when requested. libsumo cannot reopen a GUI window
@@ -787,9 +826,70 @@ class World(object):
         :param: None
         :return: None
         '''
+        self._apply_obs_count_noise()
         self.info = {}
         for fn in self.fns:
             self.info[fn] = self.info_functions[fn]()
+
+    def _vehicle_visible(self, veh_id):
+        '''
+        _vehicle_visible
+        Partial-observability gate: return True if this vehicle is "connected"/detected
+        under the current penetration rate. Visibility is PERSISTENT per vehicle (decided
+        once, deterministically, from a seeded hash of the vehicle id) so a car is either
+        observed for its whole trip or never — matching real connected-vehicle fleets.
+        At p>=1.0 this short-circuits to True (no hashing, exact baseline behaviour).
+
+        :param veh_id: SUMO vehicle id
+        :return: bool, whether the vehicle is observable
+        '''
+        if self.obs_penetration >= 1.0:
+            return True
+        if self.obs_penetration <= 0.0:
+            return False
+        h = hashlib.md5(f"{self.obs_seed}:{veh_id}".encode()).digest()
+        frac = int.from_bytes(h[:4], 'big') / 0xFFFFFFFF
+        return frac < self.obs_penetration
+    def _apply_obs_count_noise(self):
+        '''
+        _apply_obs_count_noise
+        Partial observability (noisy detector): perturb the per-lane vehicle counts stored
+        in each intersection's full_observation with Gaussian measurement noise, in place.
+        Runs once per step before any info function reads the observation, so counts,
+        queue length, waiting count and both pressure variants all inherit the SAME noisy
+        realization consistently. At sigma<=0 this is a no-op (exact baseline).
+
+        Ground-truth ATT/throughput use a separate path (self.vehicles) and are untouched.
+
+        :param: None
+        :return: None
+        '''
+        sigma = self.obs_count_noise_std
+        if sigma <= 0.0:
+            return
+        # Per-step RNG keyed on (seed, sim time): reproducible and re-sampled each step.
+        rng = random.Random((self.obs_seed * 1000003 + int(self.get_current_time())) & 0xFFFFFFFF)
+        proportional = self.obs_noise_mode == 'proportional'
+        for intsec in self.intersections:
+            for lane in intsec.lanes:
+                fo = intsec.full_observation[lane]
+                # lane_count and queue_length are the same physical vehicle count here,
+                # so they share one detector reading; waiting count is a separate detector.
+                shared = self._noisy_count(fo['lane_count'], sigma, proportional, rng)
+                fo['lane_count'] = shared
+                fo['queue_length'] = shared
+                fo['lane_waiting_count'] = self._noisy_count(
+                    fo['lane_waiting_count'], sigma, proportional, rng)
+
+    @staticmethod
+    def _noisy_count(true_val, sigma, proportional, rng):
+        '''Return an unbiased Gaussian-noised, rounded, non-negative count.'''
+        s = sigma * true_val if proportional else sigma
+        if s <= 0.0:
+            return true_val
+        noisy = true_val + rng.gauss(0.0, s)
+        noisy = int(round(noisy))
+        return noisy if noisy > 0 else 0
 
     def get_lane_vehicle_count(self):
         '''

@@ -26,7 +26,12 @@ class BaseTrainer(ABC):
                 self.replay_file_dir = os.path.dirname(Registry.mapping['world_mapping']['setting'].param['roadnetLogFile'])
                 if not os.path.exists(os.path.join(self.dir, self.replay_file_dir)):
                     os.makedirs(os.path.join(self.dir, self.replay_file_dir))
+        # Global seed: prefer the CLI --seed; when it is omitted (None), fall back to the
+        # config's world.seed so runs are reproducible by default and the config key is the
+        # single source of truth. --seed N still overrides for multi-seed experiments.
         self.seed = Registry.mapping['command_mapping']['setting'].param['seed']
+        if self.seed is None:
+            self.seed = Registry.mapping['world_mapping']['setting'].param.get('seed', 0)
         self.logger = logger
         #self.debug = args['debug']
         self.name = name
