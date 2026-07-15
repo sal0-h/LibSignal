@@ -1,0 +1,19 @@
+{
+  "agent": "maxpressure",
+  "world": "sumo",
+  "network": "sumo1x1",
+  "prefix": "vehicle_wait_log",
+  "seed": 42,
+  "test_steps": 120,
+  "action_interval": 10,
+  "generated_at": "2026-07-01T14:30:29",
+  "n_vehicles_logged": 58,
+  "n_completed_trips": 35,
+  "mean_travel_time_s": 25.714285714285715,
+  "mean_waiting_time_s": 3.3142857142857145,
+  "median_waiting_time_s": 0.0,
+  "p95_waiting_time_s": 27.99999999999997,
+  "avg_travel_time_metric": 25.714285714285715,
+  "throughput": 35,
+  "csv_path": "data/output_data/tsc/sumo_maxpressure/sumo1x1/vehicle_wait_log/vehicle_waiting_times.csv"
+}
