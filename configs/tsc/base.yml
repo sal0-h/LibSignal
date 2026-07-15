@@ -20,6 +20,7 @@ world:
   physics_mode: standard   # standard | ghost
 
   hetero: false             # false = uniform vType baseline; true = mixed cars+trucks
+  slow_start: false          # false = default pkw accel; true = realistic startup accel + headway
 
   # Partial observability (see docs/PARTIAL_OBSERVABILITY.md). Two composable axes; both
   # default to a no-op (exact baseline). Physics is unchanged; the same seeded corruption is
