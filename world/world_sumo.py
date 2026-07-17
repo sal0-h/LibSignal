@@ -396,6 +396,7 @@ class CrossingProxyController(object):
         self.active = {}
         self.rng = {}
         self.event_count = 0
+        self.nominal_speed = {}
 
         self.call_prob = float(world_param.get('crossing_call_prob', 0.12))
         self.service_min = float(world_param.get('crossing_service_min', 7.0))
@@ -423,6 +424,23 @@ class CrossingProxyController(object):
     def eng(self):
         return self.world.eng
 
+    def nominal_lane_speed(self, lane_id, default=11.11):
+        """Pre-halt lane max speed for metrics when setMaxSpeed(lane, 0) is active."""
+        return self.nominal_speed.get(lane_id, default)
+
+    def cache_nominal_speeds(self):
+        for phases in self.lane_map.values():
+            for lanes in phases.values():
+                for lane in lanes:
+                    if lane in self.nominal_speed:
+                        continue
+                    try:
+                        speed = self.eng.lane.getMaxSpeed(lane)
+                        if speed > 0:
+                            self.nominal_speed[lane] = speed
+                    except Exception:
+                        pass
+
     def reset(self):
         self._clear_all_halts()
         self.active.clear()
@@ -432,6 +450,7 @@ class CrossingProxyController(object):
                 self.last_phase[tls_id] = self.eng.trafficlight.getPhase(tls_id)
             except Exception:
                 self.last_phase[tls_id] = None
+        self.cache_nominal_speeds()
 
     def step(self):
         now = self.eng.simulation.getTime()
@@ -459,7 +478,12 @@ class CrossingProxyController(object):
         saved = {}
         for lane in lanes:
             try:
-                saved[lane] = self.eng.lane.getMaxSpeed(lane)
+                speed = self.eng.lane.getMaxSpeed(lane)
+                if speed > 0:
+                    self.nominal_speed[lane] = speed
+                elif lane in self.nominal_speed:
+                    speed = self.nominal_speed[lane]
+                saved[lane] = speed
                 self.eng.lane.setMaxSpeed(lane, 0.0)
             except Exception:
                 continue
@@ -1197,6 +1221,11 @@ class World(object):
             lane_vehicle_count = len(vehicles)
             lane_avg_speed = 0.0
             speed_limit = self.eng.lane.getMaxSpeed(key)
+            if speed_limit <= 1e-9 and self.crossing_proxy_ctrl is not None:
+                speed_limit = self.crossing_proxy_ctrl.nominal_lane_speed(key)
+            if speed_limit <= 1e-9:
+                lane_delay[key] = 1.0
+                continue
             for vehicle in vehicles:
                 speed = vehicle['speed']
                 lane_avg_speed += speed
@@ -1292,6 +1321,10 @@ class World(object):
             routes = self.vehicle_trajectory[v] # lane_level
             for idx, lane in enumerate(routes):
                 speed = min(self.eng.lane.getMaxSpeed(lane[0]), self.vehicle_maxspeed[(v,lane[0])])
+                if speed <= 1e-9 and self.crossing_proxy_ctrl is not None:
+                    speed = self.crossing_proxy_ctrl.nominal_lane_speed(lane[0])
+                if speed <= 1e-9:
+                    speed = 11.11
                 lane_length = self.eng.lane.getLength(lane[0])
                 if idx == len(routes)-1: # the last lane
                     # judge whether the vehicle run over the whole lane.
