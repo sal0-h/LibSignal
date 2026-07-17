@@ -242,6 +242,9 @@ class Intersection(object):
         :param action: the changes to take
         :return: None
         '''
+        ctrl = self.world.crossing_proxy_ctrl
+        if ctrl is not None and ctrl.is_phase_locked(self.id):
+            action = self.virtual_phase
         # TODO: check if change state, yellow phase must less than minimum of action time
         # test yellow finished first
         self.virtual_phase = action
@@ -383,17 +386,20 @@ def _physics_flags(mode):
 
 class CrossingProxyController(object):
     """
-    Actuated crossing-delay realism axis (see docs/CROSSING_PROXY.md).
+    Actuated pedestrian-crossing proxy (see docs/CROSSING_PROXY.md).
 
-    On selected through-green phases, stochastically zero lane max speed on
-    pre-mapped conflicting incoming lanes for a calibrated service interval.
+    NEMA concurrent walk: on a ped call at through-green entry, hold the current
+    green phase for T seconds (actuated max extension / walk+FDW) and halt any
+    crosswalk-conflicting lanes that still have G/g/s during that phase.
     """
 
     def __init__(self, world, lane_map_path, world_param):
         self.world = world
         self.lane_map = {}
+        self.through_phases = set()
         self.last_phase = {}
         self.active = {}
+        self.phase_lock_until = {}
         self.rng = {}
         self.event_count = 0
         self.nominal_speed = {}
@@ -408,6 +414,7 @@ class CrossingProxyController(object):
         with open(lane_map_path, encoding='utf-8') as f:
             payload = json.load(f)
         self.lane_map = payload.get('intersections', payload)
+        self.through_phases = set(payload.get('through_phases', ('0', '4')))
         for tls_id in self.lane_map:
             digest = hashlib.md5(f"{base_seed}:{tls_id}".encode()).hexdigest()
             subseed = int(digest[:8], 16) + seed_offset
@@ -415,7 +422,7 @@ class CrossingProxyController(object):
             self.last_phase[tls_id] = None
 
         print(
-            f"[CrossingProxy] enabled — p={self.call_prob}, "
+            f"[CrossingProxy] actuated extension — p={self.call_prob}, "
             f"service=[{self.service_min},{self.service_max}]s, "
             f"TLS={len(self.lane_map)}, seed_base={base_seed}"
         )
@@ -430,7 +437,11 @@ class CrossingProxyController(object):
 
     def cache_nominal_speeds(self):
         for phases in self.lane_map.values():
+            if not isinstance(phases, dict):
+                continue
             for lanes in phases.values():
+                if not isinstance(lanes, list):
+                    continue
                 for lane in lanes:
                     if lane in self.nominal_speed:
                         continue
@@ -441,14 +452,19 @@ class CrossingProxyController(object):
                     except Exception:
                         pass
 
+    def is_phase_locked(self, tls_id):
+        return self.eng.simulation.getTime() < self.phase_lock_until.get(tls_id, -1)
+
     def reset(self):
         self._clear_all_halts()
         self.active.clear()
+        self.phase_lock_until.clear()
         self.event_count = 0
         for tls_id in self.lane_map:
-            try:
-                self.last_phase[tls_id] = self.eng.trafficlight.getPhase(tls_id)
-            except Exception:
+            intsec = self.world.id2intersection.get(tls_id)
+            if intsec is not None:
+                self.last_phase[tls_id] = intsec.virtual_phase
+            else:
                 self.last_phase[tls_id] = None
         self.cache_nominal_speeds()
 
@@ -456,27 +472,33 @@ class CrossingProxyController(object):
         now = self.eng.simulation.getTime()
         self._expire_events(now)
         for tls_id in self.lane_map:
-            phase = self.eng.trafficlight.getPhase(tls_id)
+            intsec = self.world.id2intersection.get(tls_id)
+            if intsec is None:
+                continue
+            phase = intsec.virtual_phase
             prev = self.last_phase.get(tls_id)
             if prev is not None and phase != prev:
                 self._maybe_start_event(tls_id, phase, now)
             self.last_phase[tls_id] = phase
 
     def _maybe_start_event(self, tls_id, phase, now):
-        if tls_id in self.active:
-            return
         phase_key = str(phase)
-        lanes = self.lane_map.get(tls_id, {}).get(phase_key)
-        if not lanes:
+        if phase_key not in self.through_phases:
+            return
+        if tls_id in self.phase_lock_until and now < self.phase_lock_until[tls_id]:
             return
         if self.rng[tls_id].random() >= self.call_prob:
             return
         duration = self.rng[tls_id].uniform(self.service_min, self.service_max)
-        self._start_event(tls_id, lanes, now + duration)
+        conflict_lanes = self.lane_map.get(tls_id, {}).get(phase_key, [])
+        if not isinstance(conflict_lanes, list):
+            conflict_lanes = []
+        self._start_event(tls_id, conflict_lanes, now + duration)
 
-    def _start_event(self, tls_id, lanes, end_time):
+    def _start_event(self, tls_id, conflict_lanes, end_time):
+        self.phase_lock_until[tls_id] = end_time
         saved = {}
-        for lane in lanes:
+        for lane in conflict_lanes:
             try:
                 speed = self.eng.lane.getMaxSpeed(lane)
                 if speed > 0:
@@ -487,17 +509,20 @@ class CrossingProxyController(object):
                 self.eng.lane.setMaxSpeed(lane, 0.0)
             except Exception:
                 continue
-        if not saved:
-            return
-        self.active[tls_id] = {
-            'end_time': end_time,
-            'saved': saved,
-        }
+        if saved:
+            self.active[tls_id] = {
+                'end_time': end_time,
+                'saved': saved,
+            }
         self.event_count += 1
 
     def _expire_events(self, now):
-        finished = [tls for tls, ev in self.active.items() if now >= ev['end_time']]
+        finished = [
+            tls for tls, end in self.phase_lock_until.items()
+            if now >= end
+        ]
         for tls in finished:
+            self.phase_lock_until.pop(tls, None)
             self._restore_event(tls)
 
     def _restore_event(self, tls_id):
