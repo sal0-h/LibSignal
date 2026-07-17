@@ -45,15 +45,20 @@ Full SUMO pedestrians remain a future extension (`docs/TECHNICAL_ANALYSIS.md` §
 
 ## Runtime behaviour (`world/world_sumo.py`)
 
-1. Load `data/raw_data/grid4x4/crossing_proxy_lanes.json` (per-TLS conflict lanes
-   for green phases **0** and **4** only).
-2. On **entry** to green phase 0 or 4 (LibSignal action index / `virtual_phase`):
-   - With probability `crossing_call_prob`, start service for
-     `T ~ Uniform(service_min, service_max)` seconds.
-   - Set `phase_lock_until[tls]` → agents cannot leave that green (`pseudo_step`
-     keeps `action = virtual_phase` while locked).
-   - Halt lanes listed in `conflict_lanes` for the same interval (if any).
-3. Per-TLS RNG: `Random(md5(f"{seed}:{tls_id}") + crossing_seed_offset)`.
+1. Load `crossing_proxy_lanes.json` (through_incoming + conflict_lanes per phase 0/4).
+2. **Before each `pseudo_step`** (same second as the decision):
+   - On entry to through phase 0 or 4, with probability `p` start service for
+     `T ~ Uniform(7, 10)` seconds.
+   - **Phase extension:** hold current green (`pseudo_step` cannot switch away).
+   - **Physical yield:** `setMaxSpeed(lane, 0)` on all `through_incoming` lanes
+     (driver/corner delay during concurrent walk) plus any `conflict_lanes`
+     with G/g/s (turns). On protected grid4x4, conflict is often empty.
+3. Logs `[CrossingProxy] ped calls=N ...` during run and total at episode end.
+
+**Why earlier runs showed ~173 s:** (1) ped logic ran *after* `pseudo_step`, so
+locks never blocked decisions; (2) phase-only extension has no effect when
+MaxPressure already keeps the same green; (3) halting cross-street lanes that
+are already red does nothing.
 
 ---
 

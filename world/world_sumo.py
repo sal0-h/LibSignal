@@ -439,9 +439,8 @@ class CrossingProxyController(object):
         for phases in self.lane_map.values():
             if not isinstance(phases, dict):
                 continue
-            for lanes in phases.values():
-                if not isinstance(lanes, list):
-                    continue
+            for phase_data in phases.values():
+                lanes = self._service_lanes(phase_data)
                 for lane in lanes:
                     if lane in self.nominal_speed:
                         continue
@@ -452,23 +451,22 @@ class CrossingProxyController(object):
                     except Exception:
                         pass
 
+    @staticmethod
+    def _service_lanes(phase_data):
+        if isinstance(phase_data, list):
+            return phase_data
+        if not isinstance(phase_data, dict):
+            return []
+        lanes = []
+        lanes.extend(phase_data.get("through_incoming", []))
+        lanes.extend(phase_data.get("conflict_lanes", []))
+        return list(dict.fromkeys(lanes))
+
     def is_phase_locked(self, tls_id):
         return self.eng.simulation.getTime() < self.phase_lock_until.get(tls_id, -1)
 
-    def reset(self):
-        self._clear_all_halts()
-        self.active.clear()
-        self.phase_lock_until.clear()
-        self.event_count = 0
-        for tls_id in self.lane_map:
-            intsec = self.world.id2intersection.get(tls_id)
-            if intsec is not None:
-                self.last_phase[tls_id] = intsec.virtual_phase
-            else:
-                self.last_phase[tls_id] = None
-        self.cache_nominal_speeds()
-
-    def step(self):
+    def step_before_actions(self):
+        """Run before pseudo_step so locks apply the same second a ped call starts."""
         now = self.eng.simulation.getTime()
         self._expire_events(now)
         for tls_id in self.lane_map:
@@ -490,15 +488,14 @@ class CrossingProxyController(object):
         if self.rng[tls_id].random() >= self.call_prob:
             return
         duration = self.rng[tls_id].uniform(self.service_min, self.service_max)
-        conflict_lanes = self.lane_map.get(tls_id, {}).get(phase_key, [])
-        if not isinstance(conflict_lanes, list):
-            conflict_lanes = []
-        self._start_event(tls_id, conflict_lanes, now + duration)
+        phase_data = self.lane_map.get(tls_id, {}).get(phase_key, [])
+        service_lanes = self._service_lanes(phase_data)
+        self._start_event(tls_id, phase_key, service_lanes, now + duration)
 
-    def _start_event(self, tls_id, conflict_lanes, end_time):
+    def _start_event(self, tls_id, phase_key, service_lanes, end_time):
         self.phase_lock_until[tls_id] = end_time
         saved = {}
-        for lane in conflict_lanes:
+        for lane in service_lanes:
             try:
                 speed = self.eng.lane.getMaxSpeed(lane)
                 if speed > 0:
@@ -515,6 +512,28 @@ class CrossingProxyController(object):
                 'saved': saved,
             }
         self.event_count += 1
+        if self.event_count == 1 or self.event_count % 100 == 0:
+            print(
+                f"[CrossingProxy] ped calls={self.event_count} "
+                f"(latest tls={tls_id} phase={phase_key} "
+                f"lanes={len(service_lanes)} until t={end_time:.0f})"
+            )
+
+    def reset(self):
+        self._clear_all_halts()
+        self.active.clear()
+        self.phase_lock_until.clear()
+        self.event_count = 0
+        for tls_id in self.lane_map:
+            intsec = self.world.id2intersection.get(tls_id)
+            if intsec is not None:
+                self.last_phase[tls_id] = intsec.virtual_phase
+            else:
+                self.last_phase[tls_id] = None
+        self.cache_nominal_speeds()
+
+    def log_summary(self):
+        print(f"[CrossingProxy] total ped calls this episode: {self.event_count}")
 
     def _expire_events(self, now):
         finished = [
@@ -823,8 +842,6 @@ class World(object):
             self._collapse_ghost_lanes()
         for _ in range(self.step_ratio):
             self.eng.simulationStep()
-            if self.crossing_proxy_ctrl is not None:
-                self.crossing_proxy_ctrl.step()
         if self.physics_mode == 'ghost' and self._sim_ready:
             self._enforce_ghost_physics_all()
             self._collapse_ghost_lanes()
@@ -871,6 +888,8 @@ class World(object):
         :return: None
         '''
         # TODO: support interval != 1
+        if self.crossing_proxy_ctrl is not None:
+            self.crossing_proxy_ctrl.step_before_actions()
         if action is not None:
             for i, intersection in enumerate(self.intersections):
                 intersection.pseudo_step(action[i])

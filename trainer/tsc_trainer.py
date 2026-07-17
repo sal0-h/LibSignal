@@ -284,6 +284,8 @@ class TSCTrainer(BaseTrainer):
                 break
         self.logger.info("Final Travel Time is %.4f, mean rewards: %.4f, queue: %.4f, delay: %.4f, throughput: %d" % (self.metric.real_average_travel_time(), \
             self.metric.rewards(), self.metric.queue(), self.metric.delay(), self.metric.throughput()))
+        if getattr(self.env.world, 'crossing_proxy_ctrl', None) is not None:
+            self.env.world.crossing_proxy_ctrl.log_summary()
         return self.metric
 
     def writeLog(self, mode, step, travel_time, loss, cur_rwd, cur_queue, cur_delay, cur_throughput):
