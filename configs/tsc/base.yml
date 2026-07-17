@@ -22,6 +22,14 @@ world:
   hetero: false             # false = uniform vType baseline; true = mixed cars+trucks
   slow_start: false          # false = default pkw accel; true = realistic startup accel + headway
 
+  # Actuated crossing-delay proxy (see docs/CROSSING_PROXY.md). Stochastic lane service
+  # interruptions on conflicting approaches during through-green phases; composable.
+  crossing_proxy: false
+  crossing_call_prob: 0.12    # P(ped call | eligible through-green phase entry), urban actuated
+  crossing_service_min: 7.0    # s — walk + min clearance (MUTCD ~4 ft/s over ~12 m crosswalk)
+  crossing_service_max: 10.0   # s — walk + FDW / clearance interval
+  crossing_seed_offset: 7      # separate RNG stream from demand / partial-obs corruption
+
   # Partial observability (see docs/PARTIAL_OBSERVABILITY.md). Two composable axes; both
   # default to a no-op (exact baseline). Physics is unchanged; the same seeded corruption is
   # applied for every agent so ground-truth ATT stays comparable.

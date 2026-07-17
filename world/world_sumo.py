@@ -381,6 +381,116 @@ def _physics_flags(mode):
     raise ValueError(f"Unknown physics_mode: {mode}")
 
 
+class CrossingProxyController(object):
+    """
+    Actuated crossing-delay realism axis (see docs/CROSSING_PROXY.md).
+
+    On selected through-green phases, stochastically zero lane max speed on
+    pre-mapped conflicting incoming lanes for a calibrated service interval.
+    """
+
+    def __init__(self, world, lane_map_path, world_param):
+        self.world = world
+        self.lane_map = {}
+        self.last_phase = {}
+        self.active = {}
+        self.rng = {}
+        self.event_count = 0
+
+        self.call_prob = float(world_param.get('crossing_call_prob', 0.12))
+        self.service_min = float(world_param.get('crossing_service_min', 7.0))
+        self.service_max = float(world_param.get('crossing_service_max', 10.0))
+        seed_offset = int(world_param.get('crossing_seed_offset', 7))
+        _cmd_seed = Registry.mapping['command_mapping']['setting'].param.get('seed')
+        base_seed = int(_cmd_seed if _cmd_seed is not None else world_param.get('seed', 0))
+
+        with open(lane_map_path, encoding='utf-8') as f:
+            payload = json.load(f)
+        self.lane_map = payload.get('intersections', payload)
+        for tls_id in self.lane_map:
+            digest = hashlib.md5(f"{base_seed}:{tls_id}".encode()).hexdigest()
+            subseed = int(digest[:8], 16) + seed_offset
+            self.rng[tls_id] = random.Random(subseed)
+            self.last_phase[tls_id] = None
+
+        print(
+            f"[CrossingProxy] enabled — p={self.call_prob}, "
+            f"service=[{self.service_min},{self.service_max}]s, "
+            f"TLS={len(self.lane_map)}, seed_base={base_seed}"
+        )
+
+    @property
+    def eng(self):
+        return self.world.eng
+
+    def reset(self):
+        self._clear_all_halts()
+        self.active.clear()
+        self.event_count = 0
+        for tls_id in self.lane_map:
+            try:
+                self.last_phase[tls_id] = self.eng.trafficlight.getPhase(tls_id)
+            except Exception:
+                self.last_phase[tls_id] = None
+
+    def step(self):
+        now = self.eng.simulation.getTime()
+        self._expire_events(now)
+        for tls_id in self.lane_map:
+            phase = self.eng.trafficlight.getPhase(tls_id)
+            prev = self.last_phase.get(tls_id)
+            if prev is not None and phase != prev:
+                self._maybe_start_event(tls_id, phase, now)
+            self.last_phase[tls_id] = phase
+
+    def _maybe_start_event(self, tls_id, phase, now):
+        if tls_id in self.active:
+            return
+        phase_key = str(phase)
+        lanes = self.lane_map.get(tls_id, {}).get(phase_key)
+        if not lanes:
+            return
+        if self.rng[tls_id].random() >= self.call_prob:
+            return
+        duration = self.rng[tls_id].uniform(self.service_min, self.service_max)
+        self._start_event(tls_id, lanes, now + duration)
+
+    def _start_event(self, tls_id, lanes, end_time):
+        saved = {}
+        for lane in lanes:
+            try:
+                saved[lane] = self.eng.lane.getMaxSpeed(lane)
+                self.eng.lane.setMaxSpeed(lane, 0.0)
+            except Exception:
+                continue
+        if not saved:
+            return
+        self.active[tls_id] = {
+            'end_time': end_time,
+            'saved': saved,
+        }
+        self.event_count += 1
+
+    def _expire_events(self, now):
+        finished = [tls for tls, ev in self.active.items() if now >= ev['end_time']]
+        for tls in finished:
+            self._restore_event(tls)
+
+    def _restore_event(self, tls_id):
+        ev = self.active.pop(tls_id, None)
+        if not ev:
+            return
+        for lane, speed in ev['saved'].items():
+            try:
+                self.eng.lane.setMaxSpeed(lane, speed)
+            except Exception:
+                pass
+
+    def _clear_all_halts(self):
+        for tls_id in list(self.active.keys()):
+            self._restore_event(tls_id)
+
+
 @Registry.register_world('sumo')
 class World(object):
     '''
@@ -439,8 +549,28 @@ class World(object):
             print(f"[PartialObs] Gaussian count noise sigma={self.obs_count_noise_std} "
                   f"mode={self.obs_noise_mode} (per-step, seed={self.obs_seed})")
 
+        # Crossing proxy — actuated ped crossing delay on conflicting lanes (see
+        # docs/CROSSING_PROXY.md). Composable with other realism axes.
+        self.crossing_proxy = bool(world_param.get('crossing_proxy', False))
+        self.crossing_proxy_ctrl = None
+
         with open(sumo_config) as f:
             sumo_dict = json.load(f)
+
+        if self.crossing_proxy:
+            lane_map_rel = sumo_dict.get('crossingProxyLanes', '')
+            if not lane_map_rel:
+                raise ValueError(
+                    "crossing_proxy=true but crossingProxyLanes not set in .cfg"
+                )
+            lane_map_path = os.path.join(sumo_dict['dir'], lane_map_rel)
+            if not os.path.isfile(lane_map_path):
+                raise FileNotFoundError(
+                    f"crossing_proxy lane map not found: {lane_map_path}"
+                )
+            self.crossing_proxy_ctrl = CrossingProxyController(
+                self, lane_map_path, world_param
+            )
         self._use_gui = sumo_dict['gui'] == "True" or sumo_dict['gui'] == True
 
         physics_flags = _physics_flags(self.physics_mode)
@@ -644,6 +774,8 @@ class World(object):
             self._collapse_ghost_lanes()
         for _ in range(self.step_ratio):
             self.eng.simulationStep()
+            if self.crossing_proxy_ctrl is not None:
+                self.crossing_proxy_ctrl.step()
         if self.physics_mode == 'ghost' and self._sim_ready:
             self._enforce_ghost_physics_all()
             self._collapse_ghost_lanes()
@@ -723,6 +855,8 @@ class World(object):
         :return: None
         '''
         if self.run != 0:
+            if self.crossing_proxy_ctrl is not None:
+                self.crossing_proxy_ctrl.reset()
             # TODO: test why need switch in original code
             if self.interface_flag:
                 libsumo.close()
@@ -757,6 +891,8 @@ class World(object):
                 self._enforce_ghost_vehicle(v)
         if self.physics_mode == 'ghost' and entering_v:
             self._collapse_ghost_lanes()
+        if self.crossing_proxy_ctrl is not None:
+            self.crossing_proxy_ctrl.reset()
         self.vehicle_trajectory = {}
         self.vehicle_maxspeed = {}
         self.real_delay= {}
