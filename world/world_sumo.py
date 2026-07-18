@@ -587,13 +587,9 @@ class World(object):
         if self.physics_mode == 'ghost' and kwargs['interface'] != 'libsumo':
             raise ValueError("physics_mode='ghost' requires --interface libsumo")
 
-        # Realism toggles (independent ablations; agents never see vType).
+        # Realism toggles (composable; see docs/REALISM_FULL.md for all-axes profile).
         self.hetero = world_param.get('hetero', False)
         self.slow_start = world_param.get('slow_start', False)
-        if self.hetero and self.slow_start:
-            raise ValueError(
-                "hetero and slow_start are separate ablations — enable one at a time"
-            )
 
         # Partial observability (see docs/PARTIAL_OBSERVABILITY.md). Two composable axes that
         # corrupt what the controller perceives while leaving the SUMO physics untouched:
@@ -651,7 +647,23 @@ class World(object):
 
         route_file = sumo_dict['flowFile']
         additional_files = []
-        if self.hetero:
+        if self.hetero and self.slow_start:
+            if not sumo_dict.get('flowFileHetero'):
+                raise ValueError(
+                    "hetero+slow_start requires flowFileHetero in .cfg"
+                )
+            route_file = sumo_dict['flowFileHetero']
+            add_rel = sumo_dict.get('realismFullAdditional', '')
+            if not add_rel:
+                raise ValueError(
+                    "hetero+slow_start requires realismFullAdditional in .cfg"
+                )
+            additional_files.append(os.path.join(sumo_dict['dir'], add_rel))
+            print(
+                f"[RealismFull] hetero+slow_start — routes={route_file}, "
+                f"vTypes={add_rel}"
+            )
+        elif self.hetero:
             if not sumo_dict.get('flowFileHetero'):
                 raise ValueError("hetero=true but flowFileHetero not set in .cfg")
             route_file = sumo_dict['flowFileHetero']
@@ -660,7 +672,7 @@ class World(object):
                 additional_files.append(os.path.join(sumo_dict['dir'], add_file))
             print(f"[Hetero] enabled — routes={route_file}, vTypes={add_file}")
 
-        if self.slow_start:
+        elif self.slow_start:
             add_file = sumo_dict.get('slowStartAdditional', '')
             if not add_file:
                 raise ValueError("slow_start=true but slowStartAdditional not set in .cfg")
@@ -686,6 +698,7 @@ class World(object):
         # Use explicit -n/-r when realism toggles need additional-files or alternate routes.
         use_explicit_net_route = (
             not sumo_dict.get('combined_file') or self.hetero or self.slow_start
+            or self.crossing_proxy
         )
         if use_explicit_net_route:
             sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),

@@ -21,6 +21,7 @@ world:
 
   hetero: false             # false = uniform vType baseline; true = mixed cars+trucks
   slow_start: false          # false = default pkw accel; true = realistic startup accel + headway
+                             # hetero+s slow_start together: use realism_full profile (see docs/REALISM_FULL.md)
 
   # Actuated crossing-delay proxy (see docs/CROSSING_PROXY.md). Stochastic lane service
   # interruptions on conflicting approaches during through-green phases; composable.
