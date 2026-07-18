@@ -243,6 +243,8 @@ class TSCTrainer(BaseTrainer):
             self.metric.queue(), self.metric.delay(), int(self.metric.throughput())))
         self.writeLog("TEST", e, self.metric.real_average_travel_time(),\
             100, self.metric.rewards(),self.metric.queue(),self.metric.delay(), self.metric.throughput())
+        if getattr(self.env.world, 'crossing_proxy_ctrl', None) is not None:
+            self.env.world.crossing_proxy_ctrl.log_summary()
         return self.metric.real_average_travel_time()
 
     def test(self, drop_load=True):

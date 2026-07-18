@@ -15,6 +15,7 @@ else:
 from common.registry import Registry
 
 import json
+import logging
 import re
 import copy
 import hashlib
@@ -533,7 +534,10 @@ class CrossingProxyController(object):
         self.cache_nominal_speeds()
 
     def log_summary(self):
-        print(f"[CrossingProxy] total ped calls this episode: {self.event_count}")
+        logging.info(
+            "[CrossingProxy] total ped calls this episode: %d",
+            self.event_count,
+        )
 
     def _expire_events(self, now):
         finished = [

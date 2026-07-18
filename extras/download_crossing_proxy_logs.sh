@@ -25,6 +25,10 @@ do
   scp -r "${SERVER}:${REMOTE}/${agent}" "${LOCAL}/" || echo "  (skip — not found on server)"
 done
 
+echo "Downloading SLURM captures (ped-call stdout)..."
+mkdir -p "${REPO_ROOT}/logs"
+scp "${SERVER}:~/LibSignalFork/logs/"*crossing* "${REPO_ROOT}/logs/" 2>/dev/null || echo "  (skip — no logs/*crossing* on server)"
+
 echo ""
 echo "Done. Summarize on Mac:"
 echo "  grep -H 'Final Travel Time' data/output_data/tsc/sumo_*crossing_proxy/sumo4x4/*/logger/*BRF.log"
