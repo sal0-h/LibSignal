@@ -81,7 +81,7 @@ present (e.g. CoLight needs `torch_scatter` + `torch_geometric`). Classical base
 
 | Agent | Status | Notes |
 |-------|--------|-------|
-| `maxpressure`, `fixedtime`, `sotl` | ✅ baseline | No RL deps required. |
+| `maxpressure`, `fixedtime`, `sotl` | ✅ baseline | No RL deps required. MaxPressure defaults to Varaiya-aligned queues (`docs/MAXPRESSURE.md`); use `--agent maxpressure_libsignal` for the legacy heuristic. |
 | `dqn`, `presslight`, `frap`, `mplight`, `magd` | ✅ RL | Standard PyTorch. |
 | `ppo_pfrl` | ✅ RL | IPPO via `pfrl`. This is the working PPO. |
 | `colight` | ✅ RL | Needs `torch_scatter` (installed by `setup.sh`; not present on the Cloud `.venv`). |

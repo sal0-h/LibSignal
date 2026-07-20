@@ -156,7 +156,10 @@ model:
 model:
   train_model: False        # No training - pure heuristic
   test_model: True
+  mp_variant: varaiya       # Varaiya 2013-aligned (default); use libsignal for legacy
+  sat_flow: 1.0
 ```
+See `docs/MAXPRESSURE.md` for Original-MP vs LibSignal heuristic.
 
 ---
 
@@ -284,9 +287,11 @@ data/output_data/tsc/sumo_dqn_test/
 
 ### Non-RL Baselines (Instant)
 
-**MaxPressure** - Queue-based pressure:
+**MaxPressure** - Varaiya-style queue pressure (see `docs/MAXPRESSURE.md`):
 ```bash
 python run.py --agent maxpressure --world sumo --network sumo1x1
+# Legacy LibSignal lane_count heuristic:
+python run.py --agent maxpressure_libsignal --world sumo --network sumo1x1
 ```
 
 **SOTL (Self-Optimizing Traffic Light)** - Fixed cycle with adaptive timing:

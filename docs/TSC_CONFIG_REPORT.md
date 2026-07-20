@@ -118,6 +118,8 @@ Read from `Registry.mapping['model_mapping']['setting']`. `model.name` must matc
 | Parameter | Agent | What the code does |
 |-----------|-------|-------------------|
 | `t_min` | `maxpressure` | Minimum seconds a phase must run before switching (`maxpressure.py`: `if current_phase_time < t_min: keep phase`). |
+| `mp_variant` | `maxpressure` | `varaiya` (default) = queue-based Original-MP alignment; `libsignal` = legacy `lane_count` in−out heuristic. See `docs/MAXPRESSURE.md`. |
+| `sat_flow` | `maxpressure` | Uniform saturation-flow multiplier applied to each movement weight (default `1.0`). |
 | `t_fixed` | `fixedtime` | Fixed green duration before cycling to next phase (`fixedtime.py`). |
 | `min_green_vehicle` | `sotl` | SOTL switches phase when `(green-queue ≤ min_green_vehicle AND red-queue > max_red_vehicle)` **OR** `(green-queue == 0 AND red-queue > 0)` (`sotl.py` `get_action`). |
 | `max_red_vehicle` | `sotl` | SOTL red-side threshold (see `sotl.py` `get_action`). |

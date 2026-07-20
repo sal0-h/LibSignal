@@ -18,7 +18,7 @@ Deep dive into LibSignal's architecture, state/reward/action definitions, and ex
 **Role**: Policy implementations (RL and baseline algorithms)
 - **Base classes**: `BaseAgent` (all agents), `RLAgent` (RL-specific)
 - **RL agents (wired & usable)**: `dqn.py`, `presslight.py`, `frap.py`, `mplight.py`, `magd.py`, `colight.py`, `ppo_pfrl.py` (IPPO), `maddpg_v2.py`
-- **Baselines**: `maxpressure.py` (queue-based pressure), `sotl.py` (self-optimizing), `fixedtime.py` (static timing)
+- **Baselines**: `maxpressure.py` (Varaiya-aligned queue pressure; see `docs/MAXPRESSURE.md`), `sotl.py` (self-optimizing), `fixedtime.py` (static timing)
 - **Orphan / superseded files (present but NOT wired into `agent/__init__.py`)** — kept for
   reference/history, not usable via `--agent`:
   - `ppo.py` (`@register('ppo')`), `sac.py` (`@register('sac')`), `maddpg.py` (`@register('maddpg')`)
