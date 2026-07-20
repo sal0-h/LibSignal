@@ -244,7 +244,8 @@ These override or supplement YAML at runtime:
 |------|-------------------|
 | `dqn.yml` | `train_model: True`, tighter ε, `one_hot/phase: True`, `learning_start: 1000` |
 | `colight.yml` | `graphic: True`, CoLight arch dims, `phase: False` |
-| `maxpressure.yml` | `t_min: 10`, zeroes RL trainer params |
+| `maxpressure.yml` | `t_min: 10`, `mp_variant: varaiya`, `sat_flow: 1.0`, zeroes RL trainer params |
+| `maxpressure_libsignal.yml` | Sets `mp_variant: libsignal` (legacy lane_count heuristic) |
 | `fixedtime.yml` | `episodes: 1`, `t_fixed: 30`, RL params zeroed |
 | `sotl.yml` | `episodes: 1`, SOTL thresholds |
 | `frap.yml` | `signal_config` block, `demand_shape`, FRAP training |
