@@ -9,7 +9,7 @@ All available SUMO networks with their paths, road network topology, and traffic
 | sumo1x1 | Grid | 1×1 | [configs/sim/sumo1x1.cfg](../configs/sim/sumo1x1.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
 | sumo1x3 | Grid | 1×3 | [configs/sim/sumo1x3.cfg](../configs/sim/sumo1x3.cfg) | data/raw_data/arterial_1x6/arterial_1x6.net.xml | data/raw_data/arterial_1x6/arterial_1x6.rou.xml |
 | sumo1x21 | Arterial | 1×21 | [configs/sim/sumo1x21.cfg](../configs/sim/sumo1x21.cfg) | data/raw_data/arterial1x6/arterial1x6.net.xml | data/raw_data/arterial1x6/arterial1x6.rou.xml |
-| sumo4x4 | Grid | 4×4 | [configs/sim/sumo4x4.cfg](../configs/sim/sumo4x4.cfg) | data/raw_data/grid4x4/grid4x4.net.xml | data/raw_data/grid4x4/grid4x4.rou.xml |
+| sumo4x4 | Grid | 4×4 interior (32 TLs) | [configs/sim/sumo4x4.cfg](../configs/sim/sumo4x4.cfg) | data/raw_data/grid4x4/grid4x4.net.xml | data/raw_data/grid4x4/grid4x4.rou.xml |
 | sumo7x28 | Grid | 7×28 | [configs/sim/sumo7x28.cfg](../configs/sim/sumo7x28.cfg) | data/raw_data/cologne7x28/cologne7x28.net.xml | data/raw_data/cologne7x28/cologne7x28.rou.xml |
 | sumo1x1_colight | Grid | 1×1 (CoLight) | [configs/sim/sumo1x1_colight.cfg](../configs/sim/sumo1x1_colight.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
 | sumohz1x1 | Urban | 1×1 (Hangzhou) | [configs/sim/sumohz1x1.cfg](../configs/sim/sumohz1x1.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.rou.xml |
@@ -54,7 +54,9 @@ All available SUMO networks with their paths, road network topology, and traffic
   - Flow: `data/raw_data/arterial1x6/arterial1x6.rou.xml`
 
 #### **sumo4x4**
-- **Topology**: Urban grid 4×4 (16 intersections)
+- **Topology**: Urban grid 4×4 interior (`A0`–`D3`) plus 16 fringe portal TLs
+  (`top`/`bottom`/`left`/`right` `0–3`) — **32 traffic lights total**, so LibSignal
+  creates **32 agents** (one per SUMO TL ID). See [AGENT_OBSERVATIONS.md](AGENT_OBSERVATIONS.md).
 - **Use case**: Medium-scale multi-agent coordination
 - **Path**:
   - Config: `configs/sim/sumo4x4.cfg`
