@@ -683,6 +683,14 @@ class World(object):
             route_file = slow_route
             print(f"[SlowStart] enabled — routes={route_file}, vTypes={add_file}")
 
+        # Optional demand-set / fixed-file override (after physics route selection so
+        # realism_full can keep hetero vTypes while swapping OD hub routes).
+        demand_train_file = world_param.get('demand_train_file')
+        demand_set = world_param.get('demand_set') or world_param.get('demand_bag') or []
+        if demand_train_file:
+            route_file = demand_train_file
+            print(f"[Demand] train file override={route_file}")
+
         additional_flags = []
         if additional_files:
             additional_flags = ['--additional-files', ','.join(additional_files)]
@@ -696,34 +704,36 @@ class World(object):
         effective_seed = _cmd_seed if _cmd_seed is not None else world_param.get('seed', 0)
         seed_flags = ['--seed', str(int(effective_seed))]
         # Use explicit -n/-r when realism toggles need additional-files or alternate routes.
+        # Demand-set rotation also requires -r so set_route_file can swap files.
         use_explicit_net_route = (
             not sumo_dict.get('combined_file') or self.hetero or self.slow_start
             or self.crossing_proxy
+            or bool(demand_train_file)
+            or bool(demand_set)
         )
-        if use_explicit_net_route:
-            sim_args = ['-n', os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile']),
-                        '-r', os.path.join(sumo_dict['dir'], route_file),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + seed_flags + physics_flags + additional_flags
-        else:
-            sim_args = ['-c', os.path.join(sumo_dict['dir'], sumo_dict['combined_file']),
-                        '--no-warnings', str(sumo_dict['no_warning'])] + seed_flags + physics_flags + additional_flags
-
-        headless_bin = sumolib.checkBinary('sumo')
-        # Real run uses sumo-gui when requested. libsumo cannot reopen a GUI window
-        # in-process, so the __init__ warm-up (which only reads TLS phases) always runs
-        # headless; the GUI window then opens exactly once, in reset().
+        self._dir = sumo_dict['dir']
+        self._roadnet_file = os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile'])
+        self._physics_flags = physics_flags
+        self._additional_flags = additional_flags
+        self._seed_flags = seed_flags
+        self._no_warning = str(sumo_dict['no_warning'])
+        self._use_explicit_net_route = use_explicit_net_route
+        self._combined_file = (
+            os.path.join(sumo_dict['dir'], sumo_dict['combined_file'])
+            if sumo_dict.get('combined_file') else None
+        )
+        self._headless_bin = sumolib.checkBinary('sumo')
+        self._gui_bin = sumolib.checkBinary('sumo-gui') if self._use_gui else None
+        self._gui_flags = []
         if self._use_gui:
-            gui_flags = ['--delay', '0', '--threads', '4']
-            # Optional in sim .cfg: advance N simulation seconds per step (GUI only).
+            self._gui_flags = ['--delay', '0', '--threads', '4']
             if sumo_dict.get('gui_step_length'):
-                gui_flags += ['--step-length', str(sumo_dict['gui_step_length'])]
-            self.sumo_cmd = [sumolib.checkBinary('sumo-gui')] + gui_flags + sim_args
-        else:
-            self.sumo_cmd = [headless_bin] + sim_args
-        self.warmup_cmd = [headless_bin] + sim_args
-        self.net = os.path.join(sumo_dict['dir'], sumo_dict['roadnetFile'])
+                self._gui_flags += ['--step-length', str(sumo_dict['gui_step_length'])]
+
+        self.net = self._roadnet_file
         self.route = os.path.join(sumo_dict['dir'], route_file)
         self.warning = sumo_dict['no_warning']
+        self._rebuild_sumo_cmd()
         print("building world...")
         self.connection_name = sumo_dict['name']
         self.map = sumo_dict['roadnetFile'].split('/')[-1].split('.')[0]
@@ -930,6 +940,41 @@ class World(object):
         self._update_infos()
         self.vehicle_trajectory, self.vehicle_maxspeed = self.get_vehicle_trajectory()
         self.run += 1
+
+    def _rebuild_sumo_cmd(self):
+        '''Rebuild sumo_cmd / warmup_cmd from current net + route paths.'''
+        if self._use_explicit_net_route:
+            sim_args = [
+                '-n', self._roadnet_file,
+                '-r', self.route,
+                '--no-warnings', self._no_warning,
+            ] + self._seed_flags + self._physics_flags + self._additional_flags
+        else:
+            sim_args = [
+                '-c', self._combined_file,
+                '--no-warnings', self._no_warning,
+            ] + self._seed_flags + self._physics_flags + self._additional_flags
+        # Warm-up always headless; GUI (if any) opens in reset().
+        self.warmup_cmd = [self._headless_bin] + sim_args
+        if self._use_gui:
+            self.sumo_cmd = [self._gui_bin] + self._gui_flags + sim_args
+        else:
+            self.sumo_cmd = [self._headless_bin] + sim_args
+
+    def set_route_file(self, route_rel):
+        '''
+        Swap the demand/route file used on the next reset().
+
+        :param route_rel: path relative to world dir (usually data/), or absolute
+        '''
+        route_abs = route_rel if os.path.isabs(route_rel) else os.path.join(self._dir, route_rel)
+        if not os.path.exists(route_abs):
+            raise FileNotFoundError(f"demand route file not found: {route_abs}")
+        if not self._use_explicit_net_route:
+            self._use_explicit_net_route = True
+        self.route = route_abs
+        self._rebuild_sumo_cmd()
+        print(f"[Demand] route -> {route_abs}")
 
     def reset(self):
         '''
