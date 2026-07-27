@@ -316,8 +316,6 @@ class World(object):
         self.vehicle_trajectory = {}  # key: vehicle_id, value: [[lane_id_1, enter_time, time_spent_on_lane_1], ... , [lane_id_n, enter_time, time_spent_on_lane_n]]
         self.history_vehicles = set()
         self.real_delay= {}
-        # See world_sumo.World.update_vehicle_trajectory — gated for the same reason.
-        self.update_vehicle_trajectory = False
 
         # # get in_lanes and out_lanes
         self.in_lanes, self.out_lanes = self.get_in_out_lanes()
@@ -735,18 +733,7 @@ class World(object):
         self._update_infos()
         # update current measurement
         self.update_current_measurements()
-        if self._trajectory_tracking_enabled():
-            self.vehicle_trajectory = self.get_vehicle_trajectory()
-
-    def _trajectory_tracking_enabled(self):
-        '''
-        _trajectory_tracking_enabled
-        Whether per-step vehicle trajectory maintenance should run.
-
-        :param: None
-        :return: bool
-        '''
-        return self.update_vehicle_trajectory or ("vehicle_trajectory" in self.fns)
+        self.vehicle_trajectory = self.get_vehicle_trajectory()
 
     def reset(self):
         '''
