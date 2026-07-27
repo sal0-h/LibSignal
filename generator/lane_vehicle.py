@@ -157,14 +157,20 @@ class LaneVehicleGenerator(BaseGenerator):
                 ret_vals.append(result[self.I.id])
                 continue
 
+            # Preserve original semantics:
+            # - average "road"/None: one value per road (mean of that road's lanes) or per lane
+            # - average "all": mean of *per-road means* (not a flat mean over all lanes)
             if self.average == "all":
-                total = 0.0
-                n = 0
+                road_means = []
                 for road_lanes in self.lanes:
-                    for lane_id in road_lanes:
-                        total += result[lane_id]
-                        n += 1
-                ret_vals.append(total / n if n else 0.0)
+                    if not road_lanes:
+                        continue
+                    road_means.append(
+                        sum(result[lane_id] for lane_id in road_lanes) / len(road_lanes)
+                    )
+                ret_vals.append(
+                    sum(road_means) / len(road_means) if road_means else 0.0
+                )
             elif self.average == "road":
                 for road_lanes in self.lanes:
                     if not road_lanes:

@@ -57,7 +57,7 @@ exceed SUMO physics. “It’s all SUMO” is only half true.
 
 `DQNNet` is a tiny MLP: `input → 20 → 20 → n_actions` (~1k parameters).
 
-Standalone microbench (`extras/efficiency_audit/bench_dqn_train.py`):
+Standalone CPU microbench during this audit:
 
 | Call | Mean (CPU) |
 |------|------------|
@@ -87,7 +87,7 @@ GPU would matter for large graph models (e.g. CoLight) or huge batches — not t
 
 2. **Faster `LaneVehicleGenerator.generate`** (`generator/lane_vehicle.py`)  
    Replaced repeated `np.append` with list accumulation + one array conversion.
-   Big win for `average="all"` rewards on multi-intersection nets.
+   Preserves original averaging semantics (`average="all"` = mean of per-road means).
 
 3. **Skip intermediate observations** (`environment.py`, `trainer/tsc_trainer.py`)  
    Inside each `action_interval` block, only the **last** `get_ob()` is kept for
@@ -96,9 +96,9 @@ GPU would matter for large graph models (e.g. CoLight) or huge batches — not t
 
 4. **DQN `train()` one fewer forward** (`agent/dqn.py`)  
    Previously forwarded `b_t` twice (eval then train). Now one forward + scatter
-   into a detached target clone. Small vs env, correct and slightly cheaper.
+   into a detached target clone. Equivalent for `DQNNet` (no dropout/batchnorm).
 
-## Config levers (no code change)
+## Config levers (documentation only — no YAML defaults changed in this PR)
 
 | Lever | Effect |
 |-------|--------|
@@ -112,23 +112,9 @@ GPU would matter for large graph models (e.g. CoLight) or huge batches — not t
 
 | Idea | Risk | Expected impact |
 |------|------|-----------------|
-| Collect reward only on decision boundaries (no 10-step mean) | Behavior change | Large on multi-agent (still ~0.5 s `get_reward` on sumo4x4 after fixes) |
+| Collect reward only on decision boundaries (no 10-step mean) | Behavior change | Large on multi-agent |
 | Faster `observe` / `_get_vehicles` without `getNextTLS` | Possible obs change | Medium |
 | Cache `lane.getMaxSpeed` in `get_lane_delay` | Low | Small |
 | Don’t subscribe `lane_delay` every step; compute at decision rate | Low–medium | Small–medium |
 | Vectorized / multi-process envs | Large engineering | Only if you need many seeds/episodes in parallel |
 | Parallel SUMO instances for population-based training | Engineering | Throughput, not single-episode latency |
-
-## How to reproduce profiling
-
-```bash
-source .venv/bin/activate
-python scripts/profiling/profile_training_hotpath.py \
-  --agent maxpressure --network sumo4x4 --episodes 1 \
-  --outfile extras/efficiency_audit/profile.json
-
-python scripts/profiling/profile_observe_apis.py
-python extras/efficiency_audit/bench_dqn_train.py
-```
-
-Raw JSON from this audit lives under `extras/efficiency_audit/`.
