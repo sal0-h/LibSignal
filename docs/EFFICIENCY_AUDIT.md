@@ -79,7 +79,7 @@ GPU would matter for large graph models (e.g. CoLight) or huge batches — not t
 
 ## What we fixed (this PR)
 
-1. **Gate `get_vehicle_trajectory`** (`world_sumo.py` / `world_cityflow.py`)  
+1. **Gate `get_vehicle_trajectory`** (`world_sumo.py`)  
    It ran *every* step even though no shipped agent subscribes to it. Now it
    runs only if `"vehicle_trajectory"` is subscribed or
    `world.update_vehicle_trajectory=True` (set automatically when
