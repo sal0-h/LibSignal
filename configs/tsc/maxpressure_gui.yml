@@ -1,0 +1,10 @@
+includes:
+  - configs/tsc/maxpressure.yml
+
+world:
+  gui: True
+  gui_delay: 100   # ms between SUMO-GUI steps so the window is visible
+
+trainer:
+  test_steps: 600
+  steps: 600

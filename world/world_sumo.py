@@ -644,6 +644,11 @@ class World(object):
                 self, lane_map_path, world_param
             )
         self._use_gui = sumo_dict['gui'] == "True" or sumo_dict['gui'] == True
+        if self._use_gui:
+            print(f"[GUI] enabled (interface={'libsumo' if self.interface_flag else 'traci'}); "
+                  f"window opens on reset() — use --interface traci")
+        elif sumo_dict.get('gui') not in (False, "False", "false", None):
+            print(f"[GUI] unrecognized gui value {sumo_dict.get('gui')!r}; expected True")
 
         physics_flags = _physics_flags(self.physics_mode)
         if self.physics_mode == 'ghost':
@@ -700,7 +705,10 @@ class World(object):
         # in-process, so the __init__ warm-up (which only reads TLS phases) always runs
         # headless; the GUI window then opens exactly once, in reset().
         if self._use_gui:
-            gui_flags = ['--delay', '0', '--threads', '4']
+            # Delay (ms) between GUI steps. Default 0 races the window closed on short
+            # runs; override via world.gui_delay in the agent YAML / sim .cfg.
+            gui_delay = str(sumo_dict.get('gui_delay', world_param.get('gui_delay', 0)))
+            gui_flags = ['--start', '--delay', gui_delay, '--threads', '4']
             # Optional in sim .cfg: advance N simulation seconds per step (GUI only).
             if sumo_dict.get('gui_step_length'):
                 gui_flags += ['--step-length', str(sumo_dict['gui_step_length'])]
