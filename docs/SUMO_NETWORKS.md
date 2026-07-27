@@ -2,22 +2,28 @@
 
 All available SUMO networks with their paths, road network topology, and traffic flow files.
 
+For a recommendation of which maps are more interesting than the default `sumo4x4`
+grid, see [ALTERNATIVE_NETWORKS.md](ALTERNATIVE_NETWORKS.md) (issue #32).
+
 ## Quick Reference
 
-| Network Name | Type | Intersections | Config File | Road Network | Traffic Flow |
-|---|---|---|---|---|---|
-| sumo1x1 | Grid | 1×1 | [configs/sim/sumo1x1.cfg](../configs/sim/sumo1x1.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
-| sumo1x3 | Grid | 1×3 | [configs/sim/sumo1x3.cfg](../configs/sim/sumo1x3.cfg) | data/raw_data/arterial_1x6/arterial_1x6.net.xml | data/raw_data/arterial_1x6/arterial_1x6.rou.xml |
-| sumo1x21 | Arterial | 1×21 | [configs/sim/sumo1x21.cfg](../configs/sim/sumo1x21.cfg) | data/raw_data/arterial1x6/arterial1x6.net.xml | data/raw_data/arterial1x6/arterial1x6.rou.xml |
-| sumo4x4 | Grid | 4×4 interior (32 TLs) | [configs/sim/sumo4x4.cfg](../configs/sim/sumo4x4.cfg) | data/raw_data/grid4x4/grid4x4.net.xml | data/raw_data/grid4x4/grid4x4.rou.xml |
-| sumo7x28 | Grid | 7×28 | [configs/sim/sumo7x28.cfg](../configs/sim/sumo7x28.cfg) | data/raw_data/cologne7x28/cologne7x28.net.xml | data/raw_data/cologne7x28/cologne7x28.rou.xml |
-| sumo1x1_colight | Grid | 1×1 (CoLight) | [configs/sim/sumo1x1_colight.cfg](../configs/sim/sumo1x1_colight.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
-| sumohz1x1 | Urban | 1×1 (Hangzhou) | [configs/sim/sumohz1x1.cfg](../configs/sim/sumohz1x1.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.rou.xml |
-| sumohz1x1_config2 | Urban | 1×1 (Hangzhou v2) | [configs/sim/sumohz1x1_config2.cfg](../configs/sim/sumohz1x1_config2.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041608_1h/hangzhou_1x1_bc-tyc_18041608_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041608_1h/hangzhou_1x1_bc-tyc_18041608_1h.rou.xml |
-| sumohz1x1_config3 | Urban | 1×1 (Hangzhou v3) | [configs/sim/sumohz1x1_config3.cfg](../configs/sim/sumohz1x1_config3.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041607_1h/hangzhou_1x1_bc-tyc_18041607_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041607_1h/hangzhou_1x1_bc-tyc_18041607_1h.rou.xml |
-| sumohz1x1_config4 | Urban | 1×1 (Hangzhou v4) | [configs/sim/sumohz1x1_config4.cfg](../configs/sim/sumohz1x1_config4.cfg) | data/raw_data/hangzhou_1x1_kn-hz_18041610_1h/hangzhou_1x1_kn-hz_18041610_1h.net.xml | data/raw_data/hangzhou_1x1_kn-hz_18041610_1h/hangzhou_1x1_kn-hz_18041610_1h.rou.xml |
-| sumohz4x4 | Urban | 4×4 (Hangzhou) | [configs/sim/sumohz4x4.cfg](../configs/sim/sumohz4x4.cfg) | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml |
-| sumohz4x4_hetero | Urban | 4×4 (Hangzhou, heterogeneous) | [configs/sim/sumohz4x4_hetero.cfg](../configs/sim/sumohz4x4_hetero.cfg) | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml |
+| Network Name | Type | TLs | Config File | Road Network | Traffic Flow |
+|---|---|---:|---|---|---|
+| sumo1x1 | Real (Cologne) | 1 | [sumo1x1.cfg](../configs/sim/sumo1x1.cfg) | `data/raw_data/cologne1/cologne1.net.xml` | `cologne1.rou.xml` |
+| sumo1x3 | Real corridor (Cologne) | 3 | [sumo1x3.cfg](../configs/sim/sumo1x3.cfg) | `data/raw_data/cologne3/cologne3.net.xml` | `cologne3.rou.xml` |
+| sumo_cologne3 | Real corridor (Cologne) | 3 | [sumo_cologne3.cfg](../configs/sim/sumo_cologne3.cfg) | same as `sumo1x3` | same |
+| sumo1x21 | Real arterial (Ingolstadt) | 21 | [sumo1x21.cfg](../configs/sim/sumo1x21.cfg) | `data/raw_data/ingolstadt21/ingolstadt21.net.xml` | `ingolstadt21.rou.xml` |
+| sumo4x4 | Synthetic grid | 32 | [sumo4x4.cfg](../configs/sim/sumo4x4.cfg) | `data/raw_data/grid4x4/grid4x4.net.xml` | `grid4x4.rou.xml` |
+| sumo4x4_gui | Synthetic grid (GUI) | 32 | [sumo4x4_gui.cfg](../configs/sim/sumo4x4_gui.cfg) | same as `sumo4x4` | same |
+| sumo7x28 | Synthetic large grid (NY) | 196 | [sumo7x28.cfg](../configs/sim/sumo7x28.cfg) | `data/raw_data/manhattan_28x7/manhattan_28x7.net.xml` | `manhattan_28x7.rou.xml` |
+| sumo_atlanta1x5 | Real arterial stub (Atlanta) | 5 | [sumo_atlanta1x5.cfg](../configs/sim/sumo_atlanta1x5.cfg) | `data/raw_data/atlanta_1x5/atlanta_1x5.net.xml` | `atlanta_1x5.rou.xml` |
+| sumo1x1_colight | Cologne 1×1 (legacy paths) | 1 | [sumo1x1_colight.cfg](../configs/sim/sumo1x1_colight.cfg) | cologne1 JSON convert paths | — |
+| sumohz1x1 | Hangzhou 1×1 (bc-tyc 10) | 1 | [sumohz1x1.cfg](../configs/sim/sumohz1x1.cfg) | `hangzhou_1x1_bc-tyc_18041610_1h/` | matching `.rou.xml` |
+| sumohz1x1_config2 | Hangzhou 1×1 (qc-yn 08) | 1 | [sumohz1x1_config2.cfg](../configs/sim/sumohz1x1_config2.cfg) | `hangzhou_1x1_qc-yn_18041608_1h/` | matching `.rou.xml` |
+| sumohz1x1_config3 | Hangzhou 1×1 (kn-hz 08) | 1 | [sumohz1x1_config3.cfg](../configs/sim/sumohz1x1_config3.cfg) | `hangzhou_1x1_kn-hz_18041608_1h/` | matching `.rou.xml` |
+| sumohz1x1_config4 | Hangzhou 1×1 (sb-sx 07) | 1 | [sumohz1x1_config4.cfg](../configs/sim/sumohz1x1_config4.cfg) | `hangzhou_1x1_sb-sx_18041607_1h/` | matching `.rou.xml` |
+| sumohz4x4 | Hangzhou Gudang 4×4 | 16 | [sumohz4x4.cfg](../configs/sim/sumohz4x4.cfg) | `hangzhou_4x4_gudang_18041610_1h/` | matching `.rou.xml` |
+| sumohz4x4_hetero | Hangzhou 4×4 hetero | 16 | [sumohz4x4_hetero.cfg](../configs/sim/sumohz4x4_hetero.cfg) | `hangzhou_4x4_hetero/` | `_m.rou.xml` |
 
 ---
 
@@ -25,149 +31,107 @@ All available SUMO networks with their paths, road network topology, and traffic
 
 ### Synthetic Grid Networks
 
-#### **sumo1x1**
-- **Topology**: Single 1×1 intersection (Cologne dataset)
-- **Use case**: Minimal, quick tests
-- **Path**:
-  - Config: `configs/sim/sumo1x1.cfg`
-  - Network: `data/raw_data/cologne1/cologne1.net.xml`
-  - Flow: `data/raw_data/cologne1/cologne1.rou.xml`
-- **Run**:
-  ```bash
-  python run.py --agent maxpressure --world sumo --network sumo1x1 --interface traci
-  ```
-
-#### **sumo1x3**
-- **Topology**: Arterial corridor 1×3 intersections
-- **Use case**: Multi-intersection learning, corridor flow patterns
-- **Path**:
-  - Config: `configs/sim/sumo1x3.cfg`
-  - Network: `data/raw_data/arterial_1x6/arterial_1x6.net.xml`
-  - Flow: `data/raw_data/arterial_1x6/arterial_1x6.rou.xml`
-
-#### **sumo1x21**
-- **Topology**: Long arterial 1×21 intersections
-- **Use case**: Arterial signal coordination, platoon formation
-- **Path**:
-  - Config: `configs/sim/sumo1x21.cfg`
-  - Network: `data/raw_data/arterial1x6/arterial1x6.net.xml`
-  - Flow: `data/raw_data/arterial1x6/arterial1x6.rou.xml`
-
 #### **sumo4x4**
 - **Topology**: Urban grid 4×4 interior (`A0`–`D3`) plus 16 fringe portal TLs
   (`top`/`bottom`/`left`/`right` `0–3`) — **32 traffic lights total**, so LibSignal
   creates **32 agents** (one per SUMO TL ID). See [AGENT_OBSERVATIONS.md](AGENT_OBSERVATIONS.md).
-- **Use case**: Medium-scale multi-agent coordination
+- **Use case**: Medium-scale multi-agent coordination (default in most recent experiments)
 - **Path**:
   - Config: `configs/sim/sumo4x4.cfg`
   - Network: `data/raw_data/grid4x4/grid4x4.net.xml`
   - Flow: `data/raw_data/grid4x4/grid4x4.rou.xml`
 - **Run**:
   ```bash
-  python run.py --agent dqn --world sumo --network sumo4x4 --interface traci --seed 42
+  python run.py --agent dqn --world sumo --network sumo4x4 --seed 42 --ngpu -1
   ```
 
 #### **sumo7x28**
-- **Topology**: Large grid 7×28 (196 intersections)
-- **Use case**: Large-scale experiments, scalability testing
+- **Topology**: Large synthetic Manhattan-style grid **28×7 = 196** intersections
+  (`data/raw_data/manhattan_28x7/`)
+- **Use case**: Large-scale / scalability experiments (slow on CPU)
 - **Path**:
   - Config: `configs/sim/sumo7x28.cfg`
-  - Network: `data/raw_data/cologne7x28/cologne7x28.net.xml`
-  - Flow: `data/raw_data/cologne7x28/cologne7x28.rou.xml`
-- **Note**: Computationally intensive; requires CPU with many threads
+  - Network: `data/raw_data/manhattan_28x7/manhattan_28x7.net.xml`
+  - Flow: `data/raw_data/manhattan_28x7/manhattan_28x7.rou.xml`
 
 #### **sumo1x1_colight**
-- **Topology**: Single 1×1 intersection (Cologne, CoLight-optimized)
-- **Use case**: Testing CoLight agent specifically
-- **Path**:
-  - Config: `configs/sim/sumo1x1_colight.cfg`
-  - Network: `data/raw_data/cologne1/cologne1.net.xml`
-  - Flow: `data/raw_data/cologne1/cologne1.rou.xml`
+- **Topology**: Same Cologne single intersection as `sumo1x1`, with legacy convert-file paths
+- **Use case**: Historical CoLight config; prefer `sumo1x1` for normal runs
+
+---
+
+### Real-World Networks (Germany / US)
+
+#### **sumo1x1** (Cologne1)
+- **Topology**: Single real Cologne intersection
+- **Use case**: Minimal / smoke tests
+- **Path**: `data/raw_data/cologne1/`
+
+#### **sumo1x3** / **sumo_cologne3**
+- **Topology**: Real Cologne **3-intersection corridor** (not a synthetic 1×3 arterial)
+- **Use case**: Small real multi-intersection corridor; coordination / green-wave style tasks
+- **Path**: `data/raw_data/cologne3/`
+- **Note**: Both configs point at the same map; prefer `sumo_cologne3` for clarity.
+
+#### **sumo1x21** (Ingolstadt21)
+- **Topology**: Real Ingolstadt arterial — **21 TLs**, irregular geometry, ~853 edges,
+  heterogeneous phase counts
+- **Use case**: Best “interesting” alternative to `sumo4x4` for topology realism
+- **Path**: `data/raw_data/ingolstadt21/`
+- **Demand**: trip-based (`<trip>` entries in `.rou.xml`)
+
+#### **sumo_atlanta1x5**
+- **Topology**: Atlanta arterial stub — **5 TLs**, heterogeneous phase plans (2/4/8)
+- **Use case**: Short real corridor; stress-test mixed action-space sizes
+- **Path**: `data/raw_data/atlanta_1x5/`
 
 ---
 
 ### Real-World Urban Networks (Hangzhou, China)
 
 #### **sumohz1x1**
-- **Topology**: Single 1×1 intersection (Hangzhou real traffic, default route)
-- **Use case**: Real-world baseline, urban signal timing
-- **Path**:
-  - Config: `configs/sim/sumohz1x1.cfg`
-  - Network: `data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.net.xml`
-  - Flow: `data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.rou.xml`
-- **Data**: Real traffic from Hangzhou, collected 18:04–19:04 (peak hour)
+- **Topology**: Single Hangzhou intersection (bc-tyc, peak hour)
+- **Path**: `data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/`
 
 #### **sumohz1x1_config2, config3, config4**
-- **Topology**: Single 1×1 intersection (different Hangzhou routes/times)
-- **Use case**: Cross-validation, time-of-day experiments
-- **Routes**:
-  - **config2**: `hangzhou_1x1_bc-tyc_18041608_1h` (18:04–19:04, different route)
-  - **config3**: `hangzhou_1x1_bc-tyc_18041607_1h` (17:04–18:04, earlier time)
-  - **config4**: `hangzhou_1x1_kn-hz_18041610_1h` (different location, kn-hz)
+Different Hangzhou sites / hours (actual `.cfg` targets):
+- **config2**: `hangzhou_1x1_qc-yn_18041608_1h`
+- **config3**: `hangzhou_1x1_kn-hz_18041608_1h`
+- **config4**: `hangzhou_1x1_sb-sx_18041607_1h`
 
 #### **sumohz4x4**
-- **Topology**: Urban grid 4×4 (Hangzhou real traffic)
-- **Use case**: Real-world multi-intersection coordination
-- **Path**:
-  - Config: `configs/sim/sumohz4x4.cfg`
-  - Network: `data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml`
-  - Flow: `data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml`
-- **Data**: Real Hangzhou traffic (18:04–19:04)
+- **Topology**: Hangzhou Gudang **4×4** (16 TLs, regular grid geometry, real demand)
+- **Path**: `data/raw_data/hangzhou_4x4_gudang_18041610_1h/`
 
 #### **sumohz4x4_hetero**
-- **Topology**: Urban grid 4×4 (Hangzhou, heterogeneous traffic)
-- **Use case**: Mixed vehicle types (cars, trucks, etc.)
-- **Path**:
-  - Config: `configs/sim/sumohz4x4_hetero.cfg`
-  - Network: `data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml`
-  - Flow: `data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml` (with vType variations)
+- **Topology**: Same area with heterogeneous vehicle types (`hangzhou_4x4_hetero/`)
 
 ---
 
 ## How to Run Experiments
 
-### Quick Start (All Baselines on sumo1x1)
+### Quick Start
 ```bash
-export SUMO_HOME=/home/salman/.conda/envs/traffic/share/sumo
-export PATH=$SUMO_HOME/bin:$PATH
-conda activate traffic
+source .venv/bin/activate   # also sets SUMO_HOME on Cursor Cloud
 
-# MaxPressure baseline
-python run.py --agent maxpressure --world sumo --network sumo1x1 --interface traci
+python run.py --agent maxpressure --world sumo --network sumo1x1 --seed 42 --ngpu -1
+python run.py --agent maxpressure --world sumo --network sumo_cologne3 --seed 42 --ngpu -1
+python run.py --agent maxpressure --world sumo --network sumo1x21 --seed 42 --ngpu -1
+```
 
-# SOTL baseline
-python run.py --agent sotl --world sumo --network sumo1x1 --interface traci
-
-# Fixed-time baseline
-python run.py --agent fixedtime --world sumo --network sumo1x1 --interface traci
+### SUMO-GUI
+```bash
+sumo-gui -c data/raw_data/ingolstadt21/ingolstadt21.sumocfg
+# or via LibSignal (requires --interface traci):
+python run.py --agent fixedtime --world sumo --network sumo4x4_gui --interface traci --ngpu -1
 ```
 
 ### Train DQN on Different Networks
 ```bash
-# Small (1×1)
-python run.py --agent dqn --world sumo --network sumo1x1 --seed 42 --ngpu 0 --interface traci
-
-# Medium (4×4)
-python run.py --agent dqn --world sumo --network sumo4x4 --seed 42 --ngpu 0 --interface traci
-
-# Real-world (Hangzhou)
-python run.py --agent dqn --world sumo --network sumohz1x1 --seed 42 --ngpu 0 --interface traci
-
-# Large-scale (7×28)
-python run.py --agent dqn --world sumo --network sumo7x28 --seed 42 --ngpu 0 --interface traci
-```
-
-### Specify Output Directory
-```bash
-python run.py --agent dqn --world sumo --network sumo4x4 --prefix exp_batch1 --seed 42 --interface traci
-# Output: data/output_data/tsc/sumo_dqn_exp_batch1/
-```
-
-### Run Multiple Seeds
-```bash
-for seed in 1 2 3; do
-  python run.py --agent dqn --world sumo --network sumo4x4 --seed $seed --interface traci
-done
+python run.py --agent dqn --world sumo --network sumo1x1 --seed 42 --ngpu -1
+python run.py --agent dqn --world sumo --network sumo4x4 --seed 42 --ngpu -1
+python run.py --agent dqn --world sumo --network sumohz1x1 --seed 42 --ngpu -1
+python run.py --agent dqn --world sumo --network sumo1x21 --seed 42 --ngpu -1
 ```
 
 ---
@@ -175,13 +139,13 @@ done
 ## Configuration File Structure
 
 Each network's `.cfg` file specifies:
-- **network**: Name/ID of topology
+- **network**: Name/ID of topology (used by some agents' `signal_config`)
 - **roadnetFile**: Path to SUMO `.net.xml` (road topology)
 - **flowFile**: Path to SUMO `.rou.xml` (traffic routes)
+- **combined_file**: Optional `.sumocfg` when present
 - **interval**: Simulation step size (typically 1.0 second)
 - **yellow_length**: Duration of yellow phase (seconds)
-- **gui**: Whether to show SUMO GUI (`true`/`false`; requires X11 display)
-- **combined_file**: SUMO config file (`.sumocfg`) if multi-file scenario
+- **gui**: Whether to show SUMO GUI (`true`/`false`; needs `--interface traci`)
 
 Example (`configs/sim/sumo4x4.cfg`):
 ```json
@@ -207,24 +171,26 @@ Example (`configs/sim/sumo4x4.cfg`):
 |---|---|---|
 | Quick test | `sumo1x1` | Instant runs, single intersection |
 | Algorithm dev | `sumo1x1`, `sumo4x4` | Fast iteration, manageable |
-| Baseline comp | `sumo4x4`, `sumohz1x1` | Standard benchmarks |
-| Real-world eval | `sumohz4x4` | Actual traffic dynamics |
-| Scalability study | `sumo7x28` | Large-scale complexity |
-| Arterial signals | `sumo1x21` | Corridor coordination |
+| Leave the 4×4 habit | **`sumo1x21`**, `sumo_cologne3` | Real irregular / corridor topology |
+| Real demand, grid geometry | `sumohz4x4` | Hangzhou peak-hour flows |
+| Heterogeneous phases | `sumo_atlanta1x5`, `sumo1x21` | Mixed phase counts per TL |
+| Scalability study | `sumo7x28` | 196 TLs |
 | Multi-vehicle types | `sumohz4x4_hetero` | Heterogeneous traffic |
+
+See [ALTERNATIVE_NETWORKS.md](ALTERNATIVE_NETWORKS.md) for the full issue #32 analysis.
 
 ---
 
 ## Common Issues
 
 **"No SUMO in environment path"**
-→ Set `SUMO_HOME` before running (see Quick Start above)
+→ `source .venv/bin/activate` (exports `SUMO_HOME`), or set it manually from the `sumo` package.
 
 **Simulation very slow**
-→ Running on CPU; add `--ngpu 0` to use available GPU, or reduce `--thread_num`
+→ Cloud VMs are CPU-only (`--ngpu -1`). Prefer smaller maps (`sumo_cologne3`) before `sumo7x28`.
 
 **Network not found error**
-→ Verify `.net.xml` and `.rou.xml` exist in the paths above; check `data/raw_data/` directory
+→ Verify `.net.xml` and `.rou.xml` exist; `--network` must match a file in `configs/sim/`.
 
-**TraCI connection refused**
-→ SUMO process crashed; check for port conflicts or SUMO_HOME issues; retry with `--interface traci`
+**GUI does not open with libsumo**
+→ Use `--interface traci` when `gui: true`.
