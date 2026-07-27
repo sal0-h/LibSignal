@@ -802,6 +802,11 @@ class World(object):
         self.vehicle_trajectory = {}
         self.vehicle_maxspeed = {}
         self.real_delay = {}
+        # Per-step vehicle_trajectory maintenance is expensive (scans all lanes).
+        # Enable only when needed: subscribed "vehicle_trajectory", or real-delay
+        # metrics (trainer sets this when --delay_type real). Default agents
+        # (DQN/maxpressure/etc.) do not need it.
+        self.update_vehicle_trajectory = False
 
         # get in_lanes and out_lanes
         self.in_lanes, self.out_lanes = self.get_in_out_lanes()
@@ -915,8 +920,19 @@ class World(object):
             self.vehicles.update({v: self.get_current_time() - self.inside_vehicles[v]})
             del self.inside_vehicles[v]
         self._update_infos()
-        self.vehicle_trajectory, self.vehicle_maxspeed = self.get_vehicle_trajectory()
+        if self._trajectory_tracking_enabled():
+            self.vehicle_trajectory, self.vehicle_maxspeed = self.get_vehicle_trajectory()
         self.run += 1
+
+    def _trajectory_tracking_enabled(self):
+        '''
+        _trajectory_tracking_enabled
+        Whether per-step vehicle trajectory maintenance should run.
+
+        :param: None
+        :return: bool
+        '''
+        return self.update_vehicle_trajectory or ("vehicle_trajectory" in self.fns)
 
     def reset(self):
         '''

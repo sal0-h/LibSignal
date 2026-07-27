@@ -76,6 +76,9 @@ class TSCTrainer(BaseTrainer):
         else:
             lane_metrics = ['rewards', 'queue']
             world_metrics = ['delay', 'real avg travel time', 'throughput']
+            # real delay needs per-step vehicle trajectories; gate is off by default.
+            if hasattr(self.world, 'update_vehicle_trajectory'):
+                self.world.update_vehicle_trajectory = True
         self.metric = Metrics(lane_metrics, world_metrics, self.world, self.agents)
 
     def create_agents(self):
@@ -161,8 +164,13 @@ class TSCTrainer(BaseTrainer):
                         actions_prob.append(ag.get_action_prob(last_obs[idx], last_phase[idx]))
 
                     rewards_list = []
-                    for _ in range(self.action_interval):
-                        obs, rewards, dones, _ = self.env.step(actions.flatten())
+                    for t in range(self.action_interval):
+                        # Intermediate observations are discarded; only the last obs of
+                        # the interval is stored in the replay buffer / next state.
+                        obs, rewards, dones, _ = self.env.step(
+                            actions.flatten(),
+                            collect_obs=(t == self.action_interval - 1),
+                        )
                         i += 1
                         rewards_list.append(np.stack(rewards))
                     rewards = np.mean(rewards_list, axis=0)  # [agent, intersection]
@@ -230,8 +238,11 @@ class TSCTrainer(BaseTrainer):
                     actions.append(ag.get_action(obs[idx], phases[idx], test=True))
                 actions = np.stack(actions)
                 rewards_list = []
-                for _ in range(self.action_interval):
-                    obs, rewards, dones, _ = self.env.step(actions.flatten())  # make sure action is [intersection]
+                for t in range(self.action_interval):
+                    obs, rewards, dones, _ = self.env.step(
+                        actions.flatten(),
+                        collect_obs=(t == self.action_interval - 1),
+                    )  # make sure action is [intersection]
                     i += 1
                     rewards_list.append(np.stack(rewards))
                 rewards = np.mean(rewards_list, axis=0)  # [agent, intersection]
@@ -276,8 +287,11 @@ class TSCTrainer(BaseTrainer):
                     actions.append(ag.get_action(obs[idx], phases[idx], test=True))
                 actions = np.stack(actions)
                 rewards_list = []
-                for j in range(self.action_interval):
-                    obs, rewards, dones, _ = self.env.step(actions.flatten())
+                for t in range(self.action_interval):
+                    obs, rewards, dones, _ = self.env.step(
+                        actions.flatten(),
+                        collect_obs=(t == self.action_interval - 1),
+                    )
                     i += 1
                     rewards_list.append(np.stack(rewards))
                 rewards = np.mean(rewards_list, axis=0)  # [agent, intersection]

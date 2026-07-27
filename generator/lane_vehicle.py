@@ -146,43 +146,51 @@ class LaneVehicleGenerator(BaseGenerator):
         '''
         results = [self.world.get_info(fn) for fn in self.fns]
 
-        #need modification here
-
-        ret = np.array([])
+        # Build with Python lists then one ndarray conversion. Repeated np.append
+        # in the old path dominated multi-intersection wall time (see efficiency audit).
+        ret_vals = []
         for i in range(len(self.fns)):
             result = results[i]
 
             # pressure returns result of each intersections, so return directly
             if self.I.id in result:
-                ret = np.append(ret, result[self.I.id])
+                ret_vals.append(result[self.I.id])
                 continue
-            fn_result = np.array([])
 
-            for road_lanes in self.lanes:
-                road_result = []
-                for lane_id in road_lanes:
-                    road_result.append(result[lane_id])
-                if self.average == "road" or self.average == "all":
-                    road_result = np.mean(road_result)
-                else:
-                    road_result = np.array(road_result)
-                fn_result = np.append(fn_result, road_result)
-            
+            # Preserve original semantics:
+            # - average "road"/None: one value per road (mean of that road's lanes) or per lane
+            # - average "all": mean of *per-road means* (not a flat mean over all lanes)
             if self.average == "all":
-                fn_result = np.mean(fn_result)
-            ret = np.append(ret, fn_result)
+                road_means = []
+                for road_lanes in self.lanes:
+                    if not road_lanes:
+                        continue
+                    road_means.append(
+                        sum(result[lane_id] for lane_id in road_lanes) / len(road_lanes)
+                    )
+                ret_vals.append(
+                    sum(road_means) / len(road_means) if road_means else 0.0
+                )
+            elif self.average == "road":
+                for road_lanes in self.lanes:
+                    if not road_lanes:
+                        ret_vals.append(0.0)
+                    else:
+                        ret_vals.append(
+                            sum(result[lane_id] for lane_id in road_lanes) / len(road_lanes)
+                        )
+            else:
+                for road_lanes in self.lanes:
+                    for lane_id in road_lanes:
+                        ret_vals.append(result[lane_id])
+
+        ret = np.asarray(ret_vals, dtype=np.float64)
         if self.negative:
             ret = ret * (-1)
-        origin_ret = ret
-        if len(ret) == 3:
-            ret_list = list(ret)
-            ret_list.append(0)
-            ret = np.array(ret_list)
-        if len(ret) == 2:
-            ret_list = list(ret)
-            ret_list.append(0)
-            ret_list.append(0)
-            ret = np.array(ret_list)
+        if ret.size == 3:
+            ret = np.append(ret, 0.0)
+        elif ret.size == 2:
+            ret = np.append(ret, (0.0, 0.0))
         return ret
 
 
