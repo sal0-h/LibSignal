@@ -120,9 +120,16 @@ python run.py --agent maxpressure --world sumo --network sumo1x21 --seed 42 --ng
 ```
 
 ### SUMO-GUI
+`world.gui: True` alone is not enough: the CLI default `--interface libsumo` cannot open a
+window. Use **`--interface traci`**, and put `gui` under the YAML `world:` block (e.g.
+`--agent maxpressure_gui`). Optional `world.gui_delay` (ms) slows the view; default `0` is
+nearly invisible on short runs.
+
 ```bash
 sumo-gui -c data/raw_data/ingolstadt21/ingolstadt21.sumocfg
-# or via LibSignal (requires --interface traci):
+# via LibSignal:
+python run.py --agent maxpressure_gui --world sumo --network sumo4x4 --interface traci --ngpu -1
+# or a sim cfg with gui:true:
 python run.py --agent fixedtime --world sumo --network sumo4x4_gui --interface traci --ngpu -1
 ```
 
