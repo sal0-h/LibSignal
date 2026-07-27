@@ -121,7 +121,6 @@ Deep-dive docs live in [`docs/`](./docs/README.md):
 - [docs/TRAINING_GUIDE.md](./docs/TRAINING_GUIDE.md) — train/test workflow, config system, ghost-physics baselines.
 - [docs/EFFICIENCY_AUDIT.md](./docs/EFFICIENCY_AUDIT.md) — training wall-time audit (GPU vs SUMO vs Python overhead) and speedups.
 - [docs/SUMO_NETWORKS.md](./docs/SUMO_NETWORKS.md) — catalogue of available SUMO networks.
-- [docs/ALTERNATIVE_NETWORKS.md](./docs/ALTERNATIVE_NETWORKS.md) — networks more interesting than `sumo4x4` (issue #32).
 - [docs/SUMO_FILE_STRUCTURE_GUIDE.md](./docs/SUMO_FILE_STRUCTURE_GUIDE.md) — SUMO roadnet/flow file structure.
 - [docs/TSC_CONFIG_REPORT.md](./docs/TSC_CONFIG_REPORT.md) — code-traced reference for every `configs/tsc/*.yml` parameter.
 - [docs/SIGNAL_CONTROL_THEORY.md](./docs/SIGNAL_CONTROL_THEORY.md) — signal-control / NEMA theory + cross-network audit.

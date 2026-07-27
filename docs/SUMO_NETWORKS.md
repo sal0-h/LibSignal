@@ -2,9 +2,6 @@
 
 All available SUMO networks with their paths, road network topology, and traffic flow files.
 
-For a recommendation of which maps are more interesting than the default `sumo4x4`
-grid, see [ALTERNATIVE_NETWORKS.md](ALTERNATIVE_NETWORKS.md) (issue #32).
-
 ## Quick Reference
 
 | Network Name | Type | TLs | Config File | Road Network | Traffic Flow |
@@ -183,10 +180,6 @@ Example (`configs/sim/sumo4x4.cfg`):
 | Heterogeneous phases | `sumo_atlanta1x5`, `sumo1x21` | Mixed phase counts per TL |
 | Scalability study | `sumo7x28` | 196 TLs |
 | Multi-vehicle types | `sumohz4x4_hetero` | Heterogeneous traffic |
-
-See [ALTERNATIVE_NETWORKS.md](ALTERNATIVE_NETWORKS.md) for the full issue #32 analysis.
-
----
 
 ## Common Issues
 
