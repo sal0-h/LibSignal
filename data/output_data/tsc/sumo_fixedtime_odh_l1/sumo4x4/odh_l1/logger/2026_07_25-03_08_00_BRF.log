@@ -1,0 +1,5 @@
+HELDOUT episode:1/1, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:187.70781893004116, rewards:-51.54610460069444, queue:0.7465277777777778, delay:0.5077304416232639, throughput:729
+HELDOUT episode:1/1, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:186.5170157068063, rewards:-54.08721788194445, queue:0.7411458333333333, delay:0.5272591061062283, throughput:764
+HELDOUT episode:1/1, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:185.65410497981156, rewards:-52.21610785590278, queue:0.7307291666666667, delay:0.5086029900444878, throughput:743
+HELDOUT_MEAN episode:1/1, travel time:186.62631320555298 (n=3)
+Total time taken: 16.340115785598755

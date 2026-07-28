@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Combined fleet + startup physics for realism_full (hetero + slow_start together).
+
+  Cars: 80% of hetero demand — passenger geometry with slow-start car-following
+        (accel=1.0 m/s², tau=1.9 s per HCM / Krauss calibration used in slow_start axis).
+  Trucks: 20% of hetero demand — heavy-vehicle geometry with slower accel and longer
+        headway (tau=2.1 s) reflecting discharge startup lost time on trucks without
+        double-counting the passenger slow-start override on cars.
+
+  Used with grid4x4_hetero.rou.xml (car/truck mix); not with homo-only routes.
+-->
+<additional xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/additional_file.xsd">
+
+    <vType id="car" vClass="passenger" length="5.0" width="2.0"
+           accel="1.0" decel="4.5" maxSpeed="11.111"
+           minGap="2.5" tau="1.9" sigma="0.5"
+           color="0.0,0.0,1.0"/>
+
+    <vType id="truck" vClass="truck" length="10.0" width="2.5"
+           accel="1.2" decel="3.5" maxSpeed="8.33"
+           minGap="3.0" tau="2.1" sigma="0.5"
+           color="1.0,0.0,0.0"/>
+</additional>

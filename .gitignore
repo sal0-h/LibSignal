@@ -9,6 +9,8 @@ __pycache__/
 
 # Python virtual environment (Cursor Cloud dev setup)
 .venv/
+.venv_odh/
+.odh_deps/
 
 # Experiment outputs (logs, checkpoints, local summaries)
 data/output_data/**/model/

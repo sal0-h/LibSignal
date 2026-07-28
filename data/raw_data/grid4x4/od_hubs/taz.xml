@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='utf-8'?>
+<tazs>
+  <taz id="fringe_north">
+    <tazSource id="top0A3" weight="1.0" />
+    <tazSource id="top1B3" weight="1.0" />
+    <tazSource id="top2C3" weight="1.0" />
+    <tazSource id="top3D3" weight="1.0" />
+    <tazSink id="A3top0" weight="1.0" />
+    <tazSink id="B3top1" weight="1.0" />
+    <tazSink id="C3top2" weight="1.0" />
+    <tazSink id="D3top3" weight="1.0" />
+  </taz>
+  <taz id="fringe_south">
+    <tazSource id="bottom0A0" weight="1.0" />
+    <tazSource id="bottom1B0" weight="1.0" />
+    <tazSource id="bottom2C0" weight="1.0" />
+    <tazSource id="bottom3D0" weight="1.0" />
+    <tazSink id="A0bottom0" weight="1.0" />
+    <tazSink id="B0bottom1" weight="1.0" />
+    <tazSink id="C0bottom2" weight="1.0" />
+    <tazSink id="D0bottom3" weight="1.0" />
+  </taz>
+  <taz id="fringe_west">
+    <tazSource id="left0A0" weight="1.0" />
+    <tazSource id="left1A1" weight="1.0" />
+    <tazSource id="left2A2" weight="1.0" />
+    <tazSource id="left3A3" weight="1.0" />
+    <tazSink id="A0left0" weight="1.0" />
+    <tazSink id="A1left1" weight="1.0" />
+    <tazSink id="A2left2" weight="1.0" />
+    <tazSink id="A3left3" weight="1.0" />
+  </taz>
+  <taz id="fringe_east">
+    <tazSource id="right0D0" weight="1.0" />
+    <tazSource id="right1D1" weight="1.0" />
+    <tazSource id="right2D2" weight="1.0" />
+    <tazSource id="right3D3" weight="1.0" />
+    <tazSink id="D0right0" weight="1.0" />
+    <tazSink id="D1right1" weight="1.0" />
+    <tazSink id="D2right2" weight="1.0" />
+    <tazSink id="D3right3" weight="1.0" />
+  </taz>
+  <taz id="internal_NW">
+    <tazSource id="A0A1" weight="1.0" />
+    <tazSource id="A0B0" weight="1.0" />
+    <tazSource id="A1A0" weight="1.0" />
+    <tazSource id="A1A2" weight="1.0" />
+    <tazSource id="A2A1" weight="1.0" />
+    <tazSource id="A2A3" weight="1.0" />
+    <tazSource id="A3A2" weight="1.0" />
+    <tazSource id="A3B3" weight="1.0" />
+    <tazSource id="B0A0" weight="1.0" />
+    <tazSource id="B3A3" weight="1.0" />
+    <tazSink id="A0A1" weight="1.0" />
+    <tazSink id="A0B0" weight="1.0" />
+    <tazSink id="A1A0" weight="1.0" />
+    <tazSink id="A1A2" weight="1.0" />
+    <tazSink id="A2A1" weight="1.0" />
+    <tazSink id="A2A3" weight="1.0" />
+    <tazSink id="A3A2" weight="1.0" />
+    <tazSink id="A3B3" weight="1.0" />
+    <tazSink id="B0A0" weight="1.0" />
+    <tazSink id="B3A3" weight="1.0" />
+  </taz>
+  <taz id="internal_NE">
+    <tazSource id="A0B0" weight="1.0" />
+    <tazSource id="A3B3" weight="1.0" />
+    <tazSource id="B0A0" weight="1.0" />
+    <tazSource id="B0C0" weight="1.0" />
+    <tazSource id="B3A3" weight="1.0" />
+    <tazSource id="B3C3" weight="1.0" />
+    <tazSource id="C0B0" weight="1.0" />
+    <tazSource id="C3B3" weight="1.0" />
+    <tazSink id="A0B0" weight="1.0" />
+    <tazSink id="A3B3" weight="1.0" />
+    <tazSink id="B0A0" weight="1.0" />
+    <tazSink id="B0C0" weight="1.0" />
+    <tazSink id="B3A3" weight="1.0" />
+    <tazSink id="B3C3" weight="1.0" />
+    <tazSink id="C0B0" weight="1.0" />
+    <tazSink id="C3B3" weight="1.0" />
+  </taz>
+  <taz id="internal_SW">
+    <tazSource id="B0C0" weight="1.0" />
+    <tazSource id="B3C3" weight="1.0" />
+    <tazSource id="C0B0" weight="1.0" />
+    <tazSource id="C0D0" weight="1.0" />
+    <tazSource id="C3B3" weight="1.0" />
+    <tazSource id="C3D3" weight="1.0" />
+    <tazSource id="D0C0" weight="1.0" />
+    <tazSource id="D3C3" weight="1.0" />
+    <tazSink id="B0C0" weight="1.0" />
+    <tazSink id="B3C3" weight="1.0" />
+    <tazSink id="C0B0" weight="1.0" />
+    <tazSink id="C0D0" weight="1.0" />
+    <tazSink id="C3B3" weight="1.0" />
+    <tazSink id="C3D3" weight="1.0" />
+    <tazSink id="D0C0" weight="1.0" />
+    <tazSink id="D3C3" weight="1.0" />
+  </taz>
+  <taz id="internal_SE">
+    <tazSource id="C0D0" weight="1.0" />
+    <tazSource id="C3D3" weight="1.0" />
+    <tazSource id="D0C0" weight="1.0" />
+    <tazSource id="D0D1" weight="1.0" />
+    <tazSource id="D1D0" weight="1.0" />
+    <tazSource id="D1D2" weight="1.0" />
+    <tazSource id="D2D1" weight="1.0" />
+    <tazSource id="D2D3" weight="1.0" />
+    <tazSource id="D3C3" weight="1.0" />
+    <tazSource id="D3D2" weight="1.0" />
+    <tazSink id="C0D0" weight="1.0" />
+    <tazSink id="C3D3" weight="1.0" />
+    <tazSink id="D0C0" weight="1.0" />
+    <tazSink id="D0D1" weight="1.0" />
+    <tazSink id="D1D0" weight="1.0" />
+    <tazSink id="D1D2" weight="1.0" />
+    <tazSink id="D2D1" weight="1.0" />
+    <tazSink id="D2D3" weight="1.0" />
+    <tazSink id="D3C3" weight="1.0" />
+    <tazSink id="D3D2" weight="1.0" />
+  </taz>
+  <taz id="hub_cbd">
+    <tazSource id="A1B1" weight="1.0" />
+    <tazSource id="A2B2" weight="1.0" />
+    <tazSource id="B0B1" weight="1.0" />
+    <tazSource id="B1A1" weight="1.0" />
+    <tazSource id="B1B0" weight="1.0" />
+    <tazSource id="B1B2" weight="1.0" />
+    <tazSource id="B1C1" weight="1.0" />
+    <tazSource id="B2A2" weight="1.0" />
+    <tazSource id="B2B1" weight="1.0" />
+    <tazSource id="B2B3" weight="1.0" />
+    <tazSource id="B2C2" weight="1.0" />
+    <tazSource id="B3B2" weight="1.0" />
+    <tazSource id="C0C1" weight="1.0" />
+    <tazSource id="C1B1" weight="1.0" />
+    <tazSource id="C1C0" weight="1.0" />
+    <tazSource id="C1C2" weight="1.0" />
+    <tazSource id="C1D1" weight="1.0" />
+    <tazSource id="C2B2" weight="1.0" />
+    <tazSource id="C2C1" weight="1.0" />
+    <tazSource id="C2C3" weight="1.0" />
+    <tazSource id="C2D2" weight="1.0" />
+    <tazSource id="C3C2" weight="1.0" />
+    <tazSource id="D1C1" weight="1.0" />
+    <tazSource id="D2C2" weight="1.0" />
+    <tazSink id="A1B1" weight="3.0" />
+    <tazSink id="A2B2" weight="3.0" />
+    <tazSink id="B0B1" weight="3.0" />
+    <tazSink id="B1A1" weight="3.0" />
+    <tazSink id="B1B0" weight="3.0" />
+    <tazSink id="B1B2" weight="3.0" />
+    <tazSink id="B1C1" weight="3.0" />
+    <tazSink id="B2A2" weight="3.0" />
+    <tazSink id="B2B1" weight="3.0" />
+    <tazSink id="B2B3" weight="3.0" />
+    <tazSink id="B2C2" weight="3.0" />
+    <tazSink id="B3B2" weight="3.0" />
+    <tazSink id="C0C1" weight="3.0" />
+    <tazSink id="C1B1" weight="3.0" />
+    <tazSink id="C1C0" weight="3.0" />
+    <tazSink id="C1C2" weight="3.0" />
+    <tazSink id="C1D1" weight="3.0" />
+    <tazSink id="C2B2" weight="3.0" />
+    <tazSink id="C2C1" weight="3.0" />
+    <tazSink id="C2C3" weight="3.0" />
+    <tazSink id="C2D2" weight="3.0" />
+    <tazSink id="C3C2" weight="3.0" />
+    <tazSink id="D1C1" weight="3.0" />
+    <tazSink id="D2C2" weight="3.0" />
+  </taz>
+</tazs>
