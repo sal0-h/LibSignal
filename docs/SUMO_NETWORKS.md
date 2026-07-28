@@ -7,10 +7,10 @@ All available SUMO networks with their paths, road network topology, and traffic
 | Network Name | Type | Intersections | Config File | Road Network | Traffic Flow |
 |---|---|---|---|---|---|
 | sumo1x1 | Grid | 1×1 | [configs/sim/sumo1x1.cfg](../configs/sim/sumo1x1.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
-| sumo1x3 | Real corridor (Cologne) | 3 | [configs/sim/sumo1x3.cfg](../configs/sim/sumo1x3.cfg) | data/raw_data/cologne3/cologne3.net.xml | data/raw_data/cologne3/cologne3.rou.xml |
-| sumo1x21 | Real arterial (Ingolstadt) | 21 | [configs/sim/sumo1x21.cfg](../configs/sim/sumo1x21.cfg) | data/raw_data/ingolstadt21/ingolstadt21.net.xml | data/raw_data/ingolstadt21/ingolstadt21.rou.xml |
+| sumo1x3 | Grid | 1×3 | [configs/sim/sumo1x3.cfg](../configs/sim/sumo1x3.cfg) | data/raw_data/cologne3/cologne3.net.xml | data/raw_data/cologne3/cologne3.rou.xml |
+| sumo1x21 | Arterial | 1×21 | [configs/sim/sumo1x21.cfg](../configs/sim/sumo1x21.cfg) | data/raw_data/ingolstadt21/ingolstadt21.net.xml | data/raw_data/ingolstadt21/ingolstadt21.rou.xml |
 | sumo4x4 | Grid | 4×4 interior (32 TLs) | [configs/sim/sumo4x4.cfg](../configs/sim/sumo4x4.cfg) | data/raw_data/grid4x4/grid4x4.net.xml | data/raw_data/grid4x4/grid4x4.rou.xml |
-| sumo7x28 | Synthetic grid (Manhattan) | 28×7 (196) | [configs/sim/sumo7x28.cfg](../configs/sim/sumo7x28.cfg) | data/raw_data/manhattan_28x7/manhattan_28x7.net.xml | data/raw_data/manhattan_28x7/manhattan_28x7.rou.xml |
+| sumo7x28 | Grid | 7×28 | [configs/sim/sumo7x28.cfg](../configs/sim/sumo7x28.cfg) | data/raw_data/manhattan_28x7/manhattan_28x7.net.xml | data/raw_data/manhattan_28x7/manhattan_28x7.rou.xml |
 | sumo1x1_colight | Grid | 1×1 (CoLight) | [configs/sim/sumo1x1_colight.cfg](../configs/sim/sumo1x1_colight.cfg) | data/raw_data/cologne1/cologne1.net.xml | data/raw_data/cologne1/cologne1.rou.xml |
 | sumohz1x1 | Urban | 1×1 (Hangzhou) | [configs/sim/sumohz1x1.cfg](../configs/sim/sumohz1x1.cfg) | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.net.xml | data/raw_data/hangzhou_1x1_bc-tyc_18041610_1h/hangzhou_1x1_bc-tyc_18041610_1h.rou.xml |
 | sumohz1x1_config2 | Urban | 1×1 (Hangzhou v2) | [configs/sim/sumohz1x1_config2.cfg](../configs/sim/sumohz1x1_config2.cfg) | data/raw_data/hangzhou_1x1_qc-yn_18041608_1h/hangzhou_1x1_qc-yn_18041608_1h.net.xml | data/raw_data/hangzhou_1x1_qc-yn_18041608_1h/hangzhou_1x1_qc-yn_18041608_1h.rou.xml |
@@ -38,7 +38,7 @@ All available SUMO networks with their paths, road network topology, and traffic
   ```
 
 #### **sumo1x3**
-- **Topology**: Real Cologne 3-intersection corridor (same map as `sumo_cologne3`)
+- **Topology**: Arterial corridor 1×3 intersections (Cologne `cologne3`; same map as `sumo_cologne3`)
 - **Use case**: Multi-intersection learning, corridor flow patterns
 - **Path**:
   - Config: `configs/sim/sumo1x3.cfg`
@@ -46,8 +46,8 @@ All available SUMO networks with their paths, road network topology, and traffic
   - Flow: `data/raw_data/cologne3/cologne3.rou.xml`
 
 #### **sumo1x21**
-- **Topology**: Real Ingolstadt arterial — **21** traffic lights (irregular geometry)
-- **Use case**: Arterial signal coordination; selected multi-intersection map for issue #34 / #35 (replacing synthetic `sumo4x4` for upcoming homo runs)
+- **Topology**: Long arterial 1×21 intersections (Ingolstadt `ingolstadt21`, 21 traffic lights)
+- **Use case**: Arterial signal coordination, platoon formation
 - **Path**:
   - Config: `configs/sim/sumo1x21.cfg`
   - Network: `data/raw_data/ingolstadt21/ingolstadt21.net.xml`
@@ -68,7 +68,7 @@ All available SUMO networks with their paths, road network topology, and traffic
   ```
 
 #### **sumo7x28**
-- **Topology**: Large synthetic Manhattan-style grid **28×7** (196 intersections)
+- **Topology**: Large grid 7×28 (196 intersections; data folder `manhattan_28x7`)
 - **Use case**: Large-scale experiments, scalability testing
 - **Path**:
   - Config: `configs/sim/sumo7x28.cfg`
@@ -101,9 +101,9 @@ All available SUMO networks with their paths, road network topology, and traffic
 - **Topology**: Single 1×1 intersection (different Hangzhou routes/times)
 - **Use case**: Cross-validation, time-of-day experiments
 - **Routes**:
-  - **config2**: `hangzhou_1x1_qc-yn_18041608_1h` (qc-yn site)
-  - **config3**: `hangzhou_1x1_kn-hz_18041608_1h` (kn-hz site)
-  - **config4**: `hangzhou_1x1_sb-sx_18041607_1h` (sb-sx site)
+  - **config2**: `hangzhou_1x1_qc-yn_18041608_1h` (18:04–19:04, qc-yn site)
+  - **config3**: `hangzhou_1x1_kn-hz_18041608_1h` (18:04–19:04, kn-hz site)
+  - **config4**: `hangzhou_1x1_sb-sx_18041607_1h` (17:04–18:04, sb-sx site)
 
 #### **sumohz4x4**
 - **Topology**: Urban grid 4×4 (Hangzhou real traffic)
@@ -120,7 +120,7 @@ All available SUMO networks with their paths, road network topology, and traffic
 - **Path**:
   - Config: `configs/sim/sumohz4x4_hetero.cfg`
   - Network: `data/raw_data/hangzhou_4x4_hetero/hangzhou_4x4_gudang_18041610_1h_m.net.xml`
-  - Flow: `data/raw_data/hangzhou_4x4_hetero/hangzhou_4x4_gudang_18041610_1h_m.rou.xml`
+  - Flow: `data/raw_data/hangzhou_4x4_hetero/hangzhou_4x4_gudang_18041610_1h_m.rou.xml` (with vType variations)
 
 ---
 
