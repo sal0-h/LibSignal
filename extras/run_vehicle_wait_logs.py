@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Run a LibSignal TSC agent on SUMO and export per-vehicle waiting-time logs.
+Run a LibSignal TSC agent on SUMO and export per-vehicle trip metrics (CSV + JSON).
 
-Analysis CSV/JSON go under extras/output/ (gitignored), not data/output_data/.
+Outputs: extras/output/<agent>/<network>/<run_name>/
+  vehicle_trip_metrics.csv   — one row per vehicle (completed + censored)
+  vehicle_trip_metrics_meta.json — summary stats + LibSignal ATT
 
 Usage (from repo root):
-  python extras/run_vehicle_wait_logs.py --agent maxpressure --network sumo1x1 --seed 42
   python extras/run_vehicle_wait_logs.py --agent maxpressure --network sumo4x4 --seed 42
+  python extras/run_vehicle_wait_logs.py --agent dqn --network sumo4x4 --seed 42 --train
 """
 
 import argparse
@@ -71,10 +73,30 @@ def _simulation_id_list(world, method_name):
         return []
 
 
+def _vehicle_route(world, veh_id):
+    try:
+        return list(world.eng.vehicle.getRoute(veh_id))
+    except Exception:
+        return None
+
+
+def _route_distance_m(world, veh_id):
+    """Planned route length (sum of edge lengths)."""
+    route = _vehicle_route(world, veh_id)
+    if not route:
+        return None
+    try:
+        return float(sum(world.eng.edge.getLength(edge_id) for edge_id in route))
+    except Exception:
+        return None
+
+
 def _free_flow_route_time(world, veh_id):
     """Minimum travel time if the vehicle drove at each edge's speed limit."""
+    route = _vehicle_route(world, veh_id)
+    if not route:
+        return None
     try:
-        route = world.eng.vehicle.getRoute(veh_id)
         total = 0.0
         for edge_id in route:
             length = world.eng.edge.getLength(edge_id)
@@ -87,11 +109,20 @@ def _free_flow_route_time(world, veh_id):
         return None
 
 
+def _distance_traveled_m(world, veh_id):
+    """Odometer distance along the route (SUMO getDistance)."""
+    try:
+        return float(world.eng.vehicle.getDistance(veh_id))
+    except Exception:
+        return None
+
+
 def _snapshot_vehicle_metrics(world):
     """Capture per-vehicle SUMO metrics before env.step() removes departures."""
     pre_sumo_wait = {}
     pre_time_loss = {}
     pre_speed = {}
+    pre_distance = {}
     for veh_id in world.eng.vehicle.getIDList():
         pre_sumo_wait[veh_id] = float(world.eng.vehicle.getAccumulatedWaitingTime(veh_id))
         try:
@@ -99,7 +130,10 @@ def _snapshot_vehicle_metrics(world):
         except Exception:
             pre_time_loss[veh_id] = 0.0
         pre_speed[veh_id] = float(world.eng.vehicle.getSpeed(veh_id))
-    return pre_sumo_wait, pre_time_loss, pre_speed
+        dist = _distance_traveled_m(world, veh_id)
+        if dist is not None:
+            pre_distance[veh_id] = dist
+    return pre_sumo_wait, pre_time_loss, pre_speed, pre_distance
 
 
 def _update_custom_wait(custom_wait, pre_speed, dt):
@@ -123,23 +157,34 @@ def _make_record(
     free_flow_time,
     trip_status,
     vehicle_type="",
+    route_distance_m=None,
+    distance_traveled_m=None,
 ):
     delay = None
+    schedule_efficiency = None
+    moving_time = max(0.0, travel_time - custom_wait) if travel_time > 0 else 0.0
+    waiting_fraction = custom_wait / travel_time if travel_time > 0 else 0.0
+    moving_fraction = 1.0 - waiting_fraction if travel_time > 0 else 0.0
     if free_flow_time is not None and travel_time > 0:
         delay = max(0.0, travel_time - free_flow_time)
-    primary_wait = custom_wait
+        schedule_efficiency = min(1.0, max(0.0, free_flow_time / travel_time))
     return {
         "vehicle_id": veh_id,
         "vehicle_type": vehicle_type,
         "enter_time_s": round(enter_time, 3),
         "departure_time_s": round(departure_time, 3) if departure_time is not None else None,
         "travel_time_s": round(travel_time, 3),
+        "route_distance_m": round(route_distance_m, 3) if route_distance_m is not None else "",
+        "distance_traveled_m": round(distance_traveled_m, 3) if distance_traveled_m is not None else "",
         "accumulated_waiting_time_s": round(sumo_wait, 3),
         "custom_wait_s": round(custom_wait, 3),
+        "moving_time_s": round(moving_time, 3),
         "time_loss_s": round(time_loss, 3),
         "free_flow_time_s": round(free_flow_time, 3) if free_flow_time is not None else "",
         "delay_s": round(delay, 3) if delay is not None else "",
-        "waiting_fraction": round(primary_wait / travel_time, 4) if travel_time > 0 else 0.0,
+        "waiting_fraction": round(waiting_fraction, 4),
+        "moving_fraction": round(moving_fraction, 4),
+        "schedule_efficiency": round(schedule_efficiency, 4) if schedule_efficiency is not None else "",
         "completed_trip": trip_status == "completed",
         "trip_status": trip_status,
     }
@@ -161,10 +206,12 @@ def _collect_departed_records(
     world,
     pre_sumo_wait,
     pre_time_loss,
+    pre_distance,
     custom_wait,
     cumulative_sumo_wait,
     cumulative_time_loss,
     free_flow_times,
+    route_distances,
     seen_logged,
     sim_time,
 ):
@@ -192,6 +239,8 @@ def _collect_departed_records(
                 free_flow_times.pop(veh_id, None),
                 "completed",
                 vehicle_type=_vehicle_type(world, veh_id),
+                route_distance_m=route_distances.pop(veh_id, None),
+                distance_traveled_m=pre_distance.get(veh_id),
             )
         )
     return records, seen_logged | newly_completed
@@ -201,10 +250,12 @@ def _collect_removed_records(
     world,
     pre_sumo_wait,
     pre_time_loss,
+    pre_distance,
     custom_wait,
     cumulative_sumo_wait,
     cumulative_time_loss,
     free_flow_times,
+    route_distances,
     seen_logged,
     sim_time,
     veh_ids,
@@ -232,6 +283,8 @@ def _collect_removed_records(
                 free_flow_times.pop(veh_id, None),
                 "removed",
                 vehicle_type=_vehicle_type(world, veh_id),
+                route_distance_m=route_distances.pop(veh_id, None),
+                distance_traveled_m=pre_distance.get(veh_id),
             )
         )
         newly_logged.add(veh_id)
@@ -254,11 +307,14 @@ def _accumulate_teleport_metrics(
         )
 
 
-def _refresh_free_flow_times(world, free_flow_times):
+def _refresh_route_metrics(world, free_flow_times, route_distances):
     for veh_id in world.eng.vehicle.getIDList():
         fft = _free_flow_route_time(world, veh_id)
         if fft is not None:
             free_flow_times[veh_id] = fft
+        rd = _route_distance_m(world, veh_id)
+        if rd is not None:
+            route_distances[veh_id] = rd
 
 
 def _collect_remaining_records(
@@ -267,6 +323,7 @@ def _collect_remaining_records(
     cumulative_sumo_wait,
     cumulative_time_loss,
     free_flow_times,
+    route_distances,
     seen_logged,
     sim_time,
 ):
@@ -296,9 +353,19 @@ def _collect_remaining_records(
                 free_flow_times.get(veh_id),
                 "on_map_at_end",
                 vehicle_type=_vehicle_type(world, veh_id),
+                route_distance_m=route_distances.get(veh_id),
+                distance_traveled_m=_distance_traveled_m(world, veh_id),
             )
         )
     return records
+
+
+def _system_idle_share(records):
+    total_time = sum(float(r["travel_time_s"]) for r in records if r.get("travel_time_s"))
+    total_idle = sum(float(r["custom_wait_s"]) for r in records if r.get("custom_wait_s") is not None)
+    if total_time <= 0:
+        return None
+    return float(total_idle / total_time)
 
 
 def _metric_stats(records, field):
@@ -333,6 +400,7 @@ def run_with_vehicle_logs(runner, output_dir):
     cumulative_sumo_wait = {}
     cumulative_time_loss = {}
     free_flow_times = {}
+    route_distances = {}
     seen_logged = set()
     vehicle_records = []
     dones = [False]
@@ -350,8 +418,8 @@ def run_with_vehicle_logs(runner, output_dir):
 
             rewards_list = []
             for _ in range(action_interval):
-                _refresh_free_flow_times(world, free_flow_times)
-                pre_sumo_wait, pre_time_loss, pre_speed = _snapshot_vehicle_metrics(world)
+                _refresh_route_metrics(world, free_flow_times, route_distances)
+                pre_sumo_wait, pre_time_loss, pre_speed, pre_distance = _snapshot_vehicle_metrics(world)
                 _update_custom_wait(custom_wait, pre_speed, dt)
 
                 obs, rewards, dones, _ = env.step(actions.flatten())
@@ -362,10 +430,12 @@ def run_with_vehicle_logs(runner, output_dir):
                     world,
                     pre_sumo_wait,
                     pre_time_loss,
+                    pre_distance,
                     custom_wait,
                     cumulative_sumo_wait,
                     cumulative_time_loss,
                     free_flow_times,
+                    route_distances,
                     seen_logged,
                     sim_time,
                 )
@@ -385,10 +455,12 @@ def run_with_vehicle_logs(runner, output_dir):
                     world,
                     pre_sumo_wait,
                     pre_time_loss,
+                    pre_distance,
                     custom_wait,
                     cumulative_sumo_wait,
                     cumulative_time_loss,
                     free_flow_times,
+                    route_distances,
                     seen_logged,
                     sim_time,
                     removed,
@@ -414,6 +486,7 @@ def run_with_vehicle_logs(runner, output_dir):
             cumulative_sumo_wait,
             cumulative_time_loss,
             free_flow_times,
+            route_distances,
             seen_logged,
             sim_time,
         )
@@ -421,19 +494,24 @@ def run_with_vehicle_logs(runner, output_dir):
 
     os.makedirs(output_dir, exist_ok=True)
 
-    csv_path = os.path.join(output_dir, "vehicle_waiting_times.csv")
+    csv_path = os.path.join(output_dir, "vehicle_trip_metrics.csv")
     fieldnames = [
         "vehicle_id",
         "vehicle_type",
         "enter_time_s",
         "departure_time_s",
         "travel_time_s",
+        "route_distance_m",
+        "distance_traveled_m",
         "accumulated_waiting_time_s",
         "custom_wait_s",
+        "moving_time_s",
         "time_loss_s",
         "free_flow_time_s",
         "delay_s",
         "waiting_fraction",
+        "moving_fraction",
+        "schedule_efficiency",
         "completed_trip",
         "trip_status",
     ]
@@ -451,6 +529,9 @@ def run_with_vehicle_logs(runner, output_dir):
         status = rec.get("trip_status", "unknown")
         status_counts[status] = status_counts.get(status, 0) + 1
 
+    n_departed = len(vehicle_records)
+    completion_rate = len(completed) / n_departed if n_departed else None
+
     meta = {
         "agent": runner.config["command"]["agent"],
         "world": runner.config["command"]["world"],
@@ -463,24 +544,48 @@ def run_with_vehicle_logs(runner, output_dir):
         "n_vehicles_logged": len(vehicle_records),
         "n_completed_trips": len(completed),
         "n_incomplete_trips": len(incomplete),
+        "completion_rate": completion_rate,
         "trip_status_counts": status_counts,
-        "primary_fairness_metric": "custom_wait_s",
+        "primary_idle_metric": "custom_wait_s",
+        "primary_efficiency_metric": "schedule_efficiency",
+        "metric_definitions": {
+            "travel_time_s": "Wall-clock time in network (LibSignal ATT uses mean over completed).",
+            "route_distance_m": "Sum of edge lengths on assigned route.",
+            "distance_traveled_m": "SUMO odometer at trip end (or at horizon for censored).",
+            "custom_wait_s": f"Uncapped idle time (speed < {STOP_SPEED_THRESHOLD} m/s each step).",
+            "waiting_fraction": "custom_wait_s / travel_time_s.",
+            "moving_fraction": "1 - waiting_fraction.",
+            "schedule_efficiency": "free_flow_time_s / travel_time_s in [0,1] (higher is better).",
+            "system_idle_share": "sum(custom_wait_s) / sum(travel_time_s) over a record set.",
+        },
         "sumo_accumulated_wait_note": (
             "accumulated_waiting_time_s uses SUMO getAccumulatedWaitingTime(), which is "
             "capped by default --waiting-time-memory=100s. Do NOT use it for tail/fairness "
             "plots. custom_wait_s is uncapped (per-step speed < 0.1 m/s bookkeeping)."
         ),
-        "waiting_time_stats_completed": _metric_stats(completed, "accumulated_waiting_time_s"),
-        "waiting_time_stats_incomplete": _metric_stats(incomplete, "accumulated_waiting_time_s"),
-        "waiting_time_stats_all": _metric_stats(vehicle_records, "accumulated_waiting_time_s"),
+        "travel_time_stats_completed": _metric_stats(completed, "travel_time_s"),
+        "travel_time_stats_incomplete": _metric_stats(incomplete, "travel_time_s"),
+        "route_distance_stats_completed": _metric_stats(completed, "route_distance_m"),
+        "distance_traveled_stats_completed": _metric_stats(completed, "distance_traveled_m"),
+        "schedule_efficiency_stats_completed": _metric_stats(completed, "schedule_efficiency"),
+        "moving_fraction_stats_completed": _metric_stats(completed, "moving_fraction"),
+        "waiting_fraction_stats_completed": _metric_stats(completed, "waiting_fraction"),
         "custom_wait_stats_completed": _metric_stats(completed, "custom_wait_s"),
         "custom_wait_stats_incomplete": _metric_stats(incomplete, "custom_wait_s"),
         "custom_wait_stats_all": _metric_stats(vehicle_records, "custom_wait_s"),
         "delay_stats_completed": _metric_stats(completed, "delay_s"),
-        "delay_stats_incomplete": _metric_stats(incomplete, "delay_s"),
-        "delay_stats_all": _metric_stats(vehicle_records, "delay_s"),
         "time_loss_stats_all": _metric_stats(vehicle_records, "time_loss_s"),
+        "system_idle_share_completed": _system_idle_share(completed),
+        "system_idle_share_all": _system_idle_share(vehicle_records),
+        "mean_schedule_efficiency_completed": (
+            float(np.mean([float(r["schedule_efficiency"]) for r in completed if r.get("schedule_efficiency") not in ("", None)]))
+            if completed
+            else None
+        ),
         "mean_travel_time_s": float(np.mean([r["travel_time_s"] for r in completed]))
+        if completed
+        else None,
+        "median_travel_time_s": float(np.median([r["travel_time_s"] for r in completed]))
         if completed
         else None,
         "avg_travel_time_metric": float(trainer_obj.metric.real_average_travel_time()),
@@ -491,41 +596,33 @@ def run_with_vehicle_logs(runner, output_dir):
             t: sum(1 for r in vehicle_records if r.get("vehicle_type") == t)
             for t in set(r.get("vehicle_type", "") for r in vehicle_records)
         },
-        "custom_wait_stats_by_type": {
-            t: _metric_stats(
-                [r for r in vehicle_records if r.get("vehicle_type") == t],
-                "custom_wait_s",
-            )
-            for t in set(r.get("vehicle_type", "") for r in vehicle_records)
-            if t
-        },
         "notes": (
-            "Use custom_wait_s for all fairness / outlier plots (no 100s SUMO cap). "
-            "accumulated_waiting_time_s is kept for reference only. custom_wait_s increments "
-            f"each step when speed < {STOP_SPEED_THRESHOLD} m/s, snapshotted before env.step(). "
-            "Include trip_status=on_map_at_end for stranded vehicles."
+            "Plot histograms/ECDFs of travel_time_s and route_distance_m (completed first). "
+            "Use schedule_efficiency and waiting_fraction for per-trip congestion shape. "
+            "Report completion_rate alongside ATT. Censored trips: trip_status=on_map_at_end."
         ),
     }
-    meta_path = os.path.join(output_dir, "vehicle_waiting_times_meta.json")
+    meta_path = os.path.join(output_dir, "vehicle_trip_metrics_meta.json")
     with open(meta_path, "w") as f:
         json.dump(meta, f, indent=2)
 
-    custom_all = meta.get("custom_wait_stats_all") or {}
     trainer_obj.logger.info(
-        "Saved %d vehicle records to %s (custom_wait mean %.2fs, p95 %.2fs, max %.2fs)",
+        "Saved %d vehicle records to %s (ATT=%.2fs, completion=%.1f%%)",
         len(vehicle_records),
         csv_path,
-        custom_all.get("mean", 0.0),
-        custom_all.get("p95", 0.0),
-        custom_all.get("max", 0.0),
+        meta.get("avg_travel_time_metric") or 0.0,
+        (completion_rate or 0.0) * 100.0,
     )
-    print(f"\nVehicle waiting-time log: {csv_path}")
-    print(f"Metadata:               {meta_path}")
-    if custom_all:
+    print(f"\nVehicle trip metrics CSV: {csv_path}")
+    print(f"Metadata:                 {meta_path}")
+    if meta.get("travel_time_stats_completed"):
+        ts = meta["travel_time_stats_completed"]
         print(
-            f"custom_wait_s (all vehicles): mean={custom_all['mean']:.1f}s "
-            f"p95={custom_all['p95']:.1f}s max={custom_all['max']:.1f}s"
+            f"travel_time_s (completed): mean={ts['mean']:.1f}s median={ts['median']:.1f}s "
+            f"p95={ts['p95']:.1f}s"
         )
+    if meta.get("mean_schedule_efficiency_completed") is not None:
+        print(f"mean schedule_efficiency (completed): {meta['mean_schedule_efficiency_completed']:.4f}")
     return csv_path, meta_path
 
 
@@ -561,6 +658,17 @@ def parse_args(argv=None):
     parser.add_argument(
         "--test-steps", type=int, default=None, help="Override trainer.test_steps"
     )
+    parser.add_argument(
+        "--train",
+        action="store_true",
+        help="Train RL agent first (e.g. dqn), then export trip metrics on greedy test rollout",
+    )
+    parser.add_argument(
+        "--episodes",
+        type=int,
+        default=None,
+        help="Override trainer.episodes when --train is set",
+    )
     return parser.parse_args(argv)
 
 
@@ -590,6 +698,8 @@ def main(argv=None):
         Registry.mapping["trainer_mapping"]["setting"].param["steps"] = test_steps
     else:
         test_steps = Registry.mapping["trainer_mapping"]["setting"].param["test_steps"]
+    if args.episodes is not None:
+        Registry.mapping["trainer_mapping"]["setting"].param["episodes"] = args.episodes
 
     output_dir = resolve_output_dir(
         agent=args.agent,
@@ -604,6 +714,17 @@ def main(argv=None):
     runner.trainer = Registry.mapping["trainer_mapping"][
         Registry.mapping["command_mapping"]["setting"].param["task"]
     ](logger)
+
+    if args.train:
+        train_model = Registry.mapping["model_mapping"]["setting"].param.get("train_model", False)
+        if not train_model:
+            print(f"[Warning] --train set but agent '{args.agent}' has train_model=False; exporting only.")
+        else:
+            print(f"Training {args.agent} for {Registry.mapping['trainer_mapping']['setting'].param['episodes']} episodes...")
+            runner.trainer.train()
+            for ag in runner.trainer.agents:
+                ag.load_model(runner.trainer.episodes)
+            print("Training done; running trip-metrics export rollout...")
 
     return run_with_vehicle_logs(runner, output_dir)
 
