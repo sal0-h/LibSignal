@@ -2,21 +2,29 @@
 """
 Run a LibSignal TSC agent on SUMO and export per-vehicle trip metrics (CSV + JSON).
 
+Eval rollout matches TSCTrainer.test() (greedy, collect_obs on last sub-step).
+Set PYTHONHASHSEED=0 like run.py for reproducibility.
+
 Outputs: extras/output/<agent>/<network>/<run_name>/
-  vehicle_trip_metrics.csv   — one row per vehicle (completed + censored)
-  vehicle_trip_metrics_meta.json — summary stats + LibSignal ATT
+  vehicle_trip_metrics.csv
+  vehicle_trip_metrics_meta.json
 
 Usage (from repo root):
   python extras/run_vehicle_wait_logs.py --agent maxpressure --network sumo4x4 --seed 42
   python extras/run_vehicle_wait_logs.py --agent dqn --network sumo4x4 --seed 42 --train
 """
+import os
+import sys
+
+# Match run.py reproducibility (must run before other imports).
+if os.environ.get("PYTHONHASHSEED") != "0":
+    os.environ["PYTHONHASHSEED"] = "0"
+    os.execv(sys.executable, [sys.executable] + sys.argv)
 
 import argparse
 import csv
 import json
 import logging
-import os
-import sys
 from datetime import datetime
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -417,12 +425,15 @@ def run_with_vehicle_logs(runner, output_dir):
             )
 
             rewards_list = []
-            for _ in range(action_interval):
+            for t in range(action_interval):
                 _refresh_route_metrics(world, free_flow_times, route_distances)
                 pre_sumo_wait, pre_time_loss, pre_speed, pre_distance = _snapshot_vehicle_metrics(world)
                 _update_custom_wait(custom_wait, pre_speed, dt)
 
-                obs, rewards, dones, _ = env.step(actions.flatten())
+                obs, rewards, dones, _ = env.step(
+                    actions.flatten(),
+                    collect_obs=(t == action_interval - 1),
+                )
 
                 sim_time = world.eng.simulation.getTime()
 
@@ -546,7 +557,8 @@ def run_with_vehicle_logs(runner, output_dir):
         "n_incomplete_trips": len(incomplete),
         "completion_rate": completion_rate,
         "trip_status_counts": status_counts,
-        "primary_idle_metric": "custom_wait_s",
+        "eval_protocol": "TSCTrainer.test() aligned: greedy actions, collect_obs on last sub-step",
+        "pythonhashseed": 0,
         "primary_efficiency_metric": "schedule_efficiency",
         "metric_definitions": {
             "travel_time_s": "Wall-clock time in network (LibSignal ATT uses mean over completed).",
