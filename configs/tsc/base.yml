@@ -53,7 +53,7 @@ trainer:
   action_interval: 10
   # Episode budget: train at least min_episodes, at most episodes (max).
   # After clear ATT plateau (patience + min_delta), stop early.
-  episodes: 200                 # max training episodes (LibSignal default hard cap)
+  episodes: 2000                # max training episodes (hard cap; actor-critic needs headroom)
   min_episodes: 20              # never early-stop before this many episodes
   early_stop: True              # disable to always run full episodes budget
   early_stop_patience: 20       # stop after this many episodes with no ATT improvement

@@ -28,7 +28,7 @@ export PATH="${CONDA_PREFIX}/bin:${SUMO_HOME}/bin:${PATH}"
 
 echo "Host: $(hostname)"
 echo "Agent: ${AGENT}  Network: ${NETWORK}  Seed: ${SEED}  Prefix: ${PREFIX}"
-echo "Budget: min=20 max=200 patience=20 (from configs/tsc/base.yml)"
+echo "Budget: min=20 max=2000 patience=20 (from configs/tsc/base.yml)"
 
 if [[ "${AGENT}" == "colight" ]]; then
   python -c "import torch_scatter" 2>/dev/null || {

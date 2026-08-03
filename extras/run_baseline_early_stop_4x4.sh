@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Baseline early-stop protocol on sumo4x4 (grid4x4).
 #
-# Agents (same set as realism / OD-hub notebooks):
+# Agents:
 #   maxpressure, fixedtime  — classical baselines (1 eval episode)
-#   dqn, presslight, colight — RL with min=20 / max=200 / patience=20
+#   dqn, presslight, colight, ppo_pfrl (IPPO) — RL with min=20 / max=2000 / patience=20
 #
 # Usage (local sequential):
-#   ./extras/run_baseline_early_stop_4x4.sh              # all 5
+#   ./extras/run_baseline_early_stop_4x4.sh              # all 6
 #   ./extras/run_baseline_early_stop_4x4.sh baselines    # FT + MP only
-#   ./extras/run_baseline_early_stop_4x4.sh rl           # DQN + PressLight + CoLight
+#   ./extras/run_baseline_early_stop_4x4.sh rl           # DQN + PressLight + CoLight + IPPO
 #   ./extras/run_baseline_early_stop_4x4.sh dqn          # single agent
 #
 # Env overrides:
@@ -52,16 +52,16 @@ if [[ -z "${SUMO_HOME:-}" ]]; then
 fi
 
 BASELINES=(maxpressure fixedtime)
-RL_AGENTS=(dqn presslight colight)
+RL_AGENTS=(dqn presslight colight ppo_pfrl)
 
 pick_agents() {
   case "$MODE" in
     all) echo "${BASELINES[*]} ${RL_AGENTS[*]}" ;;
     baselines) echo "${BASELINES[*]}" ;;
     rl) echo "${RL_AGENTS[*]}" ;;
-    maxpressure|fixedtime|dqn|presslight|colight) echo "$MODE" ;;
+    maxpressure|fixedtime|dqn|presslight|colight|ppo_pfrl) echo "$MODE" ;;
     *)
-      echo "Usage: $0 {all|baselines|rl|maxpressure|fixedtime|dqn|presslight|colight}" >&2
+      echo "Usage: $0 {all|baselines|rl|maxpressure|fixedtime|dqn|presslight|colight|ppo_pfrl}" >&2
       exit 1
       ;;
   esac
@@ -71,7 +71,7 @@ AGENTS=($(pick_agents))
 
 echo "========== Baseline early-stop readiness =========="
 echo "network=${NETWORK} seed=${SEED} prefix=${PREFIX} interface=${INTERFACE}"
-echo "budget: min_episodes=20 max_episodes=200 patience=20 metric=test"
+echo "budget: min_episodes=20 max_episodes=2000 patience=20 metric=test"
 echo "agents: ${AGENTS[*]}"
 echo "python: $(python -c 'import sys; print(sys.executable)')"
 echo "SUMO_HOME=${SUMO_HOME:-UNSET}"
@@ -86,6 +86,14 @@ for agent in "${AGENTS[@]}"; do
         MISSING=1
       else
         echo "[ready] colight (torch_scatter ok)"
+      fi
+      ;;
+    ppo_pfrl)
+      if ! python -c "import pfrl, torch" >/dev/null 2>&1; then
+        echo "[NOT READY] ppo_pfrl (IPPO) — pfrl/torch missing"
+        MISSING=1
+      else
+        echo "[ready] ppo_pfrl (IPPO)"
       fi
       ;;
     dqn|presslight)

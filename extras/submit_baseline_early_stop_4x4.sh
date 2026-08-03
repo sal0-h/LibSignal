@@ -3,10 +3,11 @@
 #
 # Usage:
 #   export MCS_LABEL=crs-XXXX
-#   ./extras/submit_baseline_early_stop_4x4.sh              # all 5
+#   ./extras/submit_baseline_early_stop_4x4.sh              # all 6
 #   ./extras/submit_baseline_early_stop_4x4.sh baselines    # FT + MP
-#   ./extras/submit_baseline_early_stop_4x4.sh rl           # DQN + PressLight + CoLight
+#   ./extras/submit_baseline_early_stop_4x4.sh rl           # DQN + PressLight + CoLight + IPPO
 #   ./extras/submit_baseline_early_stop_4x4.sh dqn          # single agent
+#   ./extras/submit_baseline_early_stop_4x4.sh ppo_pfrl     # IPPO only
 #
 # Note: do NOT use sbatch --export=ALL on this cluster (causes
 # "user env retrieval failed requeued held"). Agent is baked into a
@@ -30,16 +31,16 @@ NGPU="${NGPU:--1}"
 INTERFACE="${INTERFACE:-libsumo}"
 
 BASELINES=(maxpressure fixedtime)
-RL_AGENTS=(dqn presslight colight)
+RL_AGENTS=(dqn presslight colight ppo_pfrl)
 
 pick_agents() {
   case "$MODE" in
     all) echo "${BASELINES[*]} ${RL_AGENTS[*]}" ;;
     baselines) echo "${BASELINES[*]}" ;;
     rl) echo "${RL_AGENTS[*]}" ;;
-    maxpressure|fixedtime|dqn|presslight|colight) echo "$MODE" ;;
+    maxpressure|fixedtime|dqn|presslight|colight|ppo_pfrl) echo "$MODE" ;;
     *)
-      echo "Usage: $0 {all|baselines|rl|maxpressure|fixedtime|dqn|presslight|colight}" >&2
+      echo "Usage: $0 {all|baselines|rl|maxpressure|fixedtime|dqn|presslight|colight|ppo_pfrl}" >&2
       exit 1
       ;;
   esac
@@ -76,7 +77,7 @@ export PATH="\${CONDA_PREFIX}/bin:\${SUMO_HOME}/bin:\${PATH}"
 
 echo "Host: \$(hostname)"
 echo "Agent: \${AGENT}  Network: \${NETWORK}  Seed: \${SEED}  Prefix: \${PREFIX}"
-echo "Budget: min=20 max=200 patience=20 (from configs/tsc/base.yml)"
+echo "Budget: min=20 max=2000 patience=20 (from configs/tsc/base.yml)"
 
 if [[ "\${AGENT}" == "colight" ]]; then
   python -c "import torch_scatter" 2>/dev/null || {
