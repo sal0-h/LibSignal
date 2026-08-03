@@ -1,0 +1,22 @@
+includes:
+  - configs/tsc/dqn.yml
+
+# Tiny budget to verify early-stop wiring (not for real experiments).
+model:
+  batch_size: 32
+
+trainer:
+  steps: 600
+  test_steps: 600
+  episodes: 8
+  min_episodes: 3
+  early_stop: True
+  early_stop_patience: 2
+  early_stop_min_delta: 0.0
+  early_stop_metric: test
+  learning_start: 40
+  buffer_size: 500
+  test_when_train: True
+
+logger:
+  save_rate: 1

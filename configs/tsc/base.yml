@@ -51,7 +51,14 @@ trainer:
   test_steps: 3600
   yellow_length: 5
   action_interval: 10
-  episodes: 200
+  # Episode budget: train at least min_episodes, at most episodes (max).
+  # After clear ATT plateau (patience + min_delta), stop early.
+  episodes: 200                 # max training episodes (LibSignal default hard cap)
+  min_episodes: 20              # never early-stop before this many episodes
+  early_stop: True              # disable to always run full episodes budget
+  early_stop_patience: 20       # stop after this many episodes with no ATT improvement
+  early_stop_min_delta: 0.01    # relative ATT improvement required to reset patience (1%)
+  early_stop_metric: test       # which ATT to watch: test | train | heldout
   update_model_rate: 1
   update_target_rate: 10
   test_when_train: True

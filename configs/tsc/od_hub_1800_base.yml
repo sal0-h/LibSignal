@@ -9,6 +9,7 @@ trainer:
   # Prefer held-out ATT as the main signal during training.
   test_when_train: False
   heldout_eval_every: 10
+  early_stop_metric: heldout
 
 world:
   demand_train_file: raw_data/grid4x4/od_hubs/demand_set/fixed_1800.rou.xml
