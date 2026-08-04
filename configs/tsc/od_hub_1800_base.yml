@@ -1,15 +1,23 @@
 # Shared 1800s hub-centric OD demand-set protocol (Level 1 / Level 2).
 # Paths are relative to world.dir (data/).
+#
+# Early-stop watches HELDOUT_MEAN ATT (not per-episode TEST).
+# heldout_eval_every=10 ⇒ patience counts only those evals:
+#   patience=3 ≈ three held-out checks (~30 training episodes) with no ≥1% improve.
 
 trainer:
   steps: 1800
   test_steps: 1800
-  episodes: 100
+  episodes: 100                 # hard cap for OD-hub RL
+  min_episodes: 30              # at least a few held-out checks before stop
+  early_stop: True
+  early_stop_patience: 3       # held-out evaluations without improvement
+  early_stop_min_delta: 0.01
+  early_stop_metric: heldout
   action_interval: 10
   # Prefer held-out ATT as the main signal during training.
   test_when_train: False
   heldout_eval_every: 10
-  early_stop_metric: heldout
 
 world:
   demand_train_file: raw_data/grid4x4/od_hubs/demand_set/fixed_1800.rou.xml
