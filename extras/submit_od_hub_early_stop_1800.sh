@@ -41,7 +41,7 @@ write_job() {
 #SBATCH --job-name=${tag}
 #SBATCH --output=logs/${tag}_%j.out
 #SBATCH --error=logs/${tag}_%j.err
-#SBATCH --time=24:00:00
+#SBATCH --time=48:00:00
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
 #SBATCH --nodes=1
@@ -56,7 +56,7 @@ export PATH="\${CONDA_PREFIX}/bin:\${SUMO_HOME}/bin:\${PATH}"
 
 echo "Host: \$(hostname)"
 echo "Agent: ${agent}  Network: ${NETWORK}  Seed: ${SEED}  Prefix: ${prefix}"
-echo "OD-hub early-stop: max=100 min=30 patience=3(heldout) every=10"
+echo "OD-hub early-stop: max=500 min=30 patience=3(heldout) every=10"
 
 if [[ "${agent}" == colight_* ]]; then
   python -c "import torch_scatter" 2>/dev/null || {

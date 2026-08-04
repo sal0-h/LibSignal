@@ -4,11 +4,12 @@
 # Early-stop watches HELDOUT_MEAN ATT (not per-episode TEST).
 # heldout_eval_every=10 ⇒ patience counts only those evals:
 #   patience=3 ≈ three held-out checks (~30 training episodes) with no ≥1% improve.
+# Hard cap episodes=500 so long plateaus can still stop via early-stop, not a tight 100 budget.
 
 trainer:
   steps: 1800
   test_steps: 1800
-  episodes: 100                 # hard cap for OD-hub RL
+  episodes: 500                 # hard cap for OD-hub RL (early-stop usually ends sooner)
   min_episodes: 30              # at least a few held-out checks before stop
   early_stop: True
   early_stop_patience: 3       # held-out evaluations without improvement
