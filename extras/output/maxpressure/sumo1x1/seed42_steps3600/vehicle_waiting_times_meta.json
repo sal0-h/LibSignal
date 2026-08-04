@@ -1,0 +1,70 @@
+{
+  "agent": "maxpressure",
+  "world": "sumo",
+  "network": "sumo1x1",
+  "prefix": "analysis",
+  "seed": 42,
+  "test_steps": 3600,
+  "action_interval": 10,
+  "generated_at": "2026-07-03T13:16:03",
+  "n_vehicles_logged": 2014,
+  "n_completed_trips": 1999,
+  "n_incomplete_trips": 15,
+  "trip_status_counts": {
+    "completed": 1999,
+    "on_map_at_end": 15
+  },
+  "primary_fairness_metric": "custom_wait_s",
+  "sumo_accumulated_wait_note": "accumulated_waiting_time_s uses SUMO getAccumulatedWaitingTime(), which is capped by default --waiting-time-memory=100s. Do NOT use it for tail/fairness plots. custom_wait_s is uncapped (per-step speed < 0.1 m/s bookkeeping).",
+  "waiting_time_stats_completed": {
+    "mean": 5.83591795897949,
+    "median": 0.0,
+    "p95": 30.0,
+    "max": 90.0
+  },
+  "waiting_time_stats_incomplete": {
+    "mean": 3.6666666666666665,
+    "median": 1.0,
+    "p95": 15.299999999999999,
+    "max": 16.0
+  },
+  "waiting_time_stats_all": {
+    "mean": 5.819761668321748,
+    "median": 0.0,
+    "p95": 29.34999999999991,
+    "max": 90.0
+  },
+  "custom_wait_stats_completed": {
+    "mean": 5.952976488244122,
+    "median": 0.0,
+    "p95": 30.0,
+    "max": 112.0
+  },
+  "custom_wait_stats_incomplete": {
+    "mean": 3.466666666666667,
+    "median": 1.0,
+    "p95": 14.299999999999999,
+    "max": 15.0
+  },
+  "custom_wait_stats_all": {
+    "mean": 5.934458788480636,
+    "median": 0.0,
+    "p95": 29.34999999999991,
+    "max": 112.0
+  },
+  "delay_stats_completed": null,
+  "delay_stats_incomplete": null,
+  "delay_stats_all": null,
+  "time_loss_stats_all": {
+    "mean": 14.674018371400198,
+    "median": 9.8205,
+    "p95": 50.33234999999999,
+    "max": 121.669
+  },
+  "mean_travel_time_s": 37.507753876938466,
+  "avg_travel_time_metric": 37.507753876938466,
+  "throughput": 1999,
+  "output_dir": "/data1/mmirzata/LibSignalFork/extras/output/maxpressure/sumo1x1/seed42_steps3600",
+  "csv_path": "/data1/mmirzata/LibSignalFork/extras/output/maxpressure/sumo1x1/seed42_steps3600/vehicle_waiting_times.csv",
+  "notes": "Use custom_wait_s for all fairness / outlier plots (no 100s SUMO cap). accumulated_waiting_time_s is kept for reference only. custom_wait_s increments each step when speed < 0.1 m/s, snapshotted before env.step(). Include trip_status=on_map_at_end for stranded vehicles."
+}

@@ -131,6 +131,8 @@ def _snapshot_vehicle_metrics(world):
     pre_time_loss = {}
     pre_speed = {}
     pre_distance = {}
+    pre_free_flow = {}
+    pre_route_distance = {}
     for veh_id in world.eng.vehicle.getIDList():
         pre_sumo_wait[veh_id] = float(world.eng.vehicle.getAccumulatedWaitingTime(veh_id))
         try:
@@ -141,7 +143,13 @@ def _snapshot_vehicle_metrics(world):
         dist = _distance_traveled_m(world, veh_id)
         if dist is not None:
             pre_distance[veh_id] = dist
-    return pre_sumo_wait, pre_time_loss, pre_speed, pre_distance
+        fft = _free_flow_route_time(world, veh_id)
+        if fft is not None:
+            pre_free_flow[veh_id] = fft
+        rd = _route_distance_m(world, veh_id)
+        if rd is not None:
+            pre_route_distance[veh_id] = rd
+    return pre_sumo_wait, pre_time_loss, pre_speed, pre_distance, pre_free_flow, pre_route_distance
 
 
 def _update_custom_wait(custom_wait, pre_speed, dt):
@@ -215,11 +223,11 @@ def _collect_departed_records(
     pre_sumo_wait,
     pre_time_loss,
     pre_distance,
+    pre_free_flow,
+    pre_route_distance,
     custom_wait,
     cumulative_sumo_wait,
     cumulative_time_loss,
-    free_flow_times,
-    route_distances,
     seen_logged,
     sim_time,
 ):
@@ -244,10 +252,10 @@ def _collect_departed_records(
                 sumo_wait,
                 wait_custom,
                 time_loss,
-                free_flow_times.pop(veh_id, None),
+                pre_free_flow.get(veh_id),
                 "completed",
                 vehicle_type=_vehicle_type(world, veh_id),
-                route_distance_m=route_distances.pop(veh_id, None),
+                route_distance_m=pre_route_distance.get(veh_id),
                 distance_traveled_m=pre_distance.get(veh_id),
             )
         )
@@ -259,11 +267,11 @@ def _collect_removed_records(
     pre_sumo_wait,
     pre_time_loss,
     pre_distance,
+    pre_free_flow,
+    pre_route_distance,
     custom_wait,
     cumulative_sumo_wait,
     cumulative_time_loss,
-    free_flow_times,
-    route_distances,
     seen_logged,
     sim_time,
     veh_ids,
@@ -288,10 +296,10 @@ def _collect_removed_records(
                 sumo_wait,
                 wait_custom,
                 time_loss,
-                free_flow_times.pop(veh_id, None),
+                pre_free_flow.get(veh_id),
                 "removed",
                 vehicle_type=_vehicle_type(world, veh_id),
-                route_distance_m=route_distances.pop(veh_id, None),
+                route_distance_m=pre_route_distance.get(veh_id),
                 distance_traveled_m=pre_distance.get(veh_id),
             )
         )
@@ -315,23 +323,11 @@ def _accumulate_teleport_metrics(
         )
 
 
-def _refresh_route_metrics(world, free_flow_times, route_distances):
-    for veh_id in world.eng.vehicle.getIDList():
-        fft = _free_flow_route_time(world, veh_id)
-        if fft is not None:
-            free_flow_times[veh_id] = fft
-        rd = _route_distance_m(world, veh_id)
-        if rd is not None:
-            route_distances[veh_id] = rd
-
-
 def _collect_remaining_records(
     world,
     custom_wait,
     cumulative_sumo_wait,
     cumulative_time_loss,
-    free_flow_times,
-    route_distances,
     seen_logged,
     sim_time,
 ):
@@ -358,10 +354,10 @@ def _collect_remaining_records(
                 sumo_wait,
                 wait_custom,
                 time_loss,
-                free_flow_times.get(veh_id),
+                _free_flow_route_time(world, veh_id),
                 "on_map_at_end",
                 vehicle_type=_vehicle_type(world, veh_id),
-                route_distance_m=route_distances.get(veh_id),
+                route_distance_m=_route_distance_m(world, veh_id),
                 distance_traveled_m=_distance_traveled_m(world, veh_id),
             )
         )
@@ -407,8 +403,6 @@ def run_with_vehicle_logs(runner, output_dir):
     custom_wait = {}
     cumulative_sumo_wait = {}
     cumulative_time_loss = {}
-    free_flow_times = {}
-    route_distances = {}
     seen_logged = set()
     vehicle_records = []
     dones = [False]
@@ -426,8 +420,9 @@ def run_with_vehicle_logs(runner, output_dir):
 
             rewards_list = []
             for t in range(action_interval):
-                _refresh_route_metrics(world, free_flow_times, route_distances)
-                pre_sumo_wait, pre_time_loss, pre_speed, pre_distance = _snapshot_vehicle_metrics(world)
+                pre_sumo_wait, pre_time_loss, pre_speed, pre_distance, pre_free_flow, pre_route_distance = (
+                    _snapshot_vehicle_metrics(world)
+                )
                 _update_custom_wait(custom_wait, pre_speed, dt)
 
                 obs, rewards, dones, _ = env.step(
@@ -442,11 +437,11 @@ def run_with_vehicle_logs(runner, output_dir):
                     pre_sumo_wait,
                     pre_time_loss,
                     pre_distance,
+                    pre_free_flow,
+                    pre_route_distance,
                     custom_wait,
                     cumulative_sumo_wait,
                     cumulative_time_loss,
-                    free_flow_times,
-                    route_distances,
                     seen_logged,
                     sim_time,
                 )
@@ -467,11 +462,11 @@ def run_with_vehicle_logs(runner, output_dir):
                     pre_sumo_wait,
                     pre_time_loss,
                     pre_distance,
+                    pre_free_flow,
+                    pre_route_distance,
                     custom_wait,
                     cumulative_sumo_wait,
                     cumulative_time_loss,
-                    free_flow_times,
-                    route_distances,
                     seen_logged,
                     sim_time,
                     removed,
@@ -496,8 +491,6 @@ def run_with_vehicle_logs(runner, output_dir):
             custom_wait,
             cumulative_sumo_wait,
             cumulative_time_loss,
-            free_flow_times,
-            route_distances,
             seen_logged,
             sim_time,
         )

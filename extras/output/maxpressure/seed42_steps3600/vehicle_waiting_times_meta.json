@@ -1,0 +1,20 @@
+{
+  "agent": "maxpressure",
+  "world": "sumo",
+  "network": "sumo4x4",
+  "prefix": "analysis",
+  "seed": 42,
+  "test_steps": 3600,
+  "action_interval": 10,
+  "generated_at": "2026-07-01T15:27:17",
+  "n_vehicles_logged": 1473,
+  "n_completed_trips": 1458,
+  "mean_travel_time_s": 153.1851851851852,
+  "mean_waiting_time_s": 0.9705075445816187,
+  "median_waiting_time_s": 0.0,
+  "p95_waiting_time_s": 6.0,
+  "avg_travel_time_metric": 153.1851851851852,
+  "throughput": 1458,
+  "output_dir": "/data1/mmirzata/LibSignalFork/extras/output/maxpressure/sumo4x4/seed42_steps3600",
+  "csv_path": "/data1/mmirzata/LibSignalFork/extras/output/maxpressure/sumo4x4/seed42_steps3600/vehicle_waiting_times.csv"
+}

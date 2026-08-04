@@ -1,0 +1,13 @@
+includes:
+  - configs/tsc/fixedtime.yml
+
+# GUI viewing profile — does not change fixedtime logic
+world:
+  gui: True
+
+trainer:
+  test_steps: 900
+  steps: 900
+
+model:
+  name: fixedtime

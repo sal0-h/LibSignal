@@ -1,0 +1,13 @@
+includes:
+  - configs/tsc/maxpressure.yml
+
+world:
+  gui: True
+
+trainer:
+  # 180 LibSignal steps × 10 s/step (gui_step_length in sumo7x28_gui.cfg) ≈ 30 min sim time
+  test_steps: 180
+  steps: 180
+
+model:
+  name: maxpressure
