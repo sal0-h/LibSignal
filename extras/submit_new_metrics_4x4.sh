@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Submit default sumo4x4 trip-metric exports (MaxPressure, FixedTime, DQN) on gpujobs.
+# Submit default sumo4x4 new_metrics exports (MaxPressure, FixedTime, DQN) on gpujobs.
 #
 # Login node (set your MCS label):
 #   cd ~/LibSignalFork
@@ -7,11 +7,11 @@
 #   mkdir -p logs
 #   export MCS_LABEL=crs-XXXX
 #   export CONDA_ENV=libsignal
-#   ./extras/submit_trip_metrics_4x4.sh
+#   ./extras/submit_new_metrics_4x4.sh
 #
 # Outputs: extras/output/<agent>/sumo4x4/seed42_steps3600/
-#   vehicle_trip_metrics.csv
-#   vehicle_trip_metrics_meta.json
+#   new_metrics.csv
+#   new_metrics_meta.json
 #
 # Monitor: squeue -u $USER
 
@@ -35,16 +35,16 @@ submit_one() {
   local extra_env="${3:-}"
   echo "Submitting ${agent} (${time_limit})..."
   sbatch --mcs-label="${MCS_LABEL}" \
-    --job-name="trip_${agent}" \
-    --output="logs/trip_${agent}_%j.out" \
-    --error="logs/trip_${agent}_%j.err" \
+    --job-name="new_metrics_${agent}" \
+    --output="logs/new_metrics_${agent}_%j.out" \
+    --error="logs/new_metrics_${agent}_%j.err" \
     --time="${time_limit}" \
     --cpus-per-task=8 \
     --mem=32G \
     --nodes=1 \
     --ntasks=1 \
     --export=ALL,REPO_DIR="${REPO_DIR}",CONDA_ENV="${CONDA_ENV}",AGENT="${agent}",NETWORK="${NETWORK}",SEED="${SEED}",TEST_STEPS="${TEST_STEPS}",RUN_NAME="${RUN_NAME}"${extra_env} \
-    extras/slurm_vehicle_wait_logs.sh
+    extras/slurm_new_metrics.sh
 }
 
 # Baselines: ~minutes each

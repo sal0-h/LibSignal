@@ -10,25 +10,25 @@
 #   export RUN_NAME=seed42_steps3600
 #   export TRAIN=1                     # for dqn only
 #   export DQN_EPISODES=200
-#   sbatch --mcs-label="${MCS_LABEL}" extras/slurm_vehicle_wait_logs.sh
+#   sbatch --mcs-label="${MCS_LABEL}" extras/slurm_new_metrics.sh
 #
 # Or submit all three (MP, FT, DQN):
-#   ./extras/submit_trip_metrics_4x4.sh
+#   ./extras/submit_new_metrics_4x4.sh
 #
 # Note: gpujobs has no "deepnet" partition. Jobs are routed via --mcs-label only.
 # List partitions if needed: sinfo
 #
 # Monitor:
 #   squeue -u $USER
-#   tail -f logs/veh_wait_log_<jobid>.out
+#   tail -f logs/new_metrics_<jobid>.out
 #
 # Outputs: extras/output/<agent>/<network>/<run_name>/
-#   vehicle_trip_metrics.csv
-#   vehicle_trip_metrics_meta.json
+#   new_metrics.csv
+#   new_metrics_meta.json
 
-#SBATCH --job-name=veh_wait_log
-#SBATCH --output=logs/veh_wait_log_%j.out
-#SBATCH --error=logs/veh_wait_log_%j.err
+#SBATCH --job-name=new_metrics
+#SBATCH --output=logs/new_metrics_%j.out
+#SBATCH --error=logs/new_metrics_%j.err
 #SBATCH --time=02:30:00
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=32G
@@ -66,7 +66,7 @@ RUN_ARGS=(
   --test-steps "${TEST_STEPS}"
   --interface "${INTERFACE}"
   --run-name "${RUN_NAME}"
-  --prefix trip_metrics
+  --prefix new_metrics
 )
 
 if [[ "${TRAIN}" == "1" ]]; then
@@ -81,15 +81,15 @@ echo "Run name:  ${RUN_NAME}"
 python -c "import libsumo; print('libsumo: OK')" 2>/dev/null || {
   echo "WARNING: libsumo not found in ${CONDA_ENV} on $(hostname)."
   echo "Try: export CONDA_ENV=libsignal  (or libsignal/traffic on login: python -c 'import libsumo')"
-  echo "Continuing — run_vehicle_wait_logs.py will fall back to traci (much slower on 7x28)."
+  echo "Continuing — run_new_metrics.py will fall back to traci (much slower on 7x28)."
 }
 
-python extras/run_vehicle_wait_logs.py "${RUN_ARGS[@]}"
+python extras/run_new_metrics.py "${RUN_ARGS[@]}"
 
 OUT_DIR="${REPO_DIR}/extras/output/${AGENT}/${NETWORK}/${RUN_NAME}"
 echo ""
-echo "Done. Trip metrics:"
-head -1 "${OUT_DIR}/vehicle_trip_metrics.csv"
+echo "Done. new_metrics:"
+head -1 "${OUT_DIR}/new_metrics.csv"
 echo ""
-echo "CSV:  ${OUT_DIR}/vehicle_trip_metrics.csv"
-echo "Meta: ${OUT_DIR}/vehicle_trip_metrics_meta.json"
+echo "CSV:  ${OUT_DIR}/new_metrics.csv"
+echo "Meta: ${OUT_DIR}/new_metrics_meta.json"

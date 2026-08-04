@@ -6,12 +6,12 @@ Eval rollout matches TSCTrainer.test() (greedy, collect_obs on last sub-step).
 Set PYTHONHASHSEED=0 like run.py for reproducibility.
 
 Outputs: extras/output/<agent>/<network>/<run_name>/
-  vehicle_trip_metrics.csv
-  vehicle_trip_metrics_meta.json
+  new_metrics.csv
+  new_metrics_meta.json
 
 Usage (from repo root):
-  python extras/run_vehicle_wait_logs.py --agent maxpressure --network sumo4x4 --seed 42
-  python extras/run_vehicle_wait_logs.py --agent dqn --network sumo4x4 --seed 42 --train
+  python extras/run_new_metrics.py --agent maxpressure --network sumo4x4 --seed 42
+  python extras/run_new_metrics.py --agent dqn --network sumo4x4 --seed 42 --train
 """
 import os
 import sys
@@ -48,6 +48,8 @@ from utils.logger import setup_logging
 
 EXTRAS_DIR = os.path.join(PROJECT_ROOT, "extras")
 DEFAULT_OUTPUT_ROOT = os.path.join(EXTRAS_DIR, "output")
+METRICS_CSV_NAME = "new_metrics.csv"
+METRICS_META_NAME = "new_metrics_meta.json"
 
 # Match SUMO's near-stop threshold for getAccumulatedWaitingTime.
 STOP_SPEED_THRESHOLD = 0.1
@@ -389,8 +391,8 @@ def _metric_stats(records, field):
     }
 
 
-def run_with_vehicle_logs(runner, output_dir):
-    """Run test episode and write per-vehicle waiting-time CSV."""
+def run_with_new_metrics(runner, output_dir):
+    """Run test episode and write per-vehicle trip metrics CSV + JSON."""
     trainer_obj = runner.trainer
     env = trainer_obj.env
     world = trainer_obj.world
@@ -505,7 +507,7 @@ def run_with_vehicle_logs(runner, output_dir):
 
     os.makedirs(output_dir, exist_ok=True)
 
-    csv_path = os.path.join(output_dir, "vehicle_trip_metrics.csv")
+    csv_path = os.path.join(output_dir, METRICS_CSV_NAME)
     fieldnames = [
         "vehicle_id",
         "vehicle_type",
@@ -614,7 +616,7 @@ def run_with_vehicle_logs(runner, output_dir):
             "Report completion_rate alongside ATT. Censored trips: trip_status=on_map_at_end."
         ),
     }
-    meta_path = os.path.join(output_dir, "vehicle_trip_metrics_meta.json")
+    meta_path = os.path.join(output_dir, METRICS_META_NAME)
     with open(meta_path, "w") as f:
         json.dump(meta, f, indent=2)
 
@@ -625,7 +627,7 @@ def run_with_vehicle_logs(runner, output_dir):
         meta.get("avg_travel_time_metric") or 0.0,
         (completion_rate or 0.0) * 100.0,
     )
-    print(f"\nVehicle trip metrics CSV: {csv_path}")
+    print(f"\nnew_metrics CSV: {csv_path}")
     print(f"Metadata:                 {meta_path}")
     if meta.get("travel_time_stats_completed"):
         ts = meta["travel_time_stats_completed"]
@@ -640,7 +642,7 @@ def run_with_vehicle_logs(runner, output_dir):
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(
-        description="Run a TSC agent on SUMO and log per-vehicle waiting times"
+        description="Run a TSC agent on SUMO and export per-vehicle trip metrics (new_metrics CSV)"
     )
     parser.add_argument(
         "--agent", "-a", type=str, default="maxpressure",
@@ -738,7 +740,7 @@ def main(argv=None):
                 ag.load_model(runner.trainer.episodes)
             print("Training done; running trip-metrics export rollout...")
 
-    return run_with_vehicle_logs(runner, output_dir)
+    return run_with_new_metrics(runner, output_dir)
 
 
 if __name__ == "__main__":

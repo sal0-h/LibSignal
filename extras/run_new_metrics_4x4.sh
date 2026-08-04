@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-# Run default sumo4x4 trip-metric exports with nohup (no SLURM).
+# Run default sumo4x4 new_metrics exports with nohup (no SLURM).
 # Use on Salman server / any machine without sbatch.
 #
 #   cd ~/LibSignalFork
 #   conda activate traffic   # or libsignal
 #   export SUMO_HOME="${CONDA_PREFIX}/share/sumo"
 #   export PATH="${CONDA_PREFIX}/bin:${SUMO_HOME}/bin:${PATH}"
-#   ./extras/run_trip_metrics_4x4.sh
+#   ./extras/run_new_metrics_4x4.sh
 #
 # Or one agent only:
-#   AGENT=maxpressure ./extras/run_trip_metrics_4x4.sh
+#   AGENT=maxpressure ./extras/run_new_metrics_4x4.sh
 #
 # Monitor:
-#   tail -f logs/trip_maxpressure_seed42_steps3600.log
+#   tail -f logs/new_metrics_maxpressure_seed42_steps3600.log
 #
 # Outputs: extras/output/<agent>/sumo4x4/seed42_steps3600/
 
@@ -34,19 +34,19 @@ mkdir -p logs
 run_one() {
   local agent="$1"
   local train_flag="${2:-}"
-  local log_file="${REPO_DIR}/logs/trip_${agent}_${RUN_NAME}.log"
+  local log_file="${REPO_DIR}/logs/new_metrics_${agent}_${RUN_NAME}.log"
   local -a extra_args=()
   if [[ "${train_flag}" == "train" ]]; then
     extra_args+=(--train --episodes "${DQN_EPISODES}")
   fi
   echo "Starting ${agent} -> ${log_file}"
-  nohup "${PYTHON}" extras/run_vehicle_wait_logs.py \
+  nohup "${PYTHON}" extras/run_new_metrics.py \
     --agent "${agent}" \
     --network "${NETWORK}" \
     --seed "${SEED}" \
     --test-steps "${TEST_STEPS}" \
     --run-name "${RUN_NAME}" \
-    --prefix trip_metrics \
+    --prefix new_metrics \
     "${extra_args[@]}" \
     > "${log_file}" 2>&1 &
   echo "  PID $!"
@@ -67,9 +67,9 @@ run_one dqn train
 
 echo ""
 echo "All started in background. Monitor:"
-echo "  tail -f logs/trip_maxpressure_${RUN_NAME}.log"
-echo "  tail -f logs/trip_fixedtime_${RUN_NAME}.log"
-echo "  tail -f logs/trip_dqn_${RUN_NAME}.log"
+echo "  tail -f logs/new_metrics_maxpressure_${RUN_NAME}.log"
+echo "  tail -f logs/new_metrics_fixedtime_${RUN_NAME}.log"
+echo "  tail -f logs/new_metrics_dqn_${RUN_NAME}.log"
 echo ""
 echo "Outputs when done:"
-echo "  extras/output/{maxpressure,fixedtime,dqn}/${NETWORK}/${RUN_NAME}/vehicle_trip_metrics.csv"
+echo "  extras/output/{maxpressure,fixedtime,dqn}/${NETWORK}/${RUN_NAME}/new_metrics.csv"
