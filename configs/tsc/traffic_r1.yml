@@ -1,0 +1,69 @@
+includes:
+  - configs/tsc/base.yml
+
+# Traffic-R1 zero-shot evaluation (Appendix A.1, four-phase prompt).
+# Secrets: only the API key is an env var (see api_key_env). Everything else is here.
+
+model:
+  name: traffic_r1
+  train_model: False
+  test_model: True
+  load_model: False
+
+  # Backend: "api" (OpenAI-compatible) or "local" (Season998/Traffic-R1 via transformers)
+  backend: api
+
+  # --- API backend (OpenAI-compatible chat completions) ---
+  api_base_url: "https://api.openai.com/v1"
+  api_model: "gpt-4o-mini"
+  api_key_env: "OPENAI_API_KEY"
+  api_timeout: 120
+  # api_extra_body: {}
+
+  # --- Local backend (ignored when backend=api) ---
+  model_path: "Season998/Traffic-R1"
+  model_subfolder: "huggingface"
+  device_map: "auto"
+  torch_dtype: "bfloat16"
+
+  # Generation / parsing
+  temperature: 0.0
+  max_new_tokens: 512
+  do_sample: False
+  parse_retries: 5
+
+  # Observation (Appendix A.1)
+  v_stop: 0.1
+  n_segments: 3
+  obs_distance: 200
+
+  # Optional explicit map Traffic-R1 name -> LibSignal green index.
+  # Leave null to auto-detect (Grid4x4 NEMA: NTST=0, NLSL=1, ETWT=4, ELWL=5).
+  # phase_name_to_index:
+  #   NTST: 0
+  #   NLSL: 1
+  #   ETWT: 4
+  #   ELWL: 5
+
+trainer:
+  episodes: 1
+  steps: 1800
+  test_steps: 1800
+  buffer_size: 0
+  action_interval: 10
+  learning_rate: 0
+  learning_start: 0
+  update_model_rate: 0
+  update_target_rate: 0
+  test_when_train: False
+  heldout_eval_every: 0
+
+world:
+  # First smoke target: fixed hub OD 1800s (compare to MaxPressure).
+  demand_train_file: raw_data/grid4x4/od_hubs/demand_set/fixed_1800.rou.xml
+
+logger:
+  save_rate: 0
+  train_model: False
+  test_model: True
+  load_model: False

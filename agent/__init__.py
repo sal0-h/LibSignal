@@ -6,6 +6,13 @@ from .maxpressure import MaxPressureAgent
 from .fixedtime import FixedTimeAgent
 from .sotl import SOTLAgent
 
+# Traffic-R1 (LLM inference); backends/deps loaded lazily inside the agent
+try:
+	from .traffic_r1 import TrafficR1Agent
+except Exception as e:
+	print(f"Warning: Failed to import TrafficR1Agent: {e}")
+	TrafficR1Agent = None
+
 # Optional RL agents; import lazily so missing deps (e.g., torch_scatter) don't block baselines
 try:
 	from .colight import CoLightAgent

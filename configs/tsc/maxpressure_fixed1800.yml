@@ -1,0 +1,13 @@
+includes:
+  - configs/tsc/maxpressure.yml
+
+# MaxPressure baseline on the same fixed_1800 demand as traffic_r1.yml.
+
+trainer:
+  episodes: 1
+  steps: 1800
+  test_steps: 1800
+  test_when_train: False
+
+world:
+  demand_train_file: raw_data/grid4x4/od_hubs/demand_set/fixed_1800.rou.xml
