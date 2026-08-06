@@ -722,6 +722,18 @@ class World(object):
             os.path.join(sumo_dict['dir'], sumo_dict['combined_file'])
             if sumo_dict.get('combined_file') else None
         )
+        # Optional sim clock window. Needed when -n/-r bypasses a .sumocfg that
+        # sets begin/end (e.g. Ingolstadt afternoon peak at t=57600). world.*
+        # overrides beat .cfg so OD demand sets at t=0..1800 can reset the clock.
+        begin = world_param.get('sumo_begin', sumo_dict.get('begin'))
+        end = world_param.get('sumo_end', sumo_dict.get('end'))
+        self._time_flags = []
+        if begin is not None:
+            self._time_flags += ['--begin', str(begin)]
+        if end is not None:
+            self._time_flags += ['--end', str(end)]
+        if self._time_flags:
+            print(f"[SUMO] time window flags={' '.join(self._time_flags)}")
         self._headless_bin = sumolib.checkBinary('sumo')
         self._gui_bin = sumolib.checkBinary('sumo-gui') if self._use_gui else None
         self._gui_flags = []
@@ -964,7 +976,7 @@ class World(object):
                 '-n', self._roadnet_file,
                 '-r', self.route,
                 '--no-warnings', self._no_warning,
-            ] + self._seed_flags + self._physics_flags + self._additional_flags
+            ] + self._time_flags + self._seed_flags + self._physics_flags + self._additional_flags
         else:
             sim_args = [
                 '-c', self._combined_file,

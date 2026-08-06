@@ -23,10 +23,12 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 
-THROUGH_PHASES = ("0", "4")
+# Default NEMA-style through greens in the RL green-phase list (grid4x4).
+THROUGH_PHASES_DEFAULT = ("0", "4")
 
 THROUGH_PHASE_NOTES = {
     "0": "NS through + E-W walk: N/S through_incoming + E-W conflict (G/g/s)",
+    "2": "Arterial second long green (Ingolstadt 3-green programs: indices 0,1,2)",
     "4": "EW through + N-S walk: E/W through_incoming + N-S conflict (G/g/s)",
 }
 
@@ -35,6 +37,7 @@ NETWORKS = {
         "net": REPO / "data/raw_data/grid4x4/grid4x4.net.xml",
         "rou": REPO / "data/raw_data/grid4x4/grid4x4.rou.xml",
         "out": REPO / "data/raw_data/grid4x4/crossing_proxy_lanes.json",
+        "through_phases": ("0", "4"),
         "through_incoming_dirs": {
             "0": ("N", "S"),
             "4": ("E", "W"),
@@ -42,6 +45,24 @@ NETWORKS = {
         "conflict_axis": {
             "0": "EW",
             "4": "NS",
+        },
+    },
+    # Ingolstadt arterial: LibSignal keeps 3 greens (orig indices 0,2,4 → RL 0,1,2).
+    # Long through greens are RL phases 0 and 2.
+    "ingolstadt21": {
+        "net": REPO / "data/raw_data/ingolstadt21/ingolstadt21.net.xml",
+        "rou": REPO / "data/raw_data/ingolstadt21/ingolstadt21.rou.xml",
+        "out": REPO / "data/raw_data/ingolstadt21/crossing_proxy_lanes.json",
+        "through_phases": ("0", "2"),
+        "sumo_begin": 57600,
+        "sumo_end": 57601,
+        "through_incoming_dirs": {
+            "0": ("N", "S"),
+            "2": ("E", "W"),
+        },
+        "conflict_axis": {
+            "0": "EW",
+            "2": "NS",
         },
     },
 }
@@ -94,29 +115,49 @@ def build_lane_map(net_path: Path, rou_path: Path, spec: dict) -> dict:
     import traci
 
     net = sumolib.net.readNet(str(net_path))
+    through_phases = tuple(spec.get("through_phases", THROUGH_PHASES_DEFAULT))
     through_incoming_dirs = spec["through_incoming_dirs"]
     conflict_axis = spec["conflict_axis"]
     sumo_bin = sumolib.checkBinary("sumo")
-    traci.start(
-        [
-            sumo_bin,
-            "-n",
-            str(net_path),
-            "-r",
-            str(rou_path),
-            "--no-warnings",
-            "true",
-            "--end",
-            "1",
-        ]
-    )
+    cmd = [
+        sumo_bin,
+        "-n",
+        str(net_path),
+        "-r",
+        str(rou_path),
+        "--no-warnings",
+        "true",
+        "--end",
+        str(spec.get("sumo_end", 1)),
+    ]
+    if "sumo_begin" in spec:
+        cmd.extend(["--begin", str(spec["sumo_begin"])])
+    traci.start(cmd)
 
     intersections = {}
     try:
         for tls_id in traci.trafficlight.getIDList():
-            node = net.getNode(tls_id)
-            cx, cy = node.getCoord()
             links = traci.trafficlight.getControlledLinks(tls_id)
+            try:
+                node = net.getNode(tls_id)
+                cx, cy = node.getCoord()
+            except KeyError:
+                # Some Ingolstadt TLS ids are not net node ids; approximate from links.
+                cx = cy = None
+                for link in links:
+                    if not link:
+                        continue
+                    from_lane = link[0][0]
+                    if from_lane.startswith(":"):
+                        continue
+                    shape = traci.lane.getShape(from_lane)
+                    if shape:
+                        cx, cy = shape[-1]
+                        break
+                if cx is None:
+                    print(f"  skip TLS {tls_id}: no geometry")
+                    continue
+                print(f"  TLS {tls_id}: using lane-end coord fallback")
             green_states = _green_phase_states(tls_id, traci)
 
             by_dir = {"N": set(), "E": set(), "S": set(), "W": set()}
@@ -131,7 +172,7 @@ def build_lane_map(net_path: Path, rou_path: Path, spec: dict) -> dict:
                 )
 
             phase_map = {}
-            for phase_key in THROUGH_PHASES:
+            for phase_key in through_phases:
                 idx = int(phase_key)
                 through_dirs = through_incoming_dirs[phase_key]
                 through_incoming = sorted(
@@ -159,11 +200,12 @@ def build_lane_map(net_path: Path, rou_path: Path, spec: dict) -> dict:
     finally:
         traci.close()
 
+    notes = {k: THROUGH_PHASE_NOTES[k] for k in through_phases if k in THROUGH_PHASE_NOTES}
     return {
         "network": net_path.stem.replace(".net", ""),
         "mechanism": "actuated_extension_plus_through_yield_and_conflicts",
-        "through_phases": list(THROUGH_PHASES),
-        "phase_semantics": THROUGH_PHASE_NOTES,
+        "through_phases": list(through_phases),
+        "phase_semantics": notes,
         "intersections": intersections,
     }
 
@@ -183,9 +225,11 @@ def main():
         json.dump(data, f, indent=2)
         f.write("\n")
 
-    sample = data["intersections"][next(iter(data["intersections"]))]["0"]
+    first_tls = next(iter(data["intersections"]))
+    first_phase = next(iter(data["intersections"][first_tls]))
+    sample = data["intersections"][first_tls][first_phase]
     print(
-        f"Wrote {spec['out']} — sample phase0 "
+        f"Wrote {spec['out']} — sample phase{first_phase} "
         f"through={len(sample['through_incoming'])} "
         f"conflict={len(sample['conflict_lanes'])}"
     )

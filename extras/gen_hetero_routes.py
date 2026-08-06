@@ -35,11 +35,19 @@ NETWORKS = [
         "src": "data/raw_data/manhattan_28x7/manhattan_28x7.rou.xml",
         "dst": "data/raw_data/manhattan_28x7/manhattan_28x7_hetero.rou.xml",
     },
+    {
+        "name": "sumo1x21",
+        "src": "data/raw_data/ingolstadt21/ingolstadt21.rou.xml",
+        "dst": "data/raw_data/ingolstadt21/ingolstadt21_hetero.rou.xml",
+    },
 ]
 
 
 def gen_hetero(src_path, dst_path):
-    """Parse src route XML, drop inline vType, assign car/truck types, write dst."""
+    """Parse src route XML, drop inline vType, assign car/truck types, write dst.
+
+    Supports both <vehicle> (grid/manhattan) and <trip> (Ingolstadt) demand.
+    """
     tree = ET.parse(src_path)
     root = tree.getroot()
 
@@ -47,8 +55,8 @@ def gen_hetero(src_path, dst_path):
     for vtype in root.findall("vType"):
         root.remove(vtype)
 
-    vehicles = root.findall("vehicle")
-    n = len(vehicles)
+    actors = root.findall("vehicle") + root.findall("trip")
+    n = len(actors)
     n_trucks = int(round(n * TRUCK_RATIO))
     n_cars = n - n_trucks
 
@@ -60,7 +68,7 @@ def gen_hetero(src_path, dst_path):
     else:
         truck_indices = set()
 
-    for idx, veh in enumerate(vehicles):
+    for idx, veh in enumerate(actors):
         if idx in truck_indices:
             veh.set("type", "truck")
         else:
@@ -68,7 +76,7 @@ def gen_hetero(src_path, dst_path):
 
     # Write with XML declaration
     tree.write(dst_path, encoding="utf-8", xml_declaration=True)
-    print(f"[{os.path.basename(dst_path)}] {n} vehicles -> {n_cars} cars, {n_trucks} trucks")
+    print(f"[{os.path.basename(dst_path)}] {n} actors -> {n_cars} cars, {n_trucks} trucks")
     return n, n_cars, n_trucks
 
 

@@ -1,0 +1,6 @@
+includes:
+  - configs/tsc/presslight.yml
+
+world:
+  obs_count_noise_std: 2.0
+  obs_noise_mode: additive

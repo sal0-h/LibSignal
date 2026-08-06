@@ -28,11 +28,16 @@ NETWORKS = [
         "src": "data/raw_data/manhattan_28x7/manhattan_28x7.rou.xml",
         "dst": "data/raw_data/manhattan_28x7/manhattan_28x7_slow_start.rou.xml",
     },
+    {
+        "name": "sumo1x21",
+        "src": "data/raw_data/ingolstadt21/ingolstadt21.rou.xml",
+        "dst": "data/raw_data/ingolstadt21/ingolstadt21_slow_start.rou.xml",
+    },
 ]
 
 
 def gen_slow_start(src_path, dst_path):
-    """Remove inline <vType> and set type='pkw' on all vehicles so the
+    """Remove inline <vType> and set type='pkw' on all vehicles/trips so the
     vType from vTypes_slow_start.add.xml (with tau=1.8) is actually used."""
     tree = ET.parse(src_path)
     root = tree.getroot()
@@ -42,16 +47,18 @@ def gen_slow_start(src_path, dst_path):
         root.remove(vtype)
         removed += 1
 
-    # Ensure every vehicle explicitly references type="pkw"
+    # Ensure every actor explicitly references type="pkw"
     # (without this, SUMO uses its built-in default vType, ignoring our tau override)
-    for veh in root.findall("vehicle"):
-        if "type" not in veh.attrib:
-            veh.set("type", "pkw")
+    actors = root.findall("vehicle") + root.findall("trip")
+    for veh in actors:
+        veh.set("type", "pkw")
 
     tree.write(dst_path, encoding="utf-8", xml_declaration=True)
-    vehicles = root.findall("vehicle")
-    print(f"[{os.path.basename(dst_path)}] {removed} vType(s) removed, {len(vehicles)} vehicles tagged type='pkw'")
-    return len(vehicles)
+    print(
+        f"[{os.path.basename(dst_path)}] {removed} vType(s) removed, "
+        f"{len(actors)} actors tagged type='pkw'"
+    )
+    return len(actors)
 
 
 def main():

@@ -1,0 +1,5 @@
+includes:
+  - configs/tsc/presslight.yml
+
+world:
+  obs_penetration: 0.1
