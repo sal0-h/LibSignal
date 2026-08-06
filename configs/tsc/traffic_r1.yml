@@ -32,7 +32,7 @@ model:
   torch_dtype: "bfloat16"
 
   # Generation / parsing
-  temperature: 0.2
+  temperature: 0.0
   max_new_tokens: 600
   do_sample: False
   parse_retries: 5
