@@ -39,11 +39,21 @@ class OpenAICompatibleBackend(TrafficR1Backend):
                 "model.api_model must be set in the agent YAML for backend=api"
             )
         key_env = str(param.get("api_key_env", "OPENAI_API_KEY"))
+        self.api_key_env = key_env
         self.api_key = os.environ.get(key_env, "")
         if not self.api_key:
+            # Common alternate names if the runtime secret was labeled differently.
+            for alt in ("CMU_GENAI_API_KEY", "GENAI_API_KEY", "TRAFFIC_R1_API_KEY"):
+                if alt != key_env and os.environ.get(alt):
+                    self.api_key = os.environ[alt]
+                    self.api_key_env = alt
+                    break
+        if not self.api_key:
             raise ValueError(
-                f"API key env var {key_env!r} is unset; export it before running "
-                "Traffic-R1 with backend=api"
+                f"API key env var {key_env!r} is unset (also checked "
+                "CMU_GENAI_API_KEY / GENAI_API_KEY / TRAFFIC_R1_API_KEY). "
+                "Add the CMU GenAI Bearer token as a Cloud Agent runtime secret "
+                f"named {key_env} before running Traffic-R1 with backend=api."
             )
         self.temperature = float(param.get("temperature", 0.0))
         self.max_tokens = int(param.get("max_new_tokens", 512))
