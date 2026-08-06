@@ -31,10 +31,12 @@ PREFIX_L1="${PREFIX_L1:-odh_l1_1x21_es}"
 PREFIX_L2="${PREFIX_L2:-odh_l2_1x21_es}"
 
 # Wall-clock per group (sequential runs inside).
-HOURS_BASELINE="${HOURS_BASELINE:-96}"
-HOURS_AXES="${HOURS_AXES:-168}"
-HOURS_L1="${HOURS_L1:-96}"
-HOURS_L2="${HOURS_L2:-120}"
+# gpu2 rejects requests above the partition MaxTime (PartitionTimeLimit) —
+# other deepnet submits here use 24–48h, so default all groups to 48h.
+HOURS_BASELINE="${HOURS_BASELINE:-48}"
+HOURS_AXES="${HOURS_AXES:-48}"
+HOURS_L1="${HOURS_L1:-48}"
+HOURS_L2="${HOURS_L2:-48}"
 
 METHODS=(fixedtime maxpressure dqn presslight colight)
 AXES=(hetero slow_start crossing_proxy obs noise)
