@@ -17,12 +17,13 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p logs extras/_slurm_generated
 
-if [[ -z "${MCS_LABEL:-}" && "${DRY_RUN:-0}" != "1" ]]; then
-  echo "Note: MCS_LABEL unset; submitting without --mcs-label"
+if [[ "${DRY_RUN:-0}" != "1" ]]; then
+  echo "Using MCS_LABEL=${MCS_LABEL}"
 fi
 
 SEED="${SEED:-42}"
 NETWORK="${NETWORK:-sumo1x21}"
+MCS_LABEL="${MCS_LABEL:-15288}"
 PREFIX_BASE="${PREFIX_BASE:-homo_1x21_e200}"
 PREFIX_L1="${PREFIX_L1:-odh_l1_1x21_es}"
 PREFIX_L2="${PREFIX_L2:-odh_l2_1x21_es}"
@@ -163,10 +164,7 @@ submit_chained() {
       continue
     fi
 
-    sbatch_args=()
-    if [[ -n "${MCS_LABEL:-}" ]]; then
-      sbatch_args+=(--mcs-label="${MCS_LABEL}")
-    fi
+    sbatch_args=(--mcs-label="${MCS_LABEL}")
     if [[ -n "${prev_jid}" ]]; then
       sbatch_args+=(--dependency="afterok:${prev_jid}")
     fi
