@@ -9,8 +9,10 @@
 #
 # Usage:
 #   ./extras/submit_ingolstadt_1x21_chained.sh
-#   GROUPS=axes,l1,l2 ./extras/submit_ingolstadt_1x21_chained.sh   # skip baseline
+#   JOB_GROUPS=axes,l1,l2 ./extras/submit_ingolstadt_1x21_chained.sh   # skip baseline
 #   DRY_RUN=1 ./extras/submit_ingolstadt_1x21_chained.sh
+#
+# Note: do NOT use env var name GROUPS — bash reserves it (Unix gid list).
 #
 # Do NOT use sbatch --export=ALL on this cluster.
 
@@ -156,7 +158,7 @@ hours_for() {
 }
 
 submit_groups() {
-  local groups_csv="${GROUPS:-baseline,axes,l1,l2}"
+  local groups_csv="${JOB_GROUPS:-baseline,axes,l1,l2}"
   local group hours script jid
   IFS=',' read -r -a groups <<< "${groups_csv}"
 
@@ -177,7 +179,7 @@ submit_groups() {
 }
 
 echo "Ingolstadt submit: 4 independent jobs (methods sequential inside each)"
-echo "network=${NETWORK} seed=${SEED} groups=${GROUPS:-baseline,axes,l1,l2}"
+echo "network=${NETWORK} seed=${SEED} job_groups=${JOB_GROUPS:-baseline,axes,l1,l2}"
 echo "prefixes: base=${PREFIX_BASE} l1=${PREFIX_L1} l2=${PREFIX_L2}"
 submit_groups
 echo "Monitor: squeue -u \$USER"
