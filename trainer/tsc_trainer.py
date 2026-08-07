@@ -47,7 +47,7 @@ class TSCTrainer(BaseTrainer):
         self.heldout_eval_every = int(trainer_param.get('heldout_eval_every') or 0)
         # replay file is only valid in cityflow now. 
         # TODO: support SUMO and Openengine later
-        
+
         # TODO: support other dataset in the future
         self.dataset = Registry.mapping['dataset_mapping'][Registry.mapping['command_mapping']['setting'].param['dataset']](
             os.path.join(Registry.mapping['logger_mapping']['path'].path,
@@ -60,6 +60,15 @@ class TSCTrainer(BaseTrainer):
                                      Registry.mapping['logger_mapping']['setting'].param['log_dir'],
                                      os.path.basename(self.logger.handlers[-1].baseFilename).rstrip('_BRF.log') + '_DTL.log'
                                      )
+
+    def _collect_actions(self, obs, phases, test=True):
+        '''Gather actions for all agents; use batch path when the agent provides one.'''
+        first = self.agents[0]
+        if hasattr(first, "get_actions_batch"):
+            return np.stack(first.get_actions_batch(self.agents, obs, phases, test=test))
+        return np.stack(
+            [ag.get_action(obs[idx], phases[idx], test=test) for idx, ag in enumerate(self.agents)]
+        )
 
     def create_world(self):
         '''
@@ -164,10 +173,7 @@ class TSCTrainer(BaseTrainer):
                     last_phase = np.stack([ag.get_phase() for ag in self.agents])  # [agent, intersections]
 
                     if total_decision_num > self.learning_start:
-                        actions = []
-                        for idx, ag in enumerate(self.agents):
-                            actions.append(ag.get_action(last_obs[idx], last_phase[idx], test=False))                            
-                        actions = np.stack(actions)  # [agent, intersections]
+                        actions = self._collect_actions(last_obs, last_phase, test=False)
                     else:
                         actions = np.stack([ag.sample() for ag in self.agents])
 
@@ -252,10 +258,7 @@ class TSCTrainer(BaseTrainer):
         for i in range(self.test_steps):
             if i % self.action_interval == 0:
                 phases = np.stack([ag.get_phase() for ag in self.agents])
-                actions = []
-                for idx, ag in enumerate(self.agents):
-                    actions.append(ag.get_action(obs[idx], phases[idx], test=True))
-                actions = np.stack(actions)
+                actions = self._collect_actions(obs, phases, test=True)
                 rewards_list = []
                 for t in range(self.action_interval):
                     obs, rewards, dones, _ = self.env.step(
@@ -340,10 +343,7 @@ class TSCTrainer(BaseTrainer):
         for i in range(self.test_steps):
             if i % self.action_interval == 0:
                 phases = np.stack([ag.get_phase() for ag in self.agents])
-                actions = []
-                for idx, ag in enumerate(self.agents):
-                    actions.append(ag.get_action(obs[idx], phases[idx], test=True))
-                actions = np.stack(actions)
+                actions = self._collect_actions(obs, phases, test=True)
                 rewards_list = []
                 for t in range(self.action_interval):
                     obs, rewards, dones, _ = self.env.step(

@@ -3,6 +3,7 @@ __pycache__/
 *.DS_Store
 .idea/
 .vscode/
+.env
 
 # Stray tool artifact (literal dir from a mis-expanded variable)
 %OUTDIR%/
