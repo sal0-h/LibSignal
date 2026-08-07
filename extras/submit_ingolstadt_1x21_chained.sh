@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
-# Submit Ingolstadt (sumo1x21) as 4 chained SLURM jobs on deepnet.
+# Submit Ingolstadt (sumo1x21) as 4 independent SLURM jobs (fits QOS 4-job limit).
 #
-# Order (each waits for the previous with --dependency=afterok):
+# Jobs run in parallel when GPUs are free. Within each job, methods run sequentially:
 #   1) baseline  — 5 methods, homo, FIXED 200 episodes (*_e200)
-#   2) axes      — 25 runs (5 axes × 5 methods), FIXED 200 episodes (*_*_e200)
+#   2) axes      — 25 runs (5 axes × 5 methods), FIXED 200 episodes
 #   3) l1        — 5 methods, OD-hub only, ADAPTIVE held-out early-stop
 #   4) l2        — 5 methods, OD + realism_full, ADAPTIVE held-out early-stop
 #
 # Usage:
 #   ./extras/submit_ingolstadt_1x21_chained.sh
+#   GROUPS=axes,l1,l2 ./extras/submit_ingolstadt_1x21_chained.sh   # skip baseline
 #   DRY_RUN=1 ./extras/submit_ingolstadt_1x21_chained.sh
 #
 # Do NOT use sbatch --export=ALL on this cluster.
@@ -16,10 +17,6 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p logs extras/_slurm_generated
-
-if [[ "${DRY_RUN:-0}" != "1" ]]; then
-  echo "Using MCS_LABEL=${MCS_LABEL}"
-fi
 
 SEED="${SEED:-42}"
 NETWORK="${NETWORK:-sumo1x21}"
@@ -38,6 +35,10 @@ METHODS_CLASSICAL=(fixedtime maxpressure)
 METHODS_RL=(dqn presslight colight)
 METHODS=(fixedtime maxpressure dqn presslight colight)
 AXES=(hetero slow_start crossing_proxy obs noise)
+
+if [[ "${DRY_RUN:-0}" != "1" ]]; then
+  echo "Using MCS_LABEL=${MCS_LABEL}"
+fi
 
 run_one_py() {
   cat <<'EOS'
@@ -144,40 +145,40 @@ EOF
   echo "${out}"
 }
 
-submit_chained() {
-  local groups=(baseline axes l1 l2)
-  local hours=("${HOURS_BASELINE}" "${HOURS_AXES}" "${HOURS_L1}" "${HOURS_L2}")
-  local prev_jid=""
-  local i group script jid
+hours_for() {
+  case "$1" in
+    baseline) echo "${HOURS_BASELINE}" ;;
+    axes) echo "${HOURS_AXES}" ;;
+    l1) echo "${HOURS_L1}" ;;
+    l2) echo "${HOURS_L2}" ;;
+    *) echo "unknown group: $1" >&2; exit 1 ;;
+  esac
+}
 
-  for i in "${!groups[@]}"; do
-    group="${groups[$i]}"
-    script="$(write_group_job "${group}" "${hours[$i]}")"
+submit_groups() {
+  local groups_csv="${GROUPS:-baseline,axes,l1,l2}"
+  local group hours script jid
+  IFS=',' read -r -a groups <<< "${groups_csv}"
+
+  for group in "${groups[@]}"; do
+    group="$(echo "${group}" | tr -d '[:space:]')"
+    [[ -n "${group}" ]] || continue
+    hours="$(hours_for "${group}")"
+    script="$(write_group_job "${group}" "${hours}")"
 
     if [[ "${DRY_RUN:-0}" == "1" ]]; then
-      if [[ -z "${prev_jid}" ]]; then
-        echo "DRY_RUN: sbatch ${script}  # group=${group} hours=${hours[$i]}"
-      else
-        echo "DRY_RUN: sbatch --dependency=afterok:${prev_jid} ${script}  # group=${group} hours=${hours[$i]}"
-      fi
-      prev_jid="JOBID_${group}"
+      echo "DRY_RUN: sbatch --mcs-label=${MCS_LABEL} ${script}  # group=${group} hours=${hours}"
       continue
     fi
 
-    sbatch_args=(--mcs-label="${MCS_LABEL}")
-    if [[ -n "${prev_jid}" ]]; then
-      sbatch_args+=(--dependency="afterok:${prev_jid}")
-    fi
-
-    jid="$(sbatch "${sbatch_args[@]}" "${script}" | awk '{print $NF}')"
-    echo "Submitted group=${group} job_id=${jid} hours=${hours[$i]} dep=${prev_jid:-none}"
-    prev_jid="${jid}"
+    jid="$(sbatch --mcs-label="${MCS_LABEL}" "${script}" | awk '{print $NF}')"
+    echo "Submitted group=${group} job_id=${jid} hours=${hours} (independent)"
   done
 }
 
-echo "Ingolstadt chained submit: baseline(e200) -> axes(e200) -> l1(adaptive) -> l2(adaptive)"
-echo "network=${NETWORK} seed=${SEED}"
+echo "Ingolstadt submit: 4 independent jobs (methods sequential inside each)"
+echo "network=${NETWORK} seed=${SEED} groups=${GROUPS:-baseline,axes,l1,l2}"
 echo "prefixes: base=${PREFIX_BASE} l1=${PREFIX_L1} l2=${PREFIX_L2}"
-submit_chained
+submit_groups
 echo "Monitor: squeue -u \$USER"
 echo "Logs: logs/i21_group_{baseline,axes,l1,l2}_<jid>.out"
