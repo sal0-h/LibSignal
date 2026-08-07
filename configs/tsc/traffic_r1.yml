@@ -1,7 +1,10 @@
 includes:
   - configs/tsc/base.yml
+  - configs/tsc/od_hub_1800_base.yml
 
-# Local Season998/Traffic-R1 checkpoint (paper-faithful prompt).
+# Level 1 hub-OD inference with the local Season998/Traffic-R1 checkpoint.
+# The shared include supplies the train/held-out route-set protocol; this file
+# keeps the one-episode, inference-only evaluation settings below.
 model:
   name: traffic_r1
   backend: local
