@@ -1,28 +1,21 @@
-"""
-Traffic-R1 agent for LibSignal (SUMO).
-
-Faithful inference-only integration of Season998/Traffic-R1:
-- Appendix A.1 four-phase prompt (ETWT / ELWL / NTST / NLSL)
-- Independent per-intersection decisions (no async messaging in v1)
-- Shared backend (local HF or OpenAI-compatible API)
-- Parse failures: retry up to parse_retries, then hard-fail
-"""
+"""Generic inference-only LLM controller for LibSignal SUMO."""
 
 from __future__ import annotations
 
 import math
-from typing import Any, Dict, List, Optional, Tuple
+import threading
+from typing import Any, Dict, List, Optional, Sequence, Tuple
 
 import gymnasium as gym
 import numpy as np
 
 from agent.base import BaseAgent
-from agent.traffic_r1_backend import TrafficR1Backend, create_backend
-from agent.traffic_r1_prompt import (
+from agent.llm_tsc_backend import LLMBackend, create_backend
+from agent.llm_tsc_prompt import (
     APPROACH_WORD,
+    LLMParseError,
     SIGNAL_LANE_PAIRS,
     SIGNAL_ORDER,
-    TrafficR1ParseError,
     build_messages,
     empty_signal_stats,
     parse_signal,
@@ -30,21 +23,24 @@ from agent.traffic_r1_prompt import (
 from common.registry import Registry
 from generator import IntersectionPhaseGenerator, LaneVehicleGenerator
 
-# Shared across all TrafficR1Agent instances in one process.
-_SHARED_BACKEND: Optional[TrafficR1Backend] = None
+_SHARED_BACKEND: Optional[LLMBackend] = None
+_SHARED_BACKEND_LOCK = threading.Lock()
 
 
-def _get_shared_backend(param: Dict[str, Any]) -> TrafficR1Backend:
+def _get_shared_backend(param: Dict[str, Any]) -> LLMBackend:
     global _SHARED_BACKEND
     if _SHARED_BACKEND is None:
-        _SHARED_BACKEND = create_backend(param)
+        with _SHARED_BACKEND_LOCK:
+            if _SHARED_BACKEND is None:
+                _SHARED_BACKEND = create_backend(param)
     return _SHARED_BACKEND
 
 
 def reset_shared_backend() -> None:
-    """Test helper to clear the process-wide backend singleton."""
+    """Clear the process-wide backend singleton for tests or a new run."""
     global _SHARED_BACKEND
-    _SHARED_BACKEND = None
+    with _SHARED_BACKEND_LOCK:
+        _SHARED_BACKEND = None
 
 
 def _compass_from_atan2(angle: float) -> str:
@@ -60,8 +56,9 @@ def _compass_from_atan2(angle: float) -> str:
 
 
 @Registry.register_model("traffic_r1")
-class TrafficR1Agent(BaseAgent):
-    """Traffic-R1 LLM controller (test / zero-shot only)."""
+@Registry.register_model("deepseek")
+class LLMTSCAgent(BaseAgent):
+    """LLM traffic controller used by both public backend configurations."""
 
     def __init__(self, world, rank):
         super().__init__(world)
@@ -90,9 +87,8 @@ class TrafficR1Agent(BaseAgent):
         )
 
         # Lazy: only intersections that need the LLM touch the backend.
-        self._backend: Optional[TrafficR1Backend] = None
+        self._backend: Optional[LLMBackend] = None
         self.last_action = 0
-        self.last_raw_response: Optional[str] = None
         self.last_signal: Optional[str] = None
 
     def _init_generators(self) -> None:
@@ -124,7 +120,7 @@ class TrafficR1Agent(BaseAgent):
     def __repr__(self) -> str:
         backend = self.param.get("backend", "api")
         return (
-            f"TrafficR1Agent(rank={self.rank}, id={self.inter_obj.id}, "
+            f"LLMTSCAgent(rank={self.rank}, id={self.inter_obj.id}, "
             f"backend={backend}, llm={self._llm_enabled}, "
             f"phase_map={self._signal_to_phase})"
         )
@@ -139,7 +135,6 @@ class TrafficR1Agent(BaseAgent):
             self._signal_to_phase
         )
         self.last_action = 0
-        self.last_raw_response = None
         self.last_signal = None
 
     # ---- observation / reward / phase (LibSignal interface) ----
@@ -166,64 +161,98 @@ class TrafficR1Agent(BaseAgent):
 
     # ---- action ----
 
-    def get_action(self, ob, phase, test=True):
-        # Fringe / single-phase TLS: no LLM.
-        if not self._llm_enabled:
-            self.last_action = 0
-            self.last_signal = None
-            return 0
-
+    def _ensure_backend(self) -> LLMBackend:
         if self._backend is None:
             self._backend = _get_shared_backend(self.param)
+        return self._backend
 
-        signal_stats = self._collect_signal_stats()
-        messages = build_messages(signal_stats, n_segments=self.n_segments)
-
-        last_err: Optional[Exception] = None
-        for attempt in range(1, self.parse_retries + 1):
-            raw = self._backend.complete(messages)
-            self.last_raw_response = raw
-            try:
-                signal = parse_signal(raw, allowed=SIGNAL_ORDER)
-            except TrafficR1ParseError as e:
-                last_err = e
-                print(
-                    f"[Traffic-R1] parse failure at {self.inter_obj.id} "
-                    f"attempt {attempt}/{self.parse_retries}: {e}"
-                )
-                continue
-            if signal not in self._signal_to_phase:
-                last_err = TrafficR1ParseError(
-                    f"Signal {signal} has no mapped green index on {self.inter_obj.id}"
-                )
-                print(
-                    f"[Traffic-R1] mapping failure at {self.inter_obj.id} "
-                    f"attempt {attempt}/{self.parse_retries}: {last_err}"
-                )
-                continue
-            action = int(self._signal_to_phase[signal])
-            self.last_action = action
-            self.last_signal = signal
-            return action
-
-        raise RuntimeError(
-            f"Traffic-R1 hard failure at intersection {self.inter_obj.id}: "
-            f"could not parse a valid signal after {self.parse_retries} attempts. "
-            f"Last error: {last_err}. Last response tail: "
-            f"{(self.last_raw_response or '')[-500:]!r}"
+    def _build_messages(self) -> List[Dict[str, str]]:
+        return build_messages(
+            self._collect_signal_stats(),
+            n_segments=self.n_segments,
         )
+
+    @classmethod
+    def get_actions_batch(
+        cls,
+        agents: Sequence["LLMTSCAgent"],
+        obs: Sequence[Any],
+        phases: Sequence[Any],
+        test: bool = True,
+    ) -> List[int]:
+        """Collect actions, batching LLM requests through the backend."""
+        del obs, phases, test
+        if not agents:
+            return []
+
+        actions = [0] * len(agents)
+        pending: List[
+            Tuple[int, "LLMTSCAgent", List[Dict[str, str]]]
+        ] = []
+        last_errors: Dict[int, Exception] = {}
+
+        for index, agent in enumerate(agents):
+            # Fringe / single-phase TLS: no LLM and deterministic action 0.
+            if not agent._llm_enabled:
+                agent.last_action = 0
+                agent.last_signal = None
+                continue
+            agent._ensure_backend()
+            pending.append((index, agent, agent._build_messages()))
+
+        for attempt in range(1, max(1, agents[0].parse_retries) + 1):
+            if not pending:
+                break
+
+            backend = pending[0][1]._backend
+            if backend is None:
+                raise RuntimeError("LLM backend was not initialized for a pending action")
+            raw_responses = backend.complete_many([item[2] for item in pending])
+            if len(raw_responses) != len(pending):
+                raise RuntimeError(
+                    "LLM backend returned a different number of responses than requests"
+                )
+
+            next_pending = []
+            for item, raw in zip(pending, raw_responses):
+                index, agent, messages = item
+                try:
+                    signal = parse_signal(raw, allowed=SIGNAL_ORDER)
+                    if signal not in agent._signal_to_phase:
+                        raise LLMParseError(
+                            f"Signal {signal} has no mapped green index on "
+                            f"{agent.inter_obj.id}"
+                        )
+                except LLMParseError as exc:
+                    last_errors[index] = exc
+                    next_pending.append(item)
+                    continue
+
+                action = int(agent._signal_to_phase[signal])
+                agent.last_action = action
+                agent.last_signal = signal
+                actions[index] = action
+
+            pending = next_pending
+
+        if pending:
+            failures = "; ".join(
+                f"{agent.inter_obj.id}: {last_errors[index]}"
+                for index, agent, _messages in pending
+            )
+            raise RuntimeError(
+                f"LLM hard failure after {max(1, agents[0].parse_retries)} "
+                f"attempts ({failures})"
+            )
+        return actions
+
+    def get_action(self, ob, phase, test=True):
+        return self.get_actions_batch([self], [ob], [phase], test=test)[0]
 
     # ---- lane / phase geometry ----
 
-    def _build_lane_meta(
-        self,
-    ) -> Dict[str, Tuple[str, str]]:
-        """
-        Map incoming lane id -> (approach_from, movement) with movement in R/T/L.
-
-        Approach is where traffic comes from. For 3-lane approaches we assign
-        right/through/left by ascending SUMO lane index (grid4x4 convention).
-        """
+    def _build_lane_meta(self) -> Dict[str, Tuple[str, str]]:
+        """Map incoming lane id -> (approach_from, movement in R/T/L)."""
         meta: Dict[str, Tuple[str, str]] = {}
         inter = self.inter_obj
         for road, direction, is_out in zip(inter.roads, inter.directions, inter.outs):
@@ -242,26 +271,24 @@ class TrafficR1Agent(BaseAgent):
                 labels = ["T"]
             else:
                 continue
-            for lane, lab in zip(lanes, labels):
-                meta[lane] = (approach, lab)
+            for lane, label in zip(lanes, labels):
+                meta[lane] = (approach, label)
         return meta
 
     def _resolve_phase_map(self, param: Dict[str, Any]) -> Dict[str, int]:
-        """Map Traffic-R1 signal names to LibSignal green-phase indices."""
+        """Map the four signal names to LibSignal green-phase indices."""
         explicit = param.get("phase_name_to_index")
         if explicit:
-            return {str(k).upper(): int(v) for k, v in explicit.items()}
+            return {str(key).upper(): int(value) for key, value in explicit.items()}
 
         n = len(self.inter_obj.phases)
         if n == 1:
             return {}
         if n == 4:
-            # Assume CityFlow-style ordering if an intersection already has 4 greens.
-            # Prefer auto-detect below when lane meta is rich enough.
             auto = self._autodetect_phase_map()
             if auto:
                 return auto
-            return {name: i for i, name in enumerate(SIGNAL_ORDER)}
+            return {name: index for index, name in enumerate(SIGNAL_ORDER)}
 
         auto = self._autodetect_phase_map()
         if auto:
@@ -269,21 +296,19 @@ class TrafficR1Agent(BaseAgent):
 
         # Documented Grid4x4 / NEMA ordering fallback used in this repo.
         fallback = {"NTST": 0, "NLSL": 1, "ETWT": 4, "ELWL": 5}
-        if n >= 6 and all(idx < n for idx in fallback.values()):
+        if n >= 6 and all(index < n for index in fallback.values()):
             print(
-                f"[Traffic-R1] Warning: using NEMA fallback phase map on "
+                f"[LLM] Warning: using NEMA fallback phase map on "
                 f"{self.inter_obj.id}: {fallback}"
             )
             return fallback
         raise RuntimeError(
-            f"Traffic-R1 could not map 4 signal names onto {n} green phases "
+            f"LLM controller could not map four signal names onto {n} green phases "
             f"at intersection {self.inter_obj.id}"
         )
 
     def _autodetect_phase_map(self) -> Dict[str, int]:
-        """
-        Find green indices whose non-right start lanes match each 4-phase pair.
-        """
+        """Find green indices whose non-right start lanes match each signal pair."""
         if not self._lane_meta:
             return {}
         phase_sets: List[frozenset] = []
@@ -292,72 +317,68 @@ class TrafficR1Agent(BaseAgent):
             for lane in self.inter_obj.phase_available_startlanes[phase_id]:
                 if lane not in self._lane_meta:
                     continue
-                approach, mov = self._lane_meta[lane]
-                if mov == "R":
+                approach, movement = self._lane_meta[lane]
+                if movement == "R":
                     continue
-                keys.append((approach, mov))
+                keys.append((approach, movement))
             phase_sets.append(frozenset(keys))
 
         mapping: Dict[str, int] = {}
         for signal, pair in SIGNAL_LANE_PAIRS.items():
             target = frozenset(pair)
-            matches = [i for i, s in enumerate(phase_sets) if s == target]
-            if len(matches) == 1:
+            matches = [index for index, phase_set in enumerate(phase_sets) if phase_set == target]
+            if matches:
                 mapping[signal] = matches[0]
-            elif len(matches) > 1:
-                # Prefer the phase that does not also include extras (exact match already).
-                mapping[signal] = matches[0]
-        if len(mapping) == 4:
-            return mapping
-        return {}
+        return mapping if len(mapping) == 4 else {}
 
     def _collect_signal_stats(self) -> Dict[str, Dict[str, Dict[str, int]]]:
         stats = empty_signal_stats(n_segments=self.n_segments)
-        fo = self.inter_obj.full_observation
-        if not fo:
+        full_observation = self.inter_obj.full_observation
+        if not full_observation:
             return stats
 
-        # Aggregate early_queued + approaching segments per (approach, movement).
         lane_counts: Dict[Tuple[str, str], Dict[str, Any]] = {}
-        for lane, (approach, mov) in self._lane_meta.items():
-            if mov == "R":
+        for lane, (approach, movement) in self._lane_meta.items():
+            if movement == "R":
                 continue
-            lane_obs = fo.get(lane)
-            if not lane_obs:
+            lane_observation = full_observation.get(lane)
+            if not lane_observation:
                 continue
             length = float(self.world.eng.lane.getLength(lane))
             early = 0
             segments = [0] * self.n_segments
-            for v in lane_obs.get("vehicles", []):
-                speed = float(v.get("speed", 0.0))
-                pos = float(v.get("position", 0.0))
-                dist_to_stop = max(0.0, length - pos)
-                if dist_to_stop > self.obs_distance:
+            for vehicle in lane_observation.get("vehicles", []):
+                speed = float(vehicle.get("speed", 0.0))
+                position = float(vehicle.get("position", 0.0))
+                distance_to_stop = max(0.0, length - position)
+                if distance_to_stop > self.obs_distance:
                     continue
                 if speed < self.v_stop:
                     early += 1
                     continue
-                # Approaching: bin into segments (1 = closest to intersection).
                 if length <= 0:
                     continue
-                # Relative position from stop line in [0, 1].
-                rel = min(1.0, dist_to_stop / length)
-                seg_idx = min(self.n_segments - 1, int(rel * self.n_segments))
-                segments[seg_idx] += 1
-            lane_counts[(approach, mov)] = {
+                relative_position = min(1.0, distance_to_stop / length)
+                segment = min(
+                    self.n_segments - 1,
+                    int(relative_position * self.n_segments),
+                )
+                segments[segment] += 1
+            lane_counts[(approach, movement)] = {
                 "early_queued": early,
                 "segments": segments,
             }
 
         for signal, pair in SIGNAL_LANE_PAIRS.items():
-            for approach, mov in pair:
+            for approach, movement in pair:
                 side = APPROACH_WORD[approach]
                 data = lane_counts.get(
-                    (approach, mov),
+                    (approach, movement),
                     {"early_queued": 0, "segments": [0] * self.n_segments},
                 )
                 stats[signal][side] = {
                     "early_queued": int(data["early_queued"]),
-                    "segments": [int(x) for x in data["segments"]],
+                    "segments": [int(value) for value in data["segments"]],
                 }
         return stats
+

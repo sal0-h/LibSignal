@@ -1,9 +1,14 @@
-"""Traffic-R1 Appendix A.1 prompt construction and response parsing."""
+"""Prompt construction and response parsing for the LLM TSC controller.
+
+The observation and four-signal vocabulary follow Traffic-R1 Appendix A.1.
+The controller can use the same decision interface with a local Traffic-R1
+checkpoint or a separate OpenAI-compatible model.
+"""
 
 from __future__ import annotations
 
 import re
-from typing import Dict, List, Optional, Sequence, Tuple
+from typing import Dict, List, Sequence
 
 # Paper action vocabulary (exactly four phases).
 SIGNAL_ORDER = ("ETWT", "ELWL", "NTST", "NLSL")
@@ -45,13 +50,25 @@ FORMAT_INSTRUCTION = (
     "The final choice MUST BE put in \\boxed{}."
 )
 
+# Generic reasoning APIs need stronger output compliance than the fine-tuned
+# Traffic-R1 checkpoint. The API backend applies this automatically.
+DEFAULT_API_FORMAT_SUFFIX = (
+    " Keep the think block to one or two short sentences (under 50 words). "
+    "Do not repeat the task or discuss these instructions. "
+    "Even if all queues are zero, you MUST still choose exactly one of "
+    "ETWT, ELWL, NTST, NLSL. End immediately with exactly one literal final form: "
+    "\\boxed{ETWT}, \\boxed{ELWL}, \\boxed{NTST}, or \\boxed{NLSL}. "
+    "Use the chosen signal inside the box; never write the placeholder SIGNAL. "
+    "Do not ask questions or continue thinking after the final box."
+)
+
 SYSTEM_PROMPT = "You are a helpful traffic control agent."
 
 _BOXED_RE = re.compile(r"\\boxed\{\s*([A-Za-z]+)\s*\}")
 _SIGNAL_TOKEN_RE = re.compile(r"\b(ETWT|ELWL|NTST|NLSL)\b", re.IGNORECASE)
 
 
-class TrafficR1ParseError(ValueError):
+class LLMParseError(ValueError):
     """Raised when a model response cannot be parsed into a valid signal."""
 
 
@@ -59,15 +76,7 @@ def build_observation_text(
     signal_stats: Dict[str, Dict[str, Dict[str, int]]],
     n_segments: int = 3,
 ) -> str:
-    """
-    Build the Structured Traffic Observation block.
-
-    signal_stats[signal][side] = {
-        'early_queued': int,
-        'segments': [c1, c2, c3],  # approaching counts, seg1 closest
-    }
-    side is 'East'/'West' for E-W signals and 'North'/'South' for N-S signals.
-    """
+    """Build the structured traffic observation block."""
     lines: List[str] = ["Structured Traffic Observation:"]
     for signal in SIGNAL_ORDER:
         pair = SIGNAL_LANE_PAIRS[signal]
@@ -80,14 +89,16 @@ def build_observation_text(
         lines.append(f"Signal: {signal}")
         lines.append(f"Allowed lanes: {SIGNAL_ALLOWED[signal]}")
         lines.append(
-            f"- Early queued: {q_a} ({side_a}), {q_b} ({side_b}), {q_a + q_b} (Total)"
+            f"- Early queued: {q_a} ({side_a}), {q_b} ({side_b}), "
+            f"{q_a + q_b} (Total)"
         )
         segs_a = list(a["segments"]) + [0] * n_segments
         segs_b = list(b["segments"]) + [0] * n_segments
         for s in range(n_segments):
             ca, cb = int(segs_a[s]), int(segs_b[s])
             lines.append(
-                f"- Segment {s + 1}: {ca} ({side_a}), {cb} ({side_b}), {ca + cb} (Total)"
+                f"- Segment {s + 1}: {ca} ({side_a}), {cb} ({side_b}), "
+                f"{ca + cb} (Total)"
             )
     return "\n".join(lines)
 
@@ -95,9 +106,9 @@ def build_observation_text(
 def build_user_prompt(
     signal_stats: Dict[str, Dict[str, Dict[str, int]]],
     n_segments: int = 3,
-    incident_text: Optional[str] = None,
+    incident_text: str | None = None,
 ) -> str:
-    """Full user prompt matching Traffic-R1 Appendix A.1 structure."""
+    """Build the paper-derived user prompt without backend-specific text."""
     parts = [
         f"Task Description: {TASK_DESCRIPTION}",
         build_observation_text(signal_stats, n_segments=n_segments),
@@ -111,58 +122,55 @@ def build_user_prompt(
 def build_messages(
     signal_stats: Dict[str, Dict[str, Dict[str, int]]],
     n_segments: int = 3,
-    incident_text: Optional[str] = None,
+    incident_text: str | None = None,
 ) -> List[Dict[str, str]]:
     return [
         {"role": "system", "content": SYSTEM_PROMPT},
         {
             "role": "user",
             "content": build_user_prompt(
-                signal_stats, n_segments=n_segments, incident_text=incident_text
+                signal_stats,
+                n_segments=n_segments,
+                incident_text=incident_text,
             ),
         },
     ]
 
 
 def parse_signal(response: str, allowed: Sequence[str] = SIGNAL_ORDER) -> str:
-    """
-    Extract the chosen signal from a Traffic-R1 response.
-
-    Prefer \\boxed{SIGNAL}. Fall back to the last explicit signal token only if
-    boxed is absent but a single allowed token appears after </think>.
-    """
+    """Extract a valid signal from the final answer portion of a response."""
     if response is None:
-        raise TrafficR1ParseError("Empty model response")
+        raise LLMParseError("Empty model response")
     text = str(response).strip()
     if not text:
-        raise TrafficR1ParseError("Empty model response")
+        raise LLMParseError("Empty model response")
 
     allowed_set = {a.upper() for a in allowed}
-    boxed = _BOXED_RE.findall(text)
+    close = text.rfind("</think>")
+    final_text = text[close + len("</think>") :] if close != -1 else text
+
+    # Ignore boxed choices that occur only in the reasoning block. This keeps
+    # a truncated chain-of-thought from becoming an accepted control action.
+    boxed = _BOXED_RE.findall(final_text)
     if boxed:
         choice = boxed[-1].upper()
         if choice not in allowed_set:
-            raise TrafficR1ParseError(
+            raise LLMParseError(
                 f"Boxed signal {choice!r} not in allowed set {sorted(allowed_set)}"
             )
         return choice
 
-    # After think block, look for an explicit signal mention.
-    after_think = text
-    close = text.rfind("</think>")
-    if close != -1:
-        after_think = text[close + len("</think>") :]
-    tokens = [t.upper() for t in _SIGNAL_TOKEN_RE.findall(after_think)]
+    tokens = [t.upper() for t in _SIGNAL_TOKEN_RE.findall(final_text)]
     tokens = [t for t in tokens if t in allowed_set]
     if len(tokens) == 1:
         return tokens[0]
     if len(tokens) > 1:
-        # Use the last mention after the think block.
         return tokens[-1]
 
-    raise TrafficR1ParseError(
+    raise LLMParseError(
         "Could not parse a valid signal from model response "
-        f"(expected \\boxed{{ETWT|ELWL|NTST|NLSL}}). Response tail: {text[-400:]!r}"
+        f"(expected \\boxed{{ETWT|ELWL|NTST|NLSL}}). "
+        f"Response tail: {text[-400:]!r}"
     )
 
 
@@ -170,7 +178,7 @@ def empty_signal_stats(n_segments: int = 3) -> Dict[str, Dict[str, Dict[str, int
     stats: Dict[str, Dict[str, Dict[str, int]]] = {}
     for signal, pair in SIGNAL_LANE_PAIRS.items():
         stats[signal] = {}
-        for approach, _mov in pair:
+        for approach, _movement in pair:
             side = APPROACH_WORD[approach]
             stats[signal][side] = {
                 "early_queued": 0,

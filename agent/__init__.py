@@ -6,12 +6,12 @@ from .maxpressure import MaxPressureAgent
 from .fixedtime import FixedTimeAgent
 from .sotl import SOTLAgent
 
-# Traffic-R1 (LLM inference); backends/deps loaded lazily inside the agent
+# Generic LLM TSC controller; backends/deps loaded lazily inside the agent
 try:
-	from .traffic_r1 import TrafficR1Agent
+	from .llm_tsc import LLMTSCAgent
 except Exception as e:
-	print(f"Warning: Failed to import TrafficR1Agent: {e}")
-	TrafficR1Agent = None
+	print(f"Warning: Failed to import LLM TSC agent: {e}")
+	LLMTSCAgent = None
 
 # Optional RL agents; import lazily so missing deps (e.g., torch_scatter) don't block baselines
 try:

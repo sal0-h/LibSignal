@@ -1,7 +1,7 @@
 includes:
   - configs/tsc/maxpressure.yml
 
-# MaxPressure baseline on the same fixed_1800 demand as traffic_r1.yml.
+# MaxPressure baseline on the fixed_1800 demand.
 
 trainer:
   episodes: 1
