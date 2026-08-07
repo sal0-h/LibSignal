@@ -1,0 +1,5 @@
+# Fixed 200-episode budget (no early-stop). Include after an agent YAML.
+trainer:
+  episodes: 200
+  early_stop: False
+  min_episodes: 0

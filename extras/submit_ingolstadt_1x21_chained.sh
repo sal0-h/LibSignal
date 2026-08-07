@@ -2,17 +2,14 @@
 # Submit Ingolstadt (sumo1x21) as 4 chained SLURM jobs on deepnet.
 #
 # Order (each waits for the previous with --dependency=afterok):
-#   1) baseline  — 5 methods, homo demand, axes off
-#   2) axes      — 25 runs (5 axes × 5 methods), one at a time
-#   3) l1        — 5 methods, OD-hub only
-#   4) l2        — 5 methods, OD-hub + realism_full
+#   1) baseline  — 5 methods, homo, FIXED 200 episodes (*_e200)
+#   2) axes      — 25 runs (5 axes × 5 methods), FIXED 200 episodes (*_*_e200)
+#   3) l1        — 5 methods, OD-hub only, ADAPTIVE held-out early-stop
+#   4) l2        — 5 methods, OD + realism_full, ADAPTIVE held-out early-stop
 #
-# Inside each job, runs are sequential (set -e: fail stops that group).
-#
-# Usage (on deepnet login node, after git pull + assets present):
+# Usage:
 #   ./extras/submit_ingolstadt_1x21_chained.sh
 #   DRY_RUN=1 ./extras/submit_ingolstadt_1x21_chained.sh
-#   # optional: export MCS_LABEL=... if your queue needs it
 #
 # Do NOT use sbatch --export=ALL on this cluster.
 
@@ -26,23 +23,22 @@ fi
 
 SEED="${SEED:-42}"
 NETWORK="${NETWORK:-sumo1x21}"
-PREFIX_BASE="${PREFIX_BASE:-homo_1x21_es}"
+PREFIX_BASE="${PREFIX_BASE:-homo_1x21_e200}"
 PREFIX_L1="${PREFIX_L1:-odh_l1_1x21_es}"
 PREFIX_L2="${PREFIX_L2:-odh_l2_1x21_es}"
 
-# Wall-clock per group (sequential runs inside).
-# gpu2 rejects requests above the partition MaxTime (PartitionTimeLimit) —
-# other deepnet submits here use 24–48h, so default all groups to 48h.
+# gpu2 MaxTime is typically 48h
 HOURS_BASELINE="${HOURS_BASELINE:-48}"
 HOURS_AXES="${HOURS_AXES:-48}"
 HOURS_L1="${HOURS_L1:-48}"
 HOURS_L2="${HOURS_L2:-48}"
 
+METHODS_CLASSICAL=(fixedtime maxpressure)
+METHODS_RL=(dqn presslight colight)
 METHODS=(fixedtime maxpressure dqn presslight colight)
 AXES=(hetero slow_start crossing_proxy obs noise)
 
 run_one_py() {
-  # Emitted into job scripts: run one agent; install torch_scatter for colight*.
   cat <<'EOS'
 run_one() {
   local agent="$1"
@@ -76,15 +72,22 @@ write_group_job() {
   case "${group}" in
     baseline)
       local m
-      for m in "${METHODS[@]}"; do
+      # Classical: 1-ep configs. RL: fixed 200-ep.
+      for m in "${METHODS_CLASSICAL[@]}"; do
         body+="run_one ${m} ${PREFIX_BASE}"$'\n'
+      done
+      for m in "${METHODS_RL[@]}"; do
+        body+="run_one ${m}_e200 ${PREFIX_BASE}"$'\n'
       done
       ;;
     axes)
       local axis m
       for axis in "${AXES[@]}"; do
-        for m in "${METHODS[@]}"; do
-          body+="run_one ${m}_${axis} axis_${axis}_1x21_es"$'\n'
+        for m in "${METHODS_CLASSICAL[@]}"; do
+          body+="run_one ${m}_${axis} axis_${axis}_1x21_e200"$'\n'
+        done
+        for m in "${METHODS_RL[@]}"; do
+          body+="run_one ${m}_${axis}_e200 axis_${axis}_1x21_e200"$'\n'
         done
       done
       ;;
@@ -144,7 +147,7 @@ submit_chained() {
   local groups=(baseline axes l1 l2)
   local hours=("${HOURS_BASELINE}" "${HOURS_AXES}" "${HOURS_L1}" "${HOURS_L2}")
   local prev_jid=""
-  local i group script jid dep_args
+  local i group script jid
 
   for i in "${!groups[@]}"; do
     group="${groups[$i]}"
@@ -168,15 +171,15 @@ submit_chained() {
       sbatch_args+=(--dependency="afterok:${prev_jid}")
     fi
 
-    # Capture job id from sbatch ("Submitted batch job 12345")
     jid="$(sbatch "${sbatch_args[@]}" "${script}" | awk '{print $NF}')"
     echo "Submitted group=${group} job_id=${jid} hours=${hours[$i]} dep=${prev_jid:-none}"
     prev_jid="${jid}"
   done
 }
 
-echo "Ingolstadt chained submit: baseline -> axes -> l1 -> l2"
+echo "Ingolstadt chained submit: baseline(e200) -> axes(e200) -> l1(adaptive) -> l2(adaptive)"
 echo "network=${NETWORK} seed=${SEED}"
+echo "prefixes: base=${PREFIX_BASE} l1=${PREFIX_L1} l2=${PREFIX_L2}"
 submit_chained
 echo "Monitor: squeue -u \$USER"
 echo "Logs: logs/i21_group_{baseline,axes,l1,l2}_<jid>.out"

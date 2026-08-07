@@ -705,9 +705,11 @@ class World(object):
         seed_flags = ['--seed', str(int(effective_seed))]
         # Use explicit -n/-r when realism toggles need additional-files or alternate routes.
         # Demand-set rotation also requires -r so set_route_file can swap files.
+        # crossing_proxy alone does NOT force -n/-r: on Ingolstadt the .rou is trip-based and
+        # must be launched via combined .sumocfg (-c) or vehicles fail with "no valid route".
+        # Proxy only needs TraCI lane maps; hetero/slow_start/demand still flip to -n/-r.
         use_explicit_net_route = (
             not sumo_dict.get('combined_file') or self.hetero or self.slow_start
-            or self.crossing_proxy
             or bool(demand_train_file)
             or bool(demand_set)
         )

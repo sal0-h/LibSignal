@@ -37,7 +37,7 @@ NETWORKS = [
     },
     {
         "name": "sumo1x21",
-        "src": "data/raw_data/ingolstadt21/ingolstadt21.rou.xml",
+        "src": "data/raw_data/ingolstadt21/ingolstadt21_routed.rou.xml",
         "dst": "data/raw_data/ingolstadt21/ingolstadt21_hetero.rou.xml",
     },
 ]
