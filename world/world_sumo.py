@@ -683,6 +683,20 @@ class World(object):
             route_file = slow_route
             print(f"[SlowStart] enabled — routes={route_file}, vTypes={add_file}")
 
+        elif self.crossing_proxy and 'ingolstadt21' in sumo_dict.get('roadnetFile', ''):
+            routed_rel = sumo_dict.get(
+                'flowFileRouted',
+                'raw_data/ingolstadt21/ingolstadt21_routed.rou.xml',
+            )
+            routed_abs = os.path.join(sumo_dict['dir'], routed_rel)
+            if not os.path.isfile(routed_abs):
+                raise FileNotFoundError(
+                    "Ingolstadt crossing_proxy requires pre-routed demand at "
+                    f"{routed_abs}. Run: bash extras/prepare_ingolstadt_1x21_assets.sh"
+                )
+            route_file = routed_rel
+            print(f"[CrossingProxy] Ingolstadt routed demand — routes={route_file}")
+
         # Optional demand-set / fixed-file override (after physics route selection so
         # realism_full can keep hetero vTypes while swapping OD hub routes).
         demand_train_file = world_param.get('demand_train_file')
@@ -705,11 +719,12 @@ class World(object):
         seed_flags = ['--seed', str(int(effective_seed))]
         # Use explicit -n/-r when realism toggles need additional-files or alternate routes.
         # Demand-set rotation also requires -r so set_route_file can swap files.
-        # crossing_proxy alone does NOT force -n/-r: on Ingolstadt the .rou is trip-based and
-        # must be launched via combined .sumocfg (-c) or vehicles fail with "no valid route".
-        # Proxy only needs TraCI lane maps; hetero/slow_start/demand still flip to -n/-r.
+        # crossing_proxy on Ingolstadt must use pre-routed demand (flowFile / *_routed.rou.xml):
+        # trip-based .rou via -c alone can raise FatalTraCIError "has no valid route" when
+        # lane halts run during test (see extras/prepare_ingolstadt_1x21_assets.sh).
         use_explicit_net_route = (
             not sumo_dict.get('combined_file') or self.hetero or self.slow_start
+            or self.crossing_proxy
             or bool(demand_train_file)
             or bool(demand_set)
         )
