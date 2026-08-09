@@ -1,59 +1,75 @@
 #!/usr/bin/env bash
-# Safe git pull on gpujobs when untracked experiment logs block checkout.
+# Safe git pull on gpujobs: keeps experiment logs, discards stale local edits, fast-forwards.
 #
-# Those BRF/DTL files are already committed on feat/early-stop-episodes.
-# Untracked copies on the server block pull — this backs them up, then pulls.
+# OD-hub BRF/DTL logs are already committed on feat/early-stop-episodes.
+# Server often has untracked copies + old edits to world_sumo.py — both block pull.
 #
 # Usage (gpujobs):
 #   cd ~/LibSignalFork
 #   bash extras/gpujobs_pull_safe.sh
-#   bash extras/smoke_crossing_proxy_1x21.sh
-#   export MCS_LABEL=15288 && ./extras/resubmit_ingolstadt_axes_remainder.sh
+#
+# Recover pre-pull tarball if needed:
+#   tar xzf ~/LibSignalFork_pre_pull_<timestamp>.tar.gz -C /tmp/recover
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
 BRANCH="${BRANCH:-feat/early-stop-episodes}"
-BACKUP="${BACKUP:-$HOME/LibSignalFork_untracked_backup_$(date +%Y%m%d_%H%M%S)}"
-mkdir -p "$BACKUP"
+STAMP="$(date +%Y%m%d_%H%M%S)"
+ARCHIVE="${ARCHIVE:-$HOME/LibSignalFork_pre_pull_${STAMP}.tar.gz}"
 
-backup_if_untracked() {
-  local f="$1"
-  [[ -f "$f" ]] || return 0
-  if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
-    echo "tracked (will merge): $f"
-    return 0
-  fi
-  echo "backup untracked: $f -> $BACKUP/$f"
-  mkdir -p "$BACKUP/$(dirname "$f")"
-  cp -a "$f" "$BACKUP/$f"
-  rm -f "$f"
-}
+echo "=== LibSignal safe pull (branch ${BRANCH}) ==="
 
-# Known blockers on feat/early-stop-episodes (also scan for any other untracked logs)
-backup_if_untracked "data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/odh_l2_es/logger/2026_08_05-00_33_53_BRF.log"
-backup_if_untracked "data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/odh_l2_es/logger/2026_08_05-00_33_53_DTL.log"
-backup_if_untracked "extras/resubmit_ingolstadt_axes_remainder.sh"
+# 1) Full backup of experiment outputs + any local script edits
+echo "Archiving to ${ARCHIVE} ..."
+tar czf "${ARCHIVE}" \
+  data/output_data/tsc \
+  world/world_sumo.py \
+  extras/submit_ingolstadt_1x21_chained.sh \
+  2>/dev/null || true
+echo "Backup archive: ${ARCHIVE}"
 
 echo "Fetching origin/${BRANCH}..."
 git fetch origin "$BRANCH"
 
-# Any untracked file that would be overwritten by merge
-while IFS= read -r line; do
-  f="${line#Would remove }"
-  backup_if_untracked "$f"
-done < <(git merge-tree "$(git merge-base HEAD "origin/${BRANCH}")" HEAD "origin/${BRANCH}" 2>/dev/null | grep '^Would remove' || true)
+# 2) Drop local edits to tracked files (remote branch has the correct versions)
+if git diff --quiet world/world_sumo.py 2>/dev/null; then :; else
+  echo "Reverting local edits: world/world_sumo.py"
+  git checkout -- world/world_sumo.py
+fi
+if git diff --quiet extras/submit_ingolstadt_1x21_chained.sh 2>/dev/null; then :; else
+  echo "Reverting local edits: extras/submit_ingolstadt_1x21_chained.sh"
+  git checkout -- extras/submit_ingolstadt_1x21_chained.sh
+fi
 
-git checkout "$BRANCH" 2>/dev/null || git checkout -b "$BRANCH" "origin/${BRANCH}"
-git pull origin "$BRANCH"
+# 3) Remove untracked duplicates of log files that exist in the branch
+removed=0
+while IFS= read -r f; do
+  [[ -n "$f" ]] || continue
+  if [[ -f "$f" ]] && ! git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
+    echo "remove untracked duplicate: $f"
+    rm -f "$f"
+    removed=$((removed + 1))
+  fi
+done < <(git ls-tree -r --name-only "origin/${BRANCH}" -- data/output_data/tsc 2>/dev/null | grep '\.log$' || true)
+echo "Removed ${removed} untracked log duplicate(s)."
 
-chmod +x extras/resubmit_ingolstadt_axes_remainder.sh extras/smoke_crossing_proxy_1x21.sh 2>/dev/null || true
+# 4) Fast-forward
+current="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '')"
+if [[ "$current" != "$BRANCH" ]]; then
+  git checkout "$BRANCH" 2>/dev/null || git checkout -B "$BRANCH" "origin/${BRANCH}"
+fi
+git pull --ff-only origin "$BRANCH"
+
+chmod +x extras/resubmit_ingolstadt_axes_remainder.sh \
+         extras/smoke_crossing_proxy_1x21.sh \
+         extras/gpujobs_pull_safe.sh 2>/dev/null || true
 
 echo ""
-echo "Pull OK on branch ${BRANCH}."
-echo "Untracked copies backed up to: ${BACKUP}"
-echo "Committed logs are in the repo under data/output_data/tsc/..."
+echo "Pull OK. Branch ${BRANCH} is up to date."
+echo "Experiment logs restored from git (same runs as your untracked copies)."
+echo "Full pre-pull backup: ${ARCHIVE}"
 echo ""
-echo "Compare backup vs repo (optional):"
-echo "  diff -q ${BACKUP}/data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/odh_l2_es/logger/2026_08_05-00_33_53_BRF.log \\"
-echo "    data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/odh_l2_es/logger/2026_08_05-00_33_53_BRF.log || true"
+echo "Next:"
+echo "  bash extras/smoke_crossing_proxy_1x21.sh"
+echo "  export MCS_LABEL=15288 && ./extras/resubmit_ingolstadt_axes_remainder.sh"
