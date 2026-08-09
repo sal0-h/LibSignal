@@ -34,3 +34,6 @@ data/output_data/tsc/processed_results*.csv
 
 # keep experiment DTL/BRF logs even though *.log is ignored for LaTeX
 !data/output_data/**/*.log
+
+# Track Ingolstadt analysis notebook
+!result_analysis/ingolstadt21.ipynb
