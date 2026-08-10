@@ -64,6 +64,8 @@ def _compass_from_atan2(angle: float) -> str:
 @Registry.register_model("qwen3_4b_think1024_sampled")
 @Registry.register_model("qwen3_4b_think2048")
 @Registry.register_model("qwen36_27b_no_think")
+@Registry.register_model("codex")
+@Registry.register_model("openai-codex")
 class LLMTSCAgent(BaseAgent):
     """LLM traffic controller used by both public backend configurations."""
 

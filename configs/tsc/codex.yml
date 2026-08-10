@@ -1,0 +1,50 @@
+includes:
+  - configs/tsc/base.yml
+
+# Direct OpenAI Codex Responses transport. This is the same
+# chatgpt.com/backend-api/codex provider shape Hermes uses, without invoking
+# the Codex CLI or its app-server runtime.
+model:
+  name: codex
+  backend: codex
+  provider: openai-codex
+  model_id: gpt-5.6-luna
+
+  # Read an existing Hermes OAuth session from $HERMES_HOME/auth.json (or
+  # ~/.hermes/auth.json). No token belongs in this YAML file. Set this to
+  # codex_cli to use $CODEX_HOME/auth.json (or ~/.codex/auth.json), or auto
+  # to try Hermes first and the Codex CLI store second.
+  auth_source: hermes
+  base_url: https://chatgpt.com/backend-api/codex
+
+  timeout: 180
+  reasoning_effort: medium
+  reasoning_enabled: true
+  max_new_tokens: 512
+  parse_retries: 5
+  # API-only concurrency for the 16 interior requests per decision step.
+  parallelism: 16
+
+  # Observation (paper-derived four-signal interface).
+  v_stop: 0.1
+  n_segments: 3
+  obs_distance: 200
+
+trainer:
+  episodes: 1
+  steps: 1800
+  test_steps: 1800
+  buffer_size: 0
+  action_interval: 10
+  learning_rate: 0
+  learning_start: 0
+  update_model_rate: 0
+  update_target_rate: 0
+  test_when_train: False
+  heldout_eval_every: 0
+
+world:
+  demand_train_file: raw_data/grid4x4/od_hubs/demand_set/fixed_1800.rou.xml
+
+logger:
+  save_rate: 0

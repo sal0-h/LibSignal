@@ -8,6 +8,16 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Sequence
 
+from agent.llm_tsc_codex import (
+    CodexCredentials,
+    DEFAULT_CODEX_BASE_URL,
+    DEFAULT_CODEX_MODEL,
+    build_codex_request,
+    codex_default_headers,
+    extract_codex_stream_text,
+    prepare_messages,
+    resolve_codex_credentials,
+)
 from agent.llm_tsc_prompt import DEFAULT_API_FORMAT_SUFFIX, SIGNAL_ORDER
 
 
@@ -55,11 +65,19 @@ class LLMBackend:
 
 def create_backend(param: Dict[str, Any]) -> LLMBackend:
     backend = str(param.get("backend", "api")).lower()
+    provider = str(param.get("provider", "")).lower()
     if backend == "local":
         return LocalHFBackend(param)
+    if (
+        backend in {"codex", "openai-codex", "codex_responses"}
+        or provider == "openai-codex"
+    ):
+        return CodexResponsesBackend(param)
     if backend == "api":
         return OpenAICompatibleBackend(param)
-    raise ValueError(f"Unknown LLM backend {backend!r}; expected 'local' or 'api'")
+    raise ValueError(
+        f"Unknown LLM backend {backend!r}; expected 'local', 'api', or 'codex'"
+    )
 
 
 class OpenAICompatibleBackend(LLMBackend):
@@ -220,6 +238,95 @@ class OpenAICompatibleBackend(LLMBackend):
             {"role": "assistant", "content": str(response)},
             {"role": "user", "content": _API_RETRY_INSTRUCTION},
         ]
+
+
+class CodexResponsesBackend(LLMBackend):
+    """Direct ChatGPT/Codex Responses transport, without Codex app-server."""
+
+    def __init__(
+        self,
+        param: Dict[str, Any],
+        *,
+        credentials: CodexCredentials | None = None,
+        client: Any = None,
+    ):
+        self.base_url = str(
+            param.get("base_url", DEFAULT_CODEX_BASE_URL)
+        ).rstrip("/")
+        if not self.base_url:
+            raise ValueError("model.base_url must not be empty for backend=codex")
+
+        self.model = str(
+            param.get("model_id", param.get("model", DEFAULT_CODEX_MODEL))
+        ).strip()
+        if not self.model:
+            raise ValueError("model.model_id must not be empty for backend=codex")
+
+        self.credentials = credentials or resolve_codex_credentials(param)
+        self.access_token = self.credentials.access_token
+        self.timeout = float(param.get("timeout", 120.0))
+        self.max_output_tokens = int(param.get("max_new_tokens", 512))
+        self.reasoning_effort = str(param.get("reasoning_effort", "medium")).strip()
+        self.reasoning_enabled = bool(param.get("reasoning_enabled", True))
+        self.include_reasoning = bool(param.get("include_reasoning", False))
+        self.extra_body = param.get("extra_body") or {}
+        self.request_overrides = param.get("request_overrides") or {}
+        self.parallelism = max(1, int(param.get("parallelism", 16)))
+        self.default_headers = codex_default_headers(self.access_token, self.base_url)
+        self._client = client
+        self._client_lock = threading.Lock()
+
+    def _get_client(self):
+        if self._client is None:
+            with self._client_lock:
+                if self._client is None:
+                    try:
+                        from openai import OpenAI
+                    except ImportError as exc:
+                        raise ImportError(
+                            "The 'openai' package is required for backend=codex. "
+                            "Install it with: pip install openai"
+                        ) from exc
+                    self._client = OpenAI(
+                        base_url=self.base_url,
+                        api_key=self.access_token,
+                        timeout=self.timeout,
+                        default_headers=self.default_headers or None,
+                    )
+        return self._client
+
+    def _complete_one(self, messages: List[Dict[str, str]]) -> str:
+        prepared = prepare_messages(messages)
+        request = build_codex_request(
+            prepared,
+            model=self.model,
+            max_output_tokens=self.max_output_tokens,
+            reasoning_effort=self.reasoning_effort,
+            reasoning_enabled=self.reasoning_enabled,
+            include_reasoning=self.include_reasoning,
+            extra_body=self.extra_body,
+            request_overrides=self.request_overrides,
+        )
+        event_stream = self._get_client().responses.create(**request)
+        return extract_codex_stream_text(event_stream)
+
+    def complete_many(
+        self,
+        messages_list: Sequence[List[Dict[str, str]]],
+    ) -> List[str]:
+        if self.parallelism <= 1 or len(messages_list) <= 1:
+            return [self._complete_one(messages) for messages in messages_list]
+
+        with ThreadPoolExecutor(
+            max_workers=min(self.parallelism, len(messages_list))
+        ) as pool:
+            futures = [
+                pool.submit(self._complete_one, messages)
+                for messages in messages_list
+            ]
+            # Future order intentionally mirrors request order, matching the
+            # existing OpenAI-compatible backend's batching contract.
+            return [future.result() for future in futures]
 
 
 class LocalHFBackend(LLMBackend):

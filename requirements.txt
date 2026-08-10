@@ -33,7 +33,8 @@ pandas>=1.3.0
 seaborn>=0.11.0
 tqdm>=4.62.0
 
-# LLM traffic controller (optional; only needed when running --agent deepseek or traffic_r1)
+# LLM traffic controller (optional; needed by --agent deepseek, traffic_r1, or codex)
 transformers>=4.45.0
 accelerate>=0.27.0
-openai>=1.0.0
+# Responses API support used by the direct Hermes-compatible Codex backend.
+openai>=2.24.0
