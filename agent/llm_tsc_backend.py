@@ -4,10 +4,22 @@ from __future__ import annotations
 
 import os
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor
 from typing import Any, Dict, List, Sequence
 
-from agent.llm_tsc_prompt import DEFAULT_API_FORMAT_SUFFIX
+from agent.llm_tsc_prompt import DEFAULT_API_FORMAT_SUFFIX, SIGNAL_ORDER
+
+
+_TRAFFIC_R1_STOP_STRINGS = tuple(
+    f"\\boxed{{{signal}}}" for signal in SIGNAL_ORDER
+)
+
+_API_RETRY_INSTRUCTION = (
+    "Your previous response did not provide a usable final action. "
+    "Do not repeat the reasoning. Reply now with only one literal final form: "
+    "\\boxed{ETWT}, \\boxed{ELWL}, \\boxed{NTST}, or \\boxed{NLSL}."
+)
 
 
 class LLMBackend:
@@ -26,6 +38,19 @@ class LLMBackend:
 
     def _complete_one(self, messages: List[Dict[str, str]]) -> str:
         raise NotImplementedError
+
+    def parse_attempts(self, configured_attempts: int) -> int:
+        """Return meaningful parse attempts for this backend."""
+        return max(1, int(configured_attempts))
+
+    def retry_messages(
+        self,
+        messages: List[Dict[str, str]],
+        response: str,
+    ) -> List[Dict[str, str]]:
+        """Build the next parse-retry request."""
+        del response
+        return messages
 
 
 def create_backend(param: Dict[str, Any]) -> LLMBackend:
@@ -68,6 +93,7 @@ class OpenAICompatibleBackend(LLMBackend):
         self.parallelism = max(1, int(param.get("parallelism", 16)))
         self._client = None
         self._client_lock = threading.Lock()
+        self._generation_calls = 0
 
     def _get_client(self):
         if self._client is None:
@@ -160,14 +186,40 @@ class OpenAICompatibleBackend(LLMBackend):
         self,
         messages_list: Sequence[List[Dict[str, str]]],
     ) -> List[str]:
+        started = time.monotonic()
         if self.parallelism <= 1 or len(messages_list) <= 1:
-            return [self._complete_one(messages) for messages in messages_list]
+            responses = [self._complete_one(messages) for messages in messages_list]
+        else:
+            with ThreadPoolExecutor(
+                max_workers=min(self.parallelism, len(messages_list))
+            ) as pool:
+                futures = [
+                    pool.submit(self._complete_one, messages)
+                    for messages in messages_list
+                ]
+                responses = [future.result() for future in futures]
 
-        with ThreadPoolExecutor(
-            max_workers=min(self.parallelism, len(messages_list))
-        ) as pool:
-            futures = [pool.submit(self._complete_one, messages) for messages in messages_list]
-            return [future.result() for future in futures]
+        self._generation_calls += 1
+        print(
+            f"[LLM API] generate call={self._generation_calls} "
+            f"batch={len(messages_list)} elapsed={time.monotonic() - started:.2f}s",
+            flush=True,
+        )
+        return responses
+
+    def retry_messages(
+        self,
+        messages: List[Dict[str, str]],
+        response: str,
+    ) -> List[Dict[str, str]]:
+        # A deterministic retry of the original prompt repeats the same
+        # truncated reasoning. Preserve that response as context and ask the
+        # API model only for the missing final action.
+        return [
+            *[dict(message) for message in messages],
+            {"role": "assistant", "content": str(response)},
+            {"role": "user", "content": _API_RETRY_INSTRUCTION},
+        ]
 
 
 class LocalHFBackend(LLMBackend):
@@ -177,6 +229,10 @@ class LocalHFBackend(LLMBackend):
         try:
             import torch
             from transformers import AutoModelForCausalLM, AutoTokenizer
+            from transformers.generation.stopping_criteria import (
+                StopStringCriteria,
+                StoppingCriteriaList,
+            )
         except ImportError as exc:
             raise ImportError(
                 "transformers and torch are required for backend=local. "
@@ -192,6 +248,13 @@ class LocalHFBackend(LLMBackend):
         self.temperature = float(param.get("temperature", 0.0))
         self.max_new_tokens = int(param.get("max_new_tokens", 512))
         self.do_sample = bool(param.get("do_sample", False))
+        self.top_p = param.get("top_p")
+        if self.top_p is not None:
+            self.top_p = float(self.top_p)
+        self.top_k = param.get("top_k")
+        if self.top_k is not None:
+            self.top_k = int(self.top_k)
+        self.chat_template_kwargs = dict(param.get("chat_template_kwargs") or {})
 
         load_kwargs: Dict[str, Any] = {}
         if subfolder:
@@ -208,11 +271,25 @@ class LocalHFBackend(LLMBackend):
 
         print(
             f"[LLM] Loading local model from {model_path!r} "
-            f"(subfolder={subfolder!r}) ..."
+            f"(subfolder={subfolder!r}, device_map={device_map!r}, dtype={torch_dtype!r}) ...",
+            flush=True,
         )
+        print("[LLM] Loading tokenizer ...", flush=True)
         self.tokenizer = AutoTokenizer.from_pretrained(
             model_path, trust_remote_code=True, **load_kwargs
         )
+        # Decoder-only batch generate needs a pad id and left padding.
+        if self.tokenizer.pad_token_id is None:
+            self.tokenizer.pad_token = self.tokenizer.eos_token
+        self.tokenizer.padding_side = "left"
+        # Traffic-R1 Appendix A.1 defines the final action as a boxed signal.
+        # Build this once: StopStringCriteria preprocessing is too expensive to
+        # repeat for every one of the 540 decision batches in a full run.
+        self._answer_stopping_criteria = StoppingCriteriaList(
+            [StopStringCriteria(self.tokenizer, _TRAFFIC_R1_STOP_STRINGS)]
+        )
+        self._generation_calls = 0
+        print("[LLM] Tokenizer ready; loading weights ...", flush=True)
         self.model = AutoModelForCausalLM.from_pretrained(
             model_path,
             trust_remote_code=True,
@@ -220,24 +297,95 @@ class LocalHFBackend(LLMBackend):
             device_map=device_map if torch.cuda.is_available() else None,
             **load_kwargs,
         )
+        print("[LLM] from_pretrained returned; eval() ...", flush=True)
         if not torch.cuda.is_available():
             self.model = self.model.to("cpu")
         self.model.eval()
-        print("[LLM] Local model ready.")
+        print("[LLM] Local model ready.", flush=True)
 
-    def _complete_one(self, messages: List[Dict[str, str]]) -> str:
-        prompt = self.tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
-        )
-        inputs = self.tokenizer(prompt, return_tensors="pt")
-        inputs = {key: value.to(self.model.device) for key, value in inputs.items()}
-        gen_kwargs: Dict[str, Any] = {
+    def parse_attempts(self, configured_attempts: int) -> int:
+        # Greedy generation is deterministic, but retries are still useful when
+        # the malformed response is included in a corrective continuation.
+        return super().parse_attempts(configured_attempts)
+
+    def retry_messages(
+        self,
+        messages: List[Dict[str, str]],
+        response: str,
+    ) -> List[Dict[str, str]]:
+        # Do not resend an unchanged greedy prompt: it would reproduce the
+        # same invalid action. Ask the model to emit only a valid signal box.
+        return [
+            *[dict(message) for message in messages],
+            {"role": "assistant", "content": str(response)},
+            {"role": "user", "content": _API_RETRY_INSTRUCTION},
+        ]
+
+    def _gen_kwargs(self) -> Dict[str, Any]:
+        kwargs: Dict[str, Any] = {
             "max_new_tokens": self.max_new_tokens,
             "do_sample": self.do_sample and self.temperature > 0,
+            "pad_token_id": self.tokenizer.pad_token_id,
+            "stopping_criteria": self._answer_stopping_criteria,
         }
-        if gen_kwargs["do_sample"]:
-            gen_kwargs["temperature"] = self.temperature
-        with self.torch.no_grad():
-            output = self.model.generate(**inputs, **gen_kwargs)
-        new_tokens = output[0][inputs["input_ids"].shape[-1] :]
-        return self.tokenizer.decode(new_tokens, skip_special_tokens=True)
+        if kwargs["do_sample"]:
+            kwargs["temperature"] = self.temperature
+            if self.top_p is not None:
+                kwargs["top_p"] = self.top_p
+            if self.top_k is not None:
+                kwargs["top_k"] = self.top_k
+        return kwargs
+
+    def _complete_one(self, messages: List[Dict[str, str]]) -> str:
+        return self.complete_many([messages])[0]
+
+    def complete_many(
+        self,
+        messages_list: Sequence[List[Dict[str, str]]],
+    ) -> List[str]:
+        """Batched greedy/sampling generate; one forward stack for all prompts."""
+        if not messages_list:
+            return []
+
+        prompts = [
+            self.tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True,
+                **self.chat_template_kwargs,
+            )
+            for messages in messages_list
+        ]
+        inputs = self.tokenizer(
+            prompts, return_tensors="pt", padding=True
+        )
+        inputs = {key: value.to(self.model.device) for key, value in inputs.items()}
+        prompt_len = inputs["input_ids"].shape[-1]
+        started = time.perf_counter()
+        with self.torch.inference_mode():
+            output = self.model.generate(**inputs, **self._gen_kwargs())
+        elapsed = time.perf_counter() - started
+        generated = output[:, prompt_len:]
+        responses = [
+            self.tokenizer.decode(
+                generated[index], skip_special_tokens=True
+            )
+            for index in range(len(prompts))
+        ]
+        token_counts = [
+            int(row.ne(self.tokenizer.pad_token_id).sum().item())
+            for row in generated
+        ]
+        self._generation_calls += 1
+        completed = sum(
+            any(stop in response for stop in _TRAFFIC_R1_STOP_STRINGS)
+            for response in responses
+        )
+        print(
+            f"[LLM] generate call={self._generation_calls} batch={len(prompts)} "
+            f"tokens={min(token_counts)}/{sum(token_counts) / len(token_counts):.1f}/"
+            f"{max(token_counts)} (min/mean/max) boxed={completed}/{len(prompts)} "
+            f"elapsed={elapsed:.2f}s",
+            flush=True,
+        )
+        return responses

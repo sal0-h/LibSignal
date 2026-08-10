@@ -57,6 +57,13 @@ def _compass_from_atan2(angle: float) -> str:
 
 @Registry.register_model("traffic_r1")
 @Registry.register_model("deepseek")
+@Registry.register_model("deepseek_r1_8b_2048")
+@Registry.register_model("qwen25_7b")
+@Registry.register_model("qwen3_4b_no_think")
+@Registry.register_model("qwen3_4b_think1024")
+@Registry.register_model("qwen3_4b_think1024_sampled")
+@Registry.register_model("qwen3_4b_think2048")
+@Registry.register_model("qwen36_27b_no_think")
 class LLMTSCAgent(BaseAgent):
     """LLM traffic controller used by both public backend configurations."""
 
@@ -200,7 +207,15 @@ class LLMTSCAgent(BaseAgent):
             agent._ensure_backend()
             pending.append((index, agent, agent._build_messages()))
 
-        for attempt in range(1, max(1, agents[0].parse_retries) + 1):
+        backend = pending[0][1]._backend if pending else None
+        configured_attempts = max(1, agents[0].parse_retries)
+        max_attempts = (
+            backend.parse_attempts(configured_attempts)
+            if backend is not None
+            else configured_attempts
+        )
+
+        for attempt in range(1, max_attempts + 1):
             if not pending:
                 break
 
@@ -225,7 +240,8 @@ class LLMTSCAgent(BaseAgent):
                         )
                 except LLMParseError as exc:
                     last_errors[index] = exc
-                    next_pending.append(item)
+                    retry_messages = backend.retry_messages(messages, raw)
+                    next_pending.append((index, agent, retry_messages))
                     continue
 
                 action = int(agent._signal_to_phase[signal])
@@ -234,6 +250,12 @@ class LLMTSCAgent(BaseAgent):
                 actions[index] = action
 
             pending = next_pending
+            if pending and attempt < max_attempts:
+                print(
+                    f"[LLM] parse retry attempt={attempt + 1}/{max_attempts} "
+                    f"pending={len(pending)}",
+                    flush=True,
+                )
 
         if pending:
             failures = "; ".join(
@@ -241,7 +263,7 @@ class LLMTSCAgent(BaseAgent):
                 for index, agent, _messages in pending
             )
             raise RuntimeError(
-                f"LLM hard failure after {max(1, agents[0].parse_retries)} "
+                f"LLM hard failure after {max_attempts} "
                 f"attempts ({failures})"
             )
         return actions
@@ -381,4 +403,3 @@ class LLMTSCAgent(BaseAgent):
                     "segments": [int(value) for value in data["segments"]],
                 }
         return stats
-
