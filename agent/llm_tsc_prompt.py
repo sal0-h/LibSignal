@@ -106,15 +106,12 @@ def build_observation_text(
 def build_user_prompt(
     signal_stats: Dict[str, Dict[str, Dict[str, int]]],
     n_segments: int = 3,
-    incident_text: str | None = None,
 ) -> str:
     """Build the paper-derived user prompt without backend-specific text."""
     parts = [
         f"Task Description: {TASK_DESCRIPTION}",
         build_observation_text(signal_stats, n_segments=n_segments),
     ]
-    if incident_text:
-        parts.append(f"Incident Information:\n{incident_text}")
     parts.append(f"Format Instruction: {FORMAT_INSTRUCTION}")
     return "\n\n".join(parts)
 
@@ -122,7 +119,6 @@ def build_user_prompt(
 def build_messages(
     signal_stats: Dict[str, Dict[str, Dict[str, int]]],
     n_segments: int = 3,
-    incident_text: str | None = None,
 ) -> List[Dict[str, str]]:
     return [
         {"role": "system", "content": SYSTEM_PROMPT},
@@ -131,7 +127,6 @@ def build_messages(
             "content": build_user_prompt(
                 signal_stats,
                 n_segments=n_segments,
-                incident_text=incident_text,
             ),
         },
     ]

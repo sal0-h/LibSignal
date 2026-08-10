@@ -232,7 +232,7 @@ These override or supplement YAML at runtime:
 | `--interface` | `libsumo` | SUMO backend: `libsumo` (fast) or `traci`. |
 | `--delay_type` | `apx` | `apx` = lane delay in metrics; `real` = world-level delay instead. |
 | `--dataset` | `onfly` | Dataset handler (`onfly_dataset.py`); replay-to-disk is mostly commented out. |
-| `--debug` | `True` | `True` → DEBUG logging; `False` → INFO. |
+| `--debug` | `False` | Pass the flag to enable DEBUG logging; otherwise use INFO. |
 
 ---
 

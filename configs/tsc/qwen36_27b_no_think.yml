@@ -2,29 +2,23 @@ includes:
   - configs/tsc/base.yml
   - configs/tsc/od_hub_1800_base.yml
 
-# Level 1 hub-OD inference with the OpenAI-compatible DeepSeek API.
-# This is not the fine-tuned Season998/Traffic-R1 checkpoint.
+# Qwen3.6-27B direct-answer Level-1 evaluation on the full H200 slice.
+# This keeps the traffic observation/evaluation protocol unchanged and uses
+# Qwen's supported hard switch to skip visible/internal thinking tokens.
 model:
-  name: deepseek
-  backend: api
-
-  base_url: "https://genai.qatar.cmu.edu/v1"
-  model_id: "deepseek-r1-8b"
-  api_key_env: "OPENAI_API_KEY"
-  timeout: 180
-  # CMU gateway option.
-  extra_body:
-    use_rag: false
+  name: qwen36_27b_no_think
+  backend: local
+  model_path: "Qwen/Qwen3.6-27B"
+  model_subfolder: ""
+  device_map: "auto"
+  torch_dtype: "bfloat16"
+  chat_template_kwargs:
+    enable_thinking: False
 
   temperature: 0.0
-  # Match the local Traffic-R1 Level-1 evaluation cap.
   max_new_tokens: 512
   do_sample: False
   parse_retries: 5
-  # API-only concurrency for the 16 interior requests per decision step.
-  parallelism: 16
-
-  # Observation (paper-derived four-signal interface).
   v_stop: 0.1
   n_segments: 3
   obs_distance: 200

@@ -25,7 +25,7 @@ parser.add_argument('--thread_num', type=int, default=4, help='number of threads
 parser.add_argument('--ngpu', type=str, default="-1", help='gpu to be used')  # choose gpu card
 parser.add_argument('--prefix', type=str, default='test', help="the number of prefix in this running process")
 parser.add_argument('--seed', type=int, default=None, help="global random seed for random/numpy/torch and SUMO; defaults to world.seed in the config when omitted")
-parser.add_argument('--debug', type=bool, default=True)
+parser.add_argument('--debug', action='store_true', help='enable DEBUG logging')
 parser.add_argument('--interface', type=str, default="libsumo", choices=['libsumo','traci'], help="interface type") # libsumo(fast) or traci(slow)
 parser.add_argument('--delay_type', type=str, default="apx", choices=['apx','real'], help="method of calculating delay") # apx(approximate) or real
 
@@ -87,4 +87,3 @@ class Runner:
 if __name__ == '__main__':
     test = Runner(args)
     test.run()
-
