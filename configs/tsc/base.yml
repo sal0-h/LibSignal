@@ -55,8 +55,10 @@ trainer:
   update_model_rate: 1
   update_target_rate: 10
   test_when_train: True
-  # Per-vehicle trip metrics (SUMO only): new_metrics.csv + new_metrics_meta.json
-  # written under the run logger/ dir on final test (and final held-out evals).
+  # Per-vehicle trip metrics (SUMO only) under the run logger/ dir:
+  # - always on final test: new_metrics.csv (+ new_metrics_hold_* if held-out)
+  # - RL (train_model=True) also re-evals best ATT checkpoint: new_metrics_best*
+  #   (best tracked from test_when_train and/or heldout_eval_every)
   save_trip_metrics: True
 
 model:
