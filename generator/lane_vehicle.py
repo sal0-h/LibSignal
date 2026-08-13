@@ -1,6 +1,7 @@
 import numpy as np
 from . import BaseGenerator
 from world import world_sumo
+from world.world_sumo import sumo_lane_index
 try:
     from world import world_cityflow
 except (ModuleNotFoundError, ImportError):
@@ -98,11 +99,10 @@ class LaneVehicleGenerator(BaseGenerator):
         if isinstance(world, world_sumo.World):
             for r in roads:
                 if not self.world.RIGHT:
-                    tmp = sorted(I.road_lane_mapping[r], key=lambda ob: int(ob[-1]), reverse=True)
+                    tmp = sorted(I.road_lane_mapping[r], key=sumo_lane_index, reverse=True)
                 else:
-                    tmp = sorted(I.road_lane_mapping[r], key=lambda ob: int(ob[-1]))
+                    tmp = sorted(I.road_lane_mapping[r], key=sumo_lane_index)
                 self.lanes.append(tmp)
-                # TODO: rank lanes by lane ranking [0,1,2], assume we only have one digit for ranking
         elif world_cityflow is not None and isinstance(world, world_cityflow.World):
             for road in roads:
                 from_zero = (road["startIntersection"] == I.id) if self.world.RIGHT else (road["endIntersection"] == I.id)

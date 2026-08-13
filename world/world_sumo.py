@@ -28,6 +28,31 @@ except ImportError:
     libsumo = None
 import traci
 
+
+def sumo_edge_id_from_lane(lane_id):
+    """Map a SUMO lane id (edgeId_index) to its edge id.
+
+    The previous implementation used lane_id[:-2], which is only correct when
+    the lane index is a single digit. OSM networks can have 10+ lanes on an
+    edge; rsplit on the last underscore is the SUMO naming rule.
+    """
+    if not lane_id or "_" not in lane_id:
+        raise ValueError(f"Cannot parse SUMO lane id {lane_id!r}")
+    edge, idx = lane_id.rsplit("_", 1)
+    if not idx.isdigit():
+        raise ValueError(f"Cannot parse SUMO lane index from {lane_id!r}")
+    return edge
+
+
+def sumo_lane_index(lane_id):
+    """Lane index (int) from a SUMO lane id."""
+    if not lane_id or "_" not in lane_id:
+        raise ValueError(f"Cannot parse SUMO lane id {lane_id!r}")
+    idx = lane_id.rsplit("_", 1)[-1]
+    if not idx.isdigit():
+        raise ValueError(f"Cannot parse SUMO lane index from {lane_id!r}")
+    return int(idx)
+
 class Intersection(object):
     '''
     Intersection Class is mainly used for describing crossing information and defining acting methods.
@@ -75,24 +100,26 @@ class Intersection(object):
             if not link:
                 continue
             link = link[0]
-            if link[0][:-2] not in self.road_lane_mapping.keys():
-                self.road_lane_mapping.update({link[0][:-2]: []})  # assume less than 9 lanes in each road
-                self.road_lane_mapping[link[0][:-2]].append(link[0])
-                self.roads.append(link[0][:-2])
+            in_edge = sumo_edge_id_from_lane(link[0])
+            out_edge = sumo_edge_id_from_lane(link[1])
+            if in_edge not in self.road_lane_mapping.keys():
+                self.road_lane_mapping.update({in_edge: []})
+                self.road_lane_mapping[in_edge].append(link[0])
+                self.roads.append(in_edge)
                 self.outs.append(False)
                 road = self.eng.lane.getShape(link[0])
                 self.directions.append(self._get_direction(road, False))
-            elif link[0][:-2] in self.road_lane_mapping.keys() and link[0] not in self.road_lane_mapping[link[0][:-2]]:
-                self.road_lane_mapping[link[0][:-2]].append(link[0])
-            if link[1][:-2] not in self.road_lane_mapping.keys():
-                self.road_lane_mapping.update({link[1][:-2]: []})  # assume less than 9 lanes in each road
-                self.road_lane_mapping[link[1][:-2]].append(link[1])
-                self.roads.append(link[1][:-2])
+            elif in_edge in self.road_lane_mapping.keys() and link[0] not in self.road_lane_mapping[in_edge]:
+                self.road_lane_mapping[in_edge].append(link[0])
+            if out_edge not in self.road_lane_mapping.keys():
+                self.road_lane_mapping.update({out_edge: []})
+                self.road_lane_mapping[out_edge].append(link[1])
+                self.roads.append(out_edge)
                 self.outs.append(True)
                 road = self.eng.lane.getShape(link[1])
                 self.directions.append(self._get_direction(road, True))
-            elif link[1][:-2] in self.road_lane_mapping.keys() and link[1] not in self.road_lane_mapping[link[1][:-2]]:
-                self.road_lane_mapping[link[1][:-2]].append(link[1])
+            elif out_edge in self.road_lane_mapping.keys() and link[1] not in self.road_lane_mapping[out_edge]:
+                self.road_lane_mapping[out_edge].append(link[1])
 
         self._sort_roads()
         for key in self.road_lane_mapping.keys():
@@ -100,6 +127,11 @@ class Intersection(object):
                 self.lanes.append(lane)
 
         self.green_phases = phases
+        if not self.green_phases:
+            raise ValueError(
+                f"Traffic light {self.id!r} has no usable green phases after "
+                f"filtering yellow/all-red states. LibSignal cannot assign an action space."
+            )
         self.phases = [i for i in range(len(phases))]
         self.phase_available_startlanes = []
         self.startlanes = []
@@ -759,6 +791,12 @@ class World(object):
         # prepare phase information for each intersections
         self._sim_ready = False
         self.green_phases = self.generate_valid_phase()
+        empty = [ts for ts, ph in self.green_phases.items() if not ph]
+        if empty:
+            raise ValueError(
+                "These traffic lights have no usable green phases "
+                f"(yellow/all-red only): {empty}. Cannot build LibSignal agents."
+            )
 
         # creating all intersections
         self.id2intersection = dict()
