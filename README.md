@@ -105,7 +105,7 @@ Supporting parameters:
 - `--task`: task type to run (default `tsc`).
 - `--agent`: agent type — see the [Agents](#agents) table (default `dqn`).
 - `--world`: simulator, `sumo` or `cityflow` (use `sumo`; default is `cityflow` from upstream).
-- `--network`: network name, maps to `configs/sim/<network>.cfg` (e.g. `sumo1x1`, `sumo4x4`).
+- `--network`: network name, maps to `configs/sim/<network>.cfg` (e.g. `sumo1x1`, `sumo4x4`, `sumo_doha`).
 - `--prefix`: run name used in the output path.
 - `--seed`: seed for the PyTorch/NumPy backend.
 - `--ngpu`: GPU id to use; `-1` forces CPU.
@@ -121,6 +121,7 @@ Deep-dive docs live in [`docs/`](./docs/README.md):
 - [docs/TRAINING_GUIDE.md](./docs/TRAINING_GUIDE.md) — train/test workflow, config system, ghost-physics baselines.
 - [docs/EFFICIENCY_AUDIT.md](./docs/EFFICIENCY_AUDIT.md) — training wall-time audit (GPU vs SUMO vs Python overhead) and speedups.
 - [docs/SUMO_NETWORKS.md](./docs/SUMO_NETWORKS.md) — catalogue of available SUMO networks.
+- [docs/DOHA_NETWORK.md](./docs/DOHA_NETWORK.md) — Doha Corniche OSM benchmark.
 - [docs/SUMO_FILE_STRUCTURE_GUIDE.md](./docs/SUMO_FILE_STRUCTURE_GUIDE.md) — SUMO roadnet/flow file structure.
 - [docs/TSC_CONFIG_REPORT.md](./docs/TSC_CONFIG_REPORT.md) — code-traced reference for every `configs/tsc/*.yml` parameter.
 - [docs/SIGNAL_CONTROL_THEORY.md](./docs/SIGNAL_CONTROL_THEORY.md) — signal-control / NEMA theory + cross-network audit.

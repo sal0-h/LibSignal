@@ -1,0 +1,8 @@
+# Short smoke run on sumo_doha (does not change default FixedTime).
+includes:
+  - configs/tsc/fixedtime.yml
+
+trainer:
+  episodes: 1
+  steps: 600
+  test_steps: 600

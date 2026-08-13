@@ -17,7 +17,7 @@ All available SUMO networks with their paths, road network topology, and traffic
 | sumohz1x1_config3 | Urban | 1×1 (Hangzhou v3) | [configs/sim/sumohz1x1_config3.cfg](../configs/sim/sumohz1x1_config3.cfg) | data/raw_data/hangzhou_1x1_kn-hz_18041608_1h/hangzhou_1x1_kn-hz_18041608_1h.net.xml | data/raw_data/hangzhou_1x1_kn-hz_18041608_1h/hangzhou_1x1_kn-hz_18041608_1h.rou.xml |
 | sumohz1x1_config4 | Urban | 1×1 (Hangzhou v4) | [configs/sim/sumohz1x1_config4.cfg](../configs/sim/sumohz1x1_config4.cfg) | data/raw_data/hangzhou_1x1_sb-sx_18041607_1h/hangzhou_1x1_sb-sx_18041607_1h.net.xml | data/raw_data/hangzhou_1x1_sb-sx_18041607_1h/hangzhou_1x1_sb-sx_18041607_1h.rou.xml |
 | sumohz4x4 | Urban | 4×4 (Hangzhou) | [configs/sim/sumohz4x4.cfg](../configs/sim/sumohz4x4.cfg) | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.net.xml | data/raw_data/hangzhou_4x4_gudang_18041610_1h/hangzhou_4x4_gudang_18041610_1h.rou.xml |
-| sumohz4x4_hetero | Urban | 4×4 (Hangzhou, heterogeneous) | [configs/sim/sumohz4x4_hetero.cfg](../configs/sim/sumohz4x4_hetero.cfg) | data/raw_data/hangzhou_4x4_hetero/hangzhou_4x4_gudang_18041610_1h_m.net.xml | data/raw_data/hangzhou_4x4_hetero/hangzhou_4x4_gudang_18041610_1h_m.rou.xml |
+| sumo_doha | Real (OSM) | 28 TLS (Corniche / West Bay) | [configs/sim/sumo_doha.cfg](../configs/sim/sumo_doha.cfg) | data/raw_data/doha_corniche/doha_corniche.net.xml | data/raw_data/doha_corniche/doha_corniche.rou.xml |
 
 ---
 
@@ -124,6 +124,23 @@ All available SUMO networks with their paths, road network topology, and traffic
 
 ---
 
+### Real-World Urban Network (Doha, Qatar)
+
+#### **sumo_doha**
+- **Topology**: Current OpenStreetMap extract of central Doha (Corniche / West Bay / Al Bidda / Msheireb / port approaches). **28** LibSignal-controllable traffic lights on irregular real geometry. Demand is **synthetic** (not calibrated counts).
+- **Use case**: Real topology TSC benchmark; hub-centric OD bags
+- **Path**:
+  - Config: `configs/sim/sumo_doha.cfg`
+  - Network: `data/raw_data/doha_corniche/doha_corniche.net.xml`
+  - Flow: `data/raw_data/doha_corniche/doha_corniche.rou.xml`
+- **Regen / details**: [docs/DOHA_NETWORK.md](DOHA_NETWORK.md)
+- **Run**:
+  ```bash
+  python run.py --agent maxpressure --world sumo --network sumo_doha --seed 42 --ngpu -1
+  ```
+
+---
+
 ## How to Run Experiments
 
 ### Quick Start (All Baselines on sumo1x1)
@@ -208,7 +225,8 @@ Example (`configs/sim/sumo4x4.cfg`):
 | Quick test | `sumo1x1` | Instant runs, single intersection |
 | Algorithm dev | `sumo1x1`, `sumo4x4` | Fast iteration, manageable |
 | Baseline comp | `sumo4x4`, `sumohz1x1` | Standard benchmarks |
-| Real-world eval | `sumohz4x4` | Actual traffic dynamics |
+| Real-world eval | `sumohz4x4`, `sumo_doha` | Hangzhou (calibrated hour) or Doha OSM topology + synthetic demand |
+| Doha Corniche | `sumo_doha` | Irregular real geometry, heterogeneous TLS phase counts |
 | Scalability study | `sumo7x28` | Large-scale complexity |
 | Arterial signals | `sumo1x21` | Corridor coordination |
 | Multi-vehicle types | `sumohz4x4_hetero` | Heterogeneous traffic |

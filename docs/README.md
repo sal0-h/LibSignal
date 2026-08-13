@@ -14,6 +14,7 @@ top-level [`README.md`](../README.md); for the Cursor-Cloud agent environment, s
 | [TRAINING_GUIDE.md](TRAINING_GUIDE.md) | How to train and test agents: commands, config system, train-vs-test workflow, ghost-physics baselines. |
 | [EFFICIENCY_AUDIT.md](EFFICIENCY_AUDIT.md) | Training wall-time audit: GPU vs SUMO vs Python overhead, measured speedups, profiling scripts. |
 | [SUMO_NETWORKS.md](SUMO_NETWORKS.md) | Catalogue of available SUMO networks (sizes, paths, run examples). |
+| [DOHA_NETWORK.md](DOHA_NETWORK.md) | Doha Corniche OSM benchmark: bbox, regen, TLS caveats, synthetic demand. |
 | [SUMO_FILE_STRUCTURE_GUIDE.md](SUMO_FILE_STRUCTURE_GUIDE.md) | Structure of SUMO `roadnet`/`flow` files and how LibSignal reads them. |
 
 ## Reference

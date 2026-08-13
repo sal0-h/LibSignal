@@ -1,0 +1,7 @@
+# Level 1: hub OD demand set on sumo_doha, world axes off.
+includes:
+  - configs/tsc/fixedtime.yml
+  - configs/tsc/od_hub_1800_doha.yml
+
+trainer:
+  episodes: 1

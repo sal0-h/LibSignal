@@ -1,10 +1,10 @@
-# Hub-centric OD demand realism (grid4x4, 1800 s)
+# Hub-centric OD demand realism (1800 s)
 
 ## Claim
 
 Score RL-TSC on **held-out hub-centric demand**, not one training movie. Compose with `realism_full` for Level 2.
 
-## Generate demand set
+## grid4x4
 
 ```bash
 python extras/gen_od_hub_demand_grid4x4.py
@@ -15,14 +15,27 @@ Outputs: `data/raw_data/grid4x4/od_hubs/demand_set/` (`fixed_1800`, `train_*`, `
 
 TAZ: `data/raw_data/grid4x4/od_hubs/taz.xml` (fringe + internal + hub). Routing: `duarouter` shortest path. Departures: random via `od2trips`.
 
-## LibSignal configs
+Shared protocol: [`configs/tsc/od_hub_1800_base.yml`](../configs/tsc/od_hub_1800_base.yml) (1800 s, demand set rotation, held-out every 10). `--network sumo4x4`.
+
+## Doha Corniche (`sumo_doha`)
+
+Same interface on the real OSM network: fringe / internal / `hub_corniche` (Al Corniche Street). Demand is synthetic.
+
+```bash
+python extras/gen_od_hub_demand_doha.py
+python extras/gen_od_hub_demand_doha.py --validate-only
+python run.py -a maxpressure_odh_l1_doha -w sumo -n sumo_doha --seed 42 --ngpu -1 --prefix odh_l1
+python run.py -a fixedtime_odh_l1_doha -w sumo -n sumo_doha --seed 42 --ngpu -1 --prefix odh_l1
+```
+
+See [DOHA_NETWORK.md](DOHA_NETWORK.md).
+
+## LibSignal configs (grid4x4)
 
 | Level | Agents | Config suffix |
 |-------|--------|----------------|
 | 1 demand only | FT, MP, DQN, PressLight, CoLight | `*_odh_l1` |
 | 2 demand + realism_full | same | `*_odh_l2` |
-
-Shared protocol: [`configs/tsc/od_hub_1800_base.yml`](../configs/tsc/od_hub_1800_base.yml) (1800 s, demand set rotation, held-out every 10).
 
 ```bash
 # Level 1 baselines
