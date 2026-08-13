@@ -1,0 +1,1259 @@
+early_stop enabled: min_episodes=30, max_episodes=500, patience=3, min_delta=0.0100, metric=heldout
+episode:0/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:0, rewards:-58.779437934027776, queue:2.5166666666666666, delay:0.21345687946945271, throughput:1344
+episode:0/500, real avg travel time:336.88839285714283
+intersection:0, mean_episode_reward:-1.4716665744781494, mean_queue:0.9944444298744202
+intersection:1, mean_episode_reward:-0.6366669535636902, mean_queue:0.43888887763023376
+intersection:2, mean_episode_reward:-2.3938889503479004, mean_queue:1.9888888597488403
+intersection:3, mean_episode_reward:-6.536110877990723, mean_queue:5.372222423553467
+intersection:4, mean_episode_reward:-2.8172214031219482, mean_queue:2.0611112117767334
+intersection:5, mean_episode_reward:-0.2555556297302246, mean_queue:1.3055555820465088
+intersection:6, mean_episode_reward:-1.8772225379943848, mean_queue:2.405555486679077
+intersection:7, mean_episode_reward:-11.305556297302246, mean_queue:9.222222328186035
+intersection:8, mean_episode_reward:-1.1861109733581543, mean_queue:0.6333333253860474
+intersection:9, mean_episode_reward:-7.102776527404785, mean_queue:6.0722222328186035
+intersection:10, mean_episode_reward:-2.366666078567505, mean_queue:1.9500000476837158
+intersection:11, mean_episode_reward:-0.7861111164093018, mean_queue:0.7666666507720947
+intersection:12, mean_episode_reward:-0.2922222912311554, mean_queue:1.0888888835906982
+intersection:13, mean_episode_reward:-1.0355557203292847, mean_queue:1.3611111640930176
+intersection:14, mean_episode_reward:-5.124999523162842, mean_queue:4.316666603088379
+intersection:15, mean_episode_reward:0.776111364364624, mean_queue:2.0166666507720947
+intersection:16, mean_episode_reward:-3.0533335208892822, mean_queue:1.5166666507720947
+intersection:17, mean_episode_reward:-1.4811111688613892, mean_queue:1.038888931274414
+intersection:18, mean_episode_reward:-1.1305557489395142, mean_queue:0.8444444537162781
+intersection:19, mean_episode_reward:-3.3427774906158447, mean_queue:3.5055556297302246
+intersection:20, mean_episode_reward:-5.359445095062256, mean_queue:3.950000047683716
+HELDOUT episode:0/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:497.8097982708934, rewards:-179.839453125, queue:10.771428571428572, delay:0.4112118998532573, throughput:347
+HELDOUT episode:0/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:487.3045822102426, rewards:-169.6672309027778, queue:9.804232804232804, delay:0.38333013625372026, throughput:371
+HELDOUT episode:0/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:485.83516483516485, rewards:-164.8689019097222, queue:10.153174603174604, delay:0.41741084346064816, throughput:364
+HELDOUT_MEAN episode:0/500, travel time:490.3165151054336 (n=3)
+new best ATT=490.32 at episode 0 (metric=heldout)
+episode:1/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:0, rewards:-61.986659071180554, queue:2.693915343915344, delay:0.2107071487991898, throughput:1335
+episode:1/500, real avg travel time:350.7288389513109
+intersection:0, mean_episode_reward:-3.3527770042419434, mean_queue:2.8499999046325684
+intersection:1, mean_episode_reward:-0.5261110663414001, mean_queue:0.23333333432674408
+intersection:2, mean_episode_reward:-3.006666660308838, mean_queue:2.605555534362793
+intersection:3, mean_episode_reward:-5.264443397521973, mean_queue:4.111111164093018
+intersection:4, mean_episode_reward:-6.306110858917236, mean_queue:5.516666889190674
+intersection:5, mean_episode_reward:-0.16444450616836548, mean_queue:0.7777777910232544
+intersection:6, mean_episode_reward:-0.732778012752533, mean_queue:1.0833333730697632
+intersection:7, mean_episode_reward:-12.196670532226562, mean_queue:9.949999809265137
+intersection:8, mean_episode_reward:-1.3872218132019043, mean_queue:0.7888888716697693
+intersection:9, mean_episode_reward:-6.6650004386901855, mean_queue:5.777777671813965
+intersection:10, mean_episode_reward:-1.8811110258102417, mean_queue:1.4388889074325562
+intersection:11, mean_episode_reward:-0.8061109781265259, mean_queue:0.7833333611488342
+intersection:12, mean_episode_reward:-0.4877777099609375, mean_queue:1.4500000476837158
+intersection:13, mean_episode_reward:-0.9355558753013611, mean_queue:1.2222222089767456
+intersection:14, mean_episode_reward:-4.956666946411133, mean_queue:4.1777777671813965
+intersection:15, mean_episode_reward:1.1472219228744507, mean_queue:2.183333396911621
+intersection:16, mean_episode_reward:-3.290555477142334, mean_queue:1.600000023841858
+intersection:17, mean_episode_reward:-2.331110715866089, mean_queue:1.8444443941116333
+intersection:18, mean_episode_reward:-1.4144446849822998, mean_queue:1.0722222328186035
+intersection:19, mean_episode_reward:-2.723888635635376, mean_queue:3.5444445610046387
+intersection:20, mean_episode_reward:-4.704444408416748, mean_queue:3.5611112117767334
+episode:2/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:0, rewards:-61.14832899305556, queue:2.795767195767196, delay:0.2144413054935516, throughput:1279
+episode:2/500, real avg travel time:330.6841282251759
+intersection:0, mean_episode_reward:-1.744999885559082, mean_queue:1.2777777910232544
+intersection:1, mean_episode_reward:-0.6361111402511597, mean_queue:0.36666667461395264
+intersection:2, mean_episode_reward:-2.484999656677246, mean_queue:2.0888888835906982
+intersection:3, mean_episode_reward:-6.6650004386901855, mean_queue:5.411110877990723
+intersection:4, mean_episode_reward:-4.395554542541504, mean_queue:3.366666555404663
+intersection:5, mean_episode_reward:0.06444445252418518, mean_queue:0.4000000059604645
+intersection:6, mean_episode_reward:-1.1088889837265015, mean_queue:1.2333333492279053
+intersection:7, mean_episode_reward:-16.04833221435547, mean_queue:14.233333587646484
+intersection:8, mean_episode_reward:-1.1527775526046753, mean_queue:0.5333333611488342
+intersection:9, mean_episode_reward:-7.916667461395264, mean_queue:6.877777576446533
+intersection:10, mean_episode_reward:-2.1905553340911865, mean_queue:1.7277777194976807
+intersection:11, mean_episode_reward:-0.8616665601730347, mean_queue:0.8222222328186035
+intersection:12, mean_episode_reward:-0.7366667985916138, mean_queue:1.5222222805023193
+intersection:13, mean_episode_reward:-1.1277778148651123, mean_queue:1.399999976158142
+intersection:14, mean_episode_reward:-5.043334007263184, mean_queue:4.361111164093018
+intersection:15, mean_episode_reward:0.5966666340827942, mean_queue:2.4388887882232666
+intersection:16, mean_episode_reward:-3.1322224140167236, mean_queue:1.7666666507720947
+intersection:17, mean_episode_reward:-1.7766666412353516, mean_queue:1.2833333015441895
+intersection:18, mean_episode_reward:-0.9266669154167175, mean_queue:0.6499999761581421
+intersection:19, mean_episode_reward:0.4772224724292755, mean_queue:3.9277777671813965
+intersection:20, mean_episode_reward:-4.337778091430664, mean_queue:3.0222222805023193
+episode:3/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:0, rewards:-57.103336588541666, queue:2.3653439153439155, delay:0.20604256120308367, throughput:1512
+episode:3/500, real avg travel time:327.9054232804233
+intersection:0, mean_episode_reward:-2.02500057220459, mean_queue:1.5111111402511597
+intersection:1, mean_episode_reward:-0.743888795375824, mean_queue:0.5166666507720947
+intersection:2, mean_episode_reward:-1.696667194366455, mean_queue:1.25
+intersection:3, mean_episode_reward:-6.089999675750732, mean_queue:4.672222137451172
+intersection:4, mean_episode_reward:-3.0105552673339844, mean_queue:2.0222222805023193
+intersection:5, mean_episode_reward:-0.2661111354827881, mean_queue:0.7944444417953491
+intersection:6, mean_episode_reward:-0.8488890528678894, mean_queue:0.9611111283302307
+intersection:7, mean_episode_reward:-11.161110877990723, mean_queue:8.699999809265137
+intersection:8, mean_episode_reward:-1.2427775859832764, mean_queue:0.6888889074325562
+intersection:9, mean_episode_reward:-7.735555648803711, mean_queue:6.611111164093018
+intersection:10, mean_episode_reward:-1.7411110401153564, mean_queue:1.3777778148651123
+intersection:11, mean_episode_reward:-0.8022222518920898, mean_queue:0.7944444417953491
+intersection:12, mean_episode_reward:-0.44611114263534546, mean_queue:1.1944444179534912
+intersection:13, mean_episode_reward:-1.0433332920074463, mean_queue:1.3277777433395386
+intersection:14, mean_episode_reward:-5.2383341789245605, mean_queue:4.277777671813965
+intersection:15, mean_episode_reward:0.07222232967615128, mean_queue:2.9833333492279053
+intersection:16, mean_episode_reward:-2.977778434753418, mean_queue:1.8777778148651123
+intersection:17, mean_episode_reward:-2.105555295944214, mean_queue:1.6277778148651123
+intersection:18, mean_episode_reward:-1.4272221326828003, mean_queue:1.0499999523162842
+intersection:19, mean_episode_reward:-2.264443874359131, mean_queue:2.5999999046325684
+intersection:20, mean_episode_reward:-4.3088908195495605, mean_queue:2.8333332538604736
+episode:4/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:0, rewards:-61.604443359375, queue:2.8034391534391534, delay:0.21417370347118883, throughput:1333
+episode:4/500, real avg travel time:344.80570142535635
+intersection:0, mean_episode_reward:-1.7611111402511597, mean_queue:1.2277777194976807
+intersection:1, mean_episode_reward:-0.4927777647972107, mean_queue:0.2888889014720917
+intersection:2, mean_episode_reward:-2.5072224140167236, mean_queue:2.144444465637207
+intersection:3, mean_episode_reward:-6.785553455352783, mean_queue:5.627777576446533
+intersection:4, mean_episode_reward:-3.928332805633545, mean_queue:3.0999999046325684
+intersection:5, mean_episode_reward:-0.12388888746500015, mean_queue:0.6111111044883728
+intersection:6, mean_episode_reward:-1.0394443273544312, mean_queue:1.2777777910232544
+intersection:7, mean_episode_reward:-16.28388786315918, mean_queue:14.377778053283691
+intersection:8, mean_episode_reward:-1.1261109113693237, mean_queue:0.5777778029441833
+intersection:9, mean_episode_reward:-7.054442882537842, mean_queue:6.111111164093018
+intersection:10, mean_episode_reward:-2.2111105918884277, mean_queue:1.855555534362793
+intersection:11, mean_episode_reward:-0.6055555939674377, mean_queue:0.5833333134651184
+intersection:12, mean_episode_reward:-1.1422219276428223, mean_queue:1.899999976158142
+intersection:13, mean_episode_reward:-1.0272221565246582, mean_queue:1.3722221851348877
+intersection:14, mean_episode_reward:-6.20222282409668, mean_queue:5.394444465637207
+intersection:15, mean_episode_reward:1.3383333683013916, mean_queue:1.961111068725586
+intersection:16, mean_episode_reward:-3.084998846054077, mean_queue:1.5833333730697632
+intersection:17, mean_episode_reward:-2.145555019378662, mean_queue:1.600000023841858
+intersection:18, mean_episode_reward:-1.197222352027893, mean_queue:0.8777777552604675
+intersection:19, mean_episode_reward:-0.3177780508995056, mean_queue:3.799999952316284
+intersection:20, mean_episode_reward:-3.9061102867126465, mean_queue:2.5999999046325684
+episode:5/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:13.082010269165039, rewards:-101.48944227430556, queue:4.886772486772487, delay:0.2432216099330357, throughput:959
+episode:5/500, real avg travel time:323.5453597497393
+intersection:0, mean_episode_reward:-2.8238887786865234, mean_queue:2.5
+intersection:1, mean_episode_reward:-0.6855555772781372, mean_queue:0.5055555701255798
+intersection:2, mean_episode_reward:-2.8338890075683594, mean_queue:2.6222221851348877
+intersection:3, mean_episode_reward:-7.501666069030762, mean_queue:6.511111259460449
+intersection:4, mean_episode_reward:-7.537778854370117, mean_queue:8.622221946716309
+intersection:5, mean_episode_reward:-0.15388889610767365, mean_queue:1.0277777910232544
+intersection:6, mean_episode_reward:-1.2005555629730225, mean_queue:1.149999976158142
+intersection:7, mean_episode_reward:-17.14611053466797, mean_queue:15.772222518920898
+intersection:8, mean_episode_reward:-2.847221612930298, mean_queue:2.26111102104187
+intersection:9, mean_episode_reward:-6.887224197387695, mean_queue:5.9277777671813965
+intersection:10, mean_episode_reward:-4.5833330154418945, mean_queue:4.2833333015441895
+intersection:11, mean_episode_reward:-1.290000319480896, mean_queue:1.2611111402511597
+intersection:12, mean_episode_reward:-0.9677777886390686, mean_queue:1.8277777433395386
+intersection:13, mean_episode_reward:-1.7100002765655518, mean_queue:2.1111111640930176
+intersection:14, mean_episode_reward:-7.069443702697754, mean_queue:6.505555629730225
+intersection:15, mean_episode_reward:1.8922224044799805, mean_queue:1.4444444179534912
+intersection:16, mean_episode_reward:-3.1583333015441895, mean_queue:2.5722222328186035
+intersection:17, mean_episode_reward:-8.807778358459473, mean_queue:8.5
+intersection:18, mean_episode_reward:-5.573888778686523, mean_queue:5.255555629730225
+intersection:19, mean_episode_reward:-0.8327780961990356, mean_queue:2.7166666984558105
+intersection:20, mean_episode_reward:-19.77055549621582, mean_queue:19.244443893432617
+episode:6/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:11.81516170501709, rewards:-102.6177734375, queue:4.746825396825397, delay:0.2651548355344742, throughput:713
+episode:6/500, real avg travel time:385.63394109396916
+intersection:0, mean_episode_reward:-3.6838884353637695, mean_queue:3.3111112117767334
+intersection:1, mean_episode_reward:-0.6627777814865112, mean_queue:0.4722222089767456
+intersection:2, mean_episode_reward:-2.038888931274414, mean_queue:1.744444489479065
+intersection:3, mean_episode_reward:-11.156665802001953, mean_queue:10.55555534362793
+intersection:4, mean_episode_reward:-3.4344441890716553, mean_queue:3.0222222805023193
+intersection:5, mean_episode_reward:0.23999997973442078, mean_queue:1.6611111164093018
+intersection:6, mean_episode_reward:-4.594444274902344, mean_queue:5.255555629730225
+intersection:7, mean_episode_reward:-4.036111831665039, mean_queue:2.5999999046325684
+intersection:8, mean_episode_reward:-2.0805556774139404, mean_queue:1.4888888597488403
+intersection:9, mean_episode_reward:-19.207773208618164, mean_queue:18.61111068725586
+intersection:10, mean_episode_reward:-7.996665954589844, mean_queue:7.638888835906982
+intersection:11, mean_episode_reward:-1.3116669654846191, mean_queue:1.2388888597488403
+intersection:12, mean_episode_reward:-0.20277760922908783, mean_queue:0.9166666865348816
+intersection:13, mean_episode_reward:-0.45388874411582947, mean_queue:0.7055555582046509
+intersection:14, mean_episode_reward:-9.19222354888916, mean_queue:8.811111450195312
+intersection:15, mean_episode_reward:1.8422225713729858, mean_queue:0.01666666753590107
+intersection:16, mean_episode_reward:-3.37666654586792, mean_queue:1.7944444417953491
+intersection:17, mean_episode_reward:-7.27055549621582, mean_queue:6.9277777671813965
+intersection:18, mean_episode_reward:-5.029444694519043, mean_queue:4.744444370269775
+intersection:19, mean_episode_reward:-3.2472219467163086, mean_queue:3.3777778148651123
+intersection:20, mean_episode_reward:-15.723334312438965, mean_queue:14.788888931274414
+episode:7/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:14.241888046264648, rewards:-82.96055230034722, queue:3.8105820105820105, delay:0.23650515924685847, throughput:677
+episode:7/500, real avg travel time:368.39881831610046
+intersection:0, mean_episode_reward:-4.073331832885742, mean_queue:3.894444465637207
+intersection:1, mean_episode_reward:0.7711111307144165, mean_queue:0.0555555559694767
+intersection:2, mean_episode_reward:-0.30222222208976746, mean_queue:0.011111111380159855
+intersection:3, mean_episode_reward:-18.048328399658203, mean_queue:17.450000762939453
+intersection:4, mean_episode_reward:-11.27055549621582, mean_queue:10.683333396911621
+intersection:5, mean_episode_reward:0.5833333134651184, mean_queue:0.32777777314186096
+intersection:6, mean_episode_reward:-1.101666808128357, mean_queue:1.0833333730697632
+intersection:7, mean_episode_reward:-7.555559158325195, mean_queue:5.4666666984558105
+intersection:8, mean_episode_reward:-2.2183337211608887, mean_queue:1.5777777433395386
+intersection:9, mean_episode_reward:-15.400558471679688, mean_queue:14.844444274902344
+intersection:10, mean_episode_reward:-1.1722221374511719, mean_queue:0.8666666746139526
+intersection:11, mean_episode_reward:-0.18666663765907288, mean_queue:0.16111111640930176
+intersection:12, mean_episode_reward:0.4511110186576843, mean_queue:0.21666666865348816
+intersection:13, mean_episode_reward:-0.6222222447395325, mean_queue:0.9944444298744202
+intersection:14, mean_episode_reward:-6.150554180145264, mean_queue:5.705555438995361
+intersection:15, mean_episode_reward:1.8788893222808838, mean_queue:0.03333333507180214
+intersection:16, mean_episode_reward:-3.6872220039367676, mean_queue:1.9555555582046509
+intersection:17, mean_episode_reward:-3.122776985168457, mean_queue:2.6888887882232666
+intersection:18, mean_episode_reward:-3.061110734939575, mean_queue:2.7444443702697754
+intersection:19, mean_episode_reward:-0.17999981343746185, mean_queue:1.350000023841858
+intersection:20, mean_episode_reward:-8.49166488647461, mean_queue:7.911110877990723
+episode:8/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:23.346288681030273, rewards:-72.81221788194445, queue:3.255820105820106, delay:0.18555349521536044, throughput:847
+episode:8/500, real avg travel time:326.8902007083825
+intersection:0, mean_episode_reward:-0.5344444513320923, mean_queue:0.14444445073604584
+intersection:1, mean_episode_reward:-0.21222226321697235, mean_queue:0.07777778059244156
+intersection:2, mean_episode_reward:-0.32666656374931335, mean_queue:0.011111111380159855
+intersection:3, mean_episode_reward:-19.4788875579834, mean_queue:19.08333396911621
+intersection:4, mean_episode_reward:-4.503889083862305, mean_queue:3.7444443702697754
+intersection:5, mean_episode_reward:0.21388886868953705, mean_queue:0.13333334028720856
+intersection:6, mean_episode_reward:-0.5455555319786072, mean_queue:0.43888887763023376
+intersection:7, mean_episode_reward:-7.437220096588135, mean_queue:5.411110877990723
+intersection:8, mean_episode_reward:-2.075000286102295, mean_queue:1.4500000476837158
+intersection:9, mean_episode_reward:-11.17166519165039, mean_queue:10.377778053283691
+intersection:10, mean_episode_reward:-0.6261112093925476, mean_queue:0.3333333432674408
+intersection:11, mean_episode_reward:-0.1644444614648819, mean_queue:0.1388888955116272
+intersection:12, mean_episode_reward:0.43555551767349243, mean_queue:0.20000000298023224
+intersection:13, mean_episode_reward:-0.3355555236339569, mean_queue:0.46666666865348816
+intersection:14, mean_episode_reward:-5.778889179229736, mean_queue:5.111111164093018
+intersection:15, mean_episode_reward:1.9866666793823242, mean_queue:0.06111111119389534
+intersection:16, mean_episode_reward:-2.688889503479004, mean_queue:1.2777777910232544
+intersection:17, mean_episode_reward:-0.6366666555404663, mean_queue:0.2888889014720917
+intersection:18, mean_episode_reward:-0.5911112427711487, mean_queue:0.32777777314186096
+intersection:19, mean_episode_reward:-0.30388885736465454, mean_queue:0.5888888835906982
+intersection:20, mean_episode_reward:-18.03722381591797, mean_queue:18.705554962158203
+episode:9/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:28.865983963012695, rewards:-50.30277777777778, queue:2.0915343915343914, delay:0.1640971996166088, throughput:989
+episode:9/500, real avg travel time:282.464105156724
+intersection:0, mean_episode_reward:-0.7455555200576782, mean_queue:0.25
+intersection:1, mean_episode_reward:-0.27666664123535156, mean_queue:0.07222222536802292
+intersection:2, mean_episode_reward:-0.309999942779541, mean_queue:0.0
+intersection:3, mean_episode_reward:-7.391665935516357, mean_queue:6.488888740539551
+intersection:4, mean_episode_reward:-1.5805555582046509, mean_queue:0.7777777910232544
+intersection:5, mean_episode_reward:0.19111110270023346, mean_queue:0.04444444552063942
+intersection:6, mean_episode_reward:-0.44499996304512024, mean_queue:0.21666666865348816
+intersection:7, mean_episode_reward:-5.586111068725586, mean_queue:3.694444417953491
+intersection:8, mean_episode_reward:-6.186666488647461, mean_queue:5.538888931274414
+intersection:9, mean_episode_reward:-13.834444046020508, mean_queue:13.094444274902344
+intersection:10, mean_episode_reward:-0.8222220540046692, mean_queue:0.42222222685813904
+intersection:11, mean_episode_reward:-0.13444450497627258, mean_queue:0.07777778059244156
+intersection:12, mean_episode_reward:0.4066665768623352, mean_queue:0.20555555820465088
+intersection:13, mean_episode_reward:-1.0522221326828003, mean_queue:1.1222221851348877
+intersection:14, mean_episode_reward:-3.6061110496520996, mean_queue:2.883333444595337
+intersection:15, mean_episode_reward:1.9888885021209717, mean_queue:0.0555555559694767
+intersection:16, mean_episode_reward:-2.525554895401001, mean_queue:1.1611111164093018
+intersection:17, mean_episode_reward:-0.7800001502037048, mean_queue:0.35555556416511536
+intersection:18, mean_episode_reward:-0.5472223162651062, mean_queue:0.2888889014720917
+intersection:19, mean_episode_reward:-0.28833335638046265, mean_queue:0.4722222089767456
+intersection:20, mean_episode_reward:-6.776666164398193, mean_queue:6.699999809265137
+episode:10/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:30.938804626464844, rewards:-61.18611111111111, queue:2.683333333333333, delay:0.18195193659060846, throughput:933
+episode:10/500, real avg travel time:310.9389067524116
+intersection:0, mean_episode_reward:-0.6905556321144104, mean_queue:0.30000001192092896
+intersection:1, mean_episode_reward:-0.2755555808544159, mean_queue:0.07222222536802292
+intersection:2, mean_episode_reward:-0.3722221851348877, mean_queue:0.10555555671453476
+intersection:3, mean_episode_reward:-11.05888843536377, mean_queue:10.144444465637207
+intersection:4, mean_episode_reward:-0.8738887310028076, mean_queue:0.18888889253139496
+intersection:5, mean_episode_reward:0.2222221940755844, mean_queue:0.06666667014360428
+intersection:6, mean_episode_reward:-1.1822222471237183, mean_queue:0.9666666388511658
+intersection:7, mean_episode_reward:-7.303886413574219, mean_queue:5.638888835906982
+intersection:8, mean_episode_reward:-3.8188884258270264, mean_queue:3.2555556297302246
+intersection:9, mean_episode_reward:-15.496112823486328, mean_queue:14.872221946716309
+intersection:10, mean_episode_reward:-0.7138890624046326, mean_queue:0.33888888359069824
+intersection:11, mean_episode_reward:-0.09777781367301941, mean_queue:0.04444444552063942
+intersection:12, mean_episode_reward:0.46611106395721436, mean_queue:0.21666666865348816
+intersection:13, mean_episode_reward:-0.6055552959442139, mean_queue:0.6944444179534912
+intersection:14, mean_episode_reward:-4.454444885253906, mean_queue:3.75
+intersection:15, mean_episode_reward:2.0872225761413574, mean_queue:0.01666666753590107
+intersection:16, mean_episode_reward:-2.738332748413086, mean_queue:1.2055555582046509
+intersection:17, mean_episode_reward:-0.5833331942558289, mean_queue:0.18333333730697632
+intersection:18, mean_episode_reward:-0.4661112129688263, mean_queue:0.17222222685813904
+intersection:19, mean_episode_reward:-0.36000001430511475, mean_queue:0.5222222208976746
+intersection:20, mean_episode_reward:-12.870000839233398, mean_queue:13.594444274902344
+HELDOUT episode:10/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:287.38612099644126, rewards:-64.69222005208333, queue:5.37936507936508, delay:0.2063968396060681, throughput:562
+HELDOUT episode:10/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:279.9244966442953, rewards:-53.422770182291664, queue:4.7026455026455025, delay:0.1863853172019676, throughput:596
+HELDOUT episode:10/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:290.8608964451314, rewards:-42.85944281684028, queue:4.2216931216931215, delay:0.17893678372499172, throughput:647
+HELDOUT_MEAN episode:10/500, travel time:286.057171361956 (n=3)
+new best ATT=286.06 at episode 10 (metric=heldout)
+episode:11/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:32.15940856933594, rewards:-45.13166775173611, queue:1.842063492063492, delay:0.16216299874441964, throughput:1051
+episode:11/500, real avg travel time:314.91912464319694
+intersection:0, mean_episode_reward:-0.767777681350708, mean_queue:0.2888889014720917
+intersection:1, mean_episode_reward:-0.32999998331069946, mean_queue:0.03888889029622078
+intersection:2, mean_episode_reward:-0.43499988317489624, mean_queue:0.10000000149011612
+intersection:3, mean_episode_reward:-5.522222995758057, mean_queue:4.577777862548828
+intersection:4, mean_episode_reward:-1.2711111307144165, mean_queue:0.46666666865348816
+intersection:5, mean_episode_reward:0.24611112475395203, mean_queue:0.04444444552063942
+intersection:6, mean_episode_reward:-0.8005553483963013, mean_queue:0.5888888835906982
+intersection:7, mean_episode_reward:-6.182224750518799, mean_queue:4.05555534362793
+intersection:8, mean_episode_reward:-1.4438889026641846, mean_queue:0.7944444417953491
+intersection:9, mean_episode_reward:-14.562775611877441, mean_queue:13.79444408416748
+intersection:10, mean_episode_reward:-0.6783335208892822, mean_queue:0.2666666805744171
+intersection:11, mean_episode_reward:-0.1305556297302246, mean_queue:0.0833333358168602
+intersection:12, mean_episode_reward:0.5077780485153198, mean_queue:0.21111111342906952
+intersection:13, mean_episode_reward:-0.5099998712539673, mean_queue:0.6944444179534912
+intersection:14, mean_episode_reward:-3.7122232913970947, mean_queue:3.01111102104187
+intersection:15, mean_episode_reward:1.9927771091461182, mean_queue:0.18888889253139496
+intersection:16, mean_episode_reward:-2.9622230529785156, mean_queue:1.244444489479065
+intersection:17, mean_episode_reward:-0.7388887405395508, mean_queue:0.3055555522441864
+intersection:18, mean_episode_reward:-0.5266667008399963, mean_queue:0.23333333432674408
+intersection:19, mean_episode_reward:-0.3944444954395294, mean_queue:0.644444465637207
+intersection:20, mean_episode_reward:-6.909444808959961, mean_queue:7.050000190734863
+episode:12/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:32.636505126953125, rewards:-47.97333441840278, queue:1.9248677248677248, delay:0.1526397705078125, throughput:1211
+episode:12/500, real avg travel time:301.3311312964492
+intersection:0, mean_episode_reward:-0.7455555200576782, mean_queue:0.28333333134651184
+intersection:1, mean_episode_reward:-0.3255555331707001, mean_queue:0.05000000074505806
+intersection:2, mean_episode_reward:-0.44888877868652344, mean_queue:0.05000000074505806
+intersection:3, mean_episode_reward:-6.330556869506836, mean_queue:5.172222137451172
+intersection:4, mean_episode_reward:-1.288888692855835, mean_queue:0.2888889014720917
+intersection:5, mean_episode_reward:0.08277777582406998, mean_queue:0.1111111119389534
+intersection:6, mean_episode_reward:-0.4244444966316223, mean_queue:0.3166666626930237
+intersection:7, mean_episode_reward:-10.028886795043945, mean_queue:7.561110973358154
+intersection:8, mean_episode_reward:-0.8583332300186157, mean_queue:0.25555557012557983
+intersection:9, mean_episode_reward:-11.54222297668457, mean_queue:10.683333396911621
+intersection:10, mean_episode_reward:-0.6627779006958008, mean_queue:0.25
+intersection:11, mean_episode_reward:-0.125555619597435, mean_queue:0.0555555559694767
+intersection:12, mean_episode_reward:0.3916667103767395, mean_queue:0.17777778208255768
+intersection:13, mean_episode_reward:-0.18888884782791138, mean_queue:0.4333333373069763
+intersection:14, mean_episode_reward:-5.344443321228027, mean_queue:4.661110877990723
+intersection:15, mean_episode_reward:1.8955552577972412, mean_queue:0.08888889104127884
+intersection:16, mean_episode_reward:-2.640000820159912, mean_queue:1.2000000476837158
+intersection:17, mean_episode_reward:-0.7344446182250977, mean_queue:0.3055555522441864
+intersection:18, mean_episode_reward:-0.5744446516036987, mean_queue:0.27222222089767456
+intersection:19, mean_episode_reward:-0.35333338379859924, mean_queue:0.7888888716697693
+intersection:20, mean_episode_reward:-7.72611141204834, mean_queue:7.416666507720947
+episode:13/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:31.634490966796875, rewards:-50.23888888888889, queue:2.0595238095238093, delay:0.1490484974371693, throughput:1206
+episode:13/500, real avg travel time:283.1550580431177
+intersection:0, mean_episode_reward:-0.8383334875106812, mean_queue:0.33888888359069824
+intersection:1, mean_episode_reward:-0.2966667413711548, mean_queue:0.06111111119389534
+intersection:2, mean_episode_reward:-0.38277775049209595, mean_queue:0.03888889029622078
+intersection:3, mean_episode_reward:-6.642222881317139, mean_queue:5.438889026641846
+intersection:4, mean_episode_reward:-1.246666669845581, mean_queue:0.25
+intersection:5, mean_episode_reward:0.09444443136453629, mean_queue:0.1666666716337204
+intersection:6, mean_episode_reward:-0.4277777075767517, mean_queue:0.31111112236976624
+intersection:7, mean_episode_reward:-7.221111297607422, mean_queue:4.583333492279053
+intersection:8, mean_episode_reward:-0.8155555129051208, mean_queue:0.20555555820465088
+intersection:9, mean_episode_reward:-14.290002822875977, mean_queue:13.538888931274414
+intersection:10, mean_episode_reward:-0.5761110782623291, mean_queue:0.21111111342906952
+intersection:11, mean_episode_reward:-0.16777783632278442, mean_queue:0.10555555671453476
+intersection:12, mean_episode_reward:0.4233333468437195, mean_queue:0.17777778208255768
+intersection:13, mean_episode_reward:-0.4327777326107025, mean_queue:0.7388888597488403
+intersection:14, mean_episode_reward:-5.39722204208374, mean_queue:4.7166666984558105
+intersection:15, mean_episode_reward:1.9199998378753662, mean_queue:0.04444444552063942
+intersection:16, mean_episode_reward:-2.2733333110809326, mean_queue:1.3444443941116333
+intersection:17, mean_episode_reward:-0.7705555558204651, mean_queue:0.3444444537162781
+intersection:18, mean_episode_reward:-0.8383331894874573, mean_queue:0.4888888895511627
+intersection:19, mean_episode_reward:-0.2888889014720917, mean_queue:0.7777777910232544
+intersection:20, mean_episode_reward:-9.77055549621582, mean_queue:9.366666793823242
+episode:14/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:29.735877990722656, rewards:-37.3022216796875, queue:1.4275132275132276, delay:0.14331774837756284, throughput:1200
+episode:14/500, real avg travel time:284.9216666666667
+intersection:0, mean_episode_reward:-0.9938886761665344, mean_queue:0.49444442987442017
+intersection:1, mean_episode_reward:-0.254444420337677, mean_queue:0.03333333507180214
+intersection:2, mean_episode_reward:-0.46000000834465027, mean_queue:0.12777778506278992
+intersection:3, mean_episode_reward:-5.808333396911621, mean_queue:4.699999809265137
+intersection:4, mean_episode_reward:-1.2516664266586304, mean_queue:0.4888888895511627
+intersection:5, mean_episode_reward:0.048333343118429184, mean_queue:0.17222222685813904
+intersection:6, mean_episode_reward:-0.34722214937210083, mean_queue:0.2944444417953491
+intersection:7, mean_episode_reward:-6.621111869812012, mean_queue:4.205555438995361
+intersection:8, mean_episode_reward:-0.7500002384185791, mean_queue:0.14444445073604584
+intersection:9, mean_episode_reward:-8.850554466247559, mean_queue:8.0
+intersection:10, mean_episode_reward:-0.5872223377227783, mean_queue:0.2222222238779068
+intersection:11, mean_episode_reward:-0.1344444900751114, mean_queue:0.07222222536802292
+intersection:12, mean_episode_reward:0.4477778673171997, mean_queue:0.22777777910232544
+intersection:13, mean_episode_reward:-0.10611112415790558, mean_queue:0.42222222685813904
+intersection:14, mean_episode_reward:-4.014444351196289, mean_queue:3.3111112117767334
+intersection:15, mean_episode_reward:1.911110758781433, mean_queue:0.17777778208255768
+intersection:16, mean_episode_reward:-2.7361114025115967, mean_queue:1.0444444417953491
+intersection:17, mean_episode_reward:-0.7700000405311584, mean_queue:0.31111112236976624
+intersection:18, mean_episode_reward:-0.5350000858306885, mean_queue:0.2222222238779068
+intersection:19, mean_episode_reward:-0.416666716337204, mean_queue:0.7833333611488342
+intersection:20, mean_episode_reward:-5.0722222328186035, mean_queue:4.52222204208374
+episode:15/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:30.174558639526367, rewards:-37.78333333333333, queue:1.4492063492063492, delay:0.14075310924065806, throughput:1289
+episode:15/500, real avg travel time:290.1202482544608
+intersection:0, mean_episode_reward:-0.8483332395553589, mean_queue:0.38333332538604736
+intersection:1, mean_episode_reward:-0.22388890385627747, mean_queue:0.03333333507180214
+intersection:2, mean_episode_reward:-0.4472222626209259, mean_queue:0.08888889104127884
+intersection:3, mean_episode_reward:-5.818888187408447, mean_queue:4.672222137451172
+intersection:4, mean_episode_reward:-1.1733335256576538, mean_queue:0.3611111044883728
+intersection:5, mean_episode_reward:-0.012777779251337051, mean_queue:0.14444445073604584
+intersection:6, mean_episode_reward:-0.3355555534362793, mean_queue:0.2777777910232544
+intersection:7, mean_episode_reward:-8.63166618347168, mean_queue:6.172222137451172
+intersection:8, mean_episode_reward:-0.7533335089683533, mean_queue:0.14444445073604584
+intersection:9, mean_episode_reward:-8.19277572631836, mean_queue:7.2166666984558105
+intersection:10, mean_episode_reward:-0.6905556321144104, mean_queue:0.35555556416511536
+intersection:11, mean_episode_reward:-0.1066666916012764, mean_queue:0.06111111119389534
+intersection:12, mean_episode_reward:0.37666669487953186, mean_queue:0.21666666865348816
+intersection:13, mean_episode_reward:-0.12111112475395203, mean_queue:0.4166666567325592
+intersection:14, mean_episode_reward:-2.2677783966064453, mean_queue:1.5833333730697632
+intersection:15, mean_episode_reward:1.934443712234497, mean_queue:0.09444444626569748
+intersection:16, mean_episode_reward:-2.605555772781372, mean_queue:1.1166666746139526
+intersection:17, mean_episode_reward:-0.7138888239860535, mean_queue:0.2888889014720917
+intersection:18, mean_episode_reward:-0.891666829586029, mean_queue:0.6166666746139526
+intersection:19, mean_episode_reward:-0.4622221291065216, mean_queue:0.8611111044883728
+intersection:20, mean_episode_reward:-5.7972235679626465, mean_queue:5.327777862548828
+episode:16/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:28.480365753173828, rewards:-37.3177734375, queue:1.4103174603174604, delay:0.13702533055865576, throughput:1331
+episode:16/500, real avg travel time:257.2329075882795
+intersection:0, mean_episode_reward:-0.8250001072883606, mean_queue:0.3166666626930237
+intersection:1, mean_episode_reward:-0.26222217082977295, mean_queue:0.04444444552063942
+intersection:2, mean_episode_reward:-0.39888885617256165, mean_queue:0.02222222276031971
+intersection:3, mean_episode_reward:-5.293888092041016, mean_queue:3.9666666984558105
+intersection:4, mean_episode_reward:-1.0611109733581543, mean_queue:0.3055555522441864
+intersection:5, mean_episode_reward:-0.0011111135827377439, mean_queue:0.1944444477558136
+intersection:6, mean_episode_reward:-0.31499993801116943, mean_queue:0.23888888955116272
+intersection:7, mean_episode_reward:-7.993889808654785, mean_queue:5.483333110809326
+intersection:8, mean_episode_reward:-0.7355557084083557, mean_queue:0.16111111640930176
+intersection:9, mean_episode_reward:-9.47833251953125, mean_queue:8.677778244018555
+intersection:10, mean_episode_reward:-0.5577779412269592, mean_queue:0.22777777910232544
+intersection:11, mean_episode_reward:-0.11222224682569504, mean_queue:0.04444444552063942
+intersection:12, mean_episode_reward:0.5000000596046448, mean_queue:0.20000000298023224
+intersection:13, mean_episode_reward:-0.5772222876548767, mean_queue:0.8500000238418579
+intersection:14, mean_episode_reward:-2.4000000953674316, mean_queue:1.7277777194976807
+intersection:15, mean_episode_reward:1.960556149482727, mean_queue:0.0833333358168602
+intersection:16, mean_episode_reward:-2.6644444465637207, mean_queue:1.1222221851348877
+intersection:17, mean_episode_reward:-0.7438890337944031, mean_queue:0.27222222089767456
+intersection:18, mean_episode_reward:-0.5916666388511658, mean_queue:0.2888889014720917
+intersection:19, mean_episode_reward:-0.3333333432674408, mean_queue:0.7222222089767456
+intersection:20, mean_episode_reward:-5.4327778816223145, mean_queue:4.666666507720947
+episode:17/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:27.103069305419922, rewards:-35.284442816840276, queue:1.3132275132275133, delay:0.13750142092427248, throughput:1347
+episode:17/500, real avg travel time:267.637713437268
+intersection:0, mean_episode_reward:-0.7616665363311768, mean_queue:0.28333333134651184
+intersection:1, mean_episode_reward:-0.304999977350235, mean_queue:0.07222222536802292
+intersection:2, mean_episode_reward:-0.48944422602653503, mean_queue:0.10000000149011612
+intersection:3, mean_episode_reward:-5.667777061462402, mean_queue:4.449999809265137
+intersection:4, mean_episode_reward:-1.2155557870864868, mean_queue:0.42222222685813904
+intersection:5, mean_episode_reward:-0.04666667431592941, mean_queue:0.18333333730697632
+intersection:6, mean_episode_reward:-0.25888893008232117, mean_queue:0.18888889253139496
+intersection:7, mean_episode_reward:-8.503889083862305, mean_queue:6.05555534362793
+intersection:8, mean_episode_reward:-0.7522223591804504, mean_queue:0.18333333730697632
+intersection:9, mean_episode_reward:-8.957778930664062, mean_queue:8.027777671813965
+intersection:10, mean_episode_reward:-0.6549997925758362, mean_queue:0.2944444417953491
+intersection:11, mean_episode_reward:-0.1344444751739502, mean_queue:0.09444444626569748
+intersection:12, mean_episode_reward:0.4511110484600067, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.3933332562446594, mean_queue:0.699999988079071
+intersection:14, mean_episode_reward:-2.181666612625122, mean_queue:1.4777777194976807
+intersection:15, mean_episode_reward:1.9427783489227295, mean_queue:0.13333334028720856
+intersection:16, mean_episode_reward:-2.6683335304260254, mean_queue:1.1388888359069824
+intersection:17, mean_episode_reward:-0.7611109614372253, mean_queue:0.31111112236976624
+intersection:18, mean_episode_reward:-0.5100001692771912, mean_queue:0.21666666865348816
+intersection:19, mean_episode_reward:-0.3983333110809326, mean_queue:0.7777777910232544
+intersection:20, mean_episode_reward:-3.0172224044799805, mean_queue:2.2944445610046387
+episode:18/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:25.6418399810791, rewards:-45.132221137152776, queue:1.8132275132275133, delay:0.14403767257771163, throughput:1253
+episode:18/500, real avg travel time:299.93056664006383
+intersection:0, mean_episode_reward:-0.6349999904632568, mean_queue:0.24444444477558136
+intersection:1, mean_episode_reward:-0.20500001311302185, mean_queue:0.04444444552063942
+intersection:2, mean_episode_reward:-0.43499988317489624, mean_queue:0.0555555559694767
+intersection:3, mean_episode_reward:-8.371665954589844, mean_queue:7.255555629730225
+intersection:4, mean_episode_reward:-1.2577776908874512, mean_queue:0.32777777314186096
+intersection:5, mean_episode_reward:0.026666659861803055, mean_queue:0.16111111640930176
+intersection:6, mean_episode_reward:-0.3611111044883728, mean_queue:0.30000001192092896
+intersection:7, mean_episode_reward:-8.456665992736816, mean_queue:5.911110877990723
+intersection:8, mean_episode_reward:-0.7488889098167419, mean_queue:0.15000000596046448
+intersection:9, mean_episode_reward:-7.992777347564697, mean_queue:7.005555629730225
+intersection:10, mean_episode_reward:-0.5972223281860352, mean_queue:0.25555557012557983
+intersection:11, mean_episode_reward:-0.16555561125278473, mean_queue:0.12777778506278992
+intersection:12, mean_episode_reward:0.42500001192092896, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.04277779906988144, mean_queue:0.3499999940395355
+intersection:14, mean_episode_reward:-1.978333592414856, mean_queue:1.3055555820465088
+intersection:15, mean_episode_reward:1.8705559968948364, mean_queue:0.10555555671453476
+intersection:16, mean_episode_reward:-2.622222661972046, mean_queue:1.144444465637207
+intersection:17, mean_episode_reward:-0.6366665959358215, mean_queue:0.2611111104488373
+intersection:18, mean_episode_reward:-0.513888955116272, mean_queue:0.20000000298023224
+intersection:19, mean_episode_reward:-0.44000014662742615, mean_queue:0.8666666746139526
+intersection:20, mean_episode_reward:-11.993889808654785, mean_queue:11.833333015441895
+episode:19/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:24.45925521850586, rewards:-33.20110948350695, queue:1.1843915343915343, delay:0.13483899636243385, throughput:1390
+episode:19/500, real avg travel time:277.8251798561151
+intersection:0, mean_episode_reward:-0.7038888335227966, mean_queue:0.21111111342906952
+intersection:1, mean_episode_reward:-0.24944442510604858, mean_queue:0.01666666753590107
+intersection:2, mean_episode_reward:-0.4122221767902374, mean_queue:0.0555555559694767
+intersection:3, mean_episode_reward:-3.8972222805023193, mean_queue:2.5999999046325684
+intersection:4, mean_episode_reward:-1.6666666269302368, mean_queue:0.8277778029441833
+intersection:5, mean_episode_reward:-0.000555546663235873, mean_queue:0.14444445073604584
+intersection:6, mean_episode_reward:-0.27166667580604553, mean_queue:0.18888889253139496
+intersection:7, mean_episode_reward:-7.817779541015625, mean_queue:5.472222328186035
+intersection:8, mean_episode_reward:-0.8466668725013733, mean_queue:0.17777778208255768
+intersection:9, mean_episode_reward:-9.053888320922852, mean_queue:8.033333778381348
+intersection:10, mean_episode_reward:-0.8177778720855713, mean_queue:0.38333332538604736
+intersection:11, mean_episode_reward:-0.14388896524906158, mean_queue:0.09444444626569748
+intersection:12, mean_episode_reward:0.4199998080730438, mean_queue:0.20000000298023224
+intersection:13, mean_episode_reward:-0.189444437623024, mean_queue:0.5166666507720947
+intersection:14, mean_episode_reward:-2.1311113834381104, mean_queue:1.605555534362793
+intersection:15, mean_episode_reward:1.7727781534194946, mean_queue:0.12222222238779068
+intersection:16, mean_episode_reward:-2.684999942779541, mean_queue:1.1944444179534912
+intersection:17, mean_episode_reward:-0.8155555129051208, mean_queue:0.3722222149372101
+intersection:18, mean_episode_reward:-0.4822222888469696, mean_queue:0.20000000298023224
+intersection:19, mean_episode_reward:-0.36888888478279114, mean_queue:0.7888888716697693
+intersection:20, mean_episode_reward:-2.840000629425049, mean_queue:1.6666666269302368
+episode:20/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:24.71213150024414, rewards:-34.961664496527774, queue:1.2978835978835979, delay:0.13278387160528274, throughput:1275
+episode:20/500, real avg travel time:263.98196078431374
+intersection:0, mean_episode_reward:-0.6716667413711548, mean_queue:0.2222222238779068
+intersection:1, mean_episode_reward:-0.2594444453716278, mean_queue:0.05000000074505806
+intersection:2, mean_episode_reward:-0.38499993085861206, mean_queue:0.03888889029622078
+intersection:3, mean_episode_reward:-4.874444007873535, mean_queue:3.5
+intersection:4, mean_episode_reward:-1.098333477973938, mean_queue:0.3777777850627899
+intersection:5, mean_episode_reward:0.03611111640930176, mean_queue:0.15000000596046448
+intersection:6, mean_episode_reward:-0.3494444191455841, mean_queue:0.2222222238779068
+intersection:7, mean_episode_reward:-8.104442596435547, mean_queue:5.72777795791626
+intersection:8, mean_episode_reward:-0.7294443845748901, mean_queue:0.15000000596046448
+intersection:9, mean_episode_reward:-8.018335342407227, mean_queue:7.22777795791626
+intersection:10, mean_episode_reward:-0.6666667461395264, mean_queue:0.32777777314186096
+intersection:11, mean_episode_reward:-0.09333336353302002, mean_queue:0.03888889029622078
+intersection:12, mean_episode_reward:0.48555564880371094, mean_queue:0.18888889253139496
+intersection:13, mean_episode_reward:-0.27055561542510986, mean_queue:0.44999998807907104
+intersection:14, mean_episode_reward:-1.9561108350753784, mean_queue:1.3055555820465088
+intersection:15, mean_episode_reward:1.7755553722381592, mean_queue:0.20555555820465088
+intersection:16, mean_episode_reward:-2.7499992847442627, mean_queue:1.1888889074325562
+intersection:17, mean_episode_reward:-0.6355554461479187, mean_queue:0.24444444477558136
+intersection:18, mean_episode_reward:-0.4388890564441681, mean_queue:0.13333334028720856
+intersection:19, mean_episode_reward:-0.42944446206092834, mean_queue:0.8277778029441833
+intersection:20, mean_episode_reward:-5.527778625488281, mean_queue:4.6777777671813965
+HELDOUT episode:20/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:251.23886328725038, rewards:-33.229999457465276, queue:1.2153439153439154, delay:0.13026345873635914, throughput:1302
+HELDOUT episode:20/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:263.1186046511628, rewards:-36.38555230034722, queue:1.367989417989418, delay:0.13398498858093585, throughput:1290
+HELDOUT episode:20/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:262.49691358024694, rewards:-41.49388834635417, queue:1.6423280423280424, delay:0.1375770851417824, throughput:1296
+HELDOUT_MEAN episode:20/500, travel time:258.95146050622003 (n=3)
+new best ATT=258.95 at episode 20 (metric=heldout)
+episode:21/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:23.68575096130371, rewards:-32.779443359375, queue:1.1746031746031746, delay:0.13153470962766617, throughput:1361
+episode:21/500, real avg travel time:284.704628949302
+intersection:0, mean_episode_reward:-0.7699999213218689, mean_queue:0.2944444417953491
+intersection:1, mean_episode_reward:-0.3177778124809265, mean_queue:0.01666666753590107
+intersection:2, mean_episode_reward:-0.4377778470516205, mean_queue:0.03888889029622078
+intersection:3, mean_episode_reward:-4.112221717834473, mean_queue:2.7833333015441895
+intersection:4, mean_episode_reward:-1.3722219467163086, mean_queue:0.5111111402511597
+intersection:5, mean_episode_reward:0.029999997466802597, mean_queue:0.13333334028720856
+intersection:6, mean_episode_reward:-0.3611111044883728, mean_queue:0.23888888955116272
+intersection:7, mean_episode_reward:-8.068334579467773, mean_queue:5.644444465637207
+intersection:8, mean_episode_reward:-0.8188890814781189, mean_queue:0.16111111640930176
+intersection:9, mean_episode_reward:-9.330556869506836, mean_queue:8.55555534362793
+intersection:10, mean_episode_reward:-0.6555557250976562, mean_queue:0.2611111104488373
+intersection:11, mean_episode_reward:-0.13888892531394958, mean_queue:0.09444444626569748
+intersection:12, mean_episode_reward:0.48944470286369324, mean_queue:0.22777777910232544
+intersection:13, mean_episode_reward:-0.1922222077846527, mean_queue:0.4333333373069763
+intersection:14, mean_episode_reward:-1.887222409248352, mean_queue:1.2777777910232544
+intersection:15, mean_episode_reward:1.928333044052124, mean_queue:0.16111111640930176
+intersection:16, mean_episode_reward:-2.7950003147125244, mean_queue:1.0666667222976685
+intersection:17, mean_episode_reward:-0.7633333802223206, mean_queue:0.30000001192092896
+intersection:18, mean_episode_reward:-0.5133333802223206, mean_queue:0.20555555820465088
+intersection:19, mean_episode_reward:-0.3855554759502411, mean_queue:0.7944444417953491
+intersection:20, mean_episode_reward:-2.3072221279144287, mean_queue:1.4666666984558105
+episode:22/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:23.198843002319336, rewards:-32.14333224826389, queue:1.1042328042328042, delay:0.1305938236297123, throughput:1554
+episode:22/500, real avg travel time:282.72586872586874
+intersection:0, mean_episode_reward:-1.440555453300476, mean_queue:0.9666666388511658
+intersection:1, mean_episode_reward:-0.31666669249534607, mean_queue:0.03333333507180214
+intersection:2, mean_episode_reward:-0.5033333897590637, mean_queue:0.11666666716337204
+intersection:3, mean_episode_reward:-4.39722204208374, mean_queue:2.972222328186035
+intersection:4, mean_episode_reward:-1.411666750907898, mean_queue:0.3777777850627899
+intersection:5, mean_episode_reward:0.01333333645015955, mean_queue:0.13333334028720856
+intersection:6, mean_episode_reward:-0.31277772784233093, mean_queue:0.18888889253139496
+intersection:7, mean_episode_reward:-7.639445781707764, mean_queue:5.238888740539551
+intersection:8, mean_episode_reward:-0.7722222208976746, mean_queue:0.1388888955116272
+intersection:9, mean_episode_reward:-7.594998359680176, mean_queue:6.627777576446533
+intersection:10, mean_episode_reward:-0.7444444298744202, mean_queue:0.3499999940395355
+intersection:11, mean_episode_reward:-0.14333337545394897, mean_queue:0.09444444626569748
+intersection:12, mean_episode_reward:0.3933333158493042, mean_queue:0.18333333730697632
+intersection:13, mean_episode_reward:-0.07722224295139313, mean_queue:0.4055555462837219
+intersection:14, mean_episode_reward:-1.8794442415237427, mean_queue:1.2277777194976807
+intersection:15, mean_episode_reward:1.8177778720855713, mean_queue:0.10555555671453476
+intersection:16, mean_episode_reward:-2.5372228622436523, mean_queue:1.0555555820465088
+intersection:17, mean_episode_reward:-0.8527777194976807, mean_queue:0.41111111640930176
+intersection:18, mean_episode_reward:-0.49444466829299927, mean_queue:0.18888889253139496
+intersection:19, mean_episode_reward:-0.4466665983200073, mean_queue:0.8611111044883728
+intersection:20, mean_episode_reward:-2.8033337593078613, mean_queue:1.5111111402511597
+episode:23/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:23.5173397064209, rewards:-38.446666124131944, queue:1.4166666666666667, delay:0.1391970841342179, throughput:1386
+episode:23/500, real avg travel time:297.67171717171715
+intersection:0, mean_episode_reward:-0.800555408000946, mean_queue:0.27222222089767456
+intersection:1, mean_episode_reward:-0.29333335161209106, mean_queue:0.0555555559694767
+intersection:2, mean_episode_reward:-0.47222214937210083, mean_queue:0.0555555559694767
+intersection:3, mean_episode_reward:-5.726110935211182, mean_queue:4.488888740539551
+intersection:4, mean_episode_reward:-1.3216663599014282, mean_queue:0.36666667461395264
+intersection:5, mean_episode_reward:-0.038888879120349884, mean_queue:0.20555555820465088
+intersection:6, mean_episode_reward:-0.3122222423553467, mean_queue:0.21111111342906952
+intersection:7, mean_episode_reward:-9.178332328796387, mean_queue:6.650000095367432
+intersection:8, mean_episode_reward:-0.782777726650238, mean_queue:0.17777778208255768
+intersection:9, mean_episode_reward:-8.143889427185059, mean_queue:7.066666603088379
+intersection:10, mean_episode_reward:-0.6577778458595276, mean_queue:0.2777777910232544
+intersection:11, mean_episode_reward:-0.1533333957195282, mean_queue:0.0833333358168602
+intersection:12, mean_episode_reward:0.3905555009841919, mean_queue:0.18333333730697632
+intersection:13, mean_episode_reward:-0.12111112475395203, mean_queue:0.4277777671813965
+intersection:14, mean_episode_reward:-1.9444444179534912, mean_queue:1.244444489479065
+intersection:15, mean_episode_reward:1.7055555582046509, mean_queue:0.1944444477558136
+intersection:16, mean_episode_reward:-2.470555543899536, mean_queue:1.100000023841858
+intersection:17, mean_episode_reward:-0.7777776718139648, mean_queue:0.3611111044883728
+intersection:18, mean_episode_reward:-0.6138890981674194, mean_queue:0.2666666805744171
+intersection:19, mean_episode_reward:-0.4277777671813965, mean_queue:0.9166666865348816
+intersection:20, mean_episode_reward:-6.306111812591553, mean_queue:5.144444465637207
+episode:24/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:24.201662063598633, rewards:-35.339442274305554, queue:1.2904761904761906, delay:0.12388626986710483, throughput:1376
+episode:24/500, real avg travel time:281.15406976744185
+intersection:0, mean_episode_reward:-0.7499999403953552, mean_queue:0.23333333432674408
+intersection:1, mean_episode_reward:-0.2383332997560501, mean_queue:0.011111111380159855
+intersection:2, mean_episode_reward:-0.4661109149456024, mean_queue:0.09444444626569748
+intersection:3, mean_episode_reward:-3.5961110591888428, mean_queue:2.2055554389953613
+intersection:4, mean_episode_reward:-1.0933336019515991, mean_queue:0.30000001192092896
+intersection:5, mean_episode_reward:0.03166666626930237, mean_queue:0.12222222238779068
+intersection:6, mean_episode_reward:-0.31666669249534607, mean_queue:0.18888889253139496
+intersection:7, mean_episode_reward:-8.359443664550781, mean_queue:5.905555725097656
+intersection:8, mean_episode_reward:-0.7411112189292908, mean_queue:0.12777778506278992
+intersection:9, mean_episode_reward:-12.742780685424805, mean_queue:11.933333396911621
+intersection:10, mean_episode_reward:-0.6022223830223083, mean_queue:0.25555557012557983
+intersection:11, mean_episode_reward:-0.11888890713453293, mean_queue:0.06666667014360428
+intersection:12, mean_episode_reward:0.4183333218097687, mean_queue:0.23333333432674408
+intersection:13, mean_episode_reward:-0.07111112028360367, mean_queue:0.4055555462837219
+intersection:14, mean_episode_reward:-1.7349998950958252, mean_queue:1.1222221851348877
+intersection:15, mean_episode_reward:1.9911117553710938, mean_queue:0.0833333358168602
+intersection:16, mean_episode_reward:-2.9099996089935303, mean_queue:1.211111068725586
+intersection:17, mean_episode_reward:-0.8105555176734924, mean_queue:0.35555556416511536
+intersection:18, mean_episode_reward:-0.5105558037757874, mean_queue:0.21666666865348816
+intersection:19, mean_episode_reward:-0.34166672825813293, mean_queue:0.6944444179534912
+intersection:20, mean_episode_reward:-2.37666654586792, mean_queue:1.3333333730697632
+episode:25/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:23.595630645751953, rewards:-32.06999782986111, queue:1.142063492063492, delay:0.12965237249142278, throughput:1343
+episode:25/500, real avg travel time:281.13104988830975
+intersection:0, mean_episode_reward:-0.7688888311386108, mean_queue:0.31111112236976624
+intersection:1, mean_episode_reward:-0.23888887465000153, mean_queue:0.04444444552063942
+intersection:2, mean_episode_reward:-0.4011111855506897, mean_queue:0.03888889029622078
+intersection:3, mean_episode_reward:-5.233333587646484, mean_queue:3.944444417953491
+intersection:4, mean_episode_reward:-1.146111011505127, mean_queue:0.3055555522441864
+intersection:5, mean_episode_reward:-0.02500000037252903, mean_queue:0.12777778506278992
+intersection:6, mean_episode_reward:-0.25166675448417664, mean_queue:0.16111111640930176
+intersection:7, mean_episode_reward:-8.831665992736816, mean_queue:6.4277777671813965
+intersection:8, mean_episode_reward:-0.7733333110809326, mean_queue:0.17777778208255768
+intersection:9, mean_episode_reward:-6.089999675750732, mean_queue:5.0333333015441895
+intersection:10, mean_episode_reward:-0.7138888835906982, mean_queue:0.3444444537162781
+intersection:11, mean_episode_reward:-0.12388896942138672, mean_queue:0.06666667014360428
+intersection:12, mean_episode_reward:0.4272220730781555, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.16222220659255981, mean_queue:0.42222222685813904
+intersection:14, mean_episode_reward:-1.673333764076233, mean_queue:1.005555510520935
+intersection:15, mean_episode_reward:1.7811102867126465, mean_queue:0.15000000596046448
+intersection:16, mean_episode_reward:-2.597778081893921, mean_queue:1.1277778148651123
+intersection:17, mean_episode_reward:-0.726111114025116, mean_queue:0.28333333134651184
+intersection:18, mean_episode_reward:-0.45722225308418274, mean_queue:0.15555556118488312
+intersection:19, mean_episode_reward:-0.4183334708213806, mean_queue:0.7944444417953491
+intersection:20, mean_episode_reward:-3.645555019378662, mean_queue:2.8888888359069824
+episode:26/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:23.695837020874023, rewards:-31.54999457465278, queue:1.101058201058201, delay:0.12752442536530673, throughput:1397
+episode:26/500, real avg travel time:297.0200429491768
+intersection:0, mean_episode_reward:-0.8416667580604553, mean_queue:0.3333333432674408
+intersection:1, mean_episode_reward:-0.25722217559814453, mean_queue:0.04444444552063942
+intersection:2, mean_episode_reward:-0.43111109733581543, mean_queue:0.07777778059244156
+intersection:3, mean_episode_reward:-4.478888034820557, mean_queue:3.0055556297302246
+intersection:4, mean_episode_reward:-1.016111135482788, mean_queue:0.27222222089767456
+intersection:5, mean_episode_reward:-0.02611110918223858, mean_queue:0.17777778208255768
+intersection:6, mean_episode_reward:-0.2900000512599945, mean_queue:0.1944444477558136
+intersection:7, mean_episode_reward:-7.316667556762695, mean_queue:4.877777576446533
+intersection:8, mean_episode_reward:-0.7483335137367249, mean_queue:0.17222222685813904
+intersection:9, mean_episode_reward:-8.834439277648926, mean_queue:7.8222222328186035
+intersection:10, mean_episode_reward:-0.6483333706855774, mean_queue:0.25
+intersection:11, mean_episode_reward:-0.12388891726732254, mean_queue:0.06666667014360428
+intersection:12, mean_episode_reward:0.5099998712539673, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.18166667222976685, mean_queue:0.4166666567325592
+intersection:14, mean_episode_reward:-1.7416670322418213, mean_queue:1.1555556058883667
+intersection:15, mean_episode_reward:1.8688884973526, mean_queue:0.14444445073604584
+intersection:16, mean_episode_reward:-2.7677783966064453, mean_queue:1.1833332777023315
+intersection:17, mean_episode_reward:-0.7944443821907043, mean_queue:0.31111112236976624
+intersection:18, mean_episode_reward:-0.5488889217376709, mean_queue:0.23888888955116272
+intersection:19, mean_episode_reward:-0.31111109256744385, mean_queue:0.7611111402511597
+intersection:20, mean_episode_reward:-2.5705552101135254, mean_queue:1.4444444179534912
+episode:27/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:23.458776473999023, rewards:-31.582779947916666, queue:1.1013227513227513, delay:0.12872421829788774, throughput:1507
+episode:27/500, real avg travel time:274.7120106171201
+intersection:0, mean_episode_reward:-0.7777776718139648, mean_queue:0.30000001192092896
+intersection:1, mean_episode_reward:-0.2911110818386078, mean_queue:0.06666667014360428
+intersection:2, mean_episode_reward:-0.46222206950187683, mean_queue:0.05000000074505806
+intersection:3, mean_episode_reward:-4.856111526489258, mean_queue:3.538888931274414
+intersection:4, mean_episode_reward:-1.2438889741897583, mean_queue:0.3222222328186035
+intersection:5, mean_episode_reward:-0.04000000283122063, mean_queue:0.21111111342906952
+intersection:6, mean_episode_reward:-0.2794444262981415, mean_queue:0.1944444477558136
+intersection:7, mean_episode_reward:-8.221113204956055, mean_queue:5.883333206176758
+intersection:8, mean_episode_reward:-0.760555624961853, mean_queue:0.17222222685813904
+intersection:9, mean_episode_reward:-6.5255560874938965, mean_queue:5.455555438995361
+intersection:10, mean_episode_reward:-0.6850000023841858, mean_queue:0.25555557012557983
+intersection:11, mean_episode_reward:-0.1277778148651123, mean_queue:0.07222222536802292
+intersection:12, mean_episode_reward:0.42666664719581604, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.07388889789581299, mean_queue:0.4055555462837219
+intersection:14, mean_episode_reward:-2.0461106300354004, mean_queue:1.2777777910232544
+intersection:15, mean_episode_reward:1.9522225856781006, mean_queue:0.1388888955116272
+intersection:16, mean_episode_reward:-2.790555477142334, mean_queue:1.2333333492279053
+intersection:17, mean_episode_reward:-0.7777776718139648, mean_queue:0.25
+intersection:18, mean_episode_reward:-0.47277793288230896, mean_queue:0.17777778208255768
+intersection:19, mean_episode_reward:-0.4116665720939636, mean_queue:0.8111110925674438
+intersection:20, mean_episode_reward:-3.1183340549468994, mean_queue:2.1388888359069824
+episode:28/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:23.964258193969727, rewards:-30.624441189236112, queue:1.0671957671957673, delay:0.12471175420851935, throughput:1437
+episode:28/500, real avg travel time:268.151704940849
+intersection:0, mean_episode_reward:-0.6361109614372253, mean_queue:0.2611111104488373
+intersection:1, mean_episode_reward:-0.20722219347953796, mean_queue:0.0555555559694767
+intersection:2, mean_episode_reward:-0.44055548310279846, mean_queue:0.02222222276031971
+intersection:3, mean_episode_reward:-4.847777366638184, mean_queue:3.383333444595337
+intersection:4, mean_episode_reward:-1.2261110544204712, mean_queue:0.27222222089767456
+intersection:5, mean_episode_reward:-0.02500000223517418, mean_queue:0.18888889253139496
+intersection:6, mean_episode_reward:-0.33222225308418274, mean_queue:0.2888889014720917
+intersection:7, mean_episode_reward:-8.407222747802734, mean_queue:5.938889026641846
+intersection:8, mean_episode_reward:-0.769444465637207, mean_queue:0.17777778208255768
+intersection:9, mean_episode_reward:-6.564998149871826, mean_queue:5.650000095367432
+intersection:10, mean_episode_reward:-0.6088888645172119, mean_queue:0.2611111104488373
+intersection:11, mean_episode_reward:-0.14500005543231964, mean_queue:0.09444444626569748
+intersection:12, mean_episode_reward:0.40277770161628723, mean_queue:0.18333333730697632
+intersection:13, mean_episode_reward:-0.043333329260349274, mean_queue:0.2944444417953491
+intersection:14, mean_episode_reward:-1.8855551481246948, mean_queue:1.2000000476837158
+intersection:15, mean_episode_reward:1.8111110925674438, mean_queue:0.10555555671453476
+intersection:16, mean_episode_reward:-2.540555715560913, mean_queue:1.0944443941116333
+intersection:17, mean_episode_reward:-0.6666666865348816, mean_queue:0.2944444417953491
+intersection:18, mean_episode_reward:-0.4961114227771759, mean_queue:0.18888889253139496
+intersection:19, mean_episode_reward:-0.4333333373069763, mean_queue:0.9444444179534912
+intersection:20, mean_episode_reward:-2.5622220039367676, mean_queue:1.5111111402511597
+episode:29/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:23.2208251953125, rewards:-37.13555772569445, queue:1.369047619047619, delay:0.13250488604187335, throughput:1347
+episode:29/500, real avg travel time:304.9918337045286
+intersection:0, mean_episode_reward:-0.755000114440918, mean_queue:0.27222222089767456
+intersection:1, mean_episode_reward:-0.23500001430511475, mean_queue:0.011111111380159855
+intersection:2, mean_episode_reward:-0.3794443905353546, mean_queue:0.03333333507180214
+intersection:3, mean_episode_reward:-4.948889255523682, mean_queue:3.7444443702697754
+intersection:4, mean_episode_reward:-1.5833333730697632, mean_queue:0.7444444298744202
+intersection:5, mean_episode_reward:-0.01388886384665966, mean_queue:0.10555555671453476
+intersection:6, mean_episode_reward:-0.2911110520362854, mean_queue:0.18888889253139496
+intersection:7, mean_episode_reward:-8.095556259155273, mean_queue:5.655555725097656
+intersection:8, mean_episode_reward:-0.850555419921875, mean_queue:0.2222222238779068
+intersection:9, mean_episode_reward:-10.018333435058594, mean_queue:9.005555152893066
+intersection:10, mean_episode_reward:-0.8344443440437317, mean_queue:0.39444443583488464
+intersection:11, mean_episode_reward:-0.15166670083999634, mean_queue:0.1111111119389534
+intersection:12, mean_episode_reward:0.40055572986602783, mean_queue:0.21111111342906952
+intersection:13, mean_episode_reward:-0.13833333551883698, mean_queue:0.3333333432674408
+intersection:14, mean_episode_reward:-1.6116666793823242, mean_queue:0.9777777791023254
+intersection:15, mean_episode_reward:1.773333191871643, mean_queue:0.06111111119389534
+intersection:16, mean_episode_reward:-2.6288888454437256, mean_queue:1.1555556058883667
+intersection:17, mean_episode_reward:-0.7761112451553345, mean_queue:0.3611111044883728
+intersection:18, mean_episode_reward:-0.4594445824623108, mean_queue:0.15555556118488312
+intersection:19, mean_episode_reward:-0.4333333671092987, mean_queue:0.8833333253860474
+intersection:20, mean_episode_reward:-5.1044440269470215, mean_queue:4.122222423553467
+episode:30/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:23.412199020385742, rewards:-29.68388671875, queue:1.037037037037037, delay:0.12422315002118468, throughput:1327
+episode:30/500, real avg travel time:284.5998492840995
+intersection:0, mean_episode_reward:-0.5994445085525513, mean_queue:0.1666666716337204
+intersection:1, mean_episode_reward:-0.2711111009120941, mean_queue:0.06666667014360428
+intersection:2, mean_episode_reward:-0.4022221863269806, mean_queue:0.05000000074505806
+intersection:3, mean_episode_reward:-3.6383330821990967, mean_queue:2.344444513320923
+intersection:4, mean_episode_reward:-1.0638887882232666, mean_queue:0.3611111044883728
+intersection:5, mean_episode_reward:0.005000000353902578, mean_queue:0.16111111640930176
+intersection:6, mean_episode_reward:-0.35777774453163147, mean_queue:0.23333333432674408
+intersection:7, mean_episode_reward:-8.001110076904297, mean_queue:5.788888931274414
+intersection:8, mean_episode_reward:-0.7461111545562744, mean_queue:0.15555556118488312
+intersection:9, mean_episode_reward:-7.465554237365723, mean_queue:6.511111259460449
+intersection:10, mean_episode_reward:-0.7211111187934875, mean_queue:0.3611111044883728
+intersection:11, mean_episode_reward:-0.11666672676801682, mean_queue:0.06666667014360428
+intersection:12, mean_episode_reward:0.48833325505256653, mean_queue:0.21111111342906952
+intersection:13, mean_episode_reward:-0.15500006079673767, mean_queue:0.3166666626930237
+intersection:14, mean_episode_reward:-1.6211111545562744, mean_queue:0.9888888597488403
+intersection:15, mean_episode_reward:1.8744454383850098, mean_queue:0.04444444552063942
+intersection:16, mean_episode_reward:-2.917222738265991, mean_queue:1.3388888835906982
+intersection:17, mean_episode_reward:-0.6422222852706909, mean_queue:0.21666666865348816
+intersection:18, mean_episode_reward:-0.4483334422111511, mean_queue:0.1666666716337204
+intersection:19, mean_episode_reward:-0.5022221803665161, mean_queue:0.8277778029441833
+intersection:20, mean_episode_reward:-2.3822224140167236, mean_queue:1.399999976158142
+HELDOUT episode:30/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:270.6629213483146, rewards:-27.030558268229168, queue:0.8830687830687831, delay:0.11728574561063575, throughput:1335
+HELDOUT episode:30/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:269.0015209125475, rewards:-29.379443359375, queue:0.9970899470899471, delay:0.11972337349382027, throughput:1315
+HELDOUT episode:30/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:299.80707148347426, rewards:-32.364444986979166, queue:1.1642857142857144, delay:0.13192865280877977, throughput:1301
+HELDOUT_MEAN episode:30/500, travel time:279.82383791477884 (n=3)
+episode:31/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:21.564170837402344, rewards:-32.16999782986111, queue:1.1441798941798942, delay:0.12248814497044477, throughput:1338
+episode:31/500, real avg travel time:284.5896860986547
+intersection:0, mean_episode_reward:-0.7688888311386108, mean_queue:0.2944444417953491
+intersection:1, mean_episode_reward:-0.3327777683734894, mean_queue:0.03333333507180214
+intersection:2, mean_episode_reward:-0.44833335280418396, mean_queue:0.06111111119389534
+intersection:3, mean_episode_reward:-3.2105553150177, mean_queue:1.8222222328186035
+intersection:4, mean_episode_reward:-1.3555554151535034, mean_queue:0.5277777910232544
+intersection:5, mean_episode_reward:-0.01222221739590168, mean_queue:0.15000000596046448
+intersection:6, mean_episode_reward:-0.2955555319786072, mean_queue:0.20555555820465088
+intersection:7, mean_episode_reward:-8.208333969116211, mean_queue:5.855555534362793
+intersection:8, mean_episode_reward:-0.8561111688613892, mean_queue:0.22777777910232544
+intersection:9, mean_episode_reward:-9.953333854675293, mean_queue:9.272222518920898
+intersection:10, mean_episode_reward:-0.6272224187850952, mean_queue:0.25
+intersection:11, mean_episode_reward:-0.15277782082557678, mean_queue:0.10555555671453476
+intersection:12, mean_episode_reward:0.5144447088241577, mean_queue:0.18888889253139496
+intersection:13, mean_episode_reward:-0.20999999344348907, mean_queue:0.4000000059604645
+intersection:14, mean_episode_reward:-1.4238886833190918, mean_queue:0.7888888716697693
+intersection:15, mean_episode_reward:2.0705552101135254, mean_queue:0.02777777798473835
+intersection:16, mean_episode_reward:-3.0488882064819336, mean_queue:1.2999999523162842
+intersection:17, mean_episode_reward:-0.8272225260734558, mean_queue:0.36666667461395264
+intersection:18, mean_episode_reward:-0.5077779293060303, mean_queue:0.1944444477558136
+intersection:19, mean_episode_reward:-0.47222229838371277, mean_queue:0.8666666746139526
+intersection:20, mean_episode_reward:-2.043332815170288, mean_queue:1.0888888835906982
+episode:32/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:22.020713806152344, rewards:-28.28388671875, queue:0.937037037037037, delay:0.12228353994864005, throughput:1477
+episode:32/500, real avg travel time:276.51387948544345
+intersection:0, mean_episode_reward:-0.7916666865348816, mean_queue:0.3222222328186035
+intersection:1, mean_episode_reward:-0.3711110055446625, mean_queue:0.09444444626569748
+intersection:2, mean_episode_reward:-0.40555545687675476, mean_queue:0.0055555556900799274
+intersection:3, mean_episode_reward:-5.095554828643799, mean_queue:3.7722222805023193
+intersection:4, mean_episode_reward:-1.407222032546997, mean_queue:0.3777777850627899
+intersection:5, mean_episode_reward:-0.013333320617675781, mean_queue:0.15555556118488312
+intersection:6, mean_episode_reward:-0.3049999177455902, mean_queue:0.18888889253139496
+intersection:7, mean_episode_reward:-7.122220993041992, mean_queue:4.777777671813965
+intersection:8, mean_episode_reward:-0.792222261428833, mean_queue:0.18888889253139496
+intersection:9, mean_episode_reward:-4.167778015136719, mean_queue:3.2166666984558105
+intersection:10, mean_episode_reward:-0.7300001382827759, mean_queue:0.32777777314186096
+intersection:11, mean_episode_reward:-0.14611117541790009, mean_queue:0.08888889104127884
+intersection:12, mean_episode_reward:0.40000003576278687, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.13611112534999847, mean_queue:0.3888888955116272
+intersection:14, mean_episode_reward:-1.8922219276428223, mean_queue:1.3277777433395386
+intersection:15, mean_episode_reward:1.815555453300476, mean_queue:0.0055555556900799274
+intersection:16, mean_episode_reward:-2.6322224140167236, mean_queue:1.1388888359069824
+intersection:17, mean_episode_reward:-0.8122221827507019, mean_queue:0.3499999940395355
+intersection:18, mean_episode_reward:-0.4727780222892761, mean_queue:0.16111111640930176
+intersection:19, mean_episode_reward:-0.38277775049209595, mean_queue:0.8277778029441833
+intersection:20, mean_episode_reward:-2.823333740234375, mean_queue:1.788888931274414
+episode:33/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:22.23645782470703, rewards:-41.84332953559028, queue:1.596825396825397, delay:0.13126903715587798, throughput:1344
+episode:33/500, real avg travel time:296.3385416666667
+intersection:0, mean_episode_reward:-0.8044445514678955, mean_queue:0.2944444417953491
+intersection:1, mean_episode_reward:-0.30444446206092834, mean_queue:0.07222222536802292
+intersection:2, mean_episode_reward:-0.3961111307144165, mean_queue:0.02777777798473835
+intersection:3, mean_episode_reward:-4.7672224044799805, mean_queue:3.3777778148651123
+intersection:4, mean_episode_reward:-1.3394445180892944, mean_queue:0.41111111640930176
+intersection:5, mean_episode_reward:-0.013888894580304623, mean_queue:0.18888889253139496
+intersection:6, mean_episode_reward:-0.33444446325302124, mean_queue:0.2611111104488373
+intersection:7, mean_episode_reward:-9.70888900756836, mean_queue:7.161110877990723
+intersection:8, mean_episode_reward:-0.8927779197692871, mean_queue:0.2944444417953491
+intersection:9, mean_episode_reward:-15.353888511657715, mean_queue:14.672222137451172
+intersection:10, mean_episode_reward:-0.6405555605888367, mean_queue:0.28333333134651184
+intersection:11, mean_episode_reward:-0.17555561661720276, mean_queue:0.1388888955116272
+intersection:12, mean_episode_reward:0.4011108875274658, mean_queue:0.18888889253139496
+intersection:13, mean_episode_reward:-0.33222219347953796, mean_queue:0.5777778029441833
+intersection:14, mean_episode_reward:-1.8461105823516846, mean_queue:1.2388888597488403
+intersection:15, mean_episode_reward:1.786666750907898, mean_queue:0.03333333507180214
+intersection:16, mean_episode_reward:-2.6105546951293945, mean_queue:1.2333333492279053
+intersection:17, mean_episode_reward:-0.773888885974884, mean_queue:0.35555556416511536
+intersection:18, mean_episode_reward:-0.6488891243934631, mean_queue:0.30000001192092896
+intersection:19, mean_episode_reward:-0.3266666531562805, mean_queue:0.8777777552604675
+intersection:20, mean_episode_reward:-2.76111102104187, mean_queue:1.5444444417953491
+episode:34/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:24.02497100830078, rewards:-28.689444986979165, queue:0.9653439153439154, delay:0.12146029194826802, throughput:1340
+episode:34/500, real avg travel time:307.48880597014926
+intersection:0, mean_episode_reward:-0.7499999403953552, mean_queue:0.23333333432674408
+intersection:1, mean_episode_reward:-0.23944438993930817, mean_queue:0.011111111380159855
+intersection:2, mean_episode_reward:-0.3527778089046478, mean_queue:0.0055555556900799274
+intersection:3, mean_episode_reward:-4.778889179229736, mean_queue:3.4777777194976807
+intersection:4, mean_episode_reward:-1.2894445657730103, mean_queue:0.5277777910232544
+intersection:5, mean_episode_reward:-0.021666668355464935, mean_queue:0.11666666716337204
+intersection:6, mean_episode_reward:-0.25833338499069214, mean_queue:0.13333334028720856
+intersection:7, mean_episode_reward:-8.192221641540527, mean_queue:5.75
+intersection:8, mean_episode_reward:-0.7783334255218506, mean_queue:0.17777778208255768
+intersection:9, mean_episode_reward:-4.964444637298584, mean_queue:4.038888931274414
+intersection:10, mean_episode_reward:-0.6683334112167358, mean_queue:0.2888889014720917
+intersection:11, mean_episode_reward:-0.12111113965511322, mean_queue:0.07222222536802292
+intersection:12, mean_episode_reward:0.4955556094646454, mean_queue:0.18333333730697632
+intersection:13, mean_episode_reward:-0.07388890534639359, mean_queue:0.4000000059604645
+intersection:14, mean_episode_reward:-1.7111109495162964, mean_queue:1.0944443941116333
+intersection:15, mean_episode_reward:1.9705557823181152, mean_queue:0.0055555556900799274
+intersection:16, mean_episode_reward:-2.8294451236724854, mean_queue:1.1111111640930176
+intersection:17, mean_episode_reward:-0.7755556106567383, mean_queue:0.28333333134651184
+intersection:18, mean_episode_reward:-0.5244446396827698, mean_queue:0.23333333432674408
+intersection:19, mean_episode_reward:-0.4994443356990814, mean_queue:0.8777777552604675
+intersection:20, mean_episode_reward:-2.3266661167144775, mean_queue:1.25
+episode:35/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:23.481630325317383, rewards:-40.48722601996528, queue:1.5693121693121692, delay:0.13545976265397652, throughput:1294
+episode:35/500, real avg travel time:296.65455950540957
+intersection:0, mean_episode_reward:-0.7800002098083496, mean_queue:0.2944444417953491
+intersection:1, mean_episode_reward:-0.2266666442155838, mean_queue:0.02777777798473835
+intersection:2, mean_episode_reward:-0.3533332049846649, mean_queue:0.0055555556900799274
+intersection:3, mean_episode_reward:-5.363333225250244, mean_queue:4.199999809265137
+intersection:4, mean_episode_reward:-1.0805556774139404, mean_queue:0.3444444537162781
+intersection:5, mean_episode_reward:-0.03166666254401207, mean_queue:0.1388888955116272
+intersection:6, mean_episode_reward:-0.2761112153530121, mean_queue:0.17222222685813904
+intersection:7, mean_episode_reward:-8.253889083862305, mean_queue:5.794444561004639
+intersection:8, mean_episode_reward:-0.820555567741394, mean_queue:0.24444444477558136
+intersection:9, mean_episode_reward:-12.884444236755371, mean_queue:11.983333587646484
+intersection:10, mean_episode_reward:-0.6850000619888306, mean_queue:0.33888888359069824
+intersection:11, mean_episode_reward:-0.0788889229297638, mean_queue:0.02222222276031971
+intersection:12, mean_episode_reward:0.47444432973861694, mean_queue:0.12222222238779068
+intersection:13, mean_episode_reward:-0.20944444835186005, mean_queue:0.3611111044883728
+intersection:14, mean_episode_reward:-1.8655552864074707, mean_queue:1.2055555582046509
+intersection:15, mean_episode_reward:1.6822221279144287, mean_queue:0.18333333730697632
+intersection:16, mean_episode_reward:-2.708333730697632, mean_queue:1.2055555582046509
+intersection:17, mean_episode_reward:-0.6416666507720947, mean_queue:0.21666666865348816
+intersection:18, mean_episode_reward:-0.4816667437553406, mean_queue:0.20000000298023224
+intersection:19, mean_episode_reward:-0.3944443166255951, mean_queue:0.8055555820465088
+intersection:20, mean_episode_reward:-5.508335113525391, mean_queue:5.088889122009277
+episode:36/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:23.322832107543945, rewards:-32.76777886284722, queue:1.1907407407407407, delay:0.12956791630497685, throughput:1318
+episode:36/500, real avg travel time:284.4992412746586
+intersection:0, mean_episode_reward:-0.8244446516036987, mean_queue:0.32777777314186096
+intersection:1, mean_episode_reward:-0.28277772665023804, mean_queue:0.07222222536802292
+intersection:2, mean_episode_reward:-0.41888877749443054, mean_queue:0.02777777798473835
+intersection:3, mean_episode_reward:-5.398333549499512, mean_queue:4.144444465637207
+intersection:4, mean_episode_reward:-1.028333306312561, mean_queue:0.31111112236976624
+intersection:5, mean_episode_reward:0.08055555820465088, mean_queue:0.12777778506278992
+intersection:6, mean_episode_reward:-0.3949998617172241, mean_queue:0.23333333432674408
+intersection:7, mean_episode_reward:-7.850555419921875, mean_queue:5.44444465637207
+intersection:8, mean_episode_reward:-0.733889102935791, mean_queue:0.17777778208255768
+intersection:9, mean_episode_reward:-7.354445457458496, mean_queue:6.438889026641846
+intersection:10, mean_episode_reward:-0.6344443559646606, mean_queue:0.27222222089767456
+intersection:11, mean_episode_reward:-0.13499999046325684, mean_queue:0.07222222536802292
+intersection:12, mean_episode_reward:0.5483333468437195, mean_queue:0.1388888955116272
+intersection:13, mean_episode_reward:-0.18611109256744385, mean_queue:0.44999998807907104
+intersection:14, mean_episode_reward:-1.6833339929580688, mean_queue:1.0777777433395386
+intersection:15, mean_episode_reward:1.69944429397583, mean_queue:0.17777778208255768
+intersection:16, mean_episode_reward:-2.64888858795166, mean_queue:1.0944443941116333
+intersection:17, mean_episode_reward:-0.6544442772865295, mean_queue:0.18333333730697632
+intersection:18, mean_episode_reward:-0.5433332920074463, mean_queue:0.23888888955116272
+intersection:19, mean_episode_reward:-0.48944443464279175, mean_queue:0.9388889074325562
+intersection:20, mean_episode_reward:-3.8344452381134033, mean_queue:3.055555582046509
+episode:37/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:22.589305877685547, rewards:-36.31277669270833, queue:1.406084656084656, delay:0.13636040258659887, throughput:1256
+episode:37/500, real avg travel time:293.97133757961785
+intersection:0, mean_episode_reward:-0.7838887572288513, mean_queue:0.2944444417953491
+intersection:1, mean_episode_reward:-0.30888885259628296, mean_queue:0.10555555671453476
+intersection:2, mean_episode_reward:-0.40833333134651184, mean_queue:0.0555555559694767
+intersection:3, mean_episode_reward:-7.045001983642578, mean_queue:6.044444561004639
+intersection:4, mean_episode_reward:-1.2122223377227783, mean_queue:0.3499999940395355
+intersection:5, mean_episode_reward:-0.03999999538064003, mean_queue:0.13333334028720856
+intersection:6, mean_episode_reward:-0.24555552005767822, mean_queue:0.13333334028720856
+intersection:7, mean_episode_reward:-6.869444370269775, mean_queue:4.5
+intersection:8, mean_episode_reward:-0.7611112594604492, mean_queue:0.16111111640930176
+intersection:9, mean_episode_reward:-5.264999866485596, mean_queue:4.333333492279053
+intersection:10, mean_episode_reward:-0.6588887572288513, mean_queue:0.27222222089767456
+intersection:11, mean_episode_reward:-0.10888894647359848, mean_queue:0.05000000074505806
+intersection:12, mean_episode_reward:0.4477778971195221, mean_queue:0.1944444477558136
+intersection:13, mean_episode_reward:-0.06055557355284691, mean_queue:0.3611111044883728
+intersection:14, mean_episode_reward:-1.5561109781265259, mean_queue:0.8722222447395325
+intersection:15, mean_episode_reward:1.9344441890716553, mean_queue:0.03333333507180214
+intersection:16, mean_episode_reward:-2.9233336448669434, mean_queue:1.2999999523162842
+intersection:17, mean_episode_reward:-0.6999998688697815, mean_queue:0.24444444477558136
+intersection:18, mean_episode_reward:-0.5033335089683533, mean_queue:0.1944444477558136
+intersection:19, mean_episode_reward:-0.3299999237060547, mean_queue:0.7277777791023254
+intersection:20, mean_episode_reward:-8.914443969726562, mean_queue:9.166666984558105
+episode:38/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:22.356443405151367, rewards:-41.538335503472226, queue:1.5687830687830688, delay:0.12887451333343666, throughput:1348
+episode:38/500, real avg travel time:305.0207715133531
+intersection:0, mean_episode_reward:-0.6316665410995483, mean_queue:0.23888888955116272
+intersection:1, mean_episode_reward:-0.21222224831581116, mean_queue:0.0555555559694767
+intersection:2, mean_episode_reward:-0.35722219944000244, mean_queue:0.0
+intersection:3, mean_episode_reward:-4.285554885864258, mean_queue:2.894444465637207
+intersection:4, mean_episode_reward:-1.2066664695739746, mean_queue:0.2777777910232544
+intersection:5, mean_episode_reward:-0.03666666895151138, mean_queue:0.16111111640930176
+intersection:6, mean_episode_reward:-0.296111136674881, mean_queue:0.1944444477558136
+intersection:7, mean_episode_reward:-9.201663970947266, mean_queue:6.777777671813965
+intersection:8, mean_episode_reward:-0.7422221899032593, mean_queue:0.14444445073604584
+intersection:9, mean_episode_reward:-17.242780685424805, mean_queue:16.13888931274414
+intersection:10, mean_episode_reward:-0.5461110472679138, mean_queue:0.2222222238779068
+intersection:11, mean_episode_reward:-0.14666670560836792, mean_queue:0.10555555671453476
+intersection:12, mean_episode_reward:0.40500009059906006, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.07222224026918411, mean_queue:0.33888888359069824
+intersection:14, mean_episode_reward:-1.9127787351608276, mean_queue:1.2999999523162842
+intersection:15, mean_episode_reward:1.815000295639038, mean_queue:0.03333333507180214
+intersection:16, mean_episode_reward:-2.748332977294922, mean_queue:1.255555510520935
+intersection:17, mean_episode_reward:-0.5849999189376831, mean_queue:0.17777778208255768
+intersection:18, mean_episode_reward:-0.5116667151451111, mean_queue:0.20555555820465088
+intersection:19, mean_episode_reward:-0.34999993443489075, mean_queue:0.8444444537162781
+intersection:20, mean_episode_reward:-2.6727781295776367, mean_queue:1.4055556058883667
+episode:39/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:21.097373962402344, rewards:-32.296666124131946, queue:1.2373015873015873, delay:0.12631370907738096, throughput:1225
+episode:39/500, real avg travel time:269.5257142857143
+intersection:0, mean_episode_reward:-0.7872222065925598, mean_queue:0.3055555522441864
+intersection:1, mean_episode_reward:-0.27666667103767395, mean_queue:0.06666667014360428
+intersection:2, mean_episode_reward:-0.30944445729255676, mean_queue:0.0055555556900799274
+intersection:3, mean_episode_reward:-3.462778329849243, mean_queue:2.211111068725586
+intersection:4, mean_episode_reward:-1.4233330488204956, mean_queue:0.5833333134651184
+intersection:5, mean_episode_reward:0.0066666631028056145, mean_queue:0.07222222536802292
+intersection:6, mean_episode_reward:-0.2822222113609314, mean_queue:0.15555556118488312
+intersection:7, mean_episode_reward:-11.005555152893066, mean_queue:8.86111068725586
+intersection:8, mean_episode_reward:-0.901111364364624, mean_queue:0.2888889014720917
+intersection:9, mean_episode_reward:-7.684445381164551, mean_queue:6.705555438995361
+intersection:10, mean_episode_reward:-0.7916669249534607, mean_queue:0.35555556416511536
+intersection:11, mean_episode_reward:-0.15555556118488312, mean_queue:0.11666666716337204
+intersection:12, mean_episode_reward:0.4261111915111542, mean_queue:0.1944444477558136
+intersection:13, mean_episode_reward:-0.18000000715255737, mean_queue:0.41111111640930176
+intersection:14, mean_episode_reward:-1.9561114311218262, mean_queue:1.4388889074325562
+intersection:15, mean_episode_reward:1.7533328533172607, mean_queue:0.0055555556900799274
+intersection:16, mean_episode_reward:-2.3972222805023193, mean_queue:0.8722222447395325
+intersection:17, mean_episode_reward:-0.7055556178092957, mean_queue:0.27222222089767456
+intersection:18, mean_episode_reward:-0.44944441318511963, mean_queue:0.17222222685813904
+intersection:19, mean_episode_reward:1.1150000095367432, mean_queue:1.1111111640930176
+intersection:20, mean_episode_reward:-2.829444169998169, mean_queue:1.7777777910232544
+episode:40/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:21.375774383544922, rewards:-33.50111219618056, queue:1.225132275132275, delay:0.12223958010395998, throughput:1280
+episode:40/500, real avg travel time:298.496875
+intersection:0, mean_episode_reward:-0.6216667890548706, mean_queue:0.18888889253139496
+intersection:1, mean_episode_reward:-0.2661111056804657, mean_queue:0.0555555559694767
+intersection:2, mean_episode_reward:-0.33777767419815063, mean_queue:0.0
+intersection:3, mean_episode_reward:-3.5199995040893555, mean_queue:2.2166666984558105
+intersection:4, mean_episode_reward:-0.9672219753265381, mean_queue:0.23333333432674408
+intersection:5, mean_episode_reward:0.06611111760139465, mean_queue:0.11666666716337204
+intersection:6, mean_episode_reward:-0.35555559396743774, mean_queue:0.22777777910232544
+intersection:7, mean_episode_reward:-8.208334922790527, mean_queue:5.955555438995361
+intersection:8, mean_episode_reward:-0.7494444251060486, mean_queue:0.16111111640930176
+intersection:9, mean_episode_reward:-11.49444580078125, mean_queue:10.683333396911621
+intersection:10, mean_episode_reward:-0.6850000023841858, mean_queue:0.3166666626930237
+intersection:11, mean_episode_reward:-0.09944447129964828, mean_queue:0.05000000074505806
+intersection:12, mean_episode_reward:0.5033332705497742, mean_queue:0.18333333730697632
+intersection:13, mean_episode_reward:-0.1366666853427887, mean_queue:0.3333333432674408
+intersection:14, mean_episode_reward:-1.6833330392837524, mean_queue:1.1222221851348877
+intersection:15, mean_episode_reward:1.8705551624298096, mean_queue:0.02222222276031971
+intersection:16, mean_episode_reward:-2.858889102935791, mean_queue:1.25
+intersection:17, mean_episode_reward:-0.6383333802223206, mean_queue:0.23888888955116272
+intersection:18, mean_episode_reward:-0.4638890027999878, mean_queue:0.16111111640930176
+intersection:19, mean_episode_reward:-0.37666669487953186, mean_queue:0.7444444298744202
+intersection:20, mean_episode_reward:-2.4783334732055664, mean_queue:1.4666666984558105
+HELDOUT episode:40/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:278.65810711665443, rewards:-34.883327907986114, queue:1.2973544973544973, delay:0.13057025727771576, throughput:1363
+HELDOUT episode:40/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:269.05677966101695, rewards:-36.702777777777776, queue:1.4396825396825397, delay:0.12589984873615245, throughput:1180
+HELDOUT episode:40/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:275.2164804469274, rewards:-26.679448784722222, queue:0.8716931216931217, delay:0.12018693389085235, throughput:1432
+HELDOUT_MEAN episode:40/500, travel time:274.3104557415329 (n=3)
+episode:41/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:20.016071319580078, rewards:-30.25278049045139, queue:1.0518518518518518, delay:0.1243664615368717, throughput:1363
+episode:41/500, real avg travel time:307.46294937637566
+intersection:0, mean_episode_reward:-0.8061113357543945, mean_queue:0.3499999940395355
+intersection:1, mean_episode_reward:-0.33888888359069824, mean_queue:0.06111111119389534
+intersection:2, mean_episode_reward:-0.39444443583488464, mean_queue:0.02222222276031971
+intersection:3, mean_episode_reward:-3.8566668033599854, mean_queue:2.5611112117767334
+intersection:4, mean_episode_reward:-1.3155559301376343, mean_queue:0.5277777910232544
+intersection:5, mean_episode_reward:0.0055555556900799274, mean_queue:0.1388888955116272
+intersection:6, mean_episode_reward:-0.3094446063041687, mean_queue:0.2222222238779068
+intersection:7, mean_episode_reward:-7.881667613983154, mean_queue:5.411110877990723
+intersection:8, mean_episode_reward:-0.8516666889190674, mean_queue:0.22777777910232544
+intersection:9, mean_episode_reward:-6.283333778381348, mean_queue:5.511111259460449
+intersection:10, mean_episode_reward:-0.6916667819023132, mean_queue:0.23888888955116272
+intersection:11, mean_episode_reward:-0.14500005543231964, mean_queue:0.10000000149011612
+intersection:12, mean_episode_reward:0.5027778148651123, mean_queue:0.21666666865348816
+intersection:13, mean_episode_reward:-0.18888889253139496, mean_queue:0.41111111640930176
+intersection:14, mean_episode_reward:-2.1322221755981445, mean_queue:1.538888931274414
+intersection:15, mean_episode_reward:1.8733336925506592, mean_queue:0.17222222685813904
+intersection:16, mean_episode_reward:-2.8399996757507324, mean_queue:1.1222221851348877
+intersection:17, mean_episode_reward:-0.6977778673171997, mean_queue:0.24444444477558136
+intersection:18, mean_episode_reward:-0.48888885974884033, mean_queue:0.15555556118488312
+intersection:19, mean_episode_reward:-0.5122222304344177, mean_queue:0.8777777552604675
+intersection:20, mean_episode_reward:-2.90000057220459, mean_queue:1.9777777194976807
+episode:42/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:19.21754264831543, rewards:-32.79388563368055, queue:1.148941798941799, delay:0.12304706876240079, throughput:1424
+episode:42/500, real avg travel time:275.57794943820227
+intersection:0, mean_episode_reward:-0.7227779030799866, mean_queue:0.24444444477558136
+intersection:1, mean_episode_reward:-0.3144444227218628, mean_queue:0.0555555559694767
+intersection:2, mean_episode_reward:-0.43222224712371826, mean_queue:0.02777777798473835
+intersection:3, mean_episode_reward:-4.853333950042725, mean_queue:3.4777777194976807
+intersection:4, mean_episode_reward:-1.3044441938400269, mean_queue:0.32777777314186096
+intersection:5, mean_episode_reward:-0.05944446474313736, mean_queue:0.13333334028720856
+intersection:6, mean_episode_reward:-0.25444450974464417, mean_queue:0.1388888955116272
+intersection:7, mean_episode_reward:-6.907778739929199, mean_queue:4.583333492279053
+intersection:8, mean_episode_reward:-0.7955557703971863, mean_queue:0.18888889253139496
+intersection:9, mean_episode_reward:-9.094443321228027, mean_queue:8.216666221618652
+intersection:10, mean_episode_reward:-0.7011111378669739, mean_queue:0.31111112236976624
+intersection:11, mean_episode_reward:-0.1483333855867386, mean_queue:0.09444444626569748
+intersection:12, mean_episode_reward:0.39111125469207764, mean_queue:0.1944444477558136
+intersection:13, mean_episode_reward:-0.1605554223060608, mean_queue:0.39444443583488464
+intersection:14, mean_episode_reward:-1.6777777671813965, mean_queue:1.038888931274414
+intersection:15, mean_episode_reward:1.8572219610214233, mean_queue:0.011111111380159855
+intersection:16, mean_episode_reward:-2.867222309112549, mean_queue:1.350000023841858
+intersection:17, mean_episode_reward:-0.727222204208374, mean_queue:0.2777777910232544
+intersection:18, mean_episode_reward:-0.4933336079120636, mean_queue:0.18333333730697632
+intersection:19, mean_episode_reward:-0.412777841091156, mean_queue:0.855555534362793
+intersection:20, mean_episode_reward:-3.1150007247924805, mean_queue:2.0222222805023193
+episode:43/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:19.682941436767578, rewards:-37.176112196180554, queue:1.3862433862433863, delay:0.13280895576275215, throughput:1363
+episode:43/500, real avg travel time:299.03008070432867
+intersection:0, mean_episode_reward:-0.8583335280418396, mean_queue:0.3499999940395355
+intersection:1, mean_episode_reward:-0.27833330631256104, mean_queue:0.04444444552063942
+intersection:2, mean_episode_reward:-0.4099999666213989, mean_queue:0.04444444552063942
+intersection:3, mean_episode_reward:-5.810555458068848, mean_queue:4.377777576446533
+intersection:4, mean_episode_reward:-1.3077775239944458, mean_queue:0.42222222685813904
+intersection:5, mean_episode_reward:-0.08055555820465088, mean_queue:0.21666666865348816
+intersection:6, mean_episode_reward:-0.27055561542510986, mean_queue:0.23888888955116272
+intersection:7, mean_episode_reward:-7.838334083557129, mean_queue:5.255555629730225
+intersection:8, mean_episode_reward:-0.7983332872390747, mean_queue:0.21111111342906952
+intersection:9, mean_episode_reward:-8.1577787399292, mean_queue:7.188889026641846
+intersection:10, mean_episode_reward:-0.7111110687255859, mean_queue:0.3222222328186035
+intersection:11, mean_episode_reward:-0.19166670739650726, mean_queue:0.15000000596046448
+intersection:12, mean_episode_reward:0.42499983310699463, mean_queue:0.15555556118488312
+intersection:13, mean_episode_reward:-0.09888892620801926, mean_queue:0.3499999940395355
+intersection:14, mean_episode_reward:-2.108888864517212, mean_queue:1.5277777910232544
+intersection:15, mean_episode_reward:1.7288891077041626, mean_queue:0.02777777798473835
+intersection:16, mean_episode_reward:-2.6399996280670166, mean_queue:1.2222222089767456
+intersection:17, mean_episode_reward:-0.6783334612846375, mean_queue:0.23888888955116272
+intersection:18, mean_episode_reward:-0.6405557990074158, mean_queue:0.2888889014720917
+intersection:19, mean_episode_reward:-0.2805555462837219, mean_queue:0.8277778029441833
+intersection:20, mean_episode_reward:-6.169445991516113, mean_queue:5.650000095367432
+episode:44/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:18.969942092895508, rewards:-30.66721733940972, queue:1.0560846560846562, delay:0.11727311068741733, throughput:1374
+episode:44/500, real avg travel time:281.7227074235808
+intersection:0, mean_episode_reward:-0.7988887429237366, mean_queue:0.30000001192092896
+intersection:1, mean_episode_reward:-0.24666664004325867, mean_queue:0.02777777798473835
+intersection:2, mean_episode_reward:-0.4094444215297699, mean_queue:0.02777777798473835
+intersection:3, mean_episode_reward:-3.2683324813842773, mean_queue:1.894444465637207
+intersection:4, mean_episode_reward:-1.2511109113693237, mean_queue:0.4277777671813965
+intersection:5, mean_episode_reward:-0.0416666679084301, mean_queue:0.18333333730697632
+intersection:6, mean_episode_reward:-0.2916666269302368, mean_queue:0.20555555820465088
+intersection:7, mean_episode_reward:-8.619997024536133, mean_queue:6.188889026641846
+intersection:8, mean_episode_reward:-0.7177778482437134, mean_queue:0.10000000149011612
+intersection:9, mean_episode_reward:-7.836112022399902, mean_queue:6.922222137451172
+intersection:10, mean_episode_reward:-0.6516667604446411, mean_queue:0.2777777910232544
+intersection:11, mean_episode_reward:-0.11111114174127579, mean_queue:0.05000000074505806
+intersection:12, mean_episode_reward:0.46777796745300293, mean_queue:0.1944444477558136
+intersection:13, mean_episode_reward:-0.04777777940034866, mean_queue:0.3777777850627899
+intersection:14, mean_episode_reward:-1.7577780485153198, mean_queue:1.0833333730697632
+intersection:15, mean_episode_reward:1.8605554103851318, mean_queue:0.18333333730697632
+intersection:16, mean_episode_reward:-3.0416667461395264, mean_queue:1.355555534362793
+intersection:17, mean_episode_reward:-0.6766666769981384, mean_queue:0.2222222238779068
+intersection:18, mean_episode_reward:-0.524444580078125, mean_queue:0.23333333432674408
+intersection:19, mean_episode_reward:-0.3866667151451111, mean_queue:0.7611111402511597
+intersection:20, mean_episode_reward:-2.3161113262176514, mean_queue:1.1611111164093018
+episode:45/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:19.385343551635742, rewards:-37.116107855902776, queue:1.3714285714285714, delay:0.12170103365782077, throughput:1365
+episode:45/500, real avg travel time:276.7164835164835
+intersection:0, mean_episode_reward:-0.7455556988716125, mean_queue:0.27222222089767456
+intersection:1, mean_episode_reward:-0.24333330988883972, mean_queue:0.04444444552063942
+intersection:2, mean_episode_reward:-0.37666669487953186, mean_queue:0.02222222276031971
+intersection:3, mean_episode_reward:-3.323888063430786, mean_queue:1.9833333492279053
+intersection:4, mean_episode_reward:-1.0033332109451294, mean_queue:0.24444444477558136
+intersection:5, mean_episode_reward:-0.06555555015802383, mean_queue:0.11666666716337204
+intersection:6, mean_episode_reward:-0.25722217559814453, mean_queue:0.16111111640930176
+intersection:7, mean_episode_reward:-8.404998779296875, mean_queue:6.027777671813965
+intersection:8, mean_episode_reward:-0.7638891339302063, mean_queue:0.16111111640930176
+intersection:9, mean_episode_reward:-13.722220420837402, mean_queue:12.966666221618652
+intersection:10, mean_episode_reward:-0.6638889908790588, mean_queue:0.33888888359069824
+intersection:11, mean_episode_reward:-0.09000002592802048, mean_queue:0.03888889029622078
+intersection:12, mean_episode_reward:0.41277778148651123, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.6622222661972046, mean_queue:0.8500000238418579
+intersection:14, mean_episode_reward:-2.0611116886138916, mean_queue:1.355555534362793
+intersection:15, mean_episode_reward:1.6888893842697144, mean_queue:0.1944444477558136
+intersection:16, mean_episode_reward:-2.917778253555298, mean_queue:1.4111111164093018
+intersection:17, mean_episode_reward:-0.5999997854232788, mean_queue:0.17222222685813904
+intersection:18, mean_episode_reward:-0.4672221839427948, mean_queue:0.17222222685813904
+intersection:19, mean_episode_reward:-0.4488888084888458, mean_queue:0.894444465637207
+intersection:20, mean_episode_reward:-2.3999996185302734, mean_queue:1.2000000476837158
+episode:46/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:18.31485939025879, rewards:-35.96499565972222, queue:1.33994708994709, delay:0.1318516968419312, throughput:1301
+episode:46/500, real avg travel time:317.0530361260569
+intersection:0, mean_episode_reward:-0.7955551743507385, mean_queue:0.31111112236976624
+intersection:1, mean_episode_reward:-0.2572222054004669, mean_queue:0.05000000074505806
+intersection:2, mean_episode_reward:-0.4072222113609314, mean_queue:0.06666667014360428
+intersection:3, mean_episode_reward:-5.911665916442871, mean_queue:4.594444274902344
+intersection:4, mean_episode_reward:-1.0533332824707031, mean_queue:0.31111112236976624
+intersection:5, mean_episode_reward:-0.04333331808447838, mean_queue:0.16111111640930176
+intersection:6, mean_episode_reward:-0.26944443583488464, mean_queue:0.15555556118488312
+intersection:7, mean_episode_reward:-9.941667556762695, mean_queue:7.388888835906982
+intersection:8, mean_episode_reward:-0.7438890337944031, mean_queue:0.16111111640930176
+intersection:9, mean_episode_reward:-5.404999732971191, mean_queue:4.47777795791626
+intersection:10, mean_episode_reward:-0.6933333277702332, mean_queue:0.30000001192092896
+intersection:11, mean_episode_reward:-0.10388891398906708, mean_queue:0.04444444552063942
+intersection:12, mean_episode_reward:0.49277788400650024, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.041666675359010696, mean_queue:0.3611111044883728
+intersection:14, mean_episode_reward:-1.9866670370101929, mean_queue:1.4833333492279053
+intersection:15, mean_episode_reward:1.6661114692687988, mean_queue:0.18888889253139496
+intersection:16, mean_episode_reward:-2.615555763244629, mean_queue:1.0611110925674438
+intersection:17, mean_episode_reward:-0.6783332228660583, mean_queue:0.18888889253139496
+intersection:18, mean_episode_reward:-0.5300000905990601, mean_queue:0.21666666865348816
+intersection:19, mean_episode_reward:-0.18888889253139496, mean_queue:0.7888888716697693
+intersection:20, mean_episode_reward:-6.457221031188965, mean_queue:5.655555725097656
+episode:47/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:18.801225662231445, rewards:-30.513335503472224, queue:1.0380952380952382, delay:0.12224222819010416, throughput:1410
+episode:47/500, real avg travel time:295.3595744680851
+intersection:0, mean_episode_reward:-0.7705557346343994, mean_queue:0.28333333134651184
+intersection:1, mean_episode_reward:-0.3033333122730255, mean_queue:0.0833333358168602
+intersection:2, mean_episode_reward:-0.38944438099861145, mean_queue:0.01666666753590107
+intersection:3, mean_episode_reward:-4.976109981536865, mean_queue:3.5166666507720947
+intersection:4, mean_episode_reward:-1.165555715560913, mean_queue:0.2777777910232544
+intersection:5, mean_episode_reward:-0.002777779707685113, mean_queue:0.12777778506278992
+intersection:6, mean_episode_reward:-0.286111056804657, mean_queue:0.20555555820465088
+intersection:7, mean_episode_reward:-8.093889236450195, mean_queue:5.650000095367432
+intersection:8, mean_episode_reward:-0.7588889002799988, mean_queue:0.1666666716337204
+intersection:9, mean_episode_reward:-5.9416680335998535, mean_queue:4.900000095367432
+intersection:10, mean_episode_reward:-0.6844444870948792, mean_queue:0.2944444417953491
+intersection:11, mean_episode_reward:-0.1322222799062729, mean_queue:0.0833333358168602
+intersection:12, mean_episode_reward:0.45111092925071716, mean_queue:0.1944444477558136
+intersection:13, mean_episode_reward:-0.0438888743519783, mean_queue:0.4000000059604645
+intersection:14, mean_episode_reward:-1.9000002145767212, mean_queue:1.244444489479065
+intersection:15, mean_episode_reward:1.9272223711013794, mean_queue:0.03888889029622078
+intersection:16, mean_episode_reward:-2.95111083984375, mean_queue:1.3166667222976685
+intersection:17, mean_episode_reward:-0.7511110901832581, mean_queue:0.28333333134651184
+intersection:18, mean_episode_reward:-0.5072222352027893, mean_queue:0.21111111342906952
+intersection:19, mean_episode_reward:-0.4383333921432495, mean_queue:0.8333333134651184
+intersection:20, mean_episode_reward:-2.794999599456787, mean_queue:1.6722222566604614
+episode:48/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:18.1944637298584, rewards:-40.30055338541667, queue:1.5656084656084657, delay:0.13042177069124092, throughput:1236
+episode:48/500, real avg travel time:299.77831715210357
+intersection:0, mean_episode_reward:-0.6294441819190979, mean_queue:0.2222222238779068
+intersection:1, mean_episode_reward:-0.217777818441391, mean_queue:0.06111111119389534
+intersection:2, mean_episode_reward:-0.3555555045604706, mean_queue:0.0
+intersection:3, mean_episode_reward:-8.598332405090332, mean_queue:7.416666507720947
+intersection:4, mean_episode_reward:-1.1683331727981567, mean_queue:0.25555557012557983
+intersection:5, mean_episode_reward:-0.054444435983896255, mean_queue:0.16111111640930176
+intersection:6, mean_episode_reward:-0.28999993205070496, mean_queue:0.20000000298023224
+intersection:7, mean_episode_reward:-8.366667747497559, mean_queue:5.844444274902344
+intersection:8, mean_episode_reward:-0.7738890051841736, mean_queue:0.1944444477558136
+intersection:9, mean_episode_reward:-4.108888626098633, mean_queue:3.094444513320923
+intersection:10, mean_episode_reward:-0.6355555653572083, mean_queue:0.3222222328186035
+intersection:11, mean_episode_reward:-0.1350000649690628, mean_queue:0.0833333358168602
+intersection:12, mean_episode_reward:0.41222232580184937, mean_queue:0.18333333730697632
+intersection:13, mean_episode_reward:-0.01722221076488495, mean_queue:0.2666666805744171
+intersection:14, mean_episode_reward:-2.0300004482269287, mean_queue:1.3611111640930176
+intersection:15, mean_episode_reward:1.8727779388427734, mean_queue:0.011111111380159855
+intersection:16, mean_episode_reward:-2.6372222900390625, mean_queue:1.144444465637207
+intersection:17, mean_episode_reward:-0.5472222566604614, mean_queue:0.17222222685813904
+intersection:18, mean_episode_reward:-0.5166666507720947, mean_queue:0.20000000298023224
+intersection:19, mean_episode_reward:-0.31833335757255554, mean_queue:0.8166666626930237
+intersection:20, mean_episode_reward:-11.184998512268066, mean_queue:10.866666793823242
+episode:49/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:19.000076293945312, rewards:-34.541110568576386, queue:1.266931216931217, delay:0.12631729368179564, throughput:1354
+episode:49/500, real avg travel time:296.0147710487445
+intersection:0, mean_episode_reward:-0.7861111760139465, mean_queue:0.28333333134651184
+intersection:1, mean_episode_reward:-0.24444442987442017, mean_queue:0.011111111380159855
+intersection:2, mean_episode_reward:-0.3427777886390686, mean_queue:0.0055555556900799274
+intersection:3, mean_episode_reward:-3.676109552383423, mean_queue:2.405555486679077
+intersection:4, mean_episode_reward:-1.3205559253692627, mean_queue:0.42222222685813904
+intersection:5, mean_episode_reward:0.0072222207672894, mean_queue:0.10000000149011612
+intersection:6, mean_episode_reward:-0.3022221624851227, mean_queue:0.1944444477558136
+intersection:7, mean_episode_reward:-8.663333892822266, mean_queue:6.25
+intersection:8, mean_episode_reward:-0.8466663956642151, mean_queue:0.18333333730697632
+intersection:9, mean_episode_reward:-9.070555686950684, mean_queue:8.061111450195312
+intersection:10, mean_episode_reward:-0.8272223472595215, mean_queue:0.3611111044883728
+intersection:11, mean_episode_reward:-0.12888893485069275, mean_queue:0.06111111119389534
+intersection:12, mean_episode_reward:0.4150000810623169, mean_queue:0.1944444477558136
+intersection:13, mean_episode_reward:-0.27166664600372314, mean_queue:0.5222222208976746
+intersection:14, mean_episode_reward:-2.1727778911590576, mean_queue:1.5222222805023193
+intersection:15, mean_episode_reward:1.8394442796707153, mean_queue:0.01666666753590107
+intersection:16, mean_episode_reward:-2.5033328533172607, mean_queue:1.0333333015441895
+intersection:17, mean_episode_reward:-0.7472220659255981, mean_queue:0.3166666626930237
+intersection:18, mean_episode_reward:-0.45722225308418274, mean_queue:0.17222222685813904
+intersection:19, mean_episode_reward:0.186111181974411, mean_queue:0.8833333253860474
+intersection:20, mean_episode_reward:-4.627777099609375, mean_queue:3.605555534362793
+episode:50/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:19.875747680664062, rewards:-35.24055718315972, queue:1.3021164021164022, delay:0.1283204336015005, throughput:1282
+episode:50/500, real avg travel time:314.07878315132604
+intersection:0, mean_episode_reward:-0.6316666603088379, mean_queue:0.1944444477558136
+intersection:1, mean_episode_reward:-0.2611111104488373, mean_queue:0.0555555559694767
+intersection:2, mean_episode_reward:-0.3588888943195343, mean_queue:0.01666666753590107
+intersection:3, mean_episode_reward:-6.288333415985107, mean_queue:5.044444561004639
+intersection:4, mean_episode_reward:-0.9961108565330505, mean_queue:0.25
+intersection:5, mean_episode_reward:0.10777778923511505, mean_queue:0.11666666716337204
+intersection:6, mean_episode_reward:-0.3994443714618683, mean_queue:0.24444444477558136
+intersection:7, mean_episode_reward:-8.161111831665039, mean_queue:5.650000095367432
+intersection:8, mean_episode_reward:-0.7544445395469666, mean_queue:0.15555556118488312
+intersection:9, mean_episode_reward:-5.945555210113525, mean_queue:4.97777795791626
+intersection:10, mean_episode_reward:-0.7422220706939697, mean_queue:0.3444444537162781
+intersection:11, mean_episode_reward:-0.11000005155801773, mean_queue:0.05000000074505806
+intersection:12, mean_episode_reward:0.48777782917022705, mean_queue:0.17222222685813904
+intersection:13, mean_episode_reward:-0.17000003159046173, mean_queue:0.3777777850627899
+intersection:14, mean_episode_reward:-2.1538891792297363, mean_queue:1.505555510520935
+intersection:15, mean_episode_reward:1.8511112928390503, mean_queue:0.0
+intersection:16, mean_episode_reward:-2.9244446754455566, mean_queue:1.3277777433395386
+intersection:17, mean_episode_reward:-0.6005555391311646, mean_queue:0.1944444477558136
+intersection:18, mean_episode_reward:-0.4866669476032257, mean_queue:0.20555555820465088
+intersection:19, mean_episode_reward:-0.5005553960800171, mean_queue:0.8166666626930237
+intersection:20, mean_episode_reward:-6.2022223472595215, mean_queue:5.644444465637207
+HELDOUT episode:50/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:295.74057649667407, rewards:-36.06445041232639, queue:1.3291005291005291, delay:0.1277240167849909, throughput:1353
+HELDOUT episode:50/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:297.0926966292135, rewards:-35.221110026041664, queue:1.2711640211640212, delay:0.12327156672402034, throughput:1424
+HELDOUT episode:50/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:299.78650137741045, rewards:-33.47778049045139, queue:1.1962962962962962, delay:0.13241750727254878, throughput:1452
+HELDOUT_MEAN episode:50/500, travel time:297.53992483443267 (n=3)
+early_stop at episode 50/500 (best ATT=258.95 at episode 20, patience=3)
+saved final checkpoint from best episode 20 (ATT=258.95) as episode 500
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:251.23886328725038, rewards:-33.229999457465276, queue:1.2153439153439154, delay:0.13026345873635914, throughput:1302
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:263.1186046511628, rewards:-36.38555230034722, queue:1.367989417989418, delay:0.13398498858093585, throughput:1290
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:262.49691358024694, rewards:-41.49388834635417, queue:1.6423280423280424, delay:0.1375770851417824, throughput:1296
+HELDOUT_MEAN episode:500/500, travel time:258.95146050622003 (n=3)
+Total time taken: 697.3678715229034

@@ -1,0 +1,18 @@
+early_stop enabled: min_episodes=3, max_episodes=8, patience=2, min_delta=0.0000, metric=test
+step:600/600, q_loss:1963.445556640625, rewards:-88.05249837239583, queue:59.75, delay:0.642223866780599, throughput:205
+episode:0/8, real avg travel time:99.10731707317073
+intersection:0, mean_episode_reward:-88.05249786376953, mean_queue:59.75
+Test step:0/8, travel time :52.95180722891566, rewards:-87.52998860677083, queue:59.266666666666666, delay:0.5967559178670248, throughput:166
+new best ATT=52.95 at episode 0 (metric=test)
+step:600/600, q_loss:2168.34814453125, rewards:-75.3625, queue:50.96666666666667, delay:0.44774405161539715, throughput:237
+episode:1/8, real avg travel time:58.94092827004219
+intersection:0, mean_episode_reward:-75.36250305175781, mean_queue:50.96666717529297
+Test step:1/8, travel time :103.8502994011976, rewards:-106.12250162760417, queue:71.51666666666667, delay:0.6447353998819987, throughput:167
+step:600/600, q_loss:2274.68896484375, rewards:-109.17250162760416, queue:73.65, delay:0.6603214263916015, throughput:159
+episode:2/8, real avg travel time:109.82389937106919
+intersection:0, mean_episode_reward:-109.17250061035156, mean_queue:73.6500015258789
+Test step:2/8, travel time :53.76744186046512, rewards:-88.23499348958333, queue:59.6, delay:0.6321526845296224, throughput:172
+early_stop at episode 2/8 (best ATT=52.95 at episode 0, patience=2)
+saved final checkpoint from best episode 0 (ATT=52.95) as episode 8
+Final Travel Time is 73.7353, mean rewards: -95.1675, queue: 64.3833, delay: 0.6160, throughput: 170
+Total time taken: 102.69636583328247

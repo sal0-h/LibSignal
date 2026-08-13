@@ -1,0 +1,756 @@
+early_stop enabled: min_episodes=20, max_episodes=2000, patience=20, min_delta=0.0100, metric=test
+step:3600/3600, q_loss:0, rewards:-133.40721571180555, queue:6.253174603174603, delay:0.2718889185991237, throughput:3398
+episode:0/2000, real avg travel time:491.5344320188346
+intersection:0, mean_episode_reward:-0.8230559229850769, mean_queue:0.6805555820465088
+intersection:1, mean_episode_reward:-14.748332023620605, mean_queue:12.469444274902344
+intersection:2, mean_episode_reward:-3.32944393157959, mean_queue:2.8388888835906982
+intersection:3, mean_episode_reward:-16.809438705444336, mean_queue:15.449999809265137
+intersection:4, mean_episode_reward:-34.77972412109375, mean_queue:33.11666488647461
+intersection:5, mean_episode_reward:-0.8433334231376648, mean_queue:1.6333333253860474
+intersection:6, mean_episode_reward:-7.999446392059326, mean_queue:7.68055534362793
+intersection:7, mean_episode_reward:-5.257500171661377, mean_queue:4.313889026641846
+intersection:8, mean_episode_reward:-2.611388921737671, mean_queue:1.6777777671813965
+intersection:9, mean_episode_reward:-7.777774333953857, mean_queue:6.925000190734863
+intersection:10, mean_episode_reward:-3.5988895893096924, mean_queue:3.008333444595337
+intersection:11, mean_episode_reward:-1.9569449424743652, mean_queue:1.8055555820465088
+intersection:12, mean_episode_reward:-1.7980554103851318, mean_queue:3.299999952316284
+intersection:13, mean_episode_reward:-0.6011110544204712, mean_queue:1.538888931274414
+intersection:14, mean_episode_reward:-2.0508337020874023, mean_queue:1.9500000476837158
+intersection:15, mean_episode_reward:3.7963874340057373, mean_queue:4.263888835906982
+intersection:16, mean_episode_reward:-6.356113910675049, mean_queue:6.766666889190674
+intersection:17, mean_episode_reward:-5.52888822555542, mean_queue:4.68055534362793
+intersection:18, mean_episode_reward:-6.943612098693848, mean_queue:6.183333396911621
+intersection:19, mean_episode_reward:-4.895555019378662, mean_queue:4.355555534362793
+intersection:20, mean_episode_reward:-8.494168281555176, mean_queue:6.6777777671813965
+Test step:0/2000, travel time :875.6293706293707, rewards:-271.34583333333336, queue:17.416402116402118, delay:0.47636880218667327, throughput:715
+new best ATT=875.63 at episode 0 (metric=test)
+step:3600/3600, q_loss:0, rewards:-124.11807725694445, queue:5.796957671957672, delay:0.26786308490410055, throughput:3490
+episode:1/2000, real avg travel time:462.7117478510029
+intersection:0, mean_episode_reward:-0.9294446110725403, mean_queue:0.7749999761581421
+intersection:1, mean_episode_reward:-13.039999961853027, mean_queue:10.397222518920898
+intersection:2, mean_episode_reward:-2.768611192703247, mean_queue:2.2861111164093018
+intersection:3, mean_episode_reward:-15.045001983642578, mean_queue:13.591666221618652
+intersection:4, mean_episode_reward:-31.517505645751953, mean_queue:29.622222900390625
+intersection:5, mean_episode_reward:-1.2563889026641846, mean_queue:1.7000000476837158
+intersection:6, mean_episode_reward:-8.385001182556152, mean_queue:7.886111259460449
+intersection:7, mean_episode_reward:-6.069446563720703, mean_queue:5.138888835906982
+intersection:8, mean_episode_reward:-2.842778205871582, mean_queue:1.8888888359069824
+intersection:9, mean_episode_reward:-7.316108703613281, mean_queue:6.438889026641846
+intersection:10, mean_episode_reward:-2.854998826980591, mean_queue:2.2638888359069824
+intersection:11, mean_episode_reward:-2.0880558490753174, mean_queue:1.9222222566604614
+intersection:12, mean_episode_reward:-1.560276985168457, mean_queue:2.875
+intersection:13, mean_episode_reward:-0.0716666504740715, mean_queue:1.244444489479065
+intersection:14, mean_episode_reward:-1.5802775621414185, mean_queue:1.5777777433395386
+intersection:15, mean_episode_reward:3.7747223377227783, mean_queue:4.988888740539551
+intersection:16, mean_episode_reward:-6.765834331512451, mean_queue:7.638888835906982
+intersection:17, mean_episode_reward:-6.196945667266846, mean_queue:5.22777795791626
+intersection:18, mean_episode_reward:-4.016665458679199, mean_queue:3.1583333015441895
+intersection:19, mean_episode_reward:-2.774444818496704, mean_queue:2.194444417953491
+intersection:20, mean_episode_reward:-10.813333511352539, mean_queue:8.91944408416748
+Test step:1/2000, travel time :875.6293706293707, rewards:-271.34583333333336, queue:17.416402116402118, delay:0.47636880218667327, throughput:715
+step:3600/3600, q_loss:35.00889587402344, rewards:-141.4927734375, queue:6.748412698412698, delay:0.28392275855654764, throughput:3172
+episode:2/2000, real avg travel time:448.5097730138714
+intersection:0, mean_episode_reward:-1.3461110591888428, mean_queue:1.2638888359069824
+intersection:1, mean_episode_reward:-14.137776374816895, mean_queue:11.772222518920898
+intersection:2, mean_episode_reward:-3.302499294281006, mean_queue:2.8888888359069824
+intersection:3, mean_episode_reward:-14.69861125946045, mean_queue:13.333333015441895
+intersection:4, mean_episode_reward:-38.27249526977539, mean_queue:36.80277633666992
+intersection:5, mean_episode_reward:-0.24666637182235718, mean_queue:1.3333333730697632
+intersection:6, mean_episode_reward:-8.511391639709473, mean_queue:8.047222137451172
+intersection:7, mean_episode_reward:-6.180276870727539, mean_queue:5.291666507720947
+intersection:8, mean_episode_reward:-3.5683329105377197, mean_queue:2.6416666507720947
+intersection:9, mean_episode_reward:-6.408888816833496, mean_queue:5.458333492279053
+intersection:10, mean_episode_reward:-4.37611198425293, mean_queue:3.819444417953491
+intersection:11, mean_episode_reward:-2.3266661167144775, mean_queue:2.144444465637207
+intersection:12, mean_episode_reward:-0.8688890933990479, mean_queue:2.6194443702697754
+intersection:13, mean_episode_reward:0.185833141207695, mean_queue:1.2527778148651123
+intersection:14, mean_episode_reward:-1.5861101150512695, mean_queue:1.850000023841858
+intersection:15, mean_episode_reward:1.7911105155944824, mean_queue:5.530555725097656
+intersection:16, mean_episode_reward:-6.41694450378418, mean_queue:7.986111164093018
+intersection:17, mean_episode_reward:-7.054723262786865, mean_queue:6.172222137451172
+intersection:18, mean_episode_reward:-6.324166297912598, mean_queue:5.458333492279053
+intersection:19, mean_episode_reward:-2.714444637298584, mean_queue:2.3222222328186035
+intersection:20, mean_episode_reward:-15.128610610961914, mean_queue:13.727777481079102
+Test step:2/2000, travel time :705.2757352941177, rewards:-266.6033203125, queue:13.976587301587301, delay:0.4135134419436177, throughput:816
+new best ATT=705.28 at episode 2 (metric=test)
+step:3600/3600, q_loss:30.85243797302246, rewards:-217.66085069444443, queue:10.565079365079365, delay:0.3515112498449901, throughput:1478
+episode:3/2000, real avg travel time:775.819350473613
+intersection:0, mean_episode_reward:-1.5019444227218628, mean_queue:1.4388889074325562
+intersection:1, mean_episode_reward:-18.841108322143555, mean_queue:16.844444274902344
+intersection:2, mean_episode_reward:-3.486943244934082, mean_queue:3.183333396911621
+intersection:3, mean_episode_reward:-17.810832977294922, mean_queue:16.952777862548828
+intersection:4, mean_episode_reward:-58.718624114990234, mean_queue:60.19444274902344
+intersection:5, mean_episode_reward:1.7461111545562744, mean_queue:2.1222221851348877
+intersection:6, mean_episode_reward:-10.650553703308105, mean_queue:10.230555534362793
+intersection:7, mean_episode_reward:-17.20944595336914, mean_queue:16.827777862548828
+intersection:8, mean_episode_reward:-18.16750144958496, mean_queue:17.530555725097656
+intersection:9, mean_episode_reward:-9.76278018951416, mean_queue:8.916666984558105
+intersection:10, mean_episode_reward:-4.811666488647461, mean_queue:4.436110973358154
+intersection:11, mean_episode_reward:-1.9902781248092651, mean_queue:1.8222222328186035
+intersection:12, mean_episode_reward:-5.342499732971191, mean_queue:5.4472222328186035
+intersection:13, mean_episode_reward:-0.3677777647972107, mean_queue:1.1805555820465088
+intersection:14, mean_episode_reward:-2.5247223377227783, mean_queue:2.855555534362793
+intersection:15, mean_episode_reward:1.2138887643814087, mean_queue:0.855555534362793
+intersection:16, mean_episode_reward:-2.776388645172119, mean_queue:2.7138888835906982
+intersection:17, mean_episode_reward:-13.161942481994629, mean_queue:12.747221946716309
+intersection:18, mean_episode_reward:-14.426671028137207, mean_queue:13.877778053283691
+intersection:19, mean_episode_reward:-0.9500001072883606, mean_queue:4.6972222328186035
+intersection:20, mean_episode_reward:-18.11916732788086, mean_queue:16.991666793823242
+Test step:3/2000, travel time :551.1492890995261, rewards:-172.00250651041668, queue:8.97473544973545, delay:0.35560709635416665, throughput:1266
+new best ATT=551.15 at episode 3 (metric=test)
+step:3600/3600, q_loss:70.1086654663086, rewards:-165.3063910590278, queue:8.06441798941799, delay:0.3119912445229828, throughput:2082
+episode:4/2000, real avg travel time:635.5076849183478
+intersection:0, mean_episode_reward:-0.6033334136009216, mean_queue:0.49166667461395264
+intersection:1, mean_episode_reward:-17.90110969543457, mean_queue:16.322221755981445
+intersection:2, mean_episode_reward:-0.726944625377655, mean_queue:0.22777777910232544
+intersection:3, mean_episode_reward:-17.77916717529297, mean_queue:16.741666793823242
+intersection:4, mean_episode_reward:-54.23944854736328, mean_queue:53.463890075683594
+intersection:5, mean_episode_reward:1.4008336067199707, mean_queue:2.038888931274414
+intersection:6, mean_episode_reward:-7.938610076904297, mean_queue:7.541666507720947
+intersection:7, mean_episode_reward:-17.928333282470703, mean_queue:17.422222137451172
+intersection:8, mean_episode_reward:-5.654443264007568, mean_queue:4.711111068725586
+intersection:9, mean_episode_reward:-7.861389636993408, mean_queue:6.938889026641846
+intersection:10, mean_episode_reward:-1.2577778100967407, mean_queue:0.7361111044883728
+intersection:11, mean_episode_reward:-0.38944435119628906, mean_queue:0.3083333373069763
+intersection:12, mean_episode_reward:-0.03611111268401146, mean_queue:0.3194444477558136
+intersection:13, mean_episode_reward:1.50166654586792, mean_queue:1.0722222328186035
+intersection:14, mean_episode_reward:-3.1247215270996094, mean_queue:3.355555534362793
+intersection:15, mean_episode_reward:2.8583335876464844, mean_queue:0.6666666865348816
+intersection:16, mean_episode_reward:-4.143888473510742, mean_queue:3.4083333015441895
+intersection:17, mean_episode_reward:-9.141944885253906, mean_queue:8.774999618530273
+intersection:18, mean_episode_reward:-12.319724082946777, mean_queue:11.88888931274414
+intersection:19, mean_episode_reward:-2.456666946411133, mean_queue:5.758333206176758
+intersection:20, mean_episode_reward:-7.564165115356445, mean_queue:7.163888931274414
+Test step:4/2000, travel time :411.7965708989805, rewards:-121.8927734375, queue:5.857275132275133, delay:0.2714266338045635, throughput:2158
+new best ATT=411.80 at episode 4 (metric=test)
+step:3600/3600, q_loss:82.36300659179688, rewards:-149.25278862847222, queue:6.9869047619047615, delay:0.271610675791584, throughput:2614
+episode:5/2000, real avg travel time:482.5566182096404
+intersection:0, mean_episode_reward:-0.17999999225139618, mean_queue:0.05277777835726738
+intersection:1, mean_episode_reward:-22.6825008392334, mean_queue:21.322221755981445
+intersection:2, mean_episode_reward:-0.5572221279144287, mean_queue:0.06111111119389534
+intersection:3, mean_episode_reward:-14.296667098999023, mean_queue:11.563888549804688
+intersection:4, mean_episode_reward:-48.04167938232422, mean_queue:47.61666488647461
+intersection:5, mean_episode_reward:0.30749979615211487, mean_queue:0.36944442987442017
+intersection:6, mean_episode_reward:-5.468332767486572, mean_queue:4.333333492279053
+intersection:7, mean_episode_reward:-17.936668395996094, mean_queue:17.48611068725586
+intersection:8, mean_episode_reward:-2.5913891792297363, mean_queue:1.6472222805023193
+intersection:9, mean_episode_reward:-5.92055606842041, mean_queue:5.016666889190674
+intersection:10, mean_episode_reward:-1.1194442510604858, mean_queue:0.6222222447395325
+intersection:11, mean_episode_reward:-0.31583327054977417, mean_queue:0.11666666716337204
+intersection:12, mean_episode_reward:0.004722265060991049, mean_queue:0.2805555462837219
+intersection:13, mean_episode_reward:-0.2594444155693054, mean_queue:0.8194444179534912
+intersection:14, mean_episode_reward:-2.380277395248413, mean_queue:2.5722222328186035
+intersection:15, mean_episode_reward:1.6341664791107178, mean_queue:1.2194443941116333
+intersection:16, mean_episode_reward:-3.3594446182250977, mean_queue:2.7444443702697754
+intersection:17, mean_episode_reward:-9.166665077209473, mean_queue:8.541666984558105
+intersection:18, mean_episode_reward:-10.140275955200195, mean_queue:9.697221755981445
+intersection:19, mean_episode_reward:1.420832872390747, mean_queue:2.8583333492279053
+intersection:20, mean_episode_reward:-8.203612327575684, mean_queue:7.7833333015441895
+Test step:5/2000, travel time :382.3905109489051, rewards:-172.37026909722223, queue:8.636375661375661, delay:0.281529792906746, throughput:2192
+new best ATT=382.39 at episode 5 (metric=test)
+step:3600/3600, q_loss:77.0989761352539, rewards:-133.00361328125, queue:6.103174603174603, delay:0.22679144642340443, throughput:2803
+episode:6/2000, real avg travel time:416.2204780592223
+intersection:0, mean_episode_reward:-0.17916660010814667, mean_queue:0.03611111268401146
+intersection:1, mean_episode_reward:-17.28583526611328, mean_queue:15.547222137451172
+intersection:2, mean_episode_reward:-0.5058333277702332, mean_queue:0.02777777798473835
+intersection:3, mean_episode_reward:-11.637776374816895, mean_queue:9.369444847106934
+intersection:4, mean_episode_reward:-51.08305740356445, mean_queue:52.08333206176758
+intersection:5, mean_episode_reward:0.36527782678604126, mean_queue:0.5083333253860474
+intersection:6, mean_episode_reward:-5.226387977600098, mean_queue:4.1583333015441895
+intersection:7, mean_episode_reward:-12.681946754455566, mean_queue:11.991666793823242
+intersection:8, mean_episode_reward:-2.066944122314453, mean_queue:1.1583333015441895
+intersection:9, mean_episode_reward:-2.899165630340576, mean_queue:1.9833333492279053
+intersection:10, mean_episode_reward:-1.2425000667572021, mean_queue:0.7138888835906982
+intersection:11, mean_episode_reward:-0.3158331513404846, mean_queue:0.08888889104127884
+intersection:12, mean_episode_reward:0.07777778059244156, mean_queue:0.3583333194255829
+intersection:13, mean_episode_reward:-0.286666601896286, mean_queue:0.8416666388511658
+intersection:14, mean_episode_reward:-1.577222228050232, mean_queue:1.7000000476837158
+intersection:15, mean_episode_reward:0.861944317817688, mean_queue:1.1583333015441895
+intersection:16, mean_episode_reward:-3.5369439125061035, mean_queue:2.402777671813965
+intersection:17, mean_episode_reward:-11.3563871383667, mean_queue:10.616666793823242
+intersection:18, mean_episode_reward:-4.590832710266113, mean_queue:4.14722204208374
+intersection:19, mean_episode_reward:0.3136110007762909, mean_queue:1.9249999523162842
+intersection:20, mean_episode_reward:-8.1497220993042, mean_queue:7.349999904632568
+Test step:6/2000, travel time :331.42519019442096, rewards:-147.30609809027777, queue:7.29047619047619, delay:0.23557032025049604, throughput:2366
+new best ATT=331.43 at episode 6 (metric=test)
+step:3600/3600, q_loss:70.08116912841797, rewards:-123.61167534722222, queue:5.502116402116402, delay:0.21646085870329035, throughput:3011
+episode:7/2000, real avg travel time:395.75788774493526
+intersection:0, mean_episode_reward:-0.2424999624490738, mean_queue:0.10555555671453476
+intersection:1, mean_episode_reward:-14.919721603393555, mean_queue:13.074999809265137
+intersection:2, mean_episode_reward:-0.5261113047599792, mean_queue:0.02222222276031971
+intersection:3, mean_episode_reward:-12.411664962768555, mean_queue:9.730555534362793
+intersection:4, mean_episode_reward:-49.20056915283203, mean_queue:47.99166488647461
+intersection:5, mean_episode_reward:-0.16833339631557465, mean_queue:0.5166666507720947
+intersection:6, mean_episode_reward:-2.765277624130249, mean_queue:1.711111068725586
+intersection:7, mean_episode_reward:-13.13917064666748, mean_queue:12.483333587646484
+intersection:8, mean_episode_reward:-1.8919436931610107, mean_queue:0.9833333492279053
+intersection:9, mean_episode_reward:-2.1186110973358154, mean_queue:1.1805555820465088
+intersection:10, mean_episode_reward:-1.3227779865264893, mean_queue:0.8027777671813965
+intersection:11, mean_episode_reward:-0.32805532217025757, mean_queue:0.10000000149011612
+intersection:12, mean_episode_reward:-0.08916673809289932, mean_queue:0.3722222149372101
+intersection:13, mean_episode_reward:-0.37861111760139465, mean_queue:0.9194444417953491
+intersection:14, mean_episode_reward:-1.8197218179702759, mean_queue:2.027777671813965
+intersection:15, mean_episode_reward:1.1672226190567017, mean_queue:1.1111111640930176
+intersection:16, mean_episode_reward:-3.4938883781433105, mean_queue:2.7861111164093018
+intersection:17, mean_episode_reward:-7.670832633972168, mean_queue:6.816666603088379
+intersection:18, mean_episode_reward:-5.092221736907959, mean_queue:4.505555629730225
+intersection:19, mean_episode_reward:0.19111117720603943, mean_queue:1.9444444179534912
+intersection:20, mean_episode_reward:-7.390834331512451, mean_queue:6.358333110809326
+Test step:7/2000, travel time :339.607544141252, rewards:-145.22417534722223, queue:7.091931216931217, delay:0.23485306028335814, throughput:2492
+step:3600/3600, q_loss:65.98350524902344, rewards:-103.78637152777777, queue:4.387301587301588, delay:0.19402950226314483, throughput:3192
+episode:8/2000, real avg travel time:417.9000626566416
+intersection:0, mean_episode_reward:-0.25027769804000854, mean_queue:0.10000000149011612
+intersection:1, mean_episode_reward:-14.554442405700684, mean_queue:12.572221755981445
+intersection:2, mean_episode_reward:-0.5194444060325623, mean_queue:0.02777777798473835
+intersection:3, mean_episode_reward:-8.494721412658691, mean_queue:5.752777576446533
+intersection:4, mean_episode_reward:-43.391380310058594, mean_queue:41.86944580078125
+intersection:5, mean_episode_reward:-0.17083343863487244, mean_queue:0.49444442987442017
+intersection:6, mean_episode_reward:-2.179166793823242, mean_queue:1.119444489479065
+intersection:7, mean_episode_reward:-9.897781372070312, mean_queue:9.036110877990723
+intersection:8, mean_episode_reward:-1.9074991941452026, mean_queue:0.9416666626930237
+intersection:9, mean_episode_reward:-2.1500000953674316, mean_queue:1.2388888597488403
+intersection:10, mean_episode_reward:-1.1374999284744263, mean_queue:0.5888888835906982
+intersection:11, mean_episode_reward:-0.34861090779304504, mean_queue:0.1111111119389534
+intersection:12, mean_episode_reward:-0.06722225248813629, mean_queue:0.3722222149372101
+intersection:13, mean_episode_reward:-0.3841666281223297, mean_queue:0.9583333134651184
+intersection:14, mean_episode_reward:-0.7797223329544067, mean_queue:0.8222222328186035
+intersection:15, mean_episode_reward:1.101388692855835, mean_queue:1.1805555820465088
+intersection:16, mean_episode_reward:-3.6408329010009766, mean_queue:2.4638888835906982
+intersection:17, mean_episode_reward:-7.596113204956055, mean_queue:6.608333110809326
+intersection:18, mean_episode_reward:-1.495833158493042, mean_queue:0.7916666865348816
+intersection:19, mean_episode_reward:-0.3500000536441803, mean_queue:0.6972222328186035
+intersection:20, mean_episode_reward:-5.572222709655762, mean_queue:4.386111259460449
+Test step:8/2000, travel time :387.2031094938803, rewards:-123.21137152777777, queue:5.522354497354497, delay:0.21212573177600033, throughput:3023
+step:3600/3600, q_loss:61.32264709472656, rewards:-123.61944444444444, queue:5.584126984126984, delay:0.20411428623098546, throughput:2819
+episode:9/2000, real avg travel time:356.5856686768358
+intersection:0, mean_episode_reward:-0.17499996721744537, mean_queue:0.06111111119389534
+intersection:1, mean_episode_reward:-15.248894691467285, mean_queue:13.433333396911621
+intersection:2, mean_episode_reward:-0.5227776765823364, mean_queue:0.01944444514811039
+intersection:3, mean_episode_reward:-12.148055076599121, mean_queue:10.130555152893066
+intersection:4, mean_episode_reward:-53.725547790527344, mean_queue:52.608333587646484
+intersection:5, mean_episode_reward:-0.009444436058402061, mean_queue:0.5111111402511597
+intersection:6, mean_episode_reward:-3.938333749771118, mean_queue:3.1111111640930176
+intersection:7, mean_episode_reward:-11.360002517700195, mean_queue:10.63611125946045
+intersection:8, mean_episode_reward:-1.7272223234176636, mean_queue:0.8305555582046509
+intersection:9, mean_episode_reward:-1.5430558919906616, mean_queue:0.6555555462837219
+intersection:10, mean_episode_reward:-1.1649998426437378, mean_queue:0.6388888955116272
+intersection:11, mean_episode_reward:-0.34916630387306213, mean_queue:0.125
+intersection:12, mean_episode_reward:-0.04833334684371948, mean_queue:0.35555556416511536
+intersection:13, mean_episode_reward:-0.5780555009841919, mean_queue:1.1749999523162842
+intersection:14, mean_episode_reward:-1.6444448232650757, mean_queue:1.9388889074325562
+intersection:15, mean_episode_reward:1.315833330154419, mean_queue:1.0361111164093018
+intersection:16, mean_episode_reward:-3.0055527687072754, mean_queue:2.2916667461395264
+intersection:17, mean_episode_reward:-7.409167289733887, mean_queue:6.816666603088379
+intersection:18, mean_episode_reward:-2.743889093399048, mean_queue:2.1027777194976807
+intersection:19, mean_episode_reward:0.186111181974411, mean_queue:1.6416666507720947
+intersection:20, mean_episode_reward:-7.77944278717041, mean_queue:7.14722204208374
+Test step:9/2000, travel time :392.4655884377151, rewards:-109.96555989583334, queue:4.871296296296296, delay:0.2216975620814732, throughput:2906
+step:3600/3600, q_loss:58.228668212890625, rewards:-105.125, queue:4.558994708994709, delay:0.19944193199198082, throughput:3026
+episode:10/2000, real avg travel time:403.34137475214806
+intersection:0, mean_episode_reward:-0.18638886511325836, mean_queue:0.0555555559694767
+intersection:1, mean_episode_reward:-12.281110763549805, mean_queue:9.980555534362793
+intersection:2, mean_episode_reward:-0.5533334016799927, mean_queue:0.0555555559694767
+intersection:3, mean_episode_reward:-9.954723358154297, mean_queue:7.377777576446533
+intersection:4, mean_episode_reward:-41.14054870605469, mean_queue:39.73055648803711
+intersection:5, mean_episode_reward:0.019166646525263786, mean_queue:0.3722222149372101
+intersection:6, mean_episode_reward:-2.797778606414795, mean_queue:1.605555534362793
+intersection:7, mean_episode_reward:-10.576947212219238, mean_queue:9.958333015441895
+intersection:8, mean_episode_reward:-7.737778663635254, mean_queue:6.911110877990723
+intersection:9, mean_episode_reward:-1.7113889455795288, mean_queue:0.8138889074325562
+intersection:10, mean_episode_reward:-1.1302778720855713, mean_queue:0.5833333134651184
+intersection:11, mean_episode_reward:-0.3366664946079254, mean_queue:0.09166666865348816
+intersection:12, mean_episode_reward:0.040000010281801224, mean_queue:0.34166666865348816
+intersection:13, mean_episode_reward:-0.4769444465637207, mean_queue:1.005555510520935
+intersection:14, mean_episode_reward:-0.933888852596283, mean_queue:1.149999976158142
+intersection:15, mean_episode_reward:1.4736112356185913, mean_queue:1.0444444417953491
+intersection:16, mean_episode_reward:-4.133334636688232, mean_queue:2.88611102104187
+intersection:17, mean_episode_reward:-5.602500915527344, mean_queue:4.705555438995361
+intersection:18, mean_episode_reward:-1.738333821296692, mean_queue:1.0666667222976685
+intersection:19, mean_episode_reward:0.5872223973274231, mean_queue:1.1833332777023315
+intersection:20, mean_episode_reward:-5.953053951263428, mean_queue:4.81944465637207
+Test step:10/2000, travel time :320.1503205128205, rewards:-83.92222764756944, queue:3.5174603174603174, delay:0.19740293795469577, throughput:3120
+new best ATT=320.15 at episode 10 (metric=test)
+step:3600/3600, q_loss:56.234764099121094, rewards:-114.72471788194444, queue:5.053174603174603, delay:0.1980440654451885, throughput:3072
+episode:11/2000, real avg travel time:447.2766927083333
+intersection:0, mean_episode_reward:-0.2402777522802353, mean_queue:0.0972222238779068
+intersection:1, mean_episode_reward:-15.649163246154785, mean_queue:13.616666793823242
+intersection:2, mean_episode_reward:-0.5458333492279053, mean_queue:0.0416666679084301
+intersection:3, mean_episode_reward:-7.390273571014404, mean_queue:4.561110973358154
+intersection:4, mean_episode_reward:-43.334712982177734, mean_queue:41.727779388427734
+intersection:5, mean_episode_reward:-0.0811111181974411, mean_queue:0.4611110985279083
+intersection:6, mean_episode_reward:-2.1669442653656006, mean_queue:1.130555510520935
+intersection:7, mean_episode_reward:-13.762778282165527, mean_queue:13.163888931274414
+intersection:8, mean_episode_reward:-5.540555000305176, mean_queue:4.663888931274414
+intersection:9, mean_episode_reward:-1.573055386543274, mean_queue:0.6638888716697693
+intersection:10, mean_episode_reward:-1.233888864517212, mean_queue:0.6916666626930237
+intersection:11, mean_episode_reward:-0.3644442558288574, mean_queue:0.13611111044883728
+intersection:12, mean_episode_reward:-0.01666673831641674, mean_queue:0.31111112236976624
+intersection:13, mean_episode_reward:0.04416666179895401, mean_queue:0.769444465637207
+intersection:14, mean_episode_reward:-2.5711114406585693, mean_queue:2.6583333015441895
+intersection:15, mean_episode_reward:1.4649999141693115, mean_queue:0.9638888835906982
+intersection:16, mean_episode_reward:-3.4925012588500977, mean_queue:2.855555534362793
+intersection:17, mean_episode_reward:-7.499166488647461, mean_queue:6.5916666984558105
+intersection:18, mean_episode_reward:-3.1641669273376465, mean_queue:2.461111068725586
+intersection:19, mean_episode_reward:0.9080555438995361, mean_queue:1.4444444179534912
+intersection:20, mean_episode_reward:-8.515279769897461, mean_queue:7.105555534362793
+Test step:11/2000, travel time :363.35331677899967, rewards:-124.99136284722222, queue:5.707671957671957, delay:0.20223057661106977, throughput:2819
+step:3600/3600, q_loss:54.95160675048828, rewards:-107.62388237847222, queue:4.6494708994708995, delay:0.19073919064153438, throughput:3224
+episode:12/2000, real avg travel time:432.2698511166253
+intersection:0, mean_episode_reward:-0.26555556058883667, mean_queue:0.10277777910232544
+intersection:1, mean_episode_reward:-14.741937637329102, mean_queue:12.727777481079102
+intersection:2, mean_episode_reward:-0.5550000667572021, mean_queue:0.05000000074505806
+intersection:3, mean_episode_reward:-7.561389923095703, mean_queue:4.836111068725586
+intersection:4, mean_episode_reward:-44.22499084472656, mean_queue:42.79166793823242
+intersection:5, mean_episode_reward:0.12916669249534607, mean_queue:0.4555555582046509
+intersection:6, mean_episode_reward:-2.348055601119995, mean_queue:1.2861111164093018
+intersection:7, mean_episode_reward:-10.246947288513184, mean_queue:9.508333206176758
+intersection:8, mean_episode_reward:-4.759444713592529, mean_queue:3.86388897895813
+intersection:9, mean_episode_reward:-1.5772225856781006, mean_queue:0.6638888716697693
+intersection:10, mean_episode_reward:-0.7252776026725769, mean_queue:0.16388888657093048
+intersection:11, mean_episode_reward:-0.34194445610046387, mean_queue:0.1111111119389534
+intersection:12, mean_episode_reward:-0.12666665017604828, mean_queue:0.3638888895511627
+intersection:13, mean_episode_reward:0.18583336472511292, mean_queue:0.574999988079071
+intersection:14, mean_episode_reward:-2.167222023010254, mean_queue:2.0638887882232666
+intersection:15, mean_episode_reward:1.1527775526046753, mean_queue:1.0
+intersection:16, mean_episode_reward:-2.838888645172119, mean_queue:2.1972222328186035
+intersection:17, mean_episode_reward:-6.810556411743164, mean_queue:5.861111164093018
+intersection:18, mean_episode_reward:-1.415555477142334, mean_queue:0.7222222089767456
+intersection:19, mean_episode_reward:0.24138891696929932, mean_queue:1.0166666507720947
+intersection:20, mean_episode_reward:-8.626391410827637, mean_queue:7.277777671813965
+Test step:12/2000, travel time :387.9623161764706, rewards:-163.32554253472222, queue:7.871164021164021, delay:0.24183247884114584, throughput:2176
+step:3600/3600, q_loss:52.94502258300781, rewards:-104.70333116319445, queue:4.526455026455026, delay:0.18237493605840774, throughput:3296
+episode:13/2000, real avg travel time:417.35103155339806
+intersection:0, mean_episode_reward:-0.2522222399711609, mean_queue:0.0833333358168602
+intersection:1, mean_episode_reward:-15.804437637329102, mean_queue:13.83055591583252
+intersection:2, mean_episode_reward:-0.6069446206092834, mean_queue:0.10000000149011612
+intersection:3, mean_episode_reward:-5.87277889251709, mean_queue:3.0055556297302246
+intersection:4, mean_episode_reward:-46.18388748168945, mean_queue:44.79999923706055
+intersection:5, mean_episode_reward:0.12999998033046722, mean_queue:0.3916666805744171
+intersection:6, mean_episode_reward:-2.3183326721191406, mean_queue:1.2972222566604614
+intersection:7, mean_episode_reward:-11.905280113220215, mean_queue:11.127778053283691
+intersection:8, mean_episode_reward:-1.4636108875274658, mean_queue:0.5527777671813965
+intersection:9, mean_episode_reward:-1.5225003957748413, mean_queue:0.6166666746139526
+intersection:10, mean_episode_reward:-0.6894446611404419, mean_queue:0.13055555522441864
+intersection:11, mean_episode_reward:-0.3599998950958252, mean_queue:0.11944444477558136
+intersection:12, mean_episode_reward:-0.20861110091209412, mean_queue:0.4138889014720917
+intersection:13, mean_episode_reward:0.24472230672836304, mean_queue:0.5111111402511597
+intersection:14, mean_episode_reward:-2.3591668605804443, mean_queue:2.4194445610046387
+intersection:15, mean_episode_reward:1.406388521194458, mean_queue:1.0611110925674438
+intersection:16, mean_episode_reward:-2.396388530731201, mean_queue:1.9972221851348877
+intersection:17, mean_episode_reward:-7.1975016593933105, mean_queue:6.247222423553467
+intersection:18, mean_episode_reward:-1.357777714729309, mean_queue:0.6527777910232544
+intersection:19, mean_episode_reward:0.561944305896759, mean_queue:0.8999999761581421
+intersection:20, mean_episode_reward:-6.547499656677246, mean_queue:4.797222137451172
+Test step:13/2000, travel time :361.19851347166303, rewards:-119.19752604166666, queue:5.345634920634921, delay:0.19410322885664683, throughput:3229
+step:3600/3600, q_loss:50.91244888305664, rewards:-95.86332465277778, queue:4.046825396825397, delay:0.18286189326533564, throughput:3398
+episode:14/2000, real avg travel time:410.55944673337257
+intersection:0, mean_episode_reward:-0.25472214818000793, mean_queue:0.07500000298023224
+intersection:1, mean_episode_reward:-14.55638599395752, mean_queue:11.741666793823242
+intersection:2, mean_episode_reward:-0.5766667127609253, mean_queue:0.07222222536802292
+intersection:3, mean_episode_reward:-5.921667575836182, mean_queue:2.930555582046509
+intersection:4, mean_episode_reward:-38.97860336303711, mean_queue:37.011112213134766
+intersection:5, mean_episode_reward:0.268888920545578, mean_queue:0.4444444477558136
+intersection:6, mean_episode_reward:-2.7902777194976807, mean_queue:1.6888889074325562
+intersection:7, mean_episode_reward:-10.35555648803711, mean_queue:9.708333015441895
+intersection:8, mean_episode_reward:-2.3922228813171387, mean_queue:1.480555534362793
+intersection:9, mean_episode_reward:-1.5299999713897705, mean_queue:0.625
+intersection:10, mean_episode_reward:-0.7463890910148621, mean_queue:0.20000000298023224
+intersection:11, mean_episode_reward:-0.37249988317489624, mean_queue:0.1527777761220932
+intersection:12, mean_episode_reward:-0.09333332628011703, mean_queue:0.42500001192092896
+intersection:13, mean_episode_reward:0.1941666305065155, mean_queue:0.5638889074325562
+intersection:14, mean_episode_reward:-2.474722385406494, mean_queue:2.4749999046325684
+intersection:15, mean_episode_reward:1.0952779054641724, mean_queue:1.4305555820465088
+intersection:16, mean_episode_reward:-2.5113885402679443, mean_queue:2.1500000953674316
+intersection:17, mean_episode_reward:-6.092780113220215, mean_queue:5.05555534362793
+intersection:18, mean_episode_reward:-1.4641668796539307, mean_queue:0.7555555701255798
+intersection:19, mean_episode_reward:0.24361132085323334, mean_queue:1.0472222566604614
+intersection:20, mean_episode_reward:-6.553887367248535, mean_queue:4.949999809265137
+Test step:14/2000, travel time :382.839248434238, rewards:-128.07749565972222, queue:5.863095238095238, delay:0.2131338775473297, throughput:2874
+step:3600/3600, q_loss:48.466087341308594, rewards:-123.61889105902777, queue:5.639153439153439, delay:0.19965888129340278, throughput:2978
+episode:15/2000, real avg travel time:380.3015446608462
+intersection:0, mean_episode_reward:-0.24555549025535583, mean_queue:0.07500000298023224
+intersection:1, mean_episode_reward:-16.529163360595703, mean_queue:14.63611125946045
+intersection:2, mean_episode_reward:-0.5625, mean_queue:0.03055555559694767
+intersection:3, mean_episode_reward:-4.586668491363525, mean_queue:1.8194444179534912
+intersection:4, mean_episode_reward:-46.61333084106445, mean_queue:45.622222900390625
+intersection:5, mean_episode_reward:0.2325000762939453, mean_queue:0.35277777910232544
+intersection:6, mean_episode_reward:-2.2211101055145264, mean_queue:1.125
+intersection:7, mean_episode_reward:-15.051667213439941, mean_queue:14.588889122009277
+intersection:8, mean_episode_reward:-11.432781219482422, mean_queue:10.68055534362793
+intersection:9, mean_episode_reward:-1.5641671419143677, mean_queue:0.6638888716697693
+intersection:10, mean_episode_reward:-0.6958332657814026, mean_queue:0.15000000596046448
+intersection:11, mean_episode_reward:-0.2980553209781647, mean_queue:0.08055555820465088
+intersection:12, mean_episode_reward:-0.0925000011920929, mean_queue:0.3083333373069763
+intersection:13, mean_episode_reward:0.39277786016464233, mean_queue:0.42500001192092896
+intersection:14, mean_episode_reward:-1.945555329322815, mean_queue:2.152777671813965
+intersection:15, mean_episode_reward:1.103055715560913, mean_queue:1.2611111402511597
+intersection:16, mean_episode_reward:-2.247499942779541, mean_queue:1.894444465637207
+intersection:17, mean_episode_reward:-7.380832195281982, mean_queue:6.508333206176758
+intersection:18, mean_episode_reward:-9.45694351196289, mean_queue:8.958333015441895
+intersection:19, mean_episode_reward:2.0561118125915527, mean_queue:1.8777778148651123
+intersection:20, mean_episode_reward:-6.479166507720947, mean_queue:5.211111068725586
+Test step:15/2000, travel time :367.91447154471547, rewards:-114.89722222222223, queue:5.435449735449735, delay:0.20102416346312832, throughput:3075
+step:3600/3600, q_loss:47.44337844848633, rewards:-117.96470269097222, queue:5.393386243386243, delay:0.19776482153191138, throughput:3048
+episode:16/2000, real avg travel time:374.3540026246719
+intersection:0, mean_episode_reward:-0.20249995589256287, mean_queue:0.05277777835726738
+intersection:1, mean_episode_reward:-16.378604888916016, mean_queue:14.480555534362793
+intersection:2, mean_episode_reward:-0.5472224354743958, mean_queue:0.01944444514811039
+intersection:3, mean_episode_reward:-4.951388359069824, mean_queue:2.0999999046325684
+intersection:4, mean_episode_reward:-47.97360610961914, mean_queue:47.34166717529297
+intersection:5, mean_episode_reward:0.14361104369163513, mean_queue:0.4416666626930237
+intersection:6, mean_episode_reward:-2.354166269302368, mean_queue:1.3083332777023315
+intersection:7, mean_episode_reward:-16.220550537109375, mean_queue:15.708333015441895
+intersection:8, mean_episode_reward:-1.3058336973190308, mean_queue:0.4027777910232544
+intersection:9, mean_episode_reward:-1.4761112928390503, mean_queue:0.6027777791023254
+intersection:10, mean_episode_reward:-0.6819444298744202, mean_queue:0.13611111044883728
+intersection:11, mean_episode_reward:-0.33333316445350647, mean_queue:0.14444445073604584
+intersection:12, mean_episode_reward:-0.13388888537883759, mean_queue:0.25
+intersection:13, mean_episode_reward:0.0327778197824955, mean_queue:0.6833333373069763
+intersection:14, mean_episode_reward:-2.66972279548645, mean_queue:2.694444417953491
+intersection:15, mean_episode_reward:1.4980558156967163, mean_queue:0.925000011920929
+intersection:16, mean_episode_reward:-2.5913875102996826, mean_queue:2.155555486679077
+intersection:17, mean_episode_reward:-7.894166469573975, mean_queue:7.011111259460449
+intersection:18, mean_episode_reward:-8.653610229492188, mean_queue:8.16944408416748
+intersection:19, mean_episode_reward:2.2347218990325928, mean_queue:2.0361111164093018
+intersection:20, mean_episode_reward:-7.505835056304932, mean_queue:6.597222328186035
+Test step:16/2000, travel time :444.5406006674082, rewards:-124.62890625, queue:6.252777777777778, delay:0.22767803858196925, throughput:2697
+step:3600/3600, q_loss:47.770530700683594, rewards:-124.68361545138889, queue:5.756216931216931, delay:0.2133278175636574, throughput:2915
+episode:17/2000, real avg travel time:373.68507718696395
+intersection:0, mean_episode_reward:-0.24111109972000122, mean_queue:0.0972222238779068
+intersection:1, mean_episode_reward:-16.854719161987305, mean_queue:14.997221946716309
+intersection:2, mean_episode_reward:-0.5736109614372253, mean_queue:0.06388889253139496
+intersection:3, mean_episode_reward:-7.890554428100586, mean_queue:5.202777862548828
+intersection:4, mean_episode_reward:-49.48167419433594, mean_queue:48.54166793823242
+intersection:5, mean_episode_reward:-0.28833329677581787, mean_queue:0.6166666746139526
+intersection:6, mean_episode_reward:-2.352222204208374, mean_queue:1.475000023841858
+intersection:7, mean_episode_reward:-16.63222312927246, mean_queue:16.169445037841797
+intersection:8, mean_episode_reward:-1.251111626625061, mean_queue:0.3722222149372101
+intersection:9, mean_episode_reward:-1.6683332920074463, mean_queue:0.730555534362793
+intersection:10, mean_episode_reward:-0.6716667413711548, mean_queue:0.13333334028720856
+intersection:11, mean_episode_reward:-0.37305551767349243, mean_queue:0.2083333283662796
+intersection:12, mean_episode_reward:-0.14861105382442474, mean_queue:0.26944443583488464
+intersection:13, mean_episode_reward:0.2538888454437256, mean_queue:0.47777777910232544
+intersection:14, mean_episode_reward:-2.4461114406585693, mean_queue:2.555555582046509
+intersection:15, mean_episode_reward:2.160555124282837, mean_queue:1.0611110925674438
+intersection:16, mean_episode_reward:-3.4397222995758057, mean_queue:2.8972222805023193
+intersection:17, mean_episode_reward:-7.554722785949707, mean_queue:6.722222328186035
+intersection:18, mean_episode_reward:-8.573331832885742, mean_queue:8.166666984558105
+intersection:19, mean_episode_reward:0.29722169041633606, mean_queue:3.9749999046325684
+intersection:20, mean_episode_reward:-6.954170227050781, mean_queue:6.14722204208374
+Test step:17/2000, travel time :366.6932132963989, rewards:-126.63332248263889, queue:5.878968253968254, delay:0.20716155521453372, throughput:2888
+step:3600/3600, q_loss:47.32428741455078, rewards:-125.74805772569445, queue:5.807804232804233, delay:0.21676953835462137, throughput:2950
+episode:18/2000, real avg travel time:377.2552542372881
+intersection:0, mean_episode_reward:-0.4024999439716339, mean_queue:0.25
+intersection:1, mean_episode_reward:-17.157777786254883, mean_queue:15.291666984558105
+intersection:2, mean_episode_reward:-0.5274999141693115, mean_queue:0.03611111268401146
+intersection:3, mean_episode_reward:-7.997775554656982, mean_queue:5.386111259460449
+intersection:4, mean_episode_reward:-50.78583908081055, mean_queue:49.897220611572266
+intersection:5, mean_episode_reward:0.0005555369425565004, mean_queue:0.3861111104488373
+intersection:6, mean_episode_reward:-2.2319438457489014, mean_queue:1.2222222089767456
+intersection:7, mean_episode_reward:-16.474164962768555, mean_queue:15.98611068725586
+intersection:8, mean_episode_reward:-1.3380560874938965, mean_queue:0.4472222328186035
+intersection:9, mean_episode_reward:-1.5861105918884277, mean_queue:0.6916666626930237
+intersection:10, mean_episode_reward:-0.6830558776855469, mean_queue:0.12777778506278992
+intersection:11, mean_episode_reward:-0.3094443082809448, mean_queue:0.0972222238779068
+intersection:12, mean_episode_reward:-0.1594444215297699, mean_queue:0.21666666865348816
+intersection:13, mean_episode_reward:0.5380556583404541, mean_queue:0.4472222328186035
+intersection:14, mean_episode_reward:-3.25639009475708, mean_queue:3.2722222805023193
+intersection:15, mean_episode_reward:2.6136114597320557, mean_queue:1.0166666507720947
+intersection:16, mean_episode_reward:-3.6611111164093018, mean_queue:3.25
+intersection:17, mean_episode_reward:-7.395832061767578, mean_queue:6.544444561004639
+intersection:18, mean_episode_reward:-8.362221717834473, mean_queue:7.886111259460449
+intersection:19, mean_episode_reward:0.5533336400985718, mean_queue:3.4944443702697754
+intersection:20, mean_episode_reward:-7.124444007873535, mean_queue:6.016666889190674
+Test step:18/2000, travel time :389.92148760330576, rewards:-136.59111328125, queue:6.430952380952381, delay:0.22068074544270833, throughput:2662
+step:3600/3600, q_loss:47.15753173828125, rewards:-125.7130859375, queue:5.857671957671958, delay:0.21120652294663525, throughput:2941
+episode:19/2000, real avg travel time:381.52907174430464
+intersection:0, mean_episode_reward:-0.21305552124977112, mean_queue:0.03611111268401146
+intersection:1, mean_episode_reward:-17.733335494995117, mean_queue:15.925000190734863
+intersection:2, mean_episode_reward:-0.5347221493721008, mean_queue:0.03611111268401146
+intersection:3, mean_episode_reward:-7.0938897132873535, mean_queue:4.472222328186035
+intersection:4, mean_episode_reward:-49.24474334716797, mean_queue:48.338890075683594
+intersection:5, mean_episode_reward:0.1452777236700058, mean_queue:0.3194444477558136
+intersection:6, mean_episode_reward:-2.301389455795288, mean_queue:1.2166666984558105
+intersection:7, mean_episode_reward:-15.897223472595215, mean_queue:15.469444274902344
+intersection:8, mean_episode_reward:-1.3205559253692627, mean_queue:0.4333333373069763
+intersection:9, mean_episode_reward:-1.5572223663330078, mean_queue:0.6305555701255798
+intersection:10, mean_episode_reward:-0.7083333730697632, mean_queue:0.16944444179534912
+intersection:11, mean_episode_reward:-0.281110942363739, mean_queue:0.07500000298023224
+intersection:12, mean_episode_reward:-0.1824999898672104, mean_queue:0.20277777314186096
+intersection:13, mean_episode_reward:0.3672221601009369, mean_queue:0.3861111104488373
+intersection:14, mean_episode_reward:-3.7219438552856445, mean_queue:3.6222221851348877
+intersection:15, mean_episode_reward:3.1327781677246094, mean_queue:0.9277777671813965
+intersection:16, mean_episode_reward:-4.165832996368408, mean_queue:3.952777862548828
+intersection:17, mean_episode_reward:-7.4647216796875, mean_queue:6.5722222328186035
+intersection:18, mean_episode_reward:-8.58194351196289, mean_queue:8.088889122009277
+intersection:19, mean_episode_reward:1.4075008630752563, mean_queue:3.3305554389953613
+intersection:20, mean_episode_reward:-9.763330459594727, mean_queue:8.80555534362793
+Test step:19/2000, travel time :391.7340328467153, rewards:-164.16751302083333, queue:7.952116402116402, delay:0.2446584873098545, throughput:2192
+step:3600/3600, q_loss:47.93451690673828, rewards:-136.65110677083334, queue:6.401058201058201, delay:0.21772980866608796, throughput:2699
+episode:20/2000, real avg travel time:377.831048536495
+intersection:0, mean_episode_reward:-0.20472221076488495, mean_queue:0.05000000074505806
+intersection:1, mean_episode_reward:-17.57778549194336, mean_queue:15.847222328186035
+intersection:2, mean_episode_reward:-0.5475000143051147, mean_queue:0.03055555559694767
+intersection:3, mean_episode_reward:-11.07861328125, mean_queue:8.747221946716309
+intersection:4, mean_episode_reward:-54.86305236816406, mean_queue:54.03888702392578
+intersection:5, mean_episode_reward:0.2616667151451111, mean_queue:0.2750000059604645
+intersection:6, mean_episode_reward:-2.954166889190674, mean_queue:1.8527777194976807
+intersection:7, mean_episode_reward:-16.055824279785156, mean_queue:15.55555534362793
+intersection:8, mean_episode_reward:-2.4394445419311523, mean_queue:1.5499999523162842
+intersection:9, mean_episode_reward:-1.5016663074493408, mean_queue:0.605555534362793
+intersection:10, mean_episode_reward:-0.7005558013916016, mean_queue:0.15833333134651184
+intersection:11, mean_episode_reward:-0.2874998152256012, mean_queue:0.08888889104127884
+intersection:12, mean_episode_reward:-0.1194443479180336, mean_queue:0.2083333283662796
+intersection:13, mean_episode_reward:0.35333332419395447, mean_queue:0.3861111104488373
+intersection:14, mean_episode_reward:-3.5772223472595215, mean_queue:3.7861111164093018
+intersection:15, mean_episode_reward:3.0500004291534424, mean_queue:0.8166666626930237
+intersection:16, mean_episode_reward:-4.103055000305176, mean_queue:3.816666603088379
+intersection:17, mean_episode_reward:-6.984724044799805, mean_queue:6.333333492279053
+intersection:18, mean_episode_reward:-9.408889770507812, mean_queue:8.947221755981445
+intersection:19, mean_episode_reward:2.7074992656707764, mean_queue:1.6166666746139526
+intersection:20, mean_episode_reward:-10.619449615478516, mean_queue:9.711111068725586
+Test step:20/2000, travel time :382.46684527796384, rewards:-129.48140190972222, queue:6.089153439153439, delay:0.2182645767454117, throughput:2986
+step:3600/3600, q_loss:47.284690856933594, rewards:-130.2761176215278, queue:6.019708994708995, delay:0.21422091690951553, throughput:2979
+episode:21/2000, real avg travel time:414.4917757636791
+intersection:0, mean_episode_reward:-0.20305544137954712, mean_queue:0.0416666679084301
+intersection:1, mean_episode_reward:-17.456113815307617, mean_queue:15.66944408416748
+intersection:2, mean_episode_reward:-0.527499794960022, mean_queue:0.03055555559694767
+intersection:3, mean_episode_reward:-10.787221908569336, mean_queue:8.202777862548828
+intersection:4, mean_episode_reward:-51.65250778198242, mean_queue:50.838890075683594
+intersection:5, mean_episode_reward:0.26916664838790894, mean_queue:0.3444444537162781
+intersection:6, mean_episode_reward:-2.797222137451172, mean_queue:1.7916666269302368
+intersection:7, mean_episode_reward:-15.08527660369873, mean_queue:14.655555725097656
+intersection:8, mean_episode_reward:-1.2902777194976807, mean_queue:0.3888888955116272
+intersection:9, mean_episode_reward:-1.463888168334961, mean_queue:0.5694444179534912
+intersection:10, mean_episode_reward:-0.6230555176734924, mean_queue:0.10555555671453476
+intersection:11, mean_episode_reward:-0.28666648268699646, mean_queue:0.06666667014360428
+intersection:12, mean_episode_reward:-0.13277773559093475, mean_queue:0.17499999701976776
+intersection:13, mean_episode_reward:0.3397221863269806, mean_queue:0.40833333134651184
+intersection:14, mean_episode_reward:-2.472778081893921, mean_queue:2.4749999046325684
+intersection:15, mean_episode_reward:1.694443941116333, mean_queue:1.0472222566604614
+intersection:16, mean_episode_reward:-3.079723358154297, mean_queue:2.444444417953491
+intersection:17, mean_episode_reward:-7.818885803222656, mean_queue:6.93055534362793
+intersection:18, mean_episode_reward:-12.11972427368164, mean_queue:11.594444274902344
+intersection:19, mean_episode_reward:2.5230557918548584, mean_queue:2.0416667461395264
+intersection:20, mean_episode_reward:-7.305834770202637, mean_queue:6.5916666984558105
+Test step:21/2000, travel time :347.73337926283153, rewards:-124.53834635416666, queue:5.809656084656084, delay:0.20682823544456846, throughput:2903
+step:3600/3600, q_loss:46.5994873046875, rewards:-127.23748914930556, queue:5.9187830687830685, delay:0.20565353474289022, throughput:2909
+episode:22/2000, real avg travel time:359.4712959779993
+intersection:0, mean_episode_reward:-0.3100000023841858, mean_queue:0.14444445073604584
+intersection:1, mean_episode_reward:-16.92500114440918, mean_queue:15.11111068725586
+intersection:2, mean_episode_reward:-0.5413889288902283, mean_queue:0.04444444552063942
+intersection:3, mean_episode_reward:-9.5488862991333, mean_queue:7.127777576446533
+intersection:4, mean_episode_reward:-52.34665298461914, mean_queue:51.463890075683594
+intersection:5, mean_episode_reward:0.13250000774860382, mean_queue:0.3222222328186035
+intersection:6, mean_episode_reward:-2.2616665363311768, mean_queue:1.288888931274414
+intersection:7, mean_episode_reward:-15.53528118133545, mean_queue:14.98888874053955
+intersection:8, mean_episode_reward:-1.2988886833190918, mean_queue:0.40833333134651184
+intersection:9, mean_episode_reward:-1.4955557584762573, mean_queue:0.5722222328186035
+intersection:10, mean_episode_reward:-0.6680557131767273, mean_queue:0.12222222238779068
+intersection:11, mean_episode_reward:-0.29694420099258423, mean_queue:0.07500000298023224
+intersection:12, mean_episode_reward:-0.07861118763685226, mean_queue:0.24166665971279144
+intersection:13, mean_episode_reward:0.46111103892326355, mean_queue:0.4305555522441864
+intersection:14, mean_episode_reward:-2.4708333015441895, mean_queue:2.6222221851348877
+intersection:15, mean_episode_reward:2.7463886737823486, mean_queue:0.9750000238418579
+intersection:16, mean_episode_reward:-4.121945858001709, mean_queue:3.3138887882232666
+intersection:17, mean_episode_reward:-7.461108207702637, mean_queue:6.7166666984558105
+intersection:18, mean_episode_reward:-9.119441032409668, mean_queue:8.708333015441895
+intersection:19, mean_episode_reward:2.911388397216797, mean_queue:1.2388888597488403
+intersection:20, mean_episode_reward:-9.008607864379883, mean_queue:8.377778053283691
+Test step:22/2000, travel time :353.544474393531, rewards:-122.1258572048611, queue:5.585449735449735, delay:0.2106326148623512, throughput:2968
+step:3600/3600, q_loss:46.47638702392578, rewards:-120.07221137152777, queue:5.531216931216931, delay:0.20034995104270006, throughput:2983
+episode:23/2000, real avg travel time:336.3610459269192
+intersection:0, mean_episode_reward:-0.3069443702697754, mean_queue:0.13611111044883728
+intersection:1, mean_episode_reward:-17.27944564819336, mean_queue:15.45555591583252
+intersection:2, mean_episode_reward:-0.527222216129303, mean_queue:0.02777777798473835
+intersection:3, mean_episode_reward:-5.052499294281006, mean_queue:2.2277777194976807
+intersection:4, mean_episode_reward:-49.49861145019531, mean_queue:48.54999923706055
+intersection:5, mean_episode_reward:-0.18583327531814575, mean_queue:0.6194444298744202
+intersection:6, mean_episode_reward:-1.5972225666046143, mean_queue:0.800000011920929
+intersection:7, mean_episode_reward:-17.090831756591797, mean_queue:16.633333206176758
+intersection:8, mean_episode_reward:-1.3186110258102417, mean_queue:0.42222222685813904
+intersection:9, mean_episode_reward:-1.450555443763733, mean_queue:0.550000011920929
+intersection:10, mean_episode_reward:-0.6800000667572021, mean_queue:0.14722222089767456
+intersection:11, mean_episode_reward:-0.3108330965042114, mean_queue:0.11666666716337204
+intersection:12, mean_episode_reward:-0.15222208201885223, mean_queue:0.27222222089767456
+intersection:13, mean_episode_reward:0.39722225069999695, mean_queue:0.42500001192092896
+intersection:14, mean_episode_reward:-1.6808335781097412, mean_queue:1.8777778148651123
+intersection:15, mean_episode_reward:1.6749998331069946, mean_queue:1.144444465637207
+intersection:16, mean_episode_reward:-3.1672208309173584, mean_queue:2.4555554389953613
+intersection:17, mean_episode_reward:-7.687222003936768, mean_queue:6.866666793823242
+intersection:18, mean_episode_reward:-8.147500991821289, mean_queue:7.663888931274414
+intersection:19, mean_episode_reward:1.896389126777649, mean_queue:2.8888888359069824
+intersection:20, mean_episode_reward:-7.907218933105469, mean_queue:6.875
+Test step:23/2000, travel time :318.5727204220045, rewards:-133.87027994791666, queue:6.339285714285714, delay:0.21314270988343254, throughput:2654
+step:3600/3600, q_loss:44.4141960144043, rewards:-119.48920355902777, queue:5.517195767195767, delay:0.20152269797350364, throughput:2966
+episode:24/2000, real avg travel time:333.4615643964936
+intersection:0, mean_episode_reward:-0.22555546462535858, mean_queue:0.07500000298023224
+intersection:1, mean_episode_reward:-17.523056030273438, mean_queue:15.733333587646484
+intersection:2, mean_episode_reward:-0.5349999070167542, mean_queue:0.02500000037252903
+intersection:3, mean_episode_reward:-5.440555572509766, mean_queue:2.605555534362793
+intersection:4, mean_episode_reward:-49.37029266357422, mean_queue:48.474998474121094
+intersection:5, mean_episode_reward:-0.2386111319065094, mean_queue:0.6305555701255798
+intersection:6, mean_episode_reward:-1.3961111307144165, mean_queue:0.5833333134651184
+intersection:7, mean_episode_reward:-16.72222328186035, mean_queue:16.21666717529297
+intersection:8, mean_episode_reward:-1.3122225999832153, mean_queue:0.4027777910232544
+intersection:9, mean_episode_reward:-1.4508336782455444, mean_queue:0.5833333134651184
+intersection:10, mean_episode_reward:-0.634166955947876, mean_queue:0.08055555820465088
+intersection:11, mean_episode_reward:-0.3013887107372284, mean_queue:0.0972222238779068
+intersection:12, mean_episode_reward:-0.06416665017604828, mean_queue:0.2750000059604645
+intersection:13, mean_episode_reward:0.2927778363227844, mean_queue:0.4555555582046509
+intersection:14, mean_episode_reward:-2.1511106491088867, mean_queue:2.2444443702697754
+intersection:15, mean_episode_reward:2.1797218322753906, mean_queue:1.1666666269302368
+intersection:16, mean_episode_reward:-3.622499942779541, mean_queue:3.094444513320923
+intersection:17, mean_episode_reward:-7.704446792602539, mean_queue:6.866666793823242
+intersection:18, mean_episode_reward:-7.702220916748047, mean_queue:7.161110877990723
+intersection:19, mean_episode_reward:1.1552777290344238, mean_queue:3.288888931274414
+intersection:20, mean_episode_reward:-6.722500324249268, mean_queue:5.800000190734863
+Test step:24/2000, travel time :395.3617397454031, rewards:-130.63973524305555, queue:6.012433862433863, delay:0.20729754412615742, throughput:2828
+step:3600/3600, q_loss:44.89332962036133, rewards:-124.30528428819444, queue:5.847619047619047, delay:0.20407177153087797, throughput:2973
+episode:25/2000, real avg travel time:391.60813992600066
+intersection:0, mean_episode_reward:-0.23694445192813873, mean_queue:0.06666667014360428
+intersection:1, mean_episode_reward:-17.146387100219727, mean_queue:15.327777862548828
+intersection:2, mean_episode_reward:-0.4969443082809448, mean_queue:0.05000000074505806
+intersection:3, mean_episode_reward:-8.563058853149414, mean_queue:5.994444370269775
+intersection:4, mean_episode_reward:-48.51639175415039, mean_queue:47.511112213134766
+intersection:5, mean_episode_reward:-0.3269444704055786, mean_queue:0.6611111164093018
+intersection:6, mean_episode_reward:-1.2775002717971802, mean_queue:0.5138888955116272
+intersection:7, mean_episode_reward:-17.670833587646484, mean_queue:17.238889694213867
+intersection:8, mean_episode_reward:-1.3430559635162354, mean_queue:0.45277777314186096
+intersection:9, mean_episode_reward:-1.4561114311218262, mean_queue:0.5527777671813965
+intersection:10, mean_episode_reward:-0.6627780199050903, mean_queue:0.15000000596046448
+intersection:11, mean_episode_reward:-0.29972195625305176, mean_queue:0.0833333358168602
+intersection:12, mean_episode_reward:0.09861108660697937, mean_queue:0.3888888955116272
+intersection:13, mean_episode_reward:0.33888912200927734, mean_queue:0.42500001192092896
+intersection:14, mean_episode_reward:-2.4488885402679443, mean_queue:2.5527777671813965
+intersection:15, mean_episode_reward:2.9966673851013184, mean_queue:1.3277777433395386
+intersection:16, mean_episode_reward:-4.900001525878906, mean_queue:4.22777795791626
+intersection:17, mean_episode_reward:-7.573056221008301, mean_queue:6.711111068725586
+intersection:18, mean_episode_reward:-9.200554847717285, mean_queue:8.686111450195312
+intersection:19, mean_episode_reward:1.1036107540130615, mean_queue:4.347222328186035
+intersection:20, mean_episode_reward:-6.723891258239746, mean_queue:5.530555725097656
+Test step:25/2000, travel time :367.3131707317073, rewards:-119.25, queue:5.476719576719577, delay:0.19265044681609622, throughput:3075
+step:3600/3600, q_loss:43.89543533325195, rewards:-116.43721788194445, queue:5.342195767195768, delay:0.20141333524512237, throughput:2991
+episode:26/2000, real avg travel time:345.7957204948178
+intersection:0, mean_episode_reward:-0.261944442987442, mean_queue:0.08888889104127884
+intersection:1, mean_episode_reward:-16.798328399658203, mean_queue:14.966666221618652
+intersection:2, mean_episode_reward:-0.5152778029441833, mean_queue:0.02500000037252903
+intersection:3, mean_episode_reward:-6.433054447174072, mean_queue:3.6500000953674316
+intersection:4, mean_episode_reward:-46.26250457763672, mean_queue:45.29722213745117
+intersection:5, mean_episode_reward:-0.04666648060083389, mean_queue:0.9333333373069763
+intersection:6, mean_episode_reward:-2.4058334827423096, mean_queue:1.744444489479065
+intersection:7, mean_episode_reward:-15.55749797821045, mean_queue:15.058333396911621
+intersection:8, mean_episode_reward:-1.3844443559646606, mean_queue:0.5083333253860474
+intersection:9, mean_episode_reward:-1.4991670846939087, mean_queue:0.6111111044883728
+intersection:10, mean_episode_reward:-0.6783335208892822, mean_queue:0.14722222089767456
+intersection:11, mean_episode_reward:-0.2952776253223419, mean_queue:0.08888889104127884
+intersection:12, mean_episode_reward:-0.13583336770534515, mean_queue:0.28611111640930176
+intersection:13, mean_episode_reward:0.34055572748184204, mean_queue:0.4027777910232544
+intersection:14, mean_episode_reward:-1.7958331108093262, mean_queue:1.9027777910232544
+intersection:15, mean_episode_reward:1.8349995613098145, mean_queue:1.0361111164093018
+intersection:16, mean_episode_reward:-3.215832233428955, mean_queue:2.6194443702697754
+intersection:17, mean_episode_reward:-7.562222003936768, mean_queue:6.758333206176758
+intersection:18, mean_episode_reward:-9.009167671203613, mean_queue:8.48888874053955
+intersection:19, mean_episode_reward:2.0374999046325684, mean_queue:2.116666555404663
+intersection:20, mean_episode_reward:-6.793055057525635, mean_queue:5.455555438995361
+Test step:26/2000, travel time :363.9896650035638, rewards:-128.248046875, queue:6.086904761904762, delay:0.21050901059751156, throughput:2806
+step:3600/3600, q_loss:42.0839958190918, rewards:-116.88470052083333, queue:5.374074074074074, delay:0.19364598188450727, throughput:2947
+episode:27/2000, real avg travel time:341.58262639972855
+intersection:0, mean_episode_reward:-0.23194444179534912, mean_queue:0.06666667014360428
+intersection:1, mean_episode_reward:-16.861949920654297, mean_queue:15.047222137451172
+intersection:2, mean_episode_reward:-0.5361111760139465, mean_queue:0.03055555559694767
+intersection:3, mean_episode_reward:-4.800833702087402, mean_queue:1.9833333492279053
+intersection:4, mean_episode_reward:-50.337493896484375, mean_queue:49.358333587646484
+intersection:5, mean_episode_reward:0.23861122131347656, mean_queue:0.5277777910232544
+intersection:6, mean_episode_reward:-1.8416672945022583, mean_queue:0.9611111283302307
+intersection:7, mean_episode_reward:-15.885000228881836, mean_queue:15.366666793823242
+intersection:8, mean_episode_reward:-1.360277771949768, mean_queue:0.4583333432674408
+intersection:9, mean_episode_reward:-1.4419448375701904, mean_queue:0.5277777910232544
+intersection:10, mean_episode_reward:-0.6875001192092896, mean_queue:0.15833333134651184
+intersection:11, mean_episode_reward:-0.3205553889274597, mean_queue:0.0972222238779068
+intersection:12, mean_episode_reward:-0.13111113011837006, mean_queue:0.25833332538604736
+intersection:13, mean_episode_reward:0.3386111855506897, mean_queue:0.42222222685813904
+intersection:14, mean_episode_reward:-2.9347221851348877, mean_queue:3.038888931274414
+intersection:15, mean_episode_reward:2.4786112308502197, mean_queue:0.9861111044883728
+intersection:16, mean_episode_reward:-3.8069448471069336, mean_queue:3.1777777671813965
+intersection:17, mean_episode_reward:-7.3330559730529785, mean_queue:6.594444274902344
+intersection:18, mean_episode_reward:-6.898333549499512, mean_queue:6.347222328186035
+intersection:19, mean_episode_reward:1.9069451093673706, mean_queue:2.3138887882232666
+intersection:20, mean_episode_reward:-6.438055515289307, mean_queue:5.133333206176758
+Test step:27/2000, travel time :459.1888246628131, rewards:-141.03667534722223, queue:6.755158730158731, delay:0.2351983287347057, throughput:2595
+step:3600/3600, q_loss:42.07343292236328, rewards:-124.73861762152778, queue:5.772619047619048, delay:0.2005801246279762, throughput:2921
+episode:28/2000, real avg travel time:359.89798014378636
+intersection:0, mean_episode_reward:-0.2011110931634903, mean_queue:0.0416666679084301
+intersection:1, mean_episode_reward:-17.328611373901367, mean_queue:15.558333396911621
+intersection:2, mean_episode_reward:-0.5408333539962769, mean_queue:0.0416666679084301
+intersection:3, mean_episode_reward:-6.635834217071533, mean_queue:3.991666555404663
+intersection:4, mean_episode_reward:-52.549171447753906, mean_queue:51.66666793823242
+intersection:5, mean_episode_reward:0.08555573970079422, mean_queue:0.6694444417953491
+intersection:6, mean_episode_reward:-1.6738892793655396, mean_queue:0.9722222089767456
+intersection:7, mean_episode_reward:-17.963613510131836, mean_queue:17.45833396911621
+intersection:8, mean_episode_reward:-1.3777778148651123, mean_queue:0.4972222149372101
+intersection:9, mean_episode_reward:-1.4652769565582275, mean_queue:0.5722222328186035
+intersection:10, mean_episode_reward:-0.6588889956474304, mean_queue:0.11666666716337204
+intersection:11, mean_episode_reward:-0.26861095428466797, mean_queue:0.05000000074505806
+intersection:12, mean_episode_reward:-0.11083339899778366, mean_queue:0.2666666805744171
+intersection:13, mean_episode_reward:0.4308333396911621, mean_queue:0.38055557012557983
+intersection:14, mean_episode_reward:-1.7630550861358643, mean_queue:2.027777671813965
+intersection:15, mean_episode_reward:1.5850003957748413, mean_queue:1.0
+intersection:16, mean_episode_reward:-3.0586116313934326, mean_queue:2.4000000953674316
+intersection:17, mean_episode_reward:-7.655556678771973, mean_queue:6.886111259460449
+intersection:18, mean_episode_reward:-7.530002117156982, mean_queue:7.063889026641846
+intersection:19, mean_episode_reward:1.2997227907180786, mean_queue:3.5
+intersection:20, mean_episode_reward:-7.3580546379089355, mean_queue:6.063889026641846
+Test step:28/2000, travel time :327.5803252677509, rewards:-141.38889973958334, queue:7.067989417989418, delay:0.23620095227761242, throughput:2521
+step:3600/3600, q_loss:42.2566032409668, rewards:-120.02195095486111, queue:5.542195767195767, delay:0.20129499485883764, throughput:2991
+episode:29/2000, real avg travel time:379.65329321297224
+intersection:0, mean_episode_reward:-0.2358333021402359, mean_queue:0.05277777835726738
+intersection:1, mean_episode_reward:-17.651384353637695, mean_queue:15.902777671813965
+intersection:2, mean_episode_reward:-0.552777886390686, mean_queue:0.05000000074505806
+intersection:3, mean_episode_reward:-6.284168720245361, mean_queue:3.538888931274414
+intersection:4, mean_episode_reward:-50.46222686767578, mean_queue:49.622222900390625
+intersection:5, mean_episode_reward:0.23111113905906677, mean_queue:0.5472221970558167
+intersection:6, mean_episode_reward:-2.018888235092163, mean_queue:1.1861110925674438
+intersection:7, mean_episode_reward:-15.673056602478027, mean_queue:15.163888931274414
+intersection:8, mean_episode_reward:-1.2838892936706543, mean_queue:0.4000000059604645
+intersection:9, mean_episode_reward:-1.5302773714065552, mean_queue:0.6138888597488403
+intersection:10, mean_episode_reward:-0.9774999618530273, mean_queue:0.4472222328186035
+intersection:11, mean_episode_reward:-0.29277753829956055, mean_queue:0.07222222536802292
+intersection:12, mean_episode_reward:-0.1613888144493103, mean_queue:0.2527777850627899
+intersection:13, mean_episode_reward:0.3800000846385956, mean_queue:0.4166666567325592
+intersection:14, mean_episode_reward:-1.837777853012085, mean_queue:2.0611112117767334
+intersection:15, mean_episode_reward:2.3047220706939697, mean_queue:0.9305555820465088
+intersection:16, mean_episode_reward:-3.470555305480957, mean_queue:2.972222328186035
+intersection:17, mean_episode_reward:-7.182775974273682, mean_queue:6.358333110809326
+intersection:18, mean_episode_reward:-8.32388973236084, mean_queue:7.769444465637207
+intersection:19, mean_episode_reward:2.4430558681488037, mean_queue:1.7194443941116333
+intersection:20, mean_episode_reward:-7.441669464111328, mean_queue:6.308333396911621
+Test step:29/2000, travel time :371.7548638132296, rewards:-147.4408420138889, queue:6.92037037037037, delay:0.22900003100198413, throughput:2570
+step:3600/3600, q_loss:40.789913177490234, rewards:-119.79918619791667, queue:5.522883597883598, delay:0.20340907182643023, throughput:3033
+episode:30/2000, real avg travel time:366.23211341905704
+intersection:0, mean_episode_reward:-0.26333335041999817, mean_queue:0.10555555671453476
+intersection:1, mean_episode_reward:-17.634727478027344, mean_queue:15.852777481079102
+intersection:2, mean_episode_reward:-0.5336109399795532, mean_queue:0.04444444552063942
+intersection:3, mean_episode_reward:-6.757777690887451, mean_queue:4.047222137451172
+intersection:4, mean_episode_reward:-50.16612243652344, mean_queue:49.24166488647461
+intersection:5, mean_episode_reward:0.14194464683532715, mean_queue:0.675000011920929
+intersection:6, mean_episode_reward:-1.6708333492279053, mean_queue:0.9416666626930237
+intersection:7, mean_episode_reward:-15.47083568572998, mean_queue:14.899999618530273
+intersection:8, mean_episode_reward:-1.3383336067199707, mean_queue:0.46666666865348816
+intersection:9, mean_episode_reward:-1.4672220945358276, mean_queue:0.5805555582046509
+intersection:10, mean_episode_reward:-0.6552777290344238, mean_queue:0.1111111119389534
+intersection:11, mean_episode_reward:-0.29138869047164917, mean_queue:0.0694444477558136
+intersection:12, mean_episode_reward:-0.16027778387069702, mean_queue:0.26944443583488464
+intersection:13, mean_episode_reward:0.4072221517562866, mean_queue:0.43888887763023376
+intersection:14, mean_episode_reward:-2.631666660308838, mean_queue:2.7861111164093018
+intersection:15, mean_episode_reward:1.974721908569336, mean_queue:0.949999988079071
+intersection:16, mean_episode_reward:-3.3813884258270264, mean_queue:2.691666603088379
+intersection:17, mean_episode_reward:-7.5152764320373535, mean_queue:6.655555725097656
+intersection:18, mean_episode_reward:-6.807223320007324, mean_queue:6.244444370269775
+intersection:19, mean_episode_reward:2.4694440364837646, mean_queue:1.8277777433395386
+intersection:20, mean_episode_reward:-8.047223091125488, mean_queue:7.080555438995361
+Test step:30/2000, travel time :391.73607242339835, rewards:-126.57109375, queue:5.907936507936508, delay:0.20061383928571427, throughput:2872
+early_stop at episode 30/2000 (best ATT=320.15 at episode 10, patience=20)
+saved final checkpoint from best episode 10 (ATT=320.15) as episode 2000
+Final Travel Time is 320.1503, mean rewards: -83.9222, queue: 3.5175, delay: 0.1974, throughput: 3120
+Total time taken: 1364.8853027820587

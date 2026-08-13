@@ -1,0 +1,6 @@
+early_stop enabled: min_episodes=3, max_episodes=8, patience=2, min_delta=0.0000, metric=test
+step:200/200, q_loss:0, rewards:-19.747500610351562, queue:14.15, delay:0.3354222536087036, throughput:50
+episode:0/8, real avg travel time:45.18
+intersection:0, mean_episode_reward:-19.747501373291016, mean_queue:14.149999618530273
+Test step:0/8, travel time :108.26315789473684, rewards:-46.01249694824219, queue:31.75, delay:0.5204850196838379, throughput:19
+new best ATT=108.26 at episode 0 (metric=test)

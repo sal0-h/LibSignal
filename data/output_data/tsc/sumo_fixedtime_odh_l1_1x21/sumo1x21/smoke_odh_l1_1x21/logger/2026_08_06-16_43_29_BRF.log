@@ -1,0 +1,5 @@
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:276.7238352464551, rewards:-100.11019134521484, queue:1.6722222566604614, delay:1.1104148626327515, throughput:1481
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:281.56452726017943, rewards:-99.91616821289062, queue:1.6489417552947998, delay:1.066640019416809, throughput:1449
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:281.4, rewards:-100.53875732421875, queue:1.6394180059432983, delay:1.1096855401992798, throughput:1505
+HELDOUT_MEAN episode:500/500, travel time:279.8961208355448 (n=3)
+Total time taken: 181.46695017814636
