@@ -34,6 +34,11 @@ parser.add_argument('-a', '--agent', type=str, default="dqn", help="agent type o
 parser.add_argument('-w', '--world', type=str, default="cityflow", choices=['cityflow','sumo'], help="simulator type")
 parser.add_argument('-n', '--network', type=str, default="cityflow1x1", help="network name")
 parser.add_argument('-d', '--dataset', type=str, default='onfly', help='type of dataset in training process')
+parser.add_argument(
+    '--no_trip_metrics',
+    action='store_true',
+    help='disable new_metrics.csv / new_metrics_meta.json export on final test (SUMO)',
+)
 
 args = parser.parse_args()
 os.environ["CUDA_VISIBLE_DEVICES"] = args.ngpu
