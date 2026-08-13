@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 # Single M0 (movie · axes OFF) job for LibSignal TSC.
 #
-# Submit via extras/submit_m0_homo.sh (preferred), or manually:
-#   export MCS_LABEL=crs-XXXX   # or QSIURP_Salman
-#   export AGENT=dqn NETWORK=sumo4x4 PREFIX=m0_homo
-#   sbatch --export=ALL --mcs-label="${MCS_LABEL}" extras/slurm_m0_homo.sh
+# Submit via extras/submit_m0_homo.sh (preferred).
 #
-# Cluster note: LibSignal TSC CPU jobs on the lab are submitted from the
-# gpujobs login node with --mcs-label (there is no "deepnet" partition for
-# these). Deepnet2 --partition=gpu2 is for GPU/LLM jobs only.
+# Important: do NOT inherit login-node CONDA_PREFIX=/opt/anaconda3 via
+# --export=ALL — compute nodes often lack that path (exit 127: python not found).
+# Always use the shared libsignal env under /data1/mmirzata/.conda/envs/.
 
 #SBATCH --job-name=m0_homo
 #SBATCH --output=logs/m0_homo_%j.out
@@ -33,31 +30,23 @@ NGPU="${NGPU:--1}"
 cd "${REPO_DIR}"
 mkdir -p logs
 
-# Prefer an already-active conda env; otherwise activate CONDA_ENV.
-if [[ -z "${CONDA_PREFIX:-}" ]]; then
-  if [[ -d "/data1/mmirzata/.conda/envs/${CONDA_ENV}" ]]; then
-    CONDA_PREFIX="/data1/mmirzata/.conda/envs/${CONDA_ENV}"
-    export PATH="${CONDA_PREFIX}/bin:${PATH}"
-  elif command -v conda >/dev/null 2>&1; then
-    # shellcheck disable=SC1091
-    source "$(conda info --base)/etc/profile.d/conda.sh"
-    conda activate "${CONDA_ENV}"
-  else
-    echo "No conda env found; expected ${CONDA_ENV}" >&2
-    exit 1
-  fi
+# Force shared env (same as extras/slurm_realism_full_*.sh). Ignore login CONDA_PREFIX.
+CONDA_PREFIX="${CONDA_PREFIX_OVERRIDE:-/data1/mmirzata/.conda/envs/${CONDA_ENV}}"
+if [[ ! -x "${CONDA_PREFIX}/bin/python" ]]; then
+  echo "ERROR: python not found at ${CONDA_PREFIX}/bin/python" >&2
+  ls -la "${CONDA_PREFIX}/bin" 2>&1 | head -20 >&2 || true
+  exit 127
 fi
 
-export SUMO_HOME="${SUMO_HOME:-${CONDA_PREFIX}/share/sumo}"
-if [[ ! -d "${SUMO_HOME}" ]]; then
-  SUMO_HOME="$(python -c 'import os,sumo; print(os.path.dirname(sumo.__file__))')"
-  export SUMO_HOME
-fi
+export CONDA_PREFIX
+export SUMO_HOME="${CONDA_PREFIX}/share/sumo"
 export PATH="${CONDA_PREFIX}/bin:${SUMO_HOME}/bin:${PATH}"
+PYTHON="${CONDA_PREFIX}/bin/python"
 
 echo "Host:      $(hostname)"
 echo "Job:       ${SLURM_JOB_ID:-local}"
 echo "Repo:      ${REPO_DIR}"
+echo "Python:    ${PYTHON} ($("${PYTHON}" --version 2>&1))"
 echo "Conda:     ${CONDA_PREFIX}"
 echo "SUMO_HOME: ${SUMO_HOME}"
 echo "Agent:     ${AGENT}"
@@ -67,18 +56,18 @@ echo "Prefix:    ${PREFIX}"
 echo "Start:     $(date -Is)"
 
 if [[ "${AGENT}" == colight* ]]; then
-  python -c "import torch_scatter" 2>/dev/null || {
-    TV="$(python -c 'import torch; print(torch.__version__.split("+")[0])')"
+  "${PYTHON}" -c "import torch_scatter" 2>/dev/null || {
+    TV="$("${PYTHON}" -c 'import torch; print(torch.__version__.split("+")[0])')"
     echo "Installing torch_scatter for torch ${TV}..."
-    pip install torch_scatter -f "https://data.pyg.org/whl/torch-${TV}.html"
+    "${PYTHON}" -m pip install torch_scatter -f "https://data.pyg.org/whl/torch-${TV}.html"
   }
 fi
 
-python -c "import libsumo; print('libsumo: OK')" 2>/dev/null || {
+"${PYTHON}" -c "import libsumo; print('libsumo: OK')" 2>/dev/null || {
   echo "WARNING: libsumo missing — run.py may fall back to traci (slower)."
 }
 
-python run.py \
+"${PYTHON}" run.py \
   --agent "${AGENT}" \
   --world sumo \
   --network "${NETWORK}" \
