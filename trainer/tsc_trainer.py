@@ -45,6 +45,12 @@ class TSCTrainer(BaseTrainer):
         self.demand_heldout = world_param.get('demand_heldout') or []
         self.demand_train_file = world_param.get('demand_train_file')
         self.heldout_eval_every = int(trainer_param.get('heldout_eval_every') or 0)
+        # Per-vehicle trip metrics (SUMO): final test / final held-out only
+        cmd = Registry.mapping['command_mapping']['setting'].param
+        self.save_trip_metrics = bool(trainer_param.get('save_trip_metrics', True))
+        if cmd.get('no_trip_metrics'):
+            self.save_trip_metrics = False
+        self._last_trip_records = None
         # replay file is only valid in cityflow now. 
         # TODO: support SUMO and Openengine later
 
@@ -60,6 +66,44 @@ class TSCTrainer(BaseTrainer):
                                      Registry.mapping['logger_mapping']['setting'].param['log_dir'],
                                      os.path.basename(self.logger.handlers[-1].baseFilename).rstrip('_BRF.log') + '_DTL.log'
                                      )
+
+    def _trip_metrics_supported(self):
+        cmd = Registry.mapping['command_mapping']['setting'].param
+        if cmd.get('world') != 'sumo':
+            return False
+        return hasattr(self.world, 'eng') and hasattr(getattr(self.world, 'eng', None), 'vehicle')
+
+    def _trip_metrics_dir(self):
+        return os.path.join(
+            Registry.mapping['logger_mapping']['path'].path,
+            Registry.mapping['logger_mapping']['setting'].param['log_dir'],
+        )
+
+    def _write_trip_metrics(self, records, stem='new_metrics', meta_extra=None):
+        from utils.trip_metrics import write_trip_metrics
+        cmd = Registry.mapping['command_mapping']['setting'].param
+        extra = {
+            'agent': cmd.get('agent'),
+            'network': cmd.get('network'),
+            'world': cmd.get('world'),
+            'prefix': cmd.get('prefix'),
+            'seed': cmd.get('seed'),
+            'avg_travel_time_metric': float(self.metric.real_average_travel_time()),
+            'throughput_metric': int(self.metric.throughput()),
+        }
+        if meta_extra:
+            extra.update(meta_extra)
+        csv_path, meta_path, meta = write_trip_metrics(
+            records, self._trip_metrics_dir(), meta_extra=extra, stem=stem
+        )
+        self.logger.info(
+            "Saved %d vehicle trip records to %s (ATT=%.2fs, completion=%.1f%%)",
+            len(records),
+            csv_path,
+            meta.get('mean_travel_time_s') or 0.0,
+            (meta.get('completion_rate') or 0.0) * 100.0,
+        )
+        return csv_path, meta_path, meta
 
     def _collect_actions(self, obs, phases, test=True):
         '''Gather actions for all agents; use batch path when the agent provides one.'''
@@ -249,37 +293,52 @@ class TSCTrainer(BaseTrainer):
         elif self.demand_train_file:
             self.world.set_route_file(self.demand_train_file)
 
-    def _run_eval_episode(self):
-        '''Greedy rollout for test_steps; returns real avg travel time.'''
+    def _run_eval_episode(self, collect_trip_metrics=False):
+        '''Greedy rollout for test_steps; returns real avg travel time.
+
+        When collect_trip_metrics is True (SUMO), fills self._last_trip_records.
+        '''
         obs = self.env.reset()
         self.metric.clear()
+        self._last_trip_records = None
         for a in self.agents:
             a.reset()
+        tracker = None
+        if collect_trip_metrics and self._trip_metrics_supported():
+            from utils.trip_metrics import TripMetricsTracker
+            tracker = TripMetricsTracker(self.world)
+        dones = [False]
         for i in range(self.test_steps):
             if i % self.action_interval == 0:
                 phases = np.stack([ag.get_phase() for ag in self.agents])
                 actions = self._collect_actions(obs, phases, test=True)
                 rewards_list = []
                 for t in range(self.action_interval):
+                    if tracker is not None:
+                        tracker.before_step()
                     obs, rewards, dones, _ = self.env.step(
                         actions.flatten(),
                         collect_obs=(t == self.action_interval - 1),
                     )
+                    if tracker is not None:
+                        tracker.after_step()
                     i += 1
                     rewards_list.append(np.stack(rewards))
                 rewards = np.mean(rewards_list, axis=0)
                 self.metric.update(rewards)
             if all(dones):
                 break
+        if tracker is not None:
+            self._last_trip_records = tracker.finalize()
         return self.metric.real_average_travel_time()
 
-    def heldout_eval(self, e):
+    def heldout_eval(self, e, save_trip_metrics=False):
         '''Evaluate (no learning) on held-out demand files and log mean ATT.'''
         atts = []
-        for route in self.demand_heldout:
+        for idx, route in enumerate(self.demand_heldout):
             if hasattr(self.world, 'set_route_file'):
                 self.world.set_route_file(route)
-            att = self._run_eval_episode()
+            att = self._run_eval_episode(collect_trip_metrics=save_trip_metrics)
             atts.append(att)
             self.logger.info(
                 "HELDOUT episode:{}/{}, demand:{}, travel time:{}, rewards:{}, queue:{}, delay:{}, throughput:{}".format(
@@ -288,6 +347,12 @@ class TSCTrainer(BaseTrainer):
             )
             self.writeLog("HELDOUT", e, att, 100, self.metric.rewards(),
                           self.metric.queue(), self.metric.delay(), self.metric.throughput())
+            if save_trip_metrics and self._last_trip_records is not None:
+                self._write_trip_metrics(
+                    self._last_trip_records,
+                    stem=f"new_metrics_hold_{idx:02d}",
+                    meta_extra={'demand_file': route, 'heldout_index': idx, 'episode': e},
+                )
         mean_att = float(np.mean(atts)) if atts else 0.0
         self.logger.info(
             "HELDOUT_MEAN episode:{}/{}, travel time:{} (n={})".format(
@@ -332,34 +397,19 @@ class TSCTrainer(BaseTrainer):
         if not drop_load:
             [ag.load_model(self.episodes) for ag in self.agents]
         attention_mat_list = []
+        collect = bool(self.save_trip_metrics)
         if self.demand_heldout and hasattr(self.world, 'set_route_file'):
-            self.heldout_eval(self.episodes)
+            self.heldout_eval(self.episodes, save_trip_metrics=collect)
             return self.metric
         if self.demand_train_file and hasattr(self.world, 'set_route_file'):
             self.world.set_route_file(self.demand_train_file)
-        obs = self.env.reset()
-        for a in self.agents:
-            a.reset()
-        for i in range(self.test_steps):
-            if i % self.action_interval == 0:
-                phases = np.stack([ag.get_phase() for ag in self.agents])
-                actions = self._collect_actions(obs, phases, test=True)
-                rewards_list = []
-                for t in range(self.action_interval):
-                    obs, rewards, dones, _ = self.env.step(
-                        actions.flatten(),
-                        collect_obs=(t == self.action_interval - 1),
-                    )
-                    i += 1
-                    rewards_list.append(np.stack(rewards))
-                rewards = np.mean(rewards_list, axis=0)  # [agent, intersection]
-                self.metric.update(rewards)
-            if all(dones):
-                break
-        self.logger.info("Final Travel Time is %.4f, mean rewards: %.4f, queue: %.4f, delay: %.4f, throughput: %d" % (self.metric.real_average_travel_time(), \
+        att = self._run_eval_episode(collect_trip_metrics=collect)
+        self.logger.info("Final Travel Time is %.4f, mean rewards: %.4f, queue: %.4f, delay: %.4f, throughput: %d" % (att, \
             self.metric.rewards(), self.metric.queue(), self.metric.delay(), self.metric.throughput()))
         if getattr(self.env.world, 'crossing_proxy_ctrl', None) is not None:
             self.env.world.crossing_proxy_ctrl.log_summary()
+        if collect and self._last_trip_records is not None:
+            self._write_trip_metrics(self._last_trip_records, stem='new_metrics')
         return self.metric
 
     def writeLog(self, mode, step, travel_time, loss, cur_rwd, cur_queue, cur_delay, cur_throughput):
