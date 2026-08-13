@@ -1,0 +1,25 @@
+# Compact central-Doha / Corniche corridor (WGS84).
+# Format: west, south, east, north  (osmGet.py / Overpass)
+#
+# Why this box:
+#   Tight Corniche + West Bay core targeting ~20–40 controllable TLS.
+#   Includes West Bay / Al Dafna, the Corniche, Al Bidda, Msheireb / central
+#   Doha, and Old Doha / Doha Port approaches. Excludes The Pearl, Lusail,
+#   Education City, the airport, and C-Ring sprawl.
+#
+# QarSUMO (Chen et al., SIGSPATIAL 2020, arXiv:2010.03289) used a similar
+# Corniche / West Bay extract (~29 signals) as precedent only. This box is
+# chosen from current OSM, not copied from that paper.
+
+west: 51.508
+south: 25.278
+east: 51.550
+north: 25.338
+
+# Human-readable area (approximate)
+area_note: >
+  ~4.2 km east–west by ~6.7 km north–south, waterfront-centred on Al Corniche
+  Street between Doha Port / Museum of Islamic Art (south) and West Bay
+  (north), inland through Msheireb, Al Bidda Park, and the inner C-Ring
+  approaches. Chosen so OSM-tagged vehicle signals land in the ~20–40 TLS
+  compact band without inventing unsigned junctions.

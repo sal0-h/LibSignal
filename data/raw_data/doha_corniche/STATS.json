@@ -1,0 +1,487 @@
+{
+  "net": "data/raw_data/doha_corniche/doha_corniche.net.xml",
+  "conv_boundary_xy_m": "0.00,0.00,4703.82,7459.22",
+  "orig_boundary_lonlat": "51.361288,25.240050,51.641418,25.350139",
+  "proj": "+proj=utm +zone=39 +ellps=WGS84 +datum=WGS84 +units=m +no_defs",
+  "extent_m": {
+    "width": 4703.8,
+    "height": 7459.2
+  },
+  "n_junctions_noninternal": 2958,
+  "junction_types": {
+    "priority": 2776,
+    "traffic_light": 42,
+    "right_before_left": 68,
+    "dead_end": 72
+  },
+  "n_traffic_lights": 28,
+  "n_edges": 5716,
+  "n_lanes": 9494,
+  "total_lane_length_km": 628.361,
+  "n_oneway_edges": 3440,
+  "weak_connected_components": {
+    "count": 1,
+    "sizes": [
+      2958
+    ]
+  },
+  "source_edges": 42,
+  "sink_edges": 40,
+  "n_boundary_edges": 81,
+  "tls_green_phase_histogram": {
+    "1": 2,
+    "3": 8,
+    "2": 11,
+    "4": 3,
+    "8": 3,
+    "6": 1
+  },
+  "tls_green_phases": {
+    "min": 1,
+    "median": 3.0,
+    "max": 8
+  },
+  "tls_incoming_lanes": {
+    "min": 3,
+    "median": 8.5,
+    "max": 36
+  },
+  "tls_outgoing_lanes": {
+    "min": 2,
+    "median": 8.0,
+    "max": 28
+  },
+  "n_joined_or_cluster_tls": 17,
+  "n_guessed_tls": 13,
+  "traffic_lights": {
+    "1240229136": {
+      "type": "static",
+      "n_phases_raw": 2,
+      "n_green": 1,
+      "green_lengths": [
+        5
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": false,
+      "n_in_lanes": 5,
+      "n_out_lanes": 5
+    },
+    "1706197650": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        10,
+        10,
+        10
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": false,
+      "n_in_lanes": 10,
+      "n_out_lanes": 7
+    },
+    "4726715867": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        3,
+        3
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": false,
+      "n_in_lanes": 3,
+      "n_out_lanes": 2
+    },
+    "5579258852": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        5,
+        5
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": false,
+      "n_in_lanes": 5,
+      "n_out_lanes": 3
+    },
+    "96444930": {
+      "type": "static",
+      "n_phases_raw": 2,
+      "n_green": 1,
+      "green_lengths": [
+        5
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": false,
+      "n_in_lanes": 5,
+      "n_out_lanes": 5
+    },
+    "GS_12247715762": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        3,
+        3
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": true,
+      "n_in_lanes": 3,
+      "n_out_lanes": 2
+    },
+    "GS_1724484453": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        4,
+        4
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": true,
+      "n_in_lanes": 4,
+      "n_out_lanes": 3
+    },
+    "GS_2532422861": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        11,
+        11,
+        11
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": true,
+      "n_in_lanes": 9,
+      "n_out_lanes": 7
+    },
+    "GS_4727948504": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        6,
+        6
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": true,
+      "n_in_lanes": 5,
+      "n_out_lanes": 4
+    },
+    "GS_5078731267": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        6,
+        6,
+        6
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": true,
+      "n_in_lanes": 5,
+      "n_out_lanes": 4
+    },
+    "GS_7045504574": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        6,
+        6
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": true,
+      "n_in_lanes": 5,
+      "n_out_lanes": 4
+    },
+    "GS_cluster_1107042708_1107043014_1107043471_1107043498": {
+      "type": "static",
+      "n_phases_raw": 8,
+      "n_green": 4,
+      "green_lengths": [
+        20,
+        20,
+        20,
+        20
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": true,
+      "n_in_lanes": 13,
+      "n_out_lanes": 10
+    },
+    "GS_cluster_1109749477_4843974836": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        10,
+        10
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": true,
+      "n_in_lanes": 8,
+      "n_out_lanes": 8
+    },
+    "GS_cluster_1362902781_1362902783_1362902795_1362902805": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        11,
+        11,
+        11
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": true,
+      "n_in_lanes": 7,
+      "n_out_lanes": 6
+    },
+    "GS_cluster_3990061281_3990061283_3990062139_552888172": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        20,
+        20,
+        20
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": true,
+      "n_in_lanes": 12,
+      "n_out_lanes": 10
+    },
+    "GS_cluster_3999473376_3999473377": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        15,
+        15
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": true,
+      "n_in_lanes": 10,
+      "n_out_lanes": 10
+    },
+    "GS_cluster_4728501520_4728501521": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        19,
+        19
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": true,
+      "n_in_lanes": 7,
+      "n_out_lanes": 7
+    },
+    "GS_cluster_4843990287_4843990295": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        14,
+        14
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": true,
+      "n_in_lanes": 9,
+      "n_out_lanes": 9
+    },
+    "cluster_10200229158_10280487079_1240264670_1277063209": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        13,
+        13,
+        13
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 5,
+      "n_out_lanes": 8
+    },
+    "cluster_1107042949_1107042957": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        11,
+        11,
+        11
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 8,
+      "n_out_lanes": 8
+    },
+    "cluster_1107042974_1107043307_1987717397_4726879125": {
+      "type": "static",
+      "n_phases_raw": 8,
+      "n_green": 4,
+      "green_lengths": [
+        16,
+        16,
+        16,
+        16
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 11,
+      "n_out_lanes": 8
+    },
+    "cluster_11085621497_11085621498_11085621500_1721863411": {
+      "type": "static",
+      "n_phases_raw": 8,
+      "n_green": 4,
+      "green_lengths": [
+        18,
+        18,
+        18,
+        18
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 9,
+      "n_out_lanes": 8
+    },
+    "joinedS_10168734383_1690430444_2426625155_2926935382": {
+      "type": "static",
+      "n_phases_raw": 16,
+      "n_green": 8,
+      "green_lengths": [
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36,
+        36
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 32,
+      "n_out_lanes": 26
+    },
+    "joinedS_1108487458_1108487841_1108487886_1108488004": {
+      "type": "static",
+      "n_phases_raw": 12,
+      "n_green": 6,
+      "green_lengths": [
+        28,
+        28,
+        28,
+        28,
+        28,
+        28
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 23,
+      "n_out_lanes": 20
+    },
+    "joinedS_1138152657_1690430329": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        16,
+        16,
+        16
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 16,
+      "n_out_lanes": 13
+    },
+    "joinedS_2297019034_2297019035_2297019036_2297019037": {
+      "type": "static",
+      "n_phases_raw": 16,
+      "n_green": 8,
+      "green_lengths": [
+        43,
+        43,
+        43,
+        43,
+        43,
+        43,
+        43,
+        43
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 36,
+      "n_out_lanes": 28
+    },
+    "joinedS_282914891_cluster_115923236_1215923431": {
+      "type": "static",
+      "n_phases_raw": 4,
+      "n_green": 2,
+      "green_lengths": [
+        18,
+        18
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 18,
+      "n_out_lanes": 15
+    },
+    "joinedS_5891826884_5891839910_5891839932_5891839962": {
+      "type": "static",
+      "n_phases_raw": 16,
+      "n_green": 8,
+      "green_lengths": [
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14,
+        14
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 14,
+      "n_out_lanes": 10
+    }
+  },
+  "bbox_west_south_east_north": "51.508,25.278,51.55,25.338",
+  "sumo_version": "Eclipse SUMO netconvert 1.27.0",
+  "acquisition_date_utc": "2026-08-13"
+}

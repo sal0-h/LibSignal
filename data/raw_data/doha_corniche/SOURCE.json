@@ -1,0 +1,158 @@
+{
+  "network": "doha_corniche",
+  "cli_name": "sumo_doha",
+  "acquisition_date_utc": "2026-08-13",
+  "bbox_west_south_east_north": "51.508,25.278,51.55,25.338",
+  "bbox": {
+    "west": 51.508,
+    "south": 25.278,
+    "east": 51.55,
+    "north": 25.338,
+    "note": "~4.2 km east\u2013west by ~6.7 km north\u2013south, waterfront-centred on Al Corniche Street between Doha Port / Museum of Islamic Art (south) and West Bay (north), inland through Msheireb, Al Bidda Park, and the inner C-Ring approaches. Chosen so OSM-tagged vehicle signals land in the ~20\u201340 TLS compact band without inventing unsigned junctions."
+  },
+  "sumo_version": "Eclipse SUMO netconvert 1.27.0",
+  "sumo_home": "$SUMO_HOME",
+  "typemap": "data/typemap/osmNetconvert.typ.xml (default motor-vehicle OSM map; not UrbanDe \u2014 Doha arterials keep OSM maxspeed)",
+  "vehicle_filter": "keep-edges.by-vclass passenger",
+  "osm_file_not_committed": "data/raw_data/doha_corniche/_build/doha_corniche.osm.xml",
+  "osm_bytes": 13240434,
+  "osmGet_command": [
+    "python",
+    "$SUMO_HOME/tools/osmGet.py",
+    "--bbox",
+    "51.508,25.278,51.55,25.338",
+    "--prefix",
+    "doha_corniche",
+    "--output-dir",
+    "data/raw_data/doha_corniche/_build",
+    "--retries",
+    "6",
+    "--retry-delay",
+    "20",
+    "--verbose"
+  ],
+  "netconvert_command": [
+    "$SUMO_HOME/bin/netconvert",
+    "--osm-files",
+    "data/raw_data/doha_corniche/_build/doha_corniche.osm.xml",
+    "--output-file",
+    "data/raw_data/doha_corniche/_build/doha_corniche.net.xml",
+    "--type-files",
+    "$SUMO_HOME/data/typemap/osmNetconvert.typ.xml",
+    "--geometry.remove",
+    "true",
+    "--ramps.guess",
+    "true",
+    "--junctions.join",
+    "true",
+    "--tls.guess-signals",
+    "true",
+    "--tls.guess-signals.slack",
+    "1",
+    "--tls.discard-simple",
+    "true",
+    "--tls.join",
+    "true",
+    "--tls.default-type",
+    "static",
+    "--tls.yellow.time",
+    "3",
+    "--tls.allred.time",
+    "0",
+    "--keep-edges.by-vclass",
+    "passenger",
+    "--keep-edges.in-geo-boundary",
+    "51.508,25.278,51.55,25.338",
+    "--remove-edges.isolated",
+    "true",
+    "--keep-edges.components",
+    "1",
+    "--remove-edges.by-type",
+    "highway.track,highway.services,highway.path,highway.footway,highway.cycleway,highway.steps,highway.pedestrian,highway.bridleway,highway.corridor,highway.bus_guideway",
+    "--output.original-names",
+    "true",
+    "--output.street-names",
+    "true",
+    "--proj.utm",
+    "true"
+  ],
+  "netconvert_warning_categories": {
+    "counts": {
+      "warning_other": 91,
+      "discarding_unusable_type": 7,
+      "restriction_relation": 20,
+      "edges_removed": 1,
+      "junction_or_tls_join": 12,
+      "geometry": 6,
+      "roundabout": 6,
+      "tls": 2,
+      "speed": 6,
+      "connections": 1
+    },
+    "samples": {
+      "warning_other": [
+        "Warning: Unknown lane use specifier '' ignored for way '95475508'",
+        "Warning: Unknown lane use specifier '' ignored for way '95475508'",
+        "Warning: Unknown lane use specifier '' ignored for way '95475508'",
+        "Warning: Unknown lane use specifier '' ignored for way '95475508'",
+        "Warning: Unknown lane use specifier '' ignored for way '95475538'"
+      ],
+      "discarding_unusable_type": [
+        "Warning: Discarding unusable type 'railway.station' (first occurrence for edge '684422116').",
+        "Warning: Discarding unusable type 'aeroway.helipad' (first occurrence for edge '694839326').",
+        "Warning: Discarding unusable type 'waterway.stream' (first occurrence for edge '757069797').",
+        "Warning: Discarding unusable type 'waterway.canal' (first occurrence for edge '773115499').",
+        "Warning: Discarding unknown compound 'route.detour' in type 'highway.trunk_link|route.detour' (first occurrence for edge '1038300876')."
+      ],
+      "restriction_relation": [
+        "Warning: direction of restriction relation could not be determined",
+        "Warning: Ignoring restriction relation '2129253'.",
+        "Warning: Ignoring restriction relation '7191994' with unknown from-way.",
+        "Warning: direction of restriction relation could not be determined",
+        "Warning: Ignoring restriction relation '13823911'."
+      ],
+      "edges_removed": [
+        "Warning: Could not find corresponding edge or compatible lane for free-floating pt stop '5918033089' (Qatar bowling). Thus, it will be removed!"
+      ],
+      "junction_or_tls_join": [
+        "Warning: Not joining junctions 10168734383,1690430444,2426625155,2926935382,4818928605,4818928608 (6 incoming edges).",
+        "Warning: Not joining junctions 10196119423,10205985098,10205985100,10732900040,4726715701,5891724976,9948242750 (6 incoming edges).",
+        "Warning: Not joining junctions 10209417556,10280445535 (parallel incoming -1116250294#0,1124193756).",
+        "Warning: Not joining junctions 10209653141,10209653144 (only 1 edge within and no cross-traffic).",
+        "Warning: Not joining junctions 1025217295,13927715271,13927715272,8004336872,9500250902,9500250904,9517420808,9932061282,9932061296 (6 incoming edges)."
+      ],
+      "geometry": [
+        "Warning: Shape for junction '10601250330' has distance 22.39 to its given position.",
+        "Warning: Shape for junction '12247715564' has distance 20.61 to its given position.",
+        "Warning: Shape for junction '12247715624' has distance 35.52 to its given position.",
+        "Warning: Shape for junction '12247715688' has distance 21.44 to its given position.",
+        "Warning: Shape for junction '1272361366' has distance 29.42 to its given position."
+      ],
+      "roundabout": [
+        "Warning: Replacing loaded roundabout '1293675835#0 1293675835#1 1293675836 1293675837 1293675838 1293676406 1293676407 479747971#0 479747971#1' with '1293675835#0 1293675836 1293675837 1293675838 1293676406 1293676407 479747971#0 479747971#1'.",
+        "Warning: Replacing loaded roundabout '490596203#0 490596203#1 490596203#2 490596203#3 490596203#4 490596203#5 490596203#6 490596203#7' with '490596203#1 490596203#2 490596203#3 490596203#5 490596203#6 490596203#7'.",
+        "Warning: Replacing loaded roundabout '489435663#0 489435663#1 489435663#2 489435663#3 489435663#4 489435663#5 489435663#6' with '489435663#1 489435663#2 489435663#3 489435663#4 489435663#5 489435663#6'.",
+        "Warning: Replacing loaded roundabout '25938082#0 25938082#1 25938082#2 25938082#3 25938082#4 25938082#5 25938082#6 25938082#7 25938082#8' with '25938082#1 25938082#2 25938082#3 25938082#4 25938082#5 25938082#6 25938082#7 25938082#8'.",
+        "Warning: Replacing loaded roundabout '95475528#0 95475528#1 95475528#2 95475528#3 95475528#4 95475528#5 95475528#6 95475528#7 95475528#8' with '95475528#1 95475528#2 95475528#3 95475528#4 95475528#7 95475528#8'."
+      ],
+      "tls": [
+        "Warning: The traffic light '8008017875' does not control any links; it will not be build.",
+        "Warning: Could not build program '0' for traffic light '8008017875'"
+      ],
+      "speed": [
+        "Warning: Speed of straight connection '622912972_1->1034928964_1' reduced by 5.34 due to turning radius of 23.33 (length=16.49, angle=56.93).",
+        "Warning: Speed of straight connection '622912972_2->1034928964_2' reduced by 6.08 due to turning radius of 20.38 (length=14.33, angle=56.93).",
+        "Warning: Speed of straight connection '985997305_0->622912972_0' reduced by 5.29 due to turning radius of 23.53 (length=8.76, angle=37.07).",
+        "Warning: Speed of straight connection '985997305_1->622912972_1' reduced by 6.43 due to turning radius of 19.08 (length=7.04, angle=37.07).",
+        "Warning: Speed of straight connection '985997305_1->622912972_2' reduced by 8.60 due to turning radius of 11.85 (length=4.25, angle=37.07)."
+      ],
+      "connections": [
+        "Warning: Connection '1040240311_2->769028957_2' is only 0.00m short."
+      ]
+    }
+  },
+  "references": {
+    "sumo_osm_import": "https://sumo.dlr.de/docs/Networks/Import/OpenStreetMap.html",
+    "qarsumo_context_only": "Chen et al., QarSUMO, ACM SIGSPATIAL 2020, arXiv:2010.03289"
+  }
+}

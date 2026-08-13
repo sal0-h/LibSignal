@@ -1,0 +1,9 @@
+# Regenerated OSM extracts and netconvert working files. The committed
+# artefact is doha_corniche.net.xml (and demand files). Rebuild with:
+#   python extras/build_doha_network.py
+_build/
+*.osm.xml
+*.osm.xml.gz
+*.netccfg
+*.polycfg
+*.poly.xml
