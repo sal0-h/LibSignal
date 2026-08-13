@@ -45,12 +45,18 @@ class TSCTrainer(BaseTrainer):
         self.demand_heldout = world_param.get('demand_heldout') or []
         self.demand_train_file = world_param.get('demand_train_file')
         self.heldout_eval_every = int(trainer_param.get('heldout_eval_every') or 0)
-        # Per-vehicle trip metrics (SUMO): final test / final held-out only
+        # Per-vehicle trip metrics (SUMO): final test (+ best checkpoint for RL)
         cmd = Registry.mapping['command_mapping']['setting'].param
         self.save_trip_metrics = bool(trainer_param.get('save_trip_metrics', True))
         if cmd.get('no_trip_metrics'):
             self.save_trip_metrics = False
         self._last_trip_records = None
+        self.train_model = bool(
+            Registry.mapping['model_mapping']['setting'].param.get('train_model', False)
+        )
+        self.best_episode = None
+        self.best_att = None
+        self.best_metric_source = None  # 'test' | 'heldout'
         # replay file is only valid in cityflow now. 
         # TODO: support SUMO and Openengine later
 
@@ -90,6 +96,9 @@ class TSCTrainer(BaseTrainer):
             'seed': cmd.get('seed'),
             'avg_travel_time_metric': float(self.metric.real_average_travel_time()),
             'throughput_metric': int(self.metric.throughput()),
+            'best_episode': self.best_episode,
+            'best_att': self.best_att,
+            'best_metric_source': self.best_metric_source,
         }
         if meta_extra:
             extra.update(meta_extra)
@@ -104,6 +113,81 @@ class TSCTrainer(BaseTrainer):
             (meta.get('completion_rate') or 0.0) * 100.0,
         )
         return csv_path, meta_path, meta
+
+    def _maybe_update_best(self, e, att, source='test'):
+        '''Track lowest eval ATT during RL training and snapshot weights to best_*.pt.'''
+        if not self.train_model or att is None:
+            return
+        att = float(att)
+        if self.best_att is not None and att >= self.best_att:
+            return
+        self.best_att = att
+        self.best_episode = int(e)
+        self.best_metric_source = source
+        try:
+            [ag.save_model(e='best') for ag in self.agents]
+            self.logger.info(
+                "New best %s ATT=%.4f at episode %s (saved model/best_*.pt)",
+                source, att, e,
+            )
+        except Exception as exc:
+            self.logger.warning("Failed to save best checkpoint at episode %s: %s", e, exc)
+
+    def _load_best_checkpoint(self):
+        '''Load best_*.pt if present; otherwise fall back to episode-numbered file.'''
+        try:
+            [ag.load_model('best') for ag in self.agents]
+            return 'best'
+        except Exception as exc:
+            self.logger.warning(
+                "Could not load model/best_*.pt (%s); trying episode %s",
+                exc, self.best_episode,
+            )
+            [ag.load_model(self.best_episode) for ag in self.agents]
+            return self.best_episode
+
+    def _save_best_trip_metrics(self):
+        '''Re-evaluate the best RL checkpoint and write new_metrics_best*.'''
+        if not (self.train_model and self.save_trip_metrics and self._trip_metrics_supported()):
+            return
+        if self.best_episode is None:
+            self.logger.info(
+                "No best checkpoint tracked (need test_when_train or heldout_eval_every); "
+                "skipping new_metrics_best*."
+            )
+            return
+        loaded = self._load_best_checkpoint()
+        meta_common = {
+            'checkpoint': 'best',
+            'checkpoint_episode': self.best_episode,
+            'checkpoint_loaded': loaded,
+            'best_metric_source': self.best_metric_source,
+            'best_att_during_train': self.best_att,
+        }
+        if self.demand_heldout and hasattr(self.world, 'set_route_file'):
+            self.heldout_eval(
+                self.best_episode,
+                save_trip_metrics=True,
+                metrics_stem_prefix='new_metrics_best_hold',
+                update_best=False,
+                checkpoint_meta=meta_common,
+            )
+            return
+        if self.demand_train_file and hasattr(self.world, 'set_route_file'):
+            self.world.set_route_file(self.demand_train_file)
+        att = self._run_eval_episode(collect_trip_metrics=True)
+        self.logger.info(
+            "Best-checkpoint Travel Time is %.4f (episode %s, source=%s)",
+            att, self.best_episode, self.best_metric_source,
+        )
+        if self._last_trip_records is not None:
+            meta_common = dict(meta_common)
+            meta_common['eval_att'] = float(att)
+            self._write_trip_metrics(
+                self._last_trip_records,
+                stem='new_metrics_best',
+                meta_extra=meta_common,
+            )
 
     def _collect_actions(self, obs, phases, test=True):
         '''Gather actions for all agents; use batch path when the agent provides one.'''
@@ -332,7 +416,14 @@ class TSCTrainer(BaseTrainer):
             self._last_trip_records = tracker.finalize()
         return self.metric.real_average_travel_time()
 
-    def heldout_eval(self, e, save_trip_metrics=False):
+    def heldout_eval(
+        self,
+        e,
+        save_trip_metrics=False,
+        metrics_stem_prefix='new_metrics_hold',
+        update_best=True,
+        checkpoint_meta=None,
+    ):
         '''Evaluate (no learning) on held-out demand files and log mean ATT.'''
         atts = []
         for idx, route in enumerate(self.demand_heldout):
@@ -348,10 +439,18 @@ class TSCTrainer(BaseTrainer):
             self.writeLog("HELDOUT", e, att, 100, self.metric.rewards(),
                           self.metric.queue(), self.metric.delay(), self.metric.throughput())
             if save_trip_metrics and self._last_trip_records is not None:
+                meta_extra = {
+                    'demand_file': route,
+                    'heldout_index': idx,
+                    'episode': e,
+                    'checkpoint': (checkpoint_meta or {}).get('checkpoint', 'final'),
+                }
+                if checkpoint_meta:
+                    meta_extra.update(checkpoint_meta)
                 self._write_trip_metrics(
                     self._last_trip_records,
-                    stem=f"new_metrics_hold_{idx:02d}",
-                    meta_extra={'demand_file': route, 'heldout_index': idx, 'episode': e},
+                    stem=f"{metrics_stem_prefix}_{idx:02d}",
+                    meta_extra=meta_extra,
                 )
         mean_att = float(np.mean(atts)) if atts else 0.0
         self.logger.info(
@@ -359,6 +458,8 @@ class TSCTrainer(BaseTrainer):
                 e, self.episodes, mean_att, len(atts))
         )
         self.writeLog("HELDOUT_MEAN", e, mean_att, 100, 0, 0, 0, 0)
+        if update_best:
+            self._maybe_update_best(e, mean_att, source='heldout')
         return mean_att
 
     def train_test(self, e):
@@ -377,6 +478,7 @@ class TSCTrainer(BaseTrainer):
             100, self.metric.rewards(),self.metric.queue(),self.metric.delay(), self.metric.throughput())
         if getattr(self.env.world, 'crossing_proxy_ctrl', None) is not None:
             self.env.world.crossing_proxy_ctrl.log_summary()
+        self._maybe_update_best(e, att, source='test')
         return att
 
     def test(self, drop_load=True):
@@ -399,7 +501,14 @@ class TSCTrainer(BaseTrainer):
         attention_mat_list = []
         collect = bool(self.save_trip_metrics)
         if self.demand_heldout and hasattr(self.world, 'set_route_file'):
-            self.heldout_eval(self.episodes, save_trip_metrics=collect)
+            self.heldout_eval(
+                self.episodes,
+                save_trip_metrics=collect,
+                metrics_stem_prefix='new_metrics_hold',
+                update_best=False,
+                checkpoint_meta={'checkpoint': 'final'},
+            )
+            self._save_best_trip_metrics()
             return self.metric
         if self.demand_train_file and hasattr(self.world, 'set_route_file'):
             self.world.set_route_file(self.demand_train_file)
@@ -409,7 +518,12 @@ class TSCTrainer(BaseTrainer):
         if getattr(self.env.world, 'crossing_proxy_ctrl', None) is not None:
             self.env.world.crossing_proxy_ctrl.log_summary()
         if collect and self._last_trip_records is not None:
-            self._write_trip_metrics(self._last_trip_records, stem='new_metrics')
+            self._write_trip_metrics(
+                self._last_trip_records,
+                stem='new_metrics',
+                meta_extra={'checkpoint': 'final', 'eval_att': float(att)},
+            )
+        self._save_best_trip_metrics()
         return self.metric
 
     def writeLog(self, mode, step, travel_time, loss, cur_rwd, cur_queue, cur_delay, cur_throughput):
