@@ -238,6 +238,7 @@ local RL unless you move `phase`/`one_hot` under `model:` in its YAML.
 | Doc | Relation |
 |-----|----------|
 | [`SUMO_NETWORKS.md`](SUMO_NETWORKS.md) | Network catalogue (incl. `sumo4x4` TL counts) |
+| [`DQN_TRAINING_PIPELINE.md`](DQN_TRAINING_PIPELINE.md) | Full DQN execution/learning pipeline on `sumo4x4` (episodes, replay, TD update, how many policies) |
 | [`TECHNICAL_ANALYSIS.md`](TECHNICAL_ANALYSIS.md) | Broader architecture / state-reward overview |
 | [`TSC_CONFIG_REPORT.md`](TSC_CONFIG_REPORT.md) | Every `configs/tsc/*.yml` key, including dead keys |
 | [`PARTIAL_OBSERVABILITY.md`](PARTIAL_OBSERVABILITY.md) | How `lane_count` can be corrupted before agents read it |

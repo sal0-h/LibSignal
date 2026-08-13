@@ -53,6 +53,8 @@ Configs: `configs/tsc/fixedtime_ncollision.yml` and `configs/tsc/maxpressure_nco
 
 ### The Training Loop
 
+For a code-traced, Grid4×4-specific account of DQN (32 independent policies, replay, TD update, what an episode is), see [DQN_TRAINING_PIPELINE.md](DQN_TRAINING_PIPELINE.md). The sketch below is the generic trainer shape.
+
 When you run with a RL agent (dqn, ppo, etc.), here's what happens:
 
 **1. Environment Setup**
