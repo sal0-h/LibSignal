@@ -30,8 +30,8 @@ NGPU="${NGPU:--1}"
 cd "${REPO_DIR}"
 mkdir -p logs
 
-# Force shared env (same as extras/slurm_realism_full_*.sh). Ignore login CONDA_PREFIX.
-CONDA_PREFIX="${CONDA_PREFIX_OVERRIDE:-/data1/mmirzata/.conda/envs/${CONDA_ENV}}"
+# Force shared env (same as extras/slurm_realism_full_*.sh). Never trust login CONDA_PREFIX.
+CONDA_PREFIX="/data1/mmirzata/.conda/envs/${CONDA_ENV}"
 if [[ ! -x "${CONDA_PREFIX}/bin/python" ]]; then
   echo "ERROR: python not found at ${CONDA_PREFIX}/bin/python" >&2
   ls -la "${CONDA_PREFIX}/bin" 2>&1 | head -20 >&2 || true

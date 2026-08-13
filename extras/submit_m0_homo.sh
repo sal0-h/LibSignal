@@ -67,13 +67,14 @@ submit_one() {
   fi
   local job_name="m0_${agent}_${network}"
   echo "sbatch ${job_name}  (time=${wall}, prefix=${PREFIX})"
-  # Export only what the job needs. Do NOT use --export=ALL (login CONDA_PREFIX
-  # is often /opt/anaconda3, which is missing on compute nodes → exit 127).
+  # Do NOT use --export=ALL — on gpujobs that triggers:
+  #   (user env retrieval failed requeued held)
+  # Pass only the vars the job script needs (same pattern as older working jobs).
   sbatch \
     --job-name="${job_name}" \
     --time="${wall}" \
-    --export="ALL,AGENT=${agent},NETWORK=${network},SEED=${SEED},PREFIX=${PREFIX},CONDA_ENV=${CONDA_ENV},REPO_DIR=${REPO_DIR},CONDA_PREFIX_OVERRIDE=/data1/mmirzata/.conda/envs/${CONDA_ENV}" \
     --mcs-label="${MCS_LABEL}" \
+    --export="AGENT=${agent},NETWORK=${network},SEED=${SEED},PREFIX=${PREFIX},REPO_DIR=${REPO_DIR},CONDA_ENV=${CONDA_ENV}" \
     extras/slurm_m0_homo.sh
 }
 
