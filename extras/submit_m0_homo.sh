@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 # Submit M0 journal cell: movie · axes OFF · 3600s · 200 eps (default configs).
 #
-# Same pattern as extras/submit_realism_full_4x4.sh / submit_od_hub_1800.sh:
-#   sbatch --mcs-label=... <script>
-# NO --export (any --export triggers "user env retrieval failed" on gpujobs).
+# gpujobs lesson: CPU-only jobs on partition gpu2 sit forever at (Priority) while
+# GPU jobs wait. Request a tiny MIG slice so Slurm will schedule; LibSignal still
+# runs on CPU (--ngpu -1).
+#
+#   sbatch --mcs-label=... <script>     # NO --export
 #
 # Usage (gpujobs login):
 #   export MCS_LABEL=15288
@@ -11,8 +13,6 @@
 #   ./extras/submit_m0_homo.sh baselines
 #   ./extras/submit_m0_homo.sh rl
 #   ./extras/submit_m0_homo.sh all
-#   ./extras/submit_m0_homo.sh 4x4
-#   ./extras/submit_m0_homo.sh 1x21
 
 set -euo pipefail
 
@@ -30,9 +30,12 @@ SEED="${SEED:-42}"
 PREFIX="${PREFIX:-m0_homo}"
 TIME_BASELINE="${TIME_BASELINE:-04:00:00}"
 TIME_RL="${TIME_RL:-48:00:00}"
-TIME_SMOKE="${TIME_SMOKE:-01:00:00}"
-CPUS="${CPUS:-2}"
-MEM="${MEM:-8G}"
+TIME_SMOKE="${TIME_SMOKE:-02:00:00}"
+# Match the working dry-run that started immediately
+CPUS="${CPUS:-1}"
+MEM="${MEM:-4G}"
+GRES="${GRES:-gpu:nvidia_h200_1g.18gb:1}"
+PARTITION="${PARTITION:-gpu2}"
 
 BASELINES=(fixedtime maxpressure)
 RL=(dqn presslight colight)
@@ -49,6 +52,8 @@ write_job_script() {
   local network="$2"
   local wall="$3"
   local prefix="$4"
+  local cpus="$5"
+  local mem="$6"
   local out="extras/_slurm_generated/m0/m0_${agent}_${network}.sh"
 
   cat >"${out}" <<EOF
@@ -56,9 +61,11 @@ write_job_script() {
 #SBATCH --job-name=m0_${agent}_${network}
 #SBATCH --output=logs/m0_${agent}_${network}_%j.out
 #SBATCH --error=logs/m0_${agent}_${network}_%j.err
+#SBATCH --partition=${PARTITION}
+#SBATCH --gres=${GRES}
 #SBATCH --time=${wall}
-#SBATCH --cpus-per-task=${CPUS}
-#SBATCH --mem=${MEM}
+#SBATCH --cpus-per-task=${cpus}
+#SBATCH --mem=${mem}
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 
@@ -74,6 +81,7 @@ PYTHON="\${CONDA_PREFIX}/bin/python"
 echo "Host:      \$(hostname)"
 echo "Job:       \${SLURM_JOB_ID:-local}"
 echo "Python:    \${PYTHON} (\$("\${PYTHON}" --version 2>&1))"
+echo "CUDA_VISIBLE_DEVICES=\${CUDA_VISIBLE_DEVICES:-unset}"
 echo "Agent:     ${agent}"
 echo "Network:   ${network}"
 echo "Seed:      ${SEED}"
@@ -97,6 +105,7 @@ fi
   echo "WARNING: libsumo missing — may fall back to traci"
 }
 
+# GPU slice is for Slurm scheduling only; LibSignal stays on CPU.
 "\${PYTHON}" run.py \\
   --agent ${agent} \\
   --world sumo \\
@@ -119,9 +128,11 @@ submit_one() {
   local network="$2"
   local wall="$3"
   local prefix="${4:-${PREFIX}}"
+  local cpus="${5:-${CPUS}}"
+  local mem="${6:-${MEM}}"
   local script
-  script="$(write_job_script "${agent}" "${network}" "${wall}" "${prefix}")"
-  echo "sbatch ${script}  (mcs=${MCS_LABEL})"
+  script="$(write_job_script "${agent}" "${network}" "${wall}" "${prefix}" "${cpus}" "${mem}")"
+  echo "sbatch ${script}  (mcs=${MCS_LABEL}, gres=${GRES}, cpus=${cpus}, mem=${mem})"
   sbatch --mcs-label="${MCS_LABEL}" "${script}"
 }
 
@@ -129,14 +140,18 @@ submit_net() {
   local network="$1"
   shift
   local agents=("$@")
-  local agent wall
+  local agent wall cpus mem
   for agent in "${agents[@]}"; do
     if is_rl "${agent}"; then
       wall="${TIME_RL}"
+      cpus="${CPUS_RL:-2}"
+      mem="${MEM_RL:-8G}"
     else
       wall="${TIME_BASELINE}"
+      cpus="${CPUS}"
+      mem="${MEM}"
     fi
-    submit_one "${agent}" "${network}" "${wall}"
+    submit_one "${agent}" "${network}" "${wall}" "${PREFIX}" "${cpus}" "${mem}"
   done
 }
 
@@ -144,8 +159,7 @@ ALL_AGENTS=("${BASELINES[@]}" "${RL[@]}")
 
 case "${MODE}" in
   smoke)
-    # Short MP 4x4 only — verify queue + env before full batch
-    submit_one maxpressure sumo4x4 "${TIME_SMOKE}" m0_smoke
+    submit_one maxpressure sumo4x4 "${TIME_SMOKE}" m0_smoke "${CPUS}" "${MEM}"
     ;;
   baselines)
     submit_net sumo4x4 "${BASELINES[@]}"
@@ -172,6 +186,6 @@ case "${MODE}" in
 esac
 
 echo ""
-echo "Submitted. Monitor: squeue -u \$USER"
-echo "Reason must NOT be: user env retrieval failed"
+echo "Submitted with gres=${GRES} (CPU compute via --ngpu -1)."
+echo "Monitor: squeue -u \$USER"
 echo "Logs: logs/m0_<agent>_<network>_<jobid>.out"
