@@ -101,11 +101,15 @@ if [[ "${agent}" == colight* ]]; then
   }
 fi
 
+# GPU MIG slice is for Slurm scheduling only. Force CPU for LibSignal even if
+# Slurm exported CUDA_VISIBLE_DEVICES=MIG-... (--ngpu -1 clears it in run.py too).
+export CUDA_VISIBLE_DEVICES=""
+
 "\${PYTHON}" -c "import libsumo; print('libsumo: OK')" 2>/dev/null || {
   echo "WARNING: libsumo missing — may fall back to traci"
 }
 
-# GPU slice is for Slurm scheduling only; LibSignal stays on CPU.
+# LibSignal on CPU (--ngpu -1).
 "\${PYTHON}" run.py \\
   --agent ${agent} \\
   --world sumo \\
@@ -169,6 +173,10 @@ case "${MODE}" in
     submit_net sumo4x4 "${RL[@]}"
     submit_net sumo1x21 "${RL[@]}"
     ;;
+  colight)
+    submit_one colight sumo4x4 "${TIME_RL}" "${PREFIX}" "${CPUS_RL:-2}" "${MEM_RL:-8G}"
+    submit_one colight sumo1x21 "${TIME_RL}" "${PREFIX}" "${CPUS_RL:-2}" "${MEM_RL:-8G}"
+    ;;
   all)
     submit_net sumo4x4 "${ALL_AGENTS[@]}"
     submit_net sumo1x21 "${ALL_AGENTS[@]}"
@@ -180,7 +188,7 @@ case "${MODE}" in
     submit_net sumo1x21 "${ALL_AGENTS[@]}"
     ;;
   *)
-    echo "Usage: $0 {smoke|baselines|rl|all|4x4|1x21}"
+    echo "Usage: $0 {smoke|baselines|rl|colight|all|4x4|1x21}"
     exit 1
     ;;
 esac

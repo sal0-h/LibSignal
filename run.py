@@ -41,7 +41,13 @@ parser.add_argument(
 )
 
 args = parser.parse_args()
-os.environ["CUDA_VISIBLE_DEVICES"] = args.ngpu
+# --ngpu -1 means CPU-only. Setting CUDA_VISIBLE_DEVICES to the literal "-1" does
+# NOT hide GPUs (Slurm MIG stays visible) and breaks agents that need CPU
+# torch_scatter (e.g. CoLight). Empty string = no CUDA devices.
+if str(args.ngpu) in ("-1", ""):
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""
+else:
+    os.environ["CUDA_VISIBLE_DEVICES"] = str(args.ngpu)
 
 logging_level = logging.INFO
 if args.debug:
