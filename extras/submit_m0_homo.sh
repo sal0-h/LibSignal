@@ -31,6 +31,8 @@ PREFIX="${PREFIX:-m0_homo}"
 TIME_BASELINE="${TIME_BASELINE:-04:00:00}"
 TIME_RL="${TIME_RL:-48:00:00}"
 TIME_SMOKE="${TIME_SMOKE:-01:00:00}"
+CPUS="${CPUS:-2}"
+MEM="${MEM:-8G}"
 
 BASELINES=(fixedtime maxpressure)
 RL=(dqn presslight colight)
@@ -55,8 +57,8 @@ write_job_script() {
 #SBATCH --output=logs/m0_${agent}_${network}_%j.out
 #SBATCH --error=logs/m0_${agent}_${network}_%j.err
 #SBATCH --time=${wall}
-#SBATCH --cpus-per-task=8
-#SBATCH --mem=32G
+#SBATCH --cpus-per-task=${CPUS}
+#SBATCH --mem=${MEM}
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 
