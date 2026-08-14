@@ -55,6 +55,8 @@ trainer:
   update_model_rate: 1
   update_target_rate: 10
   test_when_train: True
+  # Adaptive episode budget (off here; L1/L2 OD-hub configs turn it on).
+  early_stop: False
   # Per-vehicle trip metrics (SUMO only) under the run logger/ dir:
   # - always on final test: new_metrics.csv (+ new_metrics_hold_* if held-out)
   # - RL (train_model=True) also re-evals best ATT checkpoint: new_metrics_best*

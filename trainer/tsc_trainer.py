@@ -45,6 +45,23 @@ class TSCTrainer(BaseTrainer):
         self.demand_heldout = world_param.get('demand_heldout') or []
         self.demand_train_file = world_param.get('demand_train_file')
         self.heldout_eval_every = int(trainer_param.get('heldout_eval_every') or 0)
+        # Adaptive episode budget (L1/L2: cycle-mean median wait). Missing keys = run full episodes.
+        self.min_episodes = int(trainer_param.get('min_episodes') or 0)
+        self.early_stop = bool(trainer_param.get('early_stop', False))
+        self.early_stop_patience = int(trainer_param.get('early_stop_patience') or 0)
+        self.early_stop_min_delta = float(trainer_param.get('early_stop_min_delta') or 0.0)
+        self.early_stop_metric = str(trainer_param.get('early_stop_metric') or 'test').lower()
+        self.early_stop_abs_floor = float(trainer_param.get('early_stop_abs_floor') or 0.0)
+        mode = str(trainer_param.get('early_stop_mode') or 'auto').lower()
+        cycle_len = len(self.demand_set) if len(self.demand_set) > 1 else 10
+        if mode in ('', 'auto'):
+            if self.early_stop_metric == 'wait' and len(self.demand_set) > 1:
+                mode = 'cycle_mean'
+            else:
+                mode = 'off'
+        self.early_stop_mode = mode
+        self.early_stop_cycle_len = cycle_len
+        self._cycle_mean_stopper = None
         # Per-vehicle trip metrics (SUMO): final test (+ best checkpoint for RL)
         cmd = Registry.mapping['command_mapping']['setting'].param
         self.save_trip_metrics = bool(trainer_param.get('save_trip_metrics', True))
@@ -273,13 +290,35 @@ class TSCTrainer(BaseTrainer):
     def train(self):
         '''
         train
-        Train the agent(s).
+        Train the agent(s). Stops at episodes (max) or earlier when early_stop
+        is enabled (cycle-mean median wait on rotating demand).
 
         :param: None
         :return: None
         '''
         total_decision_num = 0
         flush = 0
+        self._cycle_mean_stopper = None
+        if (self.early_stop_metric == 'wait' or self.early_stop_mode == 'cycle_mean') and hasattr(
+                self.world, 'track_trip_wait'):
+            self.world.track_trip_wait = True
+        if self.early_stop and self.early_stop_mode == 'cycle_mean':
+            from common.early_stop import CycleMeanStopper
+            self._cycle_mean_stopper = CycleMeanStopper(
+                cycle_len=self.early_stop_cycle_len,
+                patience=self.early_stop_patience,
+                min_delta=self.early_stop_min_delta,
+                abs_floor=self.early_stop_abs_floor,
+                min_episodes=self.min_episodes,
+            )
+            self.logger.info(
+                "early_stop enabled: mode={}, min_episodes={}, max_episodes={}, "
+                "patience={}, min_delta={:.4f}, abs_floor={:.2f}, cycle_len={}, metric={}".format(
+                    self.early_stop_mode, self.min_episodes, self.episodes,
+                    self.early_stop_patience, self.early_stop_min_delta,
+                    self.early_stop_abs_floor, self.early_stop_cycle_len,
+                    self.early_stop_metric)
+            )
         for e in range(self.episodes):
             # TODO: check this reset agent
             self._select_train_demand(e)
@@ -349,13 +388,23 @@ class TSCTrainer(BaseTrainer):
             else:
                 mean_loss = 0
             
-            self.writeLog("TRAIN", e, self.metric.real_average_travel_time(),\
+            train_att = self.metric.real_average_travel_time()
+            self.writeLog("TRAIN", e, train_att,\
                 mean_loss, self.metric.rewards(), self.metric.queue(), self.metric.delay(), self.metric.throughput())
             self.logger.info("step:{}/{}, q_loss:{}, rewards:{}, queue:{}, delay:{}, throughput:{}".format(i, self.steps,\
                 mean_loss, self.metric.rewards(), self.metric.queue(), self.metric.delay(), int(self.metric.throughput())))
             if e % self.save_rate == 0:
                 [ag.save_model(e=e) for ag in self.agents]
-            self.logger.info("episode:{}/{}, real avg travel time:{}".format(e, self.episodes, self.metric.real_average_travel_time()))
+            self.logger.info("episode:{}/{}, real avg travel time:{}".format(e, self.episodes, train_att))
+            median_wait = None
+            if hasattr(self.world, 'get_median_waiting_time'):
+                median_wait = self.world.get_median_waiting_time()
+                n_wait = len(getattr(self.world, 'departed_wait_s', {}) or {})
+                if median_wait is not None:
+                    self.logger.info(
+                        "episode:{}/{}, median wait:{} (n={})".format(
+                            e, self.episodes, median_wait, n_wait)
+                    )
             for j in range(len(self.world.intersections)):
                 self.logger.debug("intersection:{}, mean_episode_reward:{}, mean_queue:{}".format(j, self.metric.lane_rewards()[j],\
                      self.metric.lane_queue()[j]))
@@ -363,7 +412,36 @@ class TSCTrainer(BaseTrainer):
                 self.train_test(e)
             if self.heldout_eval_every > 0 and self.demand_heldout and (e % self.heldout_eval_every == 0):
                 self.heldout_eval(e)
-        # self.dataset.flush([ag.replay_buffer for ag in self.agents])
+            if self._cycle_mean_stopper is not None:
+                stop, decision = self._cycle_mean_stopper.add(median_wait)
+                if decision is not None:
+                    self.logger.info(
+                        "cycle_mean cycle={} m_prev={:.2f} m_curr={:.2f} rel={:+.4f} "
+                        "delta={:+.2f} flat={} improved={} patience={}/{}".format(
+                            decision["cycle"], decision["mean_prev"], decision["mean_curr"],
+                            decision["rel"], decision["delta"], decision["flat"],
+                            decision["improved"], decision["cycles_without_improve"],
+                            self.early_stop_patience)
+                    )
+                if self.early_stop and stop:
+                    self.logger.info(
+                        "early_stop at episode {}/{} (cycle_mean wait, m={:.2f}, "
+                        "best ATT={} at episode {}, source={})".format(
+                            e, self.episodes,
+                            decision["mean_curr"] if decision else float("nan"),
+                            "{:.2f}".format(self.best_att) if self.best_att is not None else "n/a",
+                            self.best_episode, self.best_metric_source)
+                    )
+                    break
+        if self.best_episode is not None:
+            try:
+                self._load_best_checkpoint()
+                self.logger.info(
+                    "reloaded best checkpoint from episode {} (ATT={:.2f}, source={})".format(
+                        self.best_episode, self.best_att, self.best_metric_source)
+                )
+            except Exception as exc:
+                self.logger.warning("could not reload best checkpoint: {}".format(exc))
         [ag.save_model(e=self.episodes) for ag in self.agents]
 
     def _select_train_demand(self, e):
@@ -438,6 +516,13 @@ class TSCTrainer(BaseTrainer):
             )
             self.writeLog("HELDOUT", e, att, 100, self.metric.rewards(),
                           self.metric.queue(), self.metric.delay(), self.metric.throughput())
+            if hasattr(self.world, 'get_median_waiting_time'):
+                mw = self.world.get_median_waiting_time()
+                if mw is not None:
+                    self.logger.info(
+                        "HELDOUT episode:{}/{}, demand:{}, median wait:{}".format(
+                            e, self.episodes, route, mw)
+                    )
             if save_trip_metrics and self._last_trip_records is not None:
                 meta_extra = {
                     'demand_file': route,
