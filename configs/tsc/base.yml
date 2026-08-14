@@ -59,6 +59,9 @@ trainer:
   early_stop_patience: 20       # stop after this many episodes with no ATT improvement
   early_stop_min_delta: 0.01    # relative ATT improvement required to reset patience (1%)
   early_stop_metric: test       # which ATT to watch: test | train | heldout
+  early_stop_mode: plateau      # plateau | paired_cycle | cycle_mean | auto
+  early_stop_z: 1.0             # paired_cycle only: mean same-file drop must exceed z * SE
+  early_stop_abs_floor: 0.0     # cycle_mean: also flat if |m(t)-m(t-1)| < this (seconds)
   update_model_rate: 1
   update_target_rate: 10
   test_when_train: True

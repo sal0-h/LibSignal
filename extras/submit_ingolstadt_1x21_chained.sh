@@ -4,8 +4,8 @@
 # Jobs run in parallel when GPUs are free. Within each job, methods run sequentially:
 #   1) baseline  — 5 methods, homo, FIXED 200 episodes (*_e200)
 #   2) axes      — 25 runs (5 axes × 5 methods), early-stop (*_es prefixes)
-#   3) l1        — 5 methods, OD-hub only, ADAPTIVE held-out early-stop
-#   4) l2        — 5 methods, OD + realism_full, ADAPTIVE held-out early-stop
+#   3) l1        — 5 methods, OD-hub only, cycle-mean median-wait early-stop
+#   4) l2        — 5 methods, OD + realism_full, cycle-mean median-wait early-stop
 #
 # Usage:
 #   ./extras/submit_ingolstadt_1x21_chained.sh

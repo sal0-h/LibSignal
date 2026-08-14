@@ -4,7 +4,8 @@
 # sumo_begin/end override cfg afternoon peak (57600+) so synthetic OD at t=0..1800
 # is visible when LibSignal uses explicit -n/-r.
 #
-# Early-stop watches HELDOUT_MEAN ATT (same rule as grid4x4 OD-hub).
+# Early-stop: same cycle-mean median-wait rule as grid4x4 OD-hub.
+# Travel time is still logged; held-out ATT still picks the best checkpoint.
 
 trainer:
   steps: 1800
@@ -12,9 +13,11 @@ trainer:
   episodes: 500
   min_episodes: 30
   early_stop: True
+  early_stop_mode: cycle_mean
+  early_stop_metric: wait
   early_stop_patience: 3
-  early_stop_min_delta: 0.01
-  early_stop_metric: heldout
+  early_stop_min_delta: 0.05
+  early_stop_abs_floor: 1.0
   action_interval: 10
   test_when_train: False
   heldout_eval_every: 10

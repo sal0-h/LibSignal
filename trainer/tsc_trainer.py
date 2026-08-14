@@ -45,15 +45,32 @@ class TSCTrainer(BaseTrainer):
         self.demand_heldout = world_param.get('demand_heldout') or []
         self.demand_train_file = world_param.get('demand_train_file')
         self.heldout_eval_every = int(trainer_param.get('heldout_eval_every') or 0)
-        # Standard early-stop budget (min/max episodes + ATT plateau).
+        # Standard early-stop budget (min/max episodes + ATT plateau / paired cycle).
         # episodes is the hard max; missing keys keep legacy always-run-full-budget behavior.
         self.min_episodes = int(trainer_param.get('min_episodes') or 0)
         self.early_stop = bool(trainer_param.get('early_stop', False))
         self.early_stop_patience = int(trainer_param.get('early_stop_patience') or 0)
         self.early_stop_min_delta = float(trainer_param.get('early_stop_min_delta') or 0.0)
         self.early_stop_metric = str(trainer_param.get('early_stop_metric') or 'test').lower()
+        self.early_stop_z = float(trainer_param.get('early_stop_z') or 1.0)
+        self.early_stop_abs_floor = float(trainer_param.get('early_stop_abs_floor') or 0.0)
+        self.early_stop_window = int(trainer_param.get('early_stop_window') or 0)
+        mode = str(trainer_param.get('early_stop_mode') or 'auto').lower()
+        cycle_len = len(self.demand_set) if len(self.demand_set) > 1 else (self.early_stop_window or 10)
+        if mode in ('', 'auto'):
+            if self.early_stop_metric == 'wait' and len(self.demand_set) > 1:
+                mode = 'cycle_mean'
+            elif self.early_stop_metric == 'train' and len(self.demand_set) > 1:
+                mode = 'paired_cycle'
+            else:
+                mode = 'plateau'
+        self.early_stop_mode = mode
+        self.early_stop_cycle_len = cycle_len
+        self._paired_stopper = None
+        self._cycle_mean_stopper = None
         self.best_att = float('inf')
         self.best_episode = None
+        self.best_metric_source = None
         self.episodes_without_improve = 0
         self.stop_episode = None  # last completed episode index (0-based) when train ends
         # replay file is only valid in cityflow now. 
@@ -147,8 +164,8 @@ class TSCTrainer(BaseTrainer):
     def train(self):
         '''
         train
-        Train the agent(s). Stops at episodes (max) or earlier on ATT plateau
-        after min_episodes when early_stop is enabled.
+        Train the agent(s). Stops at episodes (max) or earlier when early_stop
+        is enabled (ATT plateau, paired-cycle train ATT, or cycle-mean wait).
 
         :param: None
         :return: None
@@ -157,14 +174,41 @@ class TSCTrainer(BaseTrainer):
         flush = 0
         self.best_att = float('inf')
         self.best_episode = None
+        self.best_metric_source = None
         self.episodes_without_improve = 0
         self.stop_episode = None
+        self._paired_stopper = None
+        self._cycle_mean_stopper = None
+        if (self.early_stop_metric == 'wait' or self.early_stop_mode == 'cycle_mean') and hasattr(
+                self.world, 'track_trip_wait'):
+            self.world.track_trip_wait = True
+        if self.early_stop_mode == 'cycle_mean':
+            from common.early_stop import CycleMeanStopper
+            self._cycle_mean_stopper = CycleMeanStopper(
+                cycle_len=self.early_stop_cycle_len,
+                patience=self.early_stop_patience,
+                min_delta=self.early_stop_min_delta,
+                abs_floor=self.early_stop_abs_floor,
+                min_episodes=self.min_episodes,
+            )
+        elif self.early_stop_mode == 'paired_cycle':
+            from common.early_stop import PairedCycleStopper
+            self._paired_stopper = PairedCycleStopper(
+                cycle_len=self.early_stop_cycle_len,
+                patience=self.early_stop_patience,
+                min_delta=self.early_stop_min_delta,
+                z=self.early_stop_z,
+                min_episodes=self.min_episodes,
+            )
         if self.early_stop:
             self.logger.info(
-                "early_stop enabled: min_episodes={}, max_episodes={}, patience={}, "
-                "min_delta={:.4f}, metric={}".format(
-                    self.min_episodes, self.episodes, self.early_stop_patience,
-                    self.early_stop_min_delta, self.early_stop_metric)
+                "early_stop enabled: mode={}, min_episodes={}, max_episodes={}, "
+                "patience={}, min_delta={:.4f}, abs_floor={:.2f}, z={:.2f}, "
+                "cycle_len={}, metric={}".format(
+                    self.early_stop_mode, self.min_episodes, self.episodes,
+                    self.early_stop_patience, self.early_stop_min_delta,
+                    self.early_stop_abs_floor, self.early_stop_z,
+                    self.early_stop_cycle_len, self.early_stop_metric)
             )
         for e in range(self.episodes):
             # TODO: check this reset agent
@@ -246,6 +290,15 @@ class TSCTrainer(BaseTrainer):
             if e % self.save_rate == 0:
                 [ag.save_model(e=e) for ag in self.agents]
             self.logger.info("episode:{}/{}, real avg travel time:{}".format(e, self.episodes, train_att))
+            median_wait = None
+            if hasattr(self.world, 'get_median_waiting_time'):
+                median_wait = self.world.get_median_waiting_time()
+                n_wait = len(getattr(self.world, 'departed_wait_s', {}) or {})
+                if median_wait is not None:
+                    self.logger.info(
+                        "episode:{}/{}, median wait:{} (n={})".format(
+                            e, self.episodes, median_wait, n_wait)
+                    )
             for j in range(len(self.world.intersections)):
                 self.logger.debug("intersection:{}, mean_episode_reward:{}, mean_queue:{}".format(j, self.metric.lane_rewards()[j],\
                      self.metric.lane_queue()[j]))
@@ -256,17 +309,27 @@ class TSCTrainer(BaseTrainer):
             if self.heldout_eval_every > 0 and self.demand_heldout and (e % self.heldout_eval_every == 0):
                 heldout_att = self.heldout_eval(e)
 
-            stop_att = self._select_early_stop_att(train_att, test_att, heldout_att)
-            if self._update_early_stop(e, stop_att):
-                self.stop_episode = e
-                self.logger.info(
-                    "early_stop at episode {}/{} (best ATT={:.2f} at episode {}, "
-                    "patience={})".format(
-                        e, self.episodes, self.best_att, self.best_episode,
-                        self.early_stop_patience)
-                )
-                break
             self.stop_episode = e
+            if self.early_stop_mode == 'cycle_mean':
+                if heldout_att is not None:
+                    self._update_checkpoint(e, heldout_att, source='heldout')
+                if self._step_cycle_mean_stop(e, median_wait, heldout_att):
+                    break
+            elif self.early_stop_mode == 'paired_cycle':
+                if heldout_att is not None:
+                    self._update_checkpoint(e, heldout_att, source='heldout')
+                if self._step_paired_cycle_stop(e, train_att, heldout_att):
+                    break
+            else:
+                stop_att = self._select_early_stop_att(train_att, test_att, heldout_att)
+                if self._update_early_stop(e, stop_att):
+                    self.logger.info(
+                        "early_stop at episode {}/{} (best ATT={:.2f} at episode {}, "
+                        "patience={})".format(
+                            e, self.episodes, self.best_att, self.best_episode,
+                            self.early_stop_patience)
+                    )
+                    break
         # Prefer best checkpoint for final test(); fall back to last weights.
         self._finalize_training_checkpoint()
 
@@ -294,9 +357,85 @@ class TSCTrainer(BaseTrainer):
             return float(train_att)
         return None
 
+    def _update_checkpoint(self, e, att, source):
+        '''Save weights when att is a new absolute best for model selection.'''
+        if att is None or not np.isfinite(att):
+            return False
+        att = float(att)
+        if self.best_att is not None and np.isfinite(self.best_att) and att >= self.best_att:
+            return False
+        self.best_att = att
+        self.best_episode = e
+        self.best_metric_source = source
+        [ag.save_model(e=e) for ag in self.agents]
+        [ag.save_model(e='best') for ag in self.agents]
+        self.logger.info(
+            "new best ATT={:.2f} at episode {} (source={})".format(
+                self.best_att, self.best_episode, source)
+        )
+        return True
+
+    def _step_paired_cycle_stop(self, e, train_att, heldout_att):
+        '''Paired-cycle stop on train ATT. Returns True if training should stop.'''
+        if self._paired_stopper is None:
+            return False
+        stop, decision = self._paired_stopper.add(train_att)
+        if decision is not None:
+            self.logger.info(
+                "paired_cycle cycle={} mean_att={:.2f} mean_delta={:+.2f} se={:.2f} "
+                "threshold={:.2f} improved={} patience={}/{}".format(
+                    decision["cycle"], decision["mean_att"], decision["mean_delta"],
+                    decision["se"], decision["threshold"], decision["improved"],
+                    decision["cycles_without_improve"], self.early_stop_patience)
+            )
+            # If there is no held-out eval, keep the cycle-mean as the selection metric.
+            if heldout_att is None:
+                self._update_checkpoint(e, decision["mean_att"], source='train_cycle')
+        if not self.early_stop:
+            return False
+        if stop:
+            self.logger.info(
+                "early_stop at episode {}/{} (paired_cycle, last mean_att={:.2f}, "
+                "best ATT={:.2f} at episode {}, source={})".format(
+                    e, self.episodes,
+                    decision["mean_att"] if decision else float("nan"),
+                    self.best_att if self.best_att is not None else float("nan"),
+                    self.best_episode, self.best_metric_source)
+            )
+        return stop
+
+    def _step_cycle_mean_stop(self, e, median_wait, heldout_att):
+        '''Cycle-mean stop on episode median wait. Returns True to stop.'''
+        if self._cycle_mean_stopper is None:
+            return False
+        stop, decision = self._cycle_mean_stopper.add(median_wait)
+        if decision is not None:
+            self.logger.info(
+                "cycle_mean cycle={} m_prev={:.2f} m_curr={:.2f} rel={:+.4f} "
+                "delta={:+.2f} flat={} improved={} patience={}/{}".format(
+                    decision["cycle"], decision["mean_prev"], decision["mean_curr"],
+                    decision["rel"], decision["delta"], decision["flat"],
+                    decision["improved"], decision["cycles_without_improve"],
+                    self.early_stop_patience)
+            )
+            if heldout_att is None:
+                self._update_checkpoint(e, decision["mean_curr"], source='train_wait_cycle')
+        if not self.early_stop:
+            return False
+        if stop:
+            self.logger.info(
+                "early_stop at episode {}/{} (cycle_mean wait, m={:.2f}, "
+                "best ATT={:.2f} at episode {}, source={})".format(
+                    e, self.episodes,
+                    decision["mean_curr"] if decision else float("nan"),
+                    self.best_att if self.best_att is not None else float("nan"),
+                    self.best_episode, self.best_metric_source)
+            )
+        return stop
+
     def _update_early_stop(self, e, att):
         '''
-        Track best ATT and decide whether to stop.
+        Plateau mode: compare this episode to the running best ATT.
         Returns True when training should stop after this episode.
         '''
         if att is None or not np.isfinite(att):
@@ -306,16 +445,8 @@ class TSCTrainer(BaseTrainer):
         threshold = self.best_att * (1.0 - self.early_stop_min_delta) if np.isfinite(self.best_att) else float('inf')
         improved = att < threshold
         if improved or self.best_episode is None:
-            self.best_att = float(att)
-            self.best_episode = e
             self.episodes_without_improve = 0
-            [ag.save_model(e=e) for ag in self.agents]
-            # Stable name so final test() can always reload the best weights.
-            [ag.save_model(e='best') for ag in self.agents]
-            self.logger.info(
-                "new best ATT={:.2f} at episode {} (metric={})".format(
-                    self.best_att, self.best_episode, self.early_stop_metric)
-            )
+            self._update_checkpoint(e, att, source=self.early_stop_metric)
         else:
             self.episodes_without_improve += 1
 
@@ -408,6 +539,13 @@ class TSCTrainer(BaseTrainer):
             )
             self.writeLog("HELDOUT", e, att, 100, self.metric.rewards(),
                           self.metric.queue(), self.metric.delay(), self.metric.throughput())
+            if hasattr(self.world, 'get_median_waiting_time'):
+                mw = self.world.get_median_waiting_time()
+                if mw is not None:
+                    self.logger.info(
+                        "HELDOUT episode:{}/{}, demand:{}, median wait:{}".format(
+                            e, self.episodes, route, mw)
+                    )
         mean_att = float(np.mean(atts)) if atts else 0.0
         self.logger.info(
             "HELDOUT_MEAN episode:{}/{}, travel time:{} (n={})".format(

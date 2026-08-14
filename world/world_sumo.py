@@ -813,6 +813,10 @@ class World(object):
         self.run = 0
         self.inside_vehicles = dict()
         self.vehicles = dict()
+        # Uncapped trip wait (speed < 0.1 m/s). Not SUMO getAccumulatedWaitingTime (100s cap).
+        self.track_trip_wait = False
+        self.vehicle_wait_s = dict()
+        self.departed_wait_s = dict()
         for intsec in self.intersections:
             intsec.observe(self.step_length, self.max_distance)
         if self.interface_flag:
@@ -961,15 +965,21 @@ class World(object):
         entering_v = self.eng.simulation.getDepartedIDList()
         for v in entering_v:
             self.inside_vehicles.update({v: self.get_current_time()})
+            if self.track_trip_wait:
+                self.vehicle_wait_s.setdefault(v, 0.0)
             if self.physics_mode == 'ghost':
                 self._enforce_ghost_vehicle(v)
         if self.physics_mode == 'ghost' and entering_v:
             self._collapse_ghost_lanes()
+        if self.track_trip_wait:
+            self._accumulate_trip_wait()
         exiting_v = self.eng.simulation.getArrivedIDList()
         for v in exiting_v:
             if v not in self.inside_vehicles:
                 continue
             self.vehicles.update({v: self.get_current_time() - self.inside_vehicles[v]})
+            if self.track_trip_wait:
+                self.departed_wait_s[v] = float(self.vehicle_wait_s.pop(v, 0.0))
             del self.inside_vehicles[v]
         self._update_infos()
         if self._trajectory_tracking_enabled():
@@ -1040,6 +1050,8 @@ class World(object):
         self.run = 0
         self.vehicles = dict()
         self.inside_vehicles = dict()
+        self.vehicle_wait_s = dict()
+        self.departed_wait_s = dict()
         # TODO: check when to close traci
         if self.interface_flag:
             libsumo.start(self.sumo_cmd)
@@ -1324,6 +1336,29 @@ class World(object):
         '''
         tvg_time = self.get_vehicles()
         return tvg_time
+
+    def _accumulate_trip_wait(self):
+        '''Add step_length of wait for each in-network vehicle with speed < 0.1 m/s.'''
+        dt = float(self.step_length)
+        for v in self.eng.vehicle.getIDList():
+            try:
+                speed = self.eng.vehicle.getSpeed(v)
+            except Exception:
+                continue
+            if speed < 0.1:
+                self.vehicle_wait_s[v] = self.vehicle_wait_s.get(v, 0.0) + dt
+
+    def get_median_waiting_time(self):
+        '''Median uncapped wait (s) over finished trips this episode, or None.'''
+        waits = [w for w in self.departed_wait_s.values() if w is not None]
+        if not waits:
+            return None
+        waits.sort()
+        n = len(waits)
+        mid = n // 2
+        if n % 2:
+            return float(waits[mid])
+        return 0.5 * (float(waits[mid - 1]) + float(waits[mid]))
 
     def get_lane_vehicles(self):
         '''

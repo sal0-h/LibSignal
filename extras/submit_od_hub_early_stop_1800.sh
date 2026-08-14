@@ -11,7 +11,7 @@
 #   ./extras/submit_od_hub_early_stop_1800.sh l1
 #   ./extras/submit_od_hub_early_stop_1800.sh l2
 #
-# Requires branch feat/early-stop-episodes (early-stop + heldout metric).
+# Requires branch feat/early-stop-episodes (cycle-mean median-wait early-stop).
 
 set -euo pipefail
 cd "$(dirname "$0")/.."
@@ -56,7 +56,7 @@ export PATH="\${CONDA_PREFIX}/bin:\${SUMO_HOME}/bin:\${PATH}"
 
 echo "Host: \$(hostname)"
 echo "Agent: ${agent}  Network: ${NETWORK}  Seed: ${SEED}  Prefix: ${prefix}"
-echo "OD-hub early-stop: max=500 min=30 patience=3(heldout) every=10"
+echo "OD-hub early-stop: cycle_mean median wait, max=500 min=30 patience=3, 5% or 1s"
 
 if [[ "${agent}" == colight_* ]]; then
   python -c "import torch_scatter" 2>/dev/null || {
