@@ -1,0 +1,204 @@
+{
+  "network": "sumo1x21",
+  "episode_len_s": 1800,
+  "target_vehicles": 2100,
+  "taz": "raw_data/ingolstadt21/od_hubs/taz.xml",
+  "fixed": "raw_data/ingolstadt21/od_hubs/demand_set/fixed_1800.rou.xml",
+  "train_set": [
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml"
+  ],
+  "heldout": [
+    "raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml",
+    "raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml"
+  ],
+  "fringe_origin_share_target": 0.65,
+  "hub_dest_share_target": 0.7,
+  "gravity_beta": 1.2,
+  "timeline_bins_s": [
+    [
+      0,
+      300,
+      0.08
+    ],
+    [
+      300,
+      600,
+      0.12
+    ],
+    [
+      600,
+      900,
+      0.22
+    ],
+    [
+      900,
+      1200,
+      0.28
+    ],
+    [
+      1200,
+      1500,
+      0.18
+    ],
+    [
+      1500,
+      1800,
+      0.12
+    ]
+  ],
+  "routing": "duarouter_shortest_path",
+  "departures": "od2trips_random",
+  "file_stats": [
+    {
+      "n_vehicles": 2096,
+      "fringe_origin_frac": 0.6331106870229007,
+      "internal_origin_frac": 0.36688931297709926,
+      "hub_touch_frac": 0.8807251908396947,
+      "routed_vehicles": 1994,
+      "seed": 42,
+      "role": "fixed",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/fixed_1800.rou.xml"
+    },
+    {
+      "n_vehicles": 2042,
+      "fringe_origin_frac": 0.6591576885406464,
+      "internal_origin_frac": 0.34084231145935356,
+      "hub_touch_frac": 0.8809990205680706,
+      "routed_vehicles": 1952,
+      "seed": 2000,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml"
+    },
+    {
+      "n_vehicles": 2079,
+      "fringe_origin_frac": 0.6291486291486291,
+      "internal_origin_frac": 0.3708513708513709,
+      "hub_touch_frac": 0.8619528619528619,
+      "routed_vehicles": 1981,
+      "seed": 2001,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml"
+    },
+    {
+      "n_vehicles": 2095,
+      "fringe_origin_frac": 0.6572792362768496,
+      "internal_origin_frac": 0.34272076372315036,
+      "hub_touch_frac": 0.8634844868735083,
+      "routed_vehicles": 1999,
+      "seed": 2002,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml"
+    },
+    {
+      "n_vehicles": 2149,
+      "fringe_origin_frac": 0.6644951140065146,
+      "internal_origin_frac": 0.3355048859934853,
+      "hub_touch_frac": 0.8743601675197766,
+      "routed_vehicles": 2045,
+      "seed": 2003,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml"
+    },
+    {
+      "n_vehicles": 2056,
+      "fringe_origin_frac": 0.6454280155642024,
+      "internal_origin_frac": 0.3545719844357977,
+      "hub_touch_frac": 0.8550583657587548,
+      "routed_vehicles": 1963,
+      "seed": 2004,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml"
+    },
+    {
+      "n_vehicles": 2090,
+      "fringe_origin_frac": 0.6502392344497607,
+      "internal_origin_frac": 0.3497607655502392,
+      "hub_touch_frac": 0.8703349282296651,
+      "routed_vehicles": 1994,
+      "seed": 2005,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml"
+    },
+    {
+      "n_vehicles": 2090,
+      "fringe_origin_frac": 0.6311004784688995,
+      "internal_origin_frac": 0.3688995215311005,
+      "hub_touch_frac": 0.8688995215311005,
+      "routed_vehicles": 1989,
+      "seed": 2006,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml"
+    },
+    {
+      "n_vehicles": 2110,
+      "fringe_origin_frac": 0.6450236966824645,
+      "internal_origin_frac": 0.35497630331753555,
+      "hub_touch_frac": 0.8682464454976303,
+      "routed_vehicles": 2017,
+      "seed": 2007,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml"
+    },
+    {
+      "n_vehicles": 2124,
+      "fringe_origin_frac": 0.6497175141242938,
+      "internal_origin_frac": 0.3502824858757062,
+      "hub_touch_frac": 0.884180790960452,
+      "routed_vehicles": 2024,
+      "seed": 2008,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml"
+    },
+    {
+      "n_vehicles": 2092,
+      "fringe_origin_frac": 0.634321223709369,
+      "internal_origin_frac": 0.365678776290631,
+      "hub_touch_frac": 0.8666347992351816,
+      "routed_vehicles": 1992,
+      "seed": 2009,
+      "role": "train",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml"
+    },
+    {
+      "n_vehicles": 2081,
+      "fringe_origin_frac": 0.6568957232099952,
+      "internal_origin_frac": 0.3431042767900048,
+      "hub_touch_frac": 0.8664103796251802,
+      "routed_vehicles": 1983,
+      "seed": 9000,
+      "role": "hold",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml"
+    },
+    {
+      "n_vehicles": 2118,
+      "fringe_origin_frac": 0.6680830972615676,
+      "internal_origin_frac": 0.3319169027384325,
+      "hub_touch_frac": 0.8715769593956563,
+      "routed_vehicles": 2011,
+      "seed": 9001,
+      "role": "hold",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml"
+    },
+    {
+      "n_vehicles": 2096,
+      "fringe_origin_frac": 0.666030534351145,
+      "internal_origin_frac": 0.33396946564885494,
+      "hub_touch_frac": 0.857824427480916,
+      "routed_vehicles": 1992,
+      "seed": 9002,
+      "role": "hold",
+      "file": "raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml"
+    }
+  ],
+  "note": "Hub-centric synthetic OD on Ingolstadt arterial; mixed fringe/internal origins; 1800s shoulder+peak; demand set + held-out protocol."
+}
