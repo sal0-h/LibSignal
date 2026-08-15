@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tlLogics xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/tllogic_file.xsd">
+  <!-- Rumaila: split joinedS_5891826884_… (143 m, two streets) into one controller
+       per stop-line node. Every controlled movement is assigned tl + linkIndex.
+       secondary_link slips are uncontrolled in doha_connections.con.xml, not here. -->
+
+  <tlLogic id="5891826884" type="static" programID="0" offset="0">
+    <phase duration="31" state="GG"/>
+    <phase duration="3" state="yy"/>
+  </tlLogic>
+  <connection from="1034545258#0" to="95741974" fromLane="0" toLane="0" tl="5891826884" linkIndex="0"/>
+  <connection from="1034545258#0" to="95741974" fromLane="1" toLane="1" tl="5891826884" linkIndex="1"/>
+
+  <tlLogic id="5891839910" type="static" programID="0" offset="0">
+    <phase duration="31" state="GGG"/>
+    <phase duration="3" state="yyy"/>
+  </tlLogic>
+  <connection from="1086541141#0" to="95601636#0" fromLane="0" toLane="0" tl="5891839910" linkIndex="0"/>
+  <connection from="1086541141#0" to="95601636#0" fromLane="1" toLane="1" tl="5891839910" linkIndex="1"/>
+  <connection from="1086541141#0" to="95601636#0" fromLane="2" toLane="2" tl="5891839910" linkIndex="2"/>
+
+  <tlLogic id="5891839932" type="static" programID="0" offset="0">
+    <phase duration="31" state="GGG"/>
+    <phase duration="3" state="yyy"/>
+  </tlLogic>
+  <connection from="1086541138#0" to="95601634#0" fromLane="0" toLane="0" tl="5891839932" linkIndex="0"/>
+  <connection from="1086541138#0" to="95601634#0" fromLane="1" toLane="1" tl="5891839932" linkIndex="1"/>
+  <connection from="1086541138#0" to="95601634#0" fromLane="2" toLane="2" tl="5891839932" linkIndex="2"/>
+
+  <tlLogic id="5891839962" type="static" programID="0" offset="0">
+    <phase duration="31" state="GG"/>
+    <phase duration="3" state="yy"/>
+  </tlLogic>
+  <connection from="1086541140#0" to="95741945" fromLane="0" toLane="0" tl="5891839962" linkIndex="0"/>
+  <connection from="1086541140#0" to="95741945" fromLane="1" toLane="1" tl="5891839962" linkIndex="1"/>
+</tlLogics>

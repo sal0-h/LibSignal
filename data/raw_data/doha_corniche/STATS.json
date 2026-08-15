@@ -7,51 +7,49 @@
     "width": 4703.8,
     "height": 7459.2
   },
-  "n_junctions_noninternal": 2958,
+  "n_junctions_noninternal": 2947,
   "junction_types": {
     "priority": 2776,
-    "traffic_light": 42,
     "right_before_left": 68,
+    "traffic_light": 31,
     "dead_end": 72
   },
-  "n_traffic_lights": 28,
-  "n_edges": 5716,
-  "n_lanes": 9494,
-  "total_lane_length_km": 628.361,
-  "n_oneway_edges": 3440,
+  "n_traffic_lights": 31,
+  "n_edges": 5709,
+  "n_lanes": 9470,
+  "total_lane_length_km": 628.446,
+  "n_oneway_edges": 3433,
   "weak_connected_components": {
     "count": 1,
     "sizes": [
-      2958
+      2947
     ]
   },
   "source_edges": 42,
   "sink_edges": 40,
   "n_boundary_edges": 81,
   "tls_green_phase_histogram": {
-    "1": 2,
-    "3": 8,
+    "1": 6,
+    "3": 9,
     "2": 11,
-    "4": 3,
-    "8": 3,
-    "6": 1
+    "4": 5
   },
   "tls_green_phases": {
     "min": 1,
-    "median": 3.0,
-    "max": 8
+    "median": 2.0,
+    "max": 4
   },
   "tls_incoming_lanes": {
-    "min": 3,
-    "median": 8.5,
-    "max": 36
+    "min": 2,
+    "median": 7.0,
+    "max": 16
   },
   "tls_outgoing_lanes": {
     "min": 2,
-    "median": 8.0,
-    "max": 28
+    "median": 7.0,
+    "max": 20
   },
-  "n_joined_or_cluster_tls": 17,
+  "n_joined_or_cluster_tls": 16,
   "n_guessed_tls": 13,
   "traffic_lights": {
     "1240229136": {
@@ -109,6 +107,58 @@
       "guessed": false,
       "n_in_lanes": 5,
       "n_out_lanes": 3
+    },
+    "5891826884": {
+      "type": "static",
+      "n_phases_raw": 2,
+      "n_green": 1,
+      "green_lengths": [
+        2
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": false,
+      "n_in_lanes": 2,
+      "n_out_lanes": 2
+    },
+    "5891839910": {
+      "type": "static",
+      "n_phases_raw": 2,
+      "n_green": 1,
+      "green_lengths": [
+        3
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": false,
+      "n_in_lanes": 3,
+      "n_out_lanes": 3
+    },
+    "5891839932": {
+      "type": "static",
+      "n_phases_raw": 2,
+      "n_green": 1,
+      "green_lengths": [
+        3
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": false,
+      "n_in_lanes": 3,
+      "n_out_lanes": 3
+    },
+    "5891839962": {
+      "type": "static",
+      "n_phases_raw": 2,
+      "n_green": 1,
+      "green_lengths": [
+        2
+      ],
+      "min_duration": 3.0,
+      "joined": false,
+      "guessed": false,
+      "n_in_lanes": 2,
+      "n_out_lanes": 2
     },
     "96444930": {
       "type": "static",
@@ -311,6 +361,22 @@
       "n_in_lanes": 9,
       "n_out_lanes": 9
     },
+    "cluster_10168734383_1690430444_2426625155_2926935382": {
+      "type": "static",
+      "n_phases_raw": 8,
+      "n_green": 4,
+      "green_lengths": [
+        32,
+        32,
+        32,
+        32
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 16,
+      "n_out_lanes": 18
+    },
     "cluster_10200229158_10280487079_1240264670_1277063209": {
       "type": "static",
       "n_phases_raw": 6,
@@ -357,6 +423,21 @@
       "n_in_lanes": 11,
       "n_out_lanes": 8
     },
+    "cluster_1108487458_1108487841_1108487886_1108488004": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        23,
+        23,
+        23
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 11,
+      "n_out_lanes": 11
+    },
     "cluster_11085621497_11085621498_11085621500_1721863411": {
       "type": "static",
       "n_phases_raw": 8,
@@ -373,112 +454,50 @@
       "n_in_lanes": 9,
       "n_out_lanes": 8
     },
-    "joinedS_10168734383_1690430444_2426625155_2926935382": {
-      "type": "static",
-      "n_phases_raw": 16,
-      "n_green": 8,
-      "green_lengths": [
-        36,
-        36,
-        36,
-        36,
-        36,
-        36,
-        36,
-        36
-      ],
-      "min_duration": 3.0,
-      "joined": true,
-      "guessed": false,
-      "n_in_lanes": 32,
-      "n_out_lanes": 26
-    },
-    "joinedS_1108487458_1108487841_1108487886_1108488004": {
-      "type": "static",
-      "n_phases_raw": 12,
-      "n_green": 6,
-      "green_lengths": [
-        28,
-        28,
-        28,
-        28,
-        28,
-        28
-      ],
-      "min_duration": 3.0,
-      "joined": true,
-      "guessed": false,
-      "n_in_lanes": 23,
-      "n_out_lanes": 20
-    },
-    "joinedS_1138152657_1690430329": {
-      "type": "static",
-      "n_phases_raw": 6,
-      "n_green": 3,
-      "green_lengths": [
-        16,
-        16,
-        16
-      ],
-      "min_duration": 3.0,
-      "joined": true,
-      "guessed": false,
-      "n_in_lanes": 16,
-      "n_out_lanes": 13
-    },
-    "joinedS_2297019034_2297019035_2297019036_2297019037": {
-      "type": "static",
-      "n_phases_raw": 16,
-      "n_green": 8,
-      "green_lengths": [
-        43,
-        43,
-        43,
-        43,
-        43,
-        43,
-        43,
-        43
-      ],
-      "min_duration": 3.0,
-      "joined": true,
-      "guessed": false,
-      "n_in_lanes": 36,
-      "n_out_lanes": 28
-    },
-    "joinedS_282914891_cluster_115923236_1215923431": {
+    "cluster_1138152657_1690430329": {
       "type": "static",
       "n_phases_raw": 4,
       "n_green": 2,
       "green_lengths": [
-        18,
-        18
-      ],
-      "min_duration": 3.0,
-      "joined": true,
-      "guessed": false,
-      "n_in_lanes": 18,
-      "n_out_lanes": 15
-    },
-    "joinedS_5891826884_5891839910_5891839932_5891839962": {
-      "type": "static",
-      "n_phases_raw": 16,
-      "n_green": 8,
-      "green_lengths": [
-        14,
-        14,
-        14,
-        14,
-        14,
-        14,
         14,
         14
       ],
       "min_duration": 3.0,
       "joined": true,
       "guessed": false,
-      "n_in_lanes": 14,
-      "n_out_lanes": 10
+      "n_in_lanes": 7,
+      "n_out_lanes": 11
+    },
+    "cluster_2297019034_2297019035_2297019036_2297019037": {
+      "type": "static",
+      "n_phases_raw": 8,
+      "n_green": 4,
+      "green_lengths": [
+        34,
+        34,
+        34,
+        34
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 15,
+      "n_out_lanes": 20
+    },
+    "cluster_282914891_cluster_115923236_1215923431": {
+      "type": "static",
+      "n_phases_raw": 6,
+      "n_green": 3,
+      "green_lengths": [
+        20,
+        20,
+        20
+      ],
+      "min_duration": 3.0,
+      "joined": true,
+      "guessed": false,
+      "n_in_lanes": 11,
+      "n_out_lanes": 15
     }
   },
   "bbox_west_south_east_north": "51.508,25.278,51.55,25.338",

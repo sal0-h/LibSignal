@@ -30,7 +30,7 @@
       "fringe_origin_frac": 0.678391959798995,
       "internal_origin_frac": 0.32160804020100503,
       "hub_touch_frac": 0.8449389806173726,
-      "routed_vehicles": 1163,
+      "routed_vehicles": 1164,
       "seed": 7,
       "role": "smoke",
       "file": "raw_data/doha_corniche/doha_corniche.rou.xml"
@@ -40,7 +40,7 @@
       "fringe_origin_frac": 0.6457286432160804,
       "internal_origin_frac": 0.3542713567839196,
       "hub_touch_frac": 0.8542713567839196,
-      "routed_vehicles": 674,
+      "routed_vehicles": 676,
       "seed": 42,
       "role": "fixed",
       "file": "raw_data/doha_corniche/od_hubs/demand_set/fixed_1800.rou.xml"
@@ -80,7 +80,7 @@
       "fringe_origin_frac": 0.6678445229681979,
       "internal_origin_frac": 0.3321554770318021,
       "hub_touch_frac": 0.8633686690223793,
-      "routed_vehicles": 701,
+      "routed_vehicles": 702,
       "seed": 2003,
       "role": "train",
       "file": "raw_data/doha_corniche/od_hubs/demand_set/train_03.rou.xml"
@@ -90,7 +90,7 @@
       "fringe_origin_frac": 0.6441798941798942,
       "internal_origin_frac": 0.3558201058201058,
       "hub_touch_frac": 0.8386243386243386,
-      "routed_vehicles": 631,
+      "routed_vehicles": 636,
       "seed": 2004,
       "role": "train",
       "file": "raw_data/doha_corniche/od_hubs/demand_set/train_04.rou.xml"
@@ -109,8 +109,8 @@
       "n_vehicles": 790,
       "fringe_origin_frac": 0.6215189873417721,
       "internal_origin_frac": 0.37848101265822787,
-      "hub_touch_frac": 0.8518987341772152,
-      "routed_vehicles": 658,
+      "hub_touch_frac": 0.8531645569620253,
+      "routed_vehicles": 664,
       "seed": 2006,
       "role": "train",
       "file": "raw_data/doha_corniche/od_hubs/demand_set/train_06.rou.xml"
@@ -120,7 +120,7 @@
       "fringe_origin_frac": 0.6444444444444445,
       "internal_origin_frac": 0.35555555555555557,
       "hub_touch_frac": 0.8518518518518519,
-      "routed_vehicles": 687,
+      "routed_vehicles": 688,
       "seed": 2007,
       "role": "train",
       "file": "raw_data/doha_corniche/od_hubs/demand_set/train_07.rou.xml"
@@ -130,7 +130,7 @@
       "fringe_origin_frac": 0.6589805825242718,
       "internal_origin_frac": 0.34101941747572817,
       "hub_touch_frac": 0.8592233009708737,
-      "routed_vehicles": 689,
+      "routed_vehicles": 690,
       "seed": 2008,
       "role": "train",
       "file": "raw_data/doha_corniche/od_hubs/demand_set/train_08.rou.xml"
@@ -150,7 +150,7 @@
       "fringe_origin_frac": 0.6619718309859155,
       "internal_origin_frac": 0.3380281690140845,
       "hub_touch_frac": 0.8373879641485276,
-      "routed_vehicles": 649,
+      "routed_vehicles": 651,
       "seed": 9000,
       "role": "hold",
       "file": "raw_data/doha_corniche/od_hubs/demand_set/hold_00.rou.xml"

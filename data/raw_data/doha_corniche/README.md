@@ -11,7 +11,8 @@ Data: `data/raw_data/doha_corniche/`
 
 | File | Committed? | Role |
 |------|------------|------|
-| `doha_corniche.net.xml` | yes | SUMO network (run this) |
+| `doha_corniche.base.net.xml` | yes | Frozen stock OSM import. Never patch this file. |
+| `doha_corniche.net.xml` | yes | LibSignal benchmark (base + explicit patches) |
 | `doha_corniche.rou.xml` | yes | 3600 s synthetic smoke / default demand |
 | `doha_corniche.sumocfg` | yes | SUMO-only config |
 | `SOURCE.json` | yes | bbox, SUMO version, osmGet/netconvert commands, date |
@@ -19,11 +20,19 @@ Data: `data/raw_data/doha_corniche/`
 | `od_hubs/` | yes | TAZ + train/hold/fixed demand bags |
 | `_build/` | **no** | OSM extract and netconvert working files |
 
+Patches (never mixed into the importer): `extras/doha_force_joins.nod.xml`,
+`extras/doha_connections.con.xml`, `extras/doha_tls.tll.xml`.
+Leftovers: `extras/doha_patches_PUNCHLIST.md`.
+
 ## Regenerate
 
 ```bash
 export SUMO_HOME=...          # eclipse-sumo tools dir
-python extras/build_doha_network.py          # download OSM + netconvert
+python extras/build_doha_network.py          # OSM → stock import into .net.xml
+# Freeze once (do not overwrite an existing base):
+#   cp data/raw_data/doha_corniche/doha_corniche.net.xml \
+#      data/raw_data/doha_corniche/doha_corniche.base.net.xml
+python extras/apply_doha_patches.py          # base + explicit patches → .net.xml
 python extras/doha_network_stats.py
 python extras/validate_sumo_tls.py --net data/raw_data/doha_corniche/doha_corniche.net.xml
 python extras/gen_od_hub_demand_doha.py      # TAZ + demand bags + default .rou.xml

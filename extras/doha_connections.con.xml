@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/connections_file.xsd">
+  <!-- Al Bidda: slip-merge stubs into the joined box. uncontrolled = no TLS bar.
+       Yield is at priority nodes 4818928605 and 4818928608, not this flag. -->
+  <connection from="1304253444" to="859072127#0" fromLane="0" toLane="2" uncontrolled="true"/>
+  <connection from="1304253444" to="1275269282" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1304253444" to="1275269282" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="1304253444" to="1111486548#0" fromLane="1" toLane="0" uncontrolled="true"/>
+  <connection from="1304253444" to="1304253446" fromLane="1" toLane="0" uncontrolled="true"/>
+  <connection from="1304253444" to="1304253446" fromLane="2" toLane="1" uncontrolled="true"/>
+  <connection from="1304253444" to="1111486545" fromLane="2" toLane="0" uncontrolled="true"/>
+  <connection from="1304253444" to="165311514#0" fromLane="2" toLane="1" uncontrolled="true"/>
+  <connection from="1304253445" to="165311514#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1304253445" to="859072127#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1304253445" to="1275269282" fromLane="0" toLane="1" uncontrolled="true"/>
+  <connection from="1304253445" to="1111486548#0" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="1304253445" to="1304253446" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="1304253445" to="1304253446" fromLane="2" toLane="2" uncontrolled="true"/>
+  <connection from="1304253445" to="1111486545" fromLane="2" toLane="3" uncontrolled="true"/>
+  <connection from="859072125" to="165311514#0" fromLane="0" toLane="2" uncontrolled="true"/>
+  <connection from="859072125" to="859072127#0" fromLane="0" toLane="2" uncontrolled="true"/>
+  <connection from="859072125" to="1275269282" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="859072125" to="1275269282" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="859072125" to="1275269282" fromLane="2" toLane="2" uncontrolled="true"/>
+  <connection from="859072125" to="1111486548#0" fromLane="2" toLane="0" uncontrolled="true"/>
+  <connection from="859072125" to="1111486545" fromLane="2" toLane="1" uncontrolled="true"/>
+  <connection from="859072126" to="165311514#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="859072126" to="859072127#0" fromLane="0" toLane="1" uncontrolled="true"/>
+  <connection from="859072126" to="1111486548#0" fromLane="0" toLane="1" uncontrolled="true"/>
+  <connection from="859072126" to="1111486548#0" fromLane="1" toLane="2" uncontrolled="true"/>
+  <connection from="859072126" to="1304253446" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="859072126" to="1304253446" fromLane="2" toLane="2" uncontrolled="true"/>
+  <connection from="859072126" to="1111486545" fromLane="2" toLane="3" uncontrolled="true"/>
+
+  <!-- C-Ring × Ras Abu Aboud: slip-merge stubs. Yield at 6935427567 / 6935427560. -->
+  <connection from="1322907200" to="220599853#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1322907200" to="1278466169" fromLane="0" toLane="2" uncontrolled="true"/>
+  <connection from="1322907200" to="220600130#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1322907200" to="220600130#0" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="1322907200" to="492402221" fromLane="2" toLane="1" uncontrolled="true"/>
+  <connection from="1322907200" to="220599852#0" fromLane="3" toLane="2" uncontrolled="true"/>
+  <connection from="1322907200" to="1424110233" fromLane="3" toLane="2" uncontrolled="true"/>
+  <connection from="1322907201" to="1424110233" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1322907201" to="220599853#0" fromLane="0" toLane="1" uncontrolled="true"/>
+  <connection from="1322907201" to="1278466169" fromLane="0" toLane="2" uncontrolled="true"/>
+  <connection from="1322907201" to="1278466169" fromLane="1" toLane="3" uncontrolled="true"/>
+  <connection from="1322907201" to="492402221" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="1322907201" to="492402221" fromLane="2" toLane="2" uncontrolled="true"/>
+  <connection from="1322907201" to="220599852#0" fromLane="2" toLane="3" uncontrolled="true"/>
+  <connection from="740776612" to="1278466169" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="740776612" to="220600130#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="740776612" to="220600130#0" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="740776612" to="220599852#0" fromLane="1" toLane="0" uncontrolled="true"/>
+  <connection from="740776612" to="1424110233" fromLane="2" toLane="1" uncontrolled="true"/>
+  <connection from="740776612" to="220599853#0" fromLane="2" toLane="3" uncontrolled="true"/>
+  <connection from="740776613" to="1424110233" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="740776613" to="220599853#0" fromLane="0" toLane="2" uncontrolled="true"/>
+  <connection from="740776613" to="220600130#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="740776613" to="220600130#0" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="740776613" to="492402221" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="740776613" to="492402221" fromLane="2" toLane="2" uncontrolled="true"/>
+  <connection from="740776613" to="220599852#0" fromLane="2" toLane="3" uncontrolled="true"/>
+
+  <!-- Rayyan × Jassim: stubs from 10768755344. Yield at that priority node. -->
+  <connection from="1085893314#1" to="1085893314#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1085893314#1" to="1085893313#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1085893314#1" to="1323594836#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1085893314#1" to="1323594836#0" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="1085893314#1" to="1085893309#0" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="1157931566#2" to="1085893309#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1157931566#2" to="95475554#0" fromLane="0" toLane="1" uncontrolled="true"/>
+  <connection from="1157931566#2" to="1085893313#0" fromLane="0" toLane="2" uncontrolled="true"/>
+  <connection from="1157931566#2" to="1323594836#0" fromLane="0" toLane="1" uncontrolled="true"/>
+
+  <!-- Rumaila secondary_link slips: yield at merge, not TLS. -->
+  <connection from="623956301#0" to="95601636#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="623956302#0" to="95601634#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="623956303#0" to="95741974" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="623956304#0" to="95741945" fromLane="0" toLane="0" uncontrolled="true"/>
+
+  <!-- Omar × Conference: secondary_link / stub from 2428034575. Yield at that node. -->
+  <connection from="105621281" to="479615881" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="105621281" to="479615881" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="105621281" to="479615881" fromLane="2" toLane="2" uncontrolled="true"/>
+  <connection from="105621281" to="479615881" fromLane="2" toLane="3" uncontrolled="true"/>
+  <connection from="105621281" to="12690405" fromLane="2" toLane="1" uncontrolled="true"/>
+  <connection from="105621281" to="115392191#0" fromLane="3" toLane="3" uncontrolled="true"/>
+  <connection from="1299968123" to="479615882" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="1299968123" to="479615882" fromLane="1" toLane="1" uncontrolled="true"/>
+  <connection from="1299968123" to="479615882" fromLane="2" toLane="2" uncontrolled="true"/>
+  <connection from="1299968123" to="115392191#0" fromLane="2" toLane="0" uncontrolled="true"/>
+  <connection from="1299968123" to="12690405" fromLane="2" toLane="3" uncontrolled="true"/>
+
+  <!-- Markhiya × Aneza: ramp/trunk_link stubs. Ramp cluster stays outside the join. -->
+  <connection from="489433438" to="1040934254#0" fromLane="0" toLane="1" uncontrolled="true"/>
+  <connection from="489433438" to="1040934254#0" fromLane="1" toLane="2" uncontrolled="true"/>
+  <connection from="489433438" to="12690902#0" fromLane="1" toLane="2" uncontrolled="true"/>
+  <connection from="489433438" to="489626238" fromLane="1" toLane="0" uncontrolled="true"/>
+  <connection from="489440086" to="489626238" fromLane="0" toLane="1" uncontrolled="true"/>
+  <connection from="489440086" to="489626238" fromLane="1" toLane="2" uncontrolled="true"/>
+  <connection from="489440086" to="12690902#0" fromLane="1" toLane="3" uncontrolled="true"/>
+  <connection from="489440086" to="246115879" fromLane="2" toLane="0" uncontrolled="true"/>
+  <connection from="489440086" to="1040934254#0" fromLane="2" toLane="2" uncontrolled="true"/>
+  <connection from="489626244" to="1040934254#0" fromLane="0" toLane="0" uncontrolled="true"/>
+  <connection from="489626244" to="12690902#0" fromLane="0" toLane="1" uncontrolled="true"/>
+  <connection from="489626244" to="12690902#0" fromLane="1" toLane="2" uncontrolled="true"/>
+  <connection from="489626244" to="489626238" fromLane="1" toLane="0" uncontrolled="true"/>
+  <connection from="489626244" to="246115879" fromLane="1" toLane="2" uncontrolled="true"/>
+  <connection from="489626246" to="1040934254#0" fromLane="0" toLane="1" uncontrolled="true"/>
+  <connection from="489626246" to="1040934254#0" fromLane="1" toLane="2" uncontrolled="true"/>
+  <connection from="489626246" to="12690902#0" fromLane="1" toLane="3" uncontrolled="true"/>
+  <connection from="489626246" to="489626238" fromLane="2" toLane="1" uncontrolled="true"/>
+  <connection from="489626246" to="246115879" fromLane="2" toLane="2" uncontrolled="true"/>
+</connections>

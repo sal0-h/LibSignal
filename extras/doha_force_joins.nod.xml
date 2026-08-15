@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/nodes_file.xsd">
+  <!-- Explicit at-grade conflict-area joins. Applied onto doha_corniche.base.net.xml.
+       Never include slip / ramp / *_link / West Bay nodes unless justified below. -->
+
+  <!-- Al Bidda St × Markhiya (شارع البدع × شارع المرخية)
+       https://www.google.com/maps/@25.313569,51.517087,19z
+       Four carriageway corners only. Slip merges 4818928605 and 4818928608 stay outside. -->
+  <join nodes="10168734383 1690430444 2426625155 2926935382"
+        type="traffic_light"
+        reset="true"/>
+
+  <!-- C-Ring (2nd Ring) × Ras Abu Aboud (شارع رأس بو عبود)
+       https://www.google.com/maps/@25.282896,51.544395,19z
+       Four carriageway corners only. Slip nodes 6935427567 and 6935427560 stay outside. -->
+  <join nodes="2297019034 2297019035 2297019036 2297019037"
+        type="traffic_light"
+        reset="true"/>
+
+  <!-- Rayyan Rd × Jassim bin Mohammed (طريق الريان × شارع جاسم بن محمد)
+       https://www.google.com/maps/@25.288126,51.530063,19z
+       Four carriageway corners only. Node 10768755344 (tertiary_link) stays outside. -->
+  <join nodes="1108487458 1108487841 1108487886 1108488004"
+        type="traffic_light"
+        reset="true"/>
+
+  <!-- Omar Al Mukhtar × Conference Centre St (شارع عمر المختار × شارع مركز المؤتمرات)
+       https://www.google.com/maps/@25.325899,51.527267,19z
+       Two remaining carriageway TLS nodes. Slip node 2428034575 stays outside. -->
+  <join nodes="282914891 cluster_115923236_1215923431"
+        type="traffic_light"
+        reset="true"/>
+
+  <!-- Markhiya × Aneza (شارع المرخية × شارع عنيزة)
+       https://www.google.com/maps/@25.319583,51.512457,19z
+       Two TLS corners only. Ramp cluster_4816587471_* and other trunk_link nodes stay outside. -->
+  <join nodes="1138152657 1690430329"
+        type="traffic_light"
+        reset="true"/>
+
+  <!-- Rumaila: detach the four stop-line nodes from joinedS_* so each has its own TLS id.
+       Programs and connection assignment are in doha_tls.tll.xml. Do not join these nodes. -->
+  <node id="5891826884" x="1405.60" y="2473.32" type="traffic_light" tl="5891826884"/>
+  <node id="5891839910" x="1367.47" y="2415.39" type="traffic_light" tl="5891839910"/>
+  <node id="5891839932" x="1344.53" y="2512.82" type="traffic_light" tl="5891839932"/>
+  <node id="5891839962" x="1300.90" y="2449.28" type="traffic_light" tl="5891839962"/>
+</nodes>
