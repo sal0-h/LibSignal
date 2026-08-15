@@ -21,6 +21,7 @@ top-level [`README.md`](../README.md); for the Cursor-Cloud agent environment, s
 | Doc | What it covers |
 |-----|----------------|
 | [AGENT_OBSERVATIONS.md](AGENT_OBSERVATIONS.md) | Why `sumo4x4` creates 32 agents, and exact observation/policy inputs for DQN, IPPO, CoLight, PressLight, MaxPressure. |
+| [DQN_TRAINING_PIPELINE.md](DQN_TRAINING_PIPELINE.md) | Code-traced DQN training loop on SUMO Grid4×4: episode/step, 32 independent policies, replay, TD update, train vs test. |
 | [TSC_CONFIG_REPORT.md](TSC_CONFIG_REPORT.md) | Code-traced reference for every parameter in `configs/tsc/*.yml`, including dead/unused keys. |
 | [SIGNAL_CONTROL_THEORY.md](SIGNAL_CONTROL_THEORY.md) | Signal-control theory primer (movements, SUMO signal encoding, NEMA phasing) + a cross-network conflict audit. |
 | [TECHNICAL_ANALYSIS.md](TECHNICAL_ANALYSIS.md) | Architecture deep-dive: folder roles, state/reward/action definitions, heterogeneous traffic, reaction-time notes. |

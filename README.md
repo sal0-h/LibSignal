@@ -125,6 +125,7 @@ Deep-dive docs live in [`docs/`](./docs/README.md):
 - [docs/TSC_CONFIG_REPORT.md](./docs/TSC_CONFIG_REPORT.md) — code-traced reference for every `configs/tsc/*.yml` parameter.
 - [docs/SIGNAL_CONTROL_THEORY.md](./docs/SIGNAL_CONTROL_THEORY.md) — signal-control / NEMA theory + cross-network audit.
 - [docs/TECHNICAL_ANALYSIS.md](./docs/TECHNICAL_ANALYSIS.md) — architecture deep-dive.
+- [docs/DQN_TRAINING_PIPELINE.md](./docs/DQN_TRAINING_PIPELINE.md) — how DQN actually trains on SUMO Grid4×4.
 
 For the Cursor-Cloud agent environment, see [AGENTS.md](./AGENTS.md).
 
