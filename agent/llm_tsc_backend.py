@@ -6,7 +6,7 @@ import os
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
-from typing import Any, Dict, List, Sequence
+from typing import Any, Dict, List, Optional, Sequence
 
 from agent.llm_tsc_prompt import DEFAULT_API_FORMAT_SUFFIX, SIGNAL_ORDER
 
@@ -57,9 +57,40 @@ def create_backend(param: Dict[str, Any]) -> LLMBackend:
     backend = str(param.get("backend", "api")).lower()
     if backend == "local":
         return LocalHFBackend(param)
+    if backend == "vllm":
+        return VLLMBackend(param)
     if backend == "api":
         return OpenAICompatibleBackend(param)
-    raise ValueError(f"Unknown LLM backend {backend!r}; expected 'local' or 'api'")
+    raise ValueError(
+        f"Unknown LLM backend {backend!r}; expected 'local', 'vllm', or 'api'"
+    )
+
+
+def _resolve_hf_weights_dir(model_path: str, subfolder: Any) -> str:
+    """Return a local directory vLLM can load (HF repo id or existing path)."""
+    folder = None if subfolder is None or str(subfolder).strip() == "" else str(subfolder)
+    if os.path.isdir(model_path):
+        resolved = os.path.join(model_path, folder) if folder else model_path
+    else:
+        from huggingface_hub import snapshot_download
+
+        snapshot = snapshot_download(model_path)
+        resolved = os.path.join(snapshot, folder) if folder else snapshot
+    if not os.path.isdir(resolved):
+        raise FileNotFoundError(
+            f"vLLM weights directory does not exist: {resolved!r} "
+            f"(model_path={model_path!r}, subfolder={folder!r})"
+        )
+    return resolved
+
+
+def _chat_tokenizer(tokenizer: Any) -> Any:
+    if hasattr(tokenizer, "apply_chat_template"):
+        return tokenizer
+    inner = getattr(tokenizer, "tokenizer", None)
+    if inner is not None and hasattr(inner, "apply_chat_template"):
+        return inner
+    raise TypeError("vLLM tokenizer does not expose apply_chat_template")
 
 
 class OpenAICompatibleBackend(LLMBackend):
@@ -389,3 +420,187 @@ class LocalHFBackend(LLMBackend):
             flush=True,
         )
         return responses
+
+
+class VLLMBackend(LLMBackend):
+    """In-process vLLM engine: greedy Traffic-R1 decode with per-sequence stop.
+
+    HuggingFace generate() keeps the whole padded batch alive until the slowest
+    sequence boxes (or hits max_new_tokens). vLLM finishes each of the 16
+    intersections as soon as it emits a boxed signal, and prefix-caches the
+    shared task text across steps.
+
+    ``distributed_executor_backend=uni`` keeps the engine in this process so it
+    can share the CUDA context LibSignal already created. Do not load
+    backend=local in the same run: two copies of the weights will OOM.
+    """
+
+    def __init__(self, param: Dict[str, Any]):
+        os.environ.setdefault("VLLM_WORKER_MULTIPROC_METHOD", "spawn")
+        try:
+            from vllm import LLM, SamplingParams
+        except ImportError as exc:
+            raise ImportError(
+                "The 'vllm' package is required for backend=vllm. Install it in "
+                "the same env as torch/CUDA (H200 job), e.g. `pip install vllm`. "
+                "backend=local still uses transformers.generate."
+            ) from exc
+
+        model_path = str(param.get("model_path", "Season998/Traffic-R1"))
+        subfolder = param.get("model_subfolder", "huggingface")
+        model_dir = _resolve_hf_weights_dir(model_path, subfolder)
+
+        self.temperature = float(param.get("temperature", 0.0))
+        self.max_new_tokens = int(param.get("max_new_tokens", 512))
+        self.do_sample = bool(param.get("do_sample", False))
+        self.top_p = param.get("top_p")
+        if self.top_p is not None:
+            self.top_p = float(self.top_p)
+        self.top_k = param.get("top_k")
+        if self.top_k is not None:
+            self.top_k = int(self.top_k)
+        self.chat_template_kwargs = dict(param.get("chat_template_kwargs") or {})
+
+        torch_dtype = str(param.get("torch_dtype", "bfloat16"))
+        if torch_dtype in ("bfloat16", "bf16"):
+            dtype = "bfloat16"
+        elif torch_dtype in ("float16", "fp16"):
+            dtype = "float16"
+        else:
+            dtype = "auto"
+
+        engine_kwargs: Dict[str, Any] = {
+            "model": model_dir,
+            "tokenizer": model_dir,
+            "trust_remote_code": True,
+            "dtype": dtype,
+            "max_model_len": int(param.get("max_model_len", 4096)),
+            "gpu_memory_utilization": float(param.get("gpu_memory_utilization", 0.85)),
+            "max_num_seqs": int(param.get("max_num_seqs", 32)),
+            "disable_log_stats": bool(param.get("disable_log_stats", False)),
+        }
+        if param.get("enable_prefix_caching", True):
+            engine_kwargs["enable_prefix_caching"] = True
+        executor = param.get("distributed_executor_backend", "uni")
+        if executor:
+            engine_kwargs["distributed_executor_backend"] = str(executor)
+
+        print(
+            f"[LLM] Loading vLLM from {model_dir!r} "
+            f"(dtype={dtype!r}, max_model_len={engine_kwargs['max_model_len']}, "
+            f"prefix_cache={engine_kwargs.get('enable_prefix_caching', False)}, "
+            f"executor={engine_kwargs.get('distributed_executor_backend', 'default')}) ...",
+            flush=True,
+        )
+        self.llm = self._build_llm(LLM, engine_kwargs)
+        self.tokenizer = _chat_tokenizer(self.llm.get_tokenizer())
+        self._sampling_params = self._build_sampling_params(SamplingParams)
+        self._generation_calls = 0
+        print("[LLM] vLLM engine ready.", flush=True)
+
+    @staticmethod
+    def _build_llm(llm_cls: Any, engine_kwargs: Dict[str, Any]) -> Any:
+        """Drop newer engine kwargs if this vLLM build does not accept them."""
+        attempts = [dict(engine_kwargs)]
+        if "distributed_executor_backend" in engine_kwargs:
+            stripped = dict(engine_kwargs)
+            stripped.pop("distributed_executor_backend", None)
+            attempts.append(stripped)
+        if "enable_prefix_caching" in engine_kwargs:
+            stripped = dict(attempts[-1])
+            stripped.pop("enable_prefix_caching", None)
+            attempts.append(stripped)
+        last_error: Optional[BaseException] = None
+        seen = []
+        for kwargs in attempts:
+            key = tuple(sorted(kwargs))
+            if key in seen:
+                continue
+            seen.append(key)
+            try:
+                return llm_cls(**kwargs)
+            except TypeError as exc:
+                last_error = exc
+                print(f"[LLM] vLLM rejected {sorted(kwargs.keys())}: {exc}", flush=True)
+        assert last_error is not None
+        raise last_error
+
+    def _build_sampling_params(self, sampling_cls: Any) -> Any:
+        greedy = not (self.do_sample and self.temperature > 0)
+        kwargs: Dict[str, Any] = {
+            "max_tokens": self.max_new_tokens,
+            "stop": list(_TRAFFIC_R1_STOP_STRINGS),
+            "skip_special_tokens": True,
+        }
+        if greedy:
+            kwargs["temperature"] = 0.0
+        else:
+            kwargs["temperature"] = self.temperature
+            if self.top_p is not None:
+                kwargs["top_p"] = self.top_p
+            if self.top_k is not None:
+                kwargs["top_k"] = self.top_k
+        try:
+            return sampling_cls(include_stop_str_in_output=True, **kwargs)
+        except TypeError:
+            print(
+                "[LLM] Warning: this vLLM build has no include_stop_str_in_output; "
+                "upgrade vllm so \\boxed{ETWT} remains in the text for the parser.",
+                flush=True,
+            )
+            return sampling_cls(**kwargs)
+
+    def retry_messages(
+        self,
+        messages: List[Dict[str, str]],
+        response: str,
+    ) -> List[Dict[str, str]]:
+        return [
+            *[dict(message) for message in messages],
+            {"role": "assistant", "content": str(response)},
+            {"role": "user", "content": _API_RETRY_INSTRUCTION},
+        ]
+
+    def _complete_one(self, messages: List[Dict[str, str]]) -> str:
+        return self.complete_many([messages])[0]
+
+    def complete_many(
+        self,
+        messages_list: Sequence[List[Dict[str, str]]],
+    ) -> List[str]:
+        if not messages_list:
+            return []
+
+        prompts = [
+            self.tokenizer.apply_chat_template(
+                messages,
+                tokenize=False,
+                add_generation_prompt=True,
+                **self.chat_template_kwargs,
+            )
+            for messages in messages_list
+        ]
+        started = time.perf_counter()
+        outputs = self.llm.generate(
+            prompts, self._sampling_params, use_tqdm=False
+        )
+        elapsed = time.perf_counter() - started
+        responses = [output.outputs[0].text for output in outputs]
+        token_counts = [len(output.outputs[0].token_ids) for output in outputs]
+        finish = [output.outputs[0].finish_reason for output in outputs]
+        self._generation_calls += 1
+        completed = sum(
+            any(stop in response for stop in _TRAFFIC_R1_STOP_STRINGS)
+            for response in responses
+        )
+        n_stop = sum(reason == "stop" for reason in finish)
+        n_length = sum(reason == "length" for reason in finish)
+        print(
+            f"[LLM vLLM] generate call={self._generation_calls} batch={len(prompts)} "
+            f"tokens={min(token_counts)}/{sum(token_counts) / len(token_counts):.1f}/"
+            f"{max(token_counts)} (min/mean/max) boxed={completed}/{len(prompts)} "
+            f"finish=stop:{n_stop}/length:{n_length} elapsed={elapsed:.2f}s",
+            flush=True,
+        )
+        return responses
+

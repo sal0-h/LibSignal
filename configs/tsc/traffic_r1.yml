@@ -7,7 +7,9 @@ includes:
 # keeps the one-episode, inference-only evaluation settings below.
 model:
   name: traffic_r1
-  backend: local
+  # vLLM: fused decode, prefix cache, per-sequence stop on \boxed{ETWT|...}.
+  # Fall back to HuggingFace generate with backend: local (no vllm install).
+  backend: vllm
 
   model_path: "Season998/Traffic-R1"
   model_subfolder: "huggingface"
@@ -18,6 +20,14 @@ model:
   max_new_tokens: 512
   do_sample: False
   parse_retries: 5
+
+  # Prompt is ~500 tokens + 512 new; cap KV cache so the MIG is not sized for 32k.
+  max_model_len: 4096
+  gpu_memory_utilization: 0.85
+  max_num_seqs: 32
+  enable_prefix_caching: true
+  # Same-process engine: LibSignal already created a CUDA context before the agent loads.
+  distributed_executor_backend: uni
 
   # Observation (paper-derived four-signal interface).
   v_stop: 0.1

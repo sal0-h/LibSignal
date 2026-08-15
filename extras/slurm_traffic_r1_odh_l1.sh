@@ -8,9 +8,10 @@
 #   sbatch --export=ALL --mcs-label=QSIURP_Salman \
 #     extras/slurm_traffic_r1_odh_l1.sh
 #
-# The model is the local Season998/Traffic-R1 checkpoint. It does not use
-# OPENAI_API_KEY or the DeepSeek API. This is an inference-only run over the
-# three held-out Level 1 OD route files in configs/tsc/od_hub_1800_base.yml.
+# The model is the local Season998/Traffic-R1 checkpoint via in-process vLLM
+# (configs/tsc/traffic_r1.yml backend=vllm). Install vllm in $CONDA_ENV against
+# the same torch/CUDA as the job. It does not use OPENAI_API_KEY. Inference-only
+# over the three held-out Level 1 OD route files in od_hub_1800_base.yml.
 
 #SBATCH --job-name=traffic_r1_odh_l1
 #SBATCH --output=logs/traffic_r1_odh_l1_%j.out
