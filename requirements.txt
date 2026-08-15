@@ -37,3 +37,6 @@ tqdm>=4.62.0
 transformers>=4.45.0
 accelerate>=0.27.0
 openai>=1.0.0
+# Optional GPU decode engine for configs/tsc/traffic_r1.yml (backend=vllm).
+# Pin against the same torch/CUDA as the env; do not install blindly on CPU:
+#   pip install vllm
