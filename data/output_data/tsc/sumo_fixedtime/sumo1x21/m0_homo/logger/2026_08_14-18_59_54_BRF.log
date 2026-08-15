@@ -1,0 +1,3 @@
+Final Travel Time is 248.9316, mean rewards: -143.9723, queue: 2.4741, delay: 1.2010, throughput: 4006
+Saved 4273 vehicle trip records to data/output_data/tsc/sumo_fixedtime/sumo1x21/m0_homo/logger/new_metrics.csv (ATT=248.93s, completion=93.8%)
+Total time taken: 18.571725606918335
