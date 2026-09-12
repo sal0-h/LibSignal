@@ -16,14 +16,18 @@ except Exception as e:
 # Optional RL agents; import lazily so missing deps (e.g., torch_scatter) don't block baselines
 try:
 	from .colight import CoLightAgent
+	from .colight_rich import CoLightRichAgent
 except Exception as e:
 	print(f"Warning: Failed to import CoLightAgent: {e}")
 	CoLightAgent = None
+	CoLightRichAgent = None
 
 try:
 	from .dqn import DQNAgent
+	from .dqn_rich import DQNRichAgent
 except ModuleNotFoundError:
 	DQNAgent = None
+	DQNRichAgent = None
 
 try:
 	from .frap import FRAP_DQNAgent
@@ -48,8 +52,10 @@ except ModuleNotFoundError:
 
 try:
 	from .presslight import PressLightAgent
+	from .presslight_rich import PressLightRichAgent
 except ModuleNotFoundError:
 	PressLightAgent = None
+	PressLightRichAgent = None
 
 try:
 	from .mplight import MPLightAgent

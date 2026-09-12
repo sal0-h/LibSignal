@@ -18,6 +18,7 @@ data/output_data/**/model/
 data/output_data/**/*.pt
 data/output_data/**/*.pth
 data/output_data/tsc/processed_results*.csv
+data/output_data/**/rich_smoke/
 
 
 # LaTeX build artifacts (source: docs/team_instructions.tex)

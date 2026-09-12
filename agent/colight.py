@@ -49,7 +49,7 @@ class CoLightAgent(RLAgent):
         for inter in self.world.intersections:
             node_id = inter.id if 'GS_' not in inter.id else inter.id[3:]
             node_idx = self.graph['node_id2idx'][node_id]
-            tmp_generator = LaneVehicleGenerator(self.world, inter, ['lane_count'], in_only=True, average=None)
+            tmp_generator = self._make_observation_generator(inter)
             observation_generators.append((node_idx, tmp_generator))
         sorted(observation_generators, key=lambda x: x[0])  # now generator's order is according to its index in graph
         self.ob_generator = observation_generators
@@ -133,6 +133,9 @@ class CoLightAgent(RLAgent):
                                        lr=self.learning_rate,
                                        alpha=0.9, centered=False, eps=1e-7)
 
+    def _make_observation_generator(self, inter):
+        return LaneVehicleGenerator(self.world, inter, ['lane_count'], in_only=True, average=None)
+
     def to_device(self, device):
         self.device = device
         self.model.to(device)
@@ -144,7 +147,7 @@ class CoLightAgent(RLAgent):
         for inter in self.world.intersections:
             node_id = inter.id if 'GS_' not in inter.id else inter.id[3:]
             node_idx = self.graph['node_id2idx'][node_id]
-            tmp_generator = LaneVehicleGenerator(self.world, inter, ['lane_count'], in_only=True, average=None)
+            tmp_generator = self._make_observation_generator(inter)
             observation_generators.append((node_idx, tmp_generator))
         sorted(observation_generators, key=lambda x: x[0])  # now generator's order is according to its index in graph
         self.ob_generator = observation_generators

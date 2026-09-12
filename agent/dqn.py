@@ -37,7 +37,7 @@ class DQNAgent(RLAgent):
         inter_id = self.world.intersection_ids[self.rank]
         inter_obj = self.world.id2intersection[inter_id]
         self.inter = inter_obj
-        self.ob_generator = LaneVehicleGenerator(self.world,  self.inter, ['lane_count'], in_only=True, average=None)
+        self.ob_generator = self._make_observation_generator(inter_obj)
 
         self.phase_generator = IntersectionPhaseGenerator(world,  self.inter, ["phase"],
                                                           targets=["cur_phase"], negative=False)
@@ -73,6 +73,9 @@ class DQNAgent(RLAgent):
     def __repr__(self):
         return self.model.__repr__()
 
+    def _make_observation_generator(self, inter_obj):
+        return LaneVehicleGenerator(self.world, inter_obj, ['lane_count'], in_only=True, average=None)
+
     def to_device(self, device):
         self.device = device
         self.model.to(device)
@@ -88,7 +91,7 @@ class DQNAgent(RLAgent):
         '''
         inter_id = self.world.intersection_ids[self.rank]
         inter_obj = self.world.id2intersection[inter_id]
-        self.ob_generator = LaneVehicleGenerator(self.world, inter_obj, ['lane_count'], in_only=True, average=None)
+        self.ob_generator = self._make_observation_generator(inter_obj)
         self.phase_generator = IntersectionPhaseGenerator(self.world, inter_obj, ["phase"],
                                                           targets=["cur_phase"], negative=False)
         self.reward_generator = LaneVehicleGenerator(self.world, inter_obj, ["lane_waiting_count"],
