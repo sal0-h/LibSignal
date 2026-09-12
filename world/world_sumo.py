@@ -732,6 +732,7 @@ class World(object):
 
         self.net = self._roadnet_file
         self.route = os.path.join(sumo_dict['dir'], route_file)
+        self.route = self._slow_start_route_without_inline_vtype(self.route)
         self.warning = sumo_dict['no_warning']
         self._rebuild_sumo_cmd()
         print("building world...")
@@ -987,6 +988,39 @@ class World(object):
         else:
             self.sumo_cmd = [self._headless_bin] + sim_args
 
+    def _slow_start_route_without_inline_vtype(self, route_abs):
+        """Hub-OD .rou.xml embeds <vType id="pkw">. slowStartAdditional also
+        defines pkw, so SUMO exits immediately with a duplicate-id error.
+        Write a sibling without the inline vType so the additional file wins
+        (same recipe as extras/gen_slow_start_routes.py). Only for
+        slow_start-alone; hetero+slow_start uses car/truck vTypes.
+        """
+        if not (getattr(self, 'slow_start', False) and not getattr(self, 'hetero', False)):
+            return route_abs
+        if not route_abs or not os.path.isfile(route_abs):
+            return route_abs
+        try:
+            tree = ET.parse(route_abs)
+        except ET.ParseError:
+            return route_abs
+        root = tree.getroot()
+        vtypes = [el for el in list(root) if el.tag.split('}')[-1] == 'vType']
+        if not vtypes:
+            return route_abs
+        cache_dir = os.path.join(os.path.dirname(route_abs), '.slow_start_notype')
+        os.makedirs(cache_dir, exist_ok=True)
+        dst = os.path.join(cache_dir, os.path.basename(route_abs))
+        if os.path.isfile(dst) and os.path.getmtime(dst) >= os.path.getmtime(route_abs):
+            return dst
+        for el in vtypes:
+            root.remove(el)
+        for veh in root.iter():
+            if veh.tag.split('}')[-1] == 'vehicle' and 'type' not in veh.attrib:
+                veh.set('type', 'pkw')
+        tree.write(dst, encoding='utf-8', xml_declaration=True)
+        print(f"[SlowStart] stripped inline vType -> {dst}")
+        return dst
+
     def set_route_file(self, route_rel):
         '''
         Swap the demand/route file used on the next reset().
@@ -996,6 +1030,7 @@ class World(object):
         route_abs = route_rel if os.path.isabs(route_rel) else os.path.join(self._dir, route_rel)
         if not os.path.exists(route_abs):
             raise FileNotFoundError(f"demand route file not found: {route_abs}")
+        route_abs = self._slow_start_route_without_inline_vtype(route_abs)
         if not self._use_explicit_net_route:
             self._use_explicit_net_route = True
         self.route = route_abs

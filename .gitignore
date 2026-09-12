@@ -40,3 +40,6 @@ data/output_data/tsc/processed_results*.csv
 
 # Keep raw Level-1 experiment stdout/stderr and downloaded logs local only.
 archive/llm_controller_level1/
+
+# Runtime copies of hub-OD routes with inline vType stripped for slow_start
+**/.slow_start_notype/
