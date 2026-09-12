@@ -27,8 +27,26 @@ CPUS="${CPUS:-8}"
 MEM="${MEM:-32G}"
 GRES="${GRES:-gpu:nvidia_h200_2g.35gb:1}"
 PARTITION="${PARTITION:-gpu2}"
-CONDA_ENV="${CONDA_ENV:-traffic}"
+# Bake a real env path into the job. Do not call `conda` on the compute node
+# (that is why 11385–11389 died in 0s). Prefer an env that already has vllm.
+CONDA_PREFIX="${CONDA_PREFIX:-}"
 AXES=(hetero slow_start crossing_proxy obs noise)
+
+pick_conda_prefix() {
+  local p
+  for p in \
+    "${CONDA_PREFIX}" \
+    /data1/mmirzata/.conda/envs/traffic \
+    /data1/mmirzata/.conda/envs/libsignal
+  do
+    [[ -z "${p}" ]] && continue
+    if [[ -x "${p}/bin/python" ]]; then
+      echo "${p}"
+      return 0
+    fi
+  done
+  echo "/data1/mmirzata/.conda/envs/traffic"
+}
 
 usage() {
   cat <<'EOF'
@@ -48,6 +66,7 @@ write_job_script() {
   local axis="$1"
   local cfg="traffic_r1_odh_l2_${axis}"
   local prefix="l2_axis_${axis}"
+  local conda_prefix="$2"
   local out="extras/_slurm_generated/l2_axes_tr1/l2ax_tr1_${axis}_sumo4x4.sh"
 
   cat >"${out}" <<EOF
@@ -65,29 +84,30 @@ write_job_script() {
 
 set -euo pipefail
 
-cd "\${SLURM_SUBMIT_DIR:-\${HOME}/LibSignalFork}"
+cd "\${HOME}/LibSignalFork"
 
-if [[ -z "\${CONDA_PREFIX:-}" ]]; then
-  source "\$(conda info --base)/etc/profile.d/conda.sh"
-  conda activate "${CONDA_ENV}"
+CONDA_PREFIX="${conda_prefix}"
+if [[ ! -x "\${CONDA_PREFIX}/bin/python" ]]; then
+  for p in /data1/mmirzata/.conda/envs/traffic /data1/mmirzata/.conda/envs/libsignal; do
+    if [[ -x "\${p}/bin/python" ]]; then
+      CONDA_PREFIX="\${p}"
+      break
+    fi
+  done
 fi
-export PATH="\${CONDA_PREFIX}/bin:\${PATH}"
-
-if [[ -z "\${SUMO_HOME:-}" ]]; then
-  if SUMO_HOME_FROM_PYTHON="\$(python -c 'import os, sumo; print(os.path.dirname(sumo.__file__))' 2>/dev/null)"; then
-    export SUMO_HOME="\${SUMO_HOME_FROM_PYTHON}"
-  elif [[ -d "\${CONDA_PREFIX}/share/sumo" ]]; then
-    export SUMO_HOME="\${CONDA_PREFIX}/share/sumo"
-  else
-    echo "SUMO_HOME unset" >&2
-    exit 1
-  fi
+export SUMO_HOME="\${SUMO_HOME:-\${CONDA_PREFIX}/share/sumo}"
+if [[ ! -d "\${SUMO_HOME}" ]]; then
+  SUMO_HOME="\$("\${CONDA_PREFIX}/bin/python" -c 'import os,sumo; print(os.path.dirname(sumo.__file__))')"
+  export SUMO_HOME
 fi
-export PATH="\${SUMO_HOME}/bin:\${PATH}"
+export PATH="\${CONDA_PREFIX}/bin:\${SUMO_HOME}/bin:\${PATH}"
+PYTHON="\${CONDA_PREFIX}/bin/python"
 
 echo "Host:      \$(hostname)"
 echo "Job:       \${SLURM_JOB_ID:-local}"
-echo "Python:    \$(command -v python) (\$("\$(command -v python)" --version 2>&1))"
+echo "Python:    \${PYTHON} (\$("\${PYTHON}" --version 2>&1))"
+echo "CONDA:     \${CONDA_PREFIX}"
+echo "SUMO_HOME: \${SUMO_HOME}"
 echo "Agent:     ${cfg}"
 echo "Axis:      ${axis}"
 echo "Network:   ${NETWORK}"
@@ -96,9 +116,14 @@ echo "Seed:      ${SEED}"
 echo "CUDA:      \${CUDA_VISIBLE_DEVICES:-unset}"
 echo "Start:     \$(date -Is)"
 
-python -c "import vllm, torch; print('vllm', vllm.__version__, 'cuda', torch.cuda.is_available())"
+if [[ ! -x "\${PYTHON}" ]]; then
+  echo "ERROR: missing \${PYTHON}" >&2
+  exit 127
+fi
 
-python run.py \\
+"\${PYTHON}" -c "import vllm, torch, libsumo; print('vllm', vllm.__version__, 'cuda', torch.cuda.is_available())"
+
+"\${PYTHON}" run.py \\
   --agent ${cfg} \\
   --world sumo \\
   --network ${NETWORK} \\
@@ -150,7 +175,8 @@ if [[ ${LIST_ONLY} -eq 0 && ${DRY_RUN} -eq 0 && -z "${MCS_LABEL:-}" ]]; then
   exit 1
 fi
 
-echo "Traffic-R1 L2 single-axis 4x4: axes=${SEL_AXES[*]}  gres=${GRES}  env=${CONDA_ENV}"
+CONDA_PREFIX="$(pick_conda_prefix)"
+echo "Traffic-R1 L2 single-axis 4x4: axes=${SEL_AXES[*]}  gres=${GRES}  conda=${CONDA_PREFIX}"
 echo ""
 
 submitted=0
@@ -165,7 +191,7 @@ for axis in "${SEL_AXES[@]}"; do
   if [[ ${LIST_ONLY} -eq 1 ]]; then
     continue
   fi
-  script="$(write_job_script "${axis}")"
+  script="$(write_job_script "${axis}" "${CONDA_PREFIX}")"
   if [[ ${DRY_RUN} -eq 1 ]]; then
     echo "    wrote ${script}"
   else
