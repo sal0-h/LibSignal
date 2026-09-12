@@ -37,7 +37,14 @@ class CoLightAgent(RLAgent):
         self.world = world
         self.sub_agents = len(self.world.intersections)
         # TODO: support dynamic graph later
-        self.edge_idx = torch.tensor(self.graph['sparse_adj'].T, dtype=torch.long)  # source -> target
+        # Graph node indices (sumolib TL order) != world.intersections order.
+        # Remap edges into world rows so GNN neighbors match obs/actions.
+        graph_to_world = np.empty(len(self.graph['node_idx2id']), dtype=np.int64)
+        for i, inter in enumerate(self.world.intersections):
+            node_id = inter.id if 'GS_' not in inter.id else inter.id[3:]
+            graph_to_world[self.graph['node_id2idx'][node_id]] = i
+        adj = np.asarray(self.graph['sparse_adj'], dtype=np.int64)
+        self.edge_idx = torch.tensor(graph_to_world[adj].T, dtype=torch.long)
 
         #  model parameters
         self.phase = Registry.mapping['model_mapping']['setting'].param['phase']
