@@ -32,20 +32,30 @@ PARTITION="${PARTITION:-gpu2}"
 CONDA_PREFIX="${CONDA_PREFIX:-}"
 AXES=(hetero slow_start crossing_proxy obs noise)
 
+env_has_vllm() {
+  local p="$1"
+  [[ -n "${p}" && -x "${p}/bin/python" ]] || return 1
+  "${p}/bin/python" -c "import vllm" >/dev/null 2>&1
+}
+
 pick_conda_prefix() {
   local p
+  if [[ -n "${CONDA_PREFIX:-}" ]] && env_has_vllm "${CONDA_PREFIX}"; then
+    echo "${CONDA_PREFIX}"
+    return 0
+  fi
   for p in \
-    /data1/mmirzata/.conda/envs/traffic \
-    /data1/mmirzata/.conda/envs/libsignal \
-    "${CONDA_PREFIX:-}"
+    /data1/mmirzata/.conda/envs/* \
+    "${HOME}/.conda/envs/"* \
+    /data1/mmirzata/.conda/envs/libsignal
   do
-    [[ -z "${p}" || "${p}" == /opt/* ]] && continue
-    if [[ -x "${p}/bin/python" ]]; then
+    [[ "${p}" == /opt/* ]] && continue
+    if env_has_vllm "${p}"; then
       echo "${p}"
       return 0
     fi
   done
-  echo "/data1/mmirzata/.conda/envs/traffic"
+  return 1
 }
 
 usage() {
@@ -174,7 +184,20 @@ if [[ ${LIST_ONLY} -eq 0 && ${DRY_RUN} -eq 0 && -z "${MCS_LABEL:-}" ]]; then
   exit 1
 fi
 
-CONDA_PREFIX="$(pick_conda_prefix)"
+if ! CONDA_PREFIX="$(pick_conda_prefix)"; then
+  echo "No conda env with vllm found." >&2
+  echo "On the login node, find one:" >&2
+  echo "  conda env list" >&2
+  echo "  ls /data1/mmirzata/.conda/envs" >&2
+  echo "  for d in /data1/mmirzata/.conda/envs/*/bin/python; do" >&2
+  echo "    echo \"== \$d\"; \"\$d\" -c 'import vllm; print(vllm.__version__)' 2>/dev/null || echo no vllm" >&2
+  echo "  done" >&2
+  echo "Then: export CONDA_PREFIX=/path/to/that/env" >&2
+  if [[ ${LIST_ONLY} -eq 0 ]]; then
+    exit 1
+  fi
+  CONDA_PREFIX="/data1/mmirzata/.conda/envs/libsignal"
+fi
 echo "Traffic-R1 L2 single-axis 4x4: axes=${SEL_AXES[*]}  gres=${GRES}  conda=${CONDA_PREFIX}"
 echo ""
 
