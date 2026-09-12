@@ -35,11 +35,11 @@ AXES=(hetero slow_start crossing_proxy obs noise)
 pick_conda_prefix() {
   local p
   for p in \
-    "${CONDA_PREFIX}" \
     /data1/mmirzata/.conda/envs/traffic \
-    /data1/mmirzata/.conda/envs/libsignal
+    /data1/mmirzata/.conda/envs/libsignal \
+    "${CONDA_PREFIX:-}"
   do
-    [[ -z "${p}" ]] && continue
+    [[ -z "${p}" || "${p}" == /opt/* ]] && continue
     if [[ -x "${p}/bin/python" ]]; then
       echo "${p}"
       return 0
@@ -87,14 +87,13 @@ set -euo pipefail
 cd "\${HOME}/LibSignalFork"
 
 CONDA_PREFIX="${conda_prefix}"
-if [[ ! -x "\${CONDA_PREFIX}/bin/python" ]]; then
-  for p in /data1/mmirzata/.conda/envs/traffic /data1/mmirzata/.conda/envs/libsignal; do
-    if [[ -x "\${p}/bin/python" ]]; then
-      CONDA_PREFIX="\${p}"
-      break
-    fi
-  done
-fi
+for p in /data1/mmirzata/.conda/envs/traffic /data1/mmirzata/.conda/envs/libsignal "\${CONDA_PREFIX}"; do
+  [[ -z "\${p}" || ! -x "\${p}/bin/python" ]] && continue
+  if "\${p}/bin/python" -c "import vllm" >/dev/null 2>&1; then
+    CONDA_PREFIX="\${p}"
+    break
+  fi
+done
 export SUMO_HOME="\${SUMO_HOME:-\${CONDA_PREFIX}/share/sumo}"
 if [[ ! -d "\${SUMO_HOME}" ]]; then
   SUMO_HOME="\$("\${CONDA_PREFIX}/bin/python" -c 'import os,sumo; print(os.path.dirname(sumo.__file__))')"
