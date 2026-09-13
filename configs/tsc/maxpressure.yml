@@ -5,6 +5,10 @@ includes:
 model:
   name: maxpressure
   t_min: 10
+  # varaiya (default): queue-based MP aligned with Varaiya 2013 — see docs/MAXPRESSURE.md
+  # libsignal: legacy lane_count[start]-lane_count[end] heuristic from upstream LibSignal
+  mp_variant: varaiya
+  sat_flow: 1.0
 
 
 trainer:
