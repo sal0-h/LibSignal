@@ -18,8 +18,9 @@
 # After a job starts, logs must contain:
 #   [CoLight] remapped N/M graph edges into world intersection order
 #
-# Hetero axis and compound L2 still need the hub-OD fleet rewrite on the
-# server (805dc4b / rewrite_route_file_hetero_mix).
+# graph-fix: 18 jobs = all CoLight table cells except L2-axis hetero
+# (that pair was already resubmitted after the hub-OD fleet rewrite).
+# Compound L2 CoLight is included here (native L2 never reran on the remap).
 #
 # Old July M0-demand axes (tab:axes4x4, prefixes like hetero_4x4) are a
 # different protocol and are not in `all`. Pass `m0-axes` only if you
@@ -31,6 +32,7 @@
 #   export MCS_LABEL=15288
 #   ./extras/submit_colight_table_rerun.sh list
 #   ./extras/submit_colight_table_rerun.sh dry-run all
+#   ./extras/submit_colight_table_rerun.sh graph-fix
 #   ./extras/submit_colight_table_rerun.sh all
 #   ./extras/submit_colight_table_rerun.sh l0 l1
 #   ./extras/submit_colight_table_rerun.sh axes 4x4
@@ -60,6 +62,7 @@ Usage: ./extras/submit_colight_table_rerun.sh [filters...]
 Filters (AND-combined; at least one required):
   list | dry-run | smoke
   all                 20 journal CoLight jobs (L0+L1+L2+axes+rich)
+  graph-fix           18 jobs: all except L2-axis hetero (already rerun)
   l0 | l1 | l2 | axes | rich
   4x4 | 1x21
   hetero | slow_start | crossing_proxy | obs | noise
@@ -68,6 +71,7 @@ Filters (AND-combined; at least one required):
 Examples:
   export MCS_LABEL=15288
   ./extras/submit_colight_table_rerun.sh list
+  ./extras/submit_colight_table_rerun.sh graph-fix
   ./extras/submit_colight_table_rerun.sh all
   ./extras/submit_colight_table_rerun.sh axes hetero
   ./extras/submit_colight_table_rerun.sh rich 4x4
@@ -187,6 +191,8 @@ LIST_ONLY=0
 DRY_RUN=0
 WANT_SMOKE=0
 WANT_ALL=0
+WANT_GRAPH_FIX=0
+SKIP_HETERO=0
 SEL_GROUPS=()
 SEL_NETWORKS=()
 SEL_AXES=()
@@ -203,6 +209,7 @@ for arg in "$@"; do
     dry-run|dryrun) DRY_RUN=1 ;;
     smoke) WANT_SMOKE=1 ;;
     all) WANT_ALL=1 ;;
+    graph-fix|graphfix) WANT_GRAPH_FIX=1 ;;
     l0|l1|l2|axes|rich|m0-axes) SEL_GROUPS+=("${arg}") ;;
     4x4) SEL_NETWORKS+=(sumo4x4) ;;
     1x21|ingolstadt) SEL_NETWORKS+=(sumo1x21) ;;
@@ -223,6 +230,10 @@ fi
 
 if [[ ${WANT_ALL} -eq 1 ]]; then
   SEL_GROUPS=(l0 l1 l2 axes rich)
+fi
+if [[ ${WANT_GRAPH_FIX} -eq 1 ]]; then
+  SEL_GROUPS=(l0 l1 l2 axes rich)
+  SKIP_HETERO=1
 fi
 
 if [[ ${#SEL_GROUPS[@]} -eq 0 ]]; then
@@ -260,6 +271,9 @@ match_network() {
 match_axis_job() {
   local group="$1"
   local prefix="$2"
+  if [[ ${SKIP_HETERO} -eq 1 && "${prefix}" == "l2_axis_hetero" ]]; then
+    return 1
+  fi
   [[ "${group}" != "axes" ]] && return 0
   [[ ${#SEL_AXES[@]} -eq 0 ]] && return 0
   local axis
@@ -284,7 +298,7 @@ if [[ ${n_jobs} -eq 0 ]]; then
   exit 1
 fi
 
-if [[ ${WANT_ALL} -eq 0 && ${WANT_SMOKE} -eq 0 && ${n_jobs} -ge 20 && ${LIST_ONLY} -eq 0 && ${DRY_RUN} -eq 0 ]]; then
+if [[ ${WANT_ALL} -eq 0 && ${WANT_GRAPH_FIX} -eq 0 && ${WANT_SMOKE} -eq 0 && ${n_jobs} -ge 20 && ${LIST_ONLY} -eq 0 && ${DRY_RUN} -eq 0 ]]; then
   echo "Refusing to submit ${n_jobs} jobs without 'all'." >&2
   echo "Narrow the filters, or pass: $0 all" >&2
   exit 1
