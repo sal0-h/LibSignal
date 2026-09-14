@@ -63,9 +63,21 @@ def smoke(args):
         action_limits = np.array([len(inter.phases) for inter in world.intersections])
         graph_order_matches = None
         if args.agent == 'colight_rich':
-            graph_order_matches = [idx for idx, _ in agents[0].ob_generator] == list(range(len(action_limits)))
-            if not graph_order_matches:
-                print('Existing CoLight graph/world order mismatch; see docs/INPUT_STATE_DESIGN.md.')
+            ag = agents[0]
+            gen_ids = [gen.I.id for _, gen in ag.ob_generator]
+            world_ids = [inter.id for inter in world.intersections]
+            graph_order_matches = gen_ids == world_ids
+            edges = ag.edge_idx.detach().cpu()
+            n_world = len(world_ids)
+            edges_in_world = (
+                edges.numel() == 0
+                or (int(edges.min()) >= 0 and int(edges.max()) < n_world)
+            )
+            if not graph_order_matches or not edges_in_world:
+                raise AssertionError(
+                    'CoLight generators/edges are not in world.intersections order '
+                    f'(gens_match={graph_order_matches}, edges_in_world={edges_in_world})'
+                )
 
         for decision in range(30):
             for ag, observation in zip(agents, obs):

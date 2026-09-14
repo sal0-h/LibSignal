@@ -147,25 +147,16 @@ traffic in every run. No full training run was launched.
 | --- | --- | --- | --- |
 | DQN-rich | 5 (boundary), 56 (interior) | 18–53, depending on intersection | Passed on both |
 | PressLight-rich | 5 (boundary), 56 (interior) | 18–53, depending on intersection | Passed on both |
-| CoLight-rich | 48 per node | 50 per node | Passed on both; existing graph issue below |
+| CoLight-rich | 48 per node | 50 per node | Passed on both; graph remapped to world order |
 
-### Existing CoLight limitation found during validation
+### CoLight graph mapping
 
-On both tested networks, the native CoLight graph builder and SUMO world enumerate
-signals in different orders. `CoLightAgent` calls `sorted(observation_generators, ...)`
-without assigning the result, and passes graph edges to a network whose input
-rows remain in world order. The adjacency therefore refers to different row
-identities on this network. The rich subclass inherits this behavior unchanged.
-The smoke result records `graph_order_matches_world` to make this visible.
+On both tested networks, the native CoLight graph builder (`sumolib`
+traffic-light order) and the SUMO world (`libsumo` `getIDList`) enumerate
+signals differently. `agent/colight.py` remaps `sparse_adj` into
+`world.intersections` rows so GNN neighbors, observations, rewards, phase
+masks, and `env.step` share one index space. Generators stay in world order;
+do not sort them into graph order. `colight_rich` inherits this remap.
 
-Constructing native CoLight separately confirmed the same issue. Comparing its
-current edge set with the edges remapped to world row IDs changes 74 of 80 edges
-on the grid and both of the two graph edges on Ingolstadt. This is an effective
-connectivity error, not merely a different but equivalent enumeration.
-
-This input-only change does not repair the graph mapping. A correction should
-remap graph edges into world order (preserving observation, reward, action, and
-phase-mask alignment), and be applied and re-evaluated for both native and rich
-CoLight before drawing conclusions about spatial coordination on either network.
-Simply sorting observations would also require mapping actions back to world
-order and keeping rewards and action masks aligned.
+A smoke run records `graph_order_matches_world` after checking that generator
+ids equal `world.intersections` and that remapped edges index that range.
