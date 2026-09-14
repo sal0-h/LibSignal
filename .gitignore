@@ -44,3 +44,5 @@ archive/llm_controller_level1/
 
 # Runtime copies of hub-OD routes with inline vType stripped for slow_start
 **/.slow_start_notype/
+# Runtime hub-OD copies with 80/20 car/truck for hetero
+**/.hetero_mix/

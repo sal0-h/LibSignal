@@ -28,6 +28,62 @@ except ImportError:
     libsumo = None
 import traci
 
+# Hub-OD routes are 100% type="pkw". hetero=true loads car/truck vTypes, then
+# demand_train_file replaces the hetero route, so trucks never spawn unless we
+# rewrite. Same 80/20 stride as extras/gen_hetero_routes.py.
+HETERO_TRUCK_RATIO = 0.2
+
+
+def _xml_local_tag(el):
+    return el.tag.split('}')[-1]
+
+
+def rewrite_route_file_hetero_mix(route_abs, truck_ratio=HETERO_TRUCK_RATIO):
+    """Rewrite a hub-OD .rou.xml so additional car/truck vTypes are used.
+
+    Drops inline <vType id="pkw"> and assigns type="car" / type="truck".
+    Files that already have trucks (M0 hetero routes) are left unchanged.
+    Cached under <dir>/.hetero_mix/.
+    """
+    if not route_abs or not os.path.isfile(route_abs):
+        return route_abs
+    try:
+        tree = ET.parse(route_abs)
+    except ET.ParseError:
+        return route_abs
+    root = tree.getroot()
+    vehicles = [el for el in root.iter() if _xml_local_tag(el) == 'vehicle']
+    if not vehicles:
+        return route_abs
+    types = [veh.get('type', '') for veh in vehicles]
+    n_pkw = sum(1 for t in types if t == 'pkw' or t == '')
+    n_truck = sum(1 for t in types if t == 'truck')
+    if n_pkw == 0 and n_truck > 0:
+        return route_abs
+    cache_dir = os.path.join(os.path.dirname(route_abs), '.hetero_mix')
+    os.makedirs(cache_dir, exist_ok=True)
+    dst = os.path.join(cache_dir, os.path.basename(route_abs))
+    if os.path.isfile(dst) and os.path.getmtime(dst) >= os.path.getmtime(route_abs):
+        return dst
+    for el in [child for child in list(root) if _xml_local_tag(child) == 'vType']:
+        root.remove(el)
+    n = len(vehicles)
+    n_trucks = int(round(n * float(truck_ratio)))
+    if n_trucks > 0:
+        stride = n / n_trucks
+        truck_indices = {int(i * stride) for i in range(n_trucks)}
+    else:
+        truck_indices = set()
+    for idx, veh in enumerate(vehicles):
+        veh.set('type', 'truck' if idx in truck_indices else 'car')
+    tree.write(dst, encoding='utf-8', xml_declaration=True)
+    n_cars = n - len(truck_indices)
+    print(
+        f"[Hetero] mixed fleet {n_cars} car / {len(truck_indices)} truck -> {dst}"
+    )
+    return dst
+
+
 class Intersection(object):
     '''
     Intersection Class is mainly used for describing crossing information and defining acting methods.
@@ -732,6 +788,7 @@ class World(object):
 
         self.net = self._roadnet_file
         self.route = os.path.join(sumo_dict['dir'], route_file)
+        self.route = self._hetero_route_with_fleet_mix(self.route)
         self.route = self._slow_start_route_without_inline_vtype(self.route)
         self.warning = sumo_dict['no_warning']
         self._rebuild_sumo_cmd()
@@ -988,6 +1045,15 @@ class World(object):
         else:
             self.sumo_cmd = [self._headless_bin] + sim_args
 
+    def _hetero_route_with_fleet_mix(self, route_abs):
+        """Hub-OD demand overrides flowFileHetero and leaves type=pkw. When
+        hetero is on, rewrite those files to 80/20 car/truck so the additional
+        vTypes (vTypes_mixed or vTypes_realism_full) actually attach.
+        """
+        if not getattr(self, 'hetero', False):
+            return route_abs
+        return rewrite_route_file_hetero_mix(route_abs)
+
     def _slow_start_route_without_inline_vtype(self, route_abs):
         """Hub-OD .rou.xml embeds <vType id="pkw">. slowStartAdditional also
         defines pkw, so SUMO exits immediately with a duplicate-id error.
@@ -1030,6 +1096,7 @@ class World(object):
         route_abs = route_rel if os.path.isabs(route_rel) else os.path.join(self._dir, route_rel)
         if not os.path.exists(route_abs):
             raise FileNotFoundError(f"demand route file not found: {route_abs}")
+        route_abs = self._hetero_route_with_fleet_mix(route_abs)
         route_abs = self._slow_start_route_without_inline_vtype(route_abs)
         if not self._use_explicit_net_route:
             self._use_explicit_net_route = True
