@@ -1,0 +1,8 @@
+HELDOUT episode:1/1, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:298.9550561797753, rewards:-105.65416666666667, queue:1.5740740740740742, delay:0.9463229063326719, throughput:1157
+Saved 1971 vehicle trip records to data/output_data/tsc/sumo_maxpressure_odh_l2_hetero_1x21/sumo1x21/l2_axis_hetero/logger/new_metrics_hold_00.csv (ATT=298.96s, completion=58.7%)
+HELDOUT episode:1/1, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:306.6865800865801, rewards:-111.35702039930555, queue:1.6775132275132276, delay:0.9960510576843584, throughput:1155
+Saved 1992 vehicle trip records to data/output_data/tsc/sumo_maxpressure_odh_l2_hetero_1x21/sumo1x21/l2_axis_hetero/logger/new_metrics_hold_01.csv (ATT=306.69s, completion=58.0%)
+HELDOUT episode:1/1, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:293.1268115942029, rewards:-116.74995659722222, queue:1.8158730158730159, delay:1.029047244440311, throughput:1104
+Saved 1984 vehicle trip records to data/output_data/tsc/sumo_maxpressure_odh_l2_hetero_1x21/sumo1x21/l2_axis_hetero/logger/new_metrics_hold_02.csv (ATT=293.13s, completion=55.6%)
+HELDOUT_MEAN episode:1/1, travel time:299.58948262018606 (n=3)
+Total time taken: 31.793591260910034

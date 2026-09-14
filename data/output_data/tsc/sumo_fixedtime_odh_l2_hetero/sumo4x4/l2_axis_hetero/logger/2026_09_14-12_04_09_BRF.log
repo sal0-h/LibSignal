@@ -1,0 +1,8 @@
+HELDOUT episode:1/1, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:196.4993103448276, rewards:-53.77666558159722, queue:0.7782986111111111, delay:0.5520915137396918, throughput:725
+Saved 780 vehicle trip records to data/output_data/tsc/sumo_fixedtime_odh_l2_hetero/sumo4x4/l2_axis_hetero/logger/new_metrics_hold_00.csv (ATT=196.50s, completion=92.9%)
+HELDOUT episode:1/1, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:196.57707509881422, rewards:-57.15888671875, queue:0.7939236111111111, delay:0.5827458699544271, throughput:759
+Saved 817 vehicle trip records to data/output_data/tsc/sumo_fixedtime_odh_l2_hetero/sumo4x4/l2_axis_hetero/logger/new_metrics_hold_01.csv (ATT=196.58s, completion=92.9%)
+HELDOUT episode:1/1, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:194.97564276048715, rewards:-54.702777777777776, queue:0.7612847222222222, delay:0.5688162485758463, throughput:739
+Saved 795 vehicle trip records to data/output_data/tsc/sumo_fixedtime_odh_l2_hetero/sumo4x4/l2_axis_hetero/logger/new_metrics_hold_02.csv (ATT=194.98s, completion=93.0%)
+HELDOUT_MEAN episode:1/1, travel time:196.01734273470967 (n=3)
+Total time taken: 11.458592891693115
