@@ -1,0 +1,109 @@
+{
+  "generated_at": "2026-09-14T03:04:31",
+  "n_vehicles_logged": 1806,
+  "n_completed_trips": 399,
+  "n_incomplete_trips": 1407,
+  "completion_rate": 0.22093023255813954,
+  "trip_status_counts": {
+    "completed": 399,
+    "on_map_at_end": 1407
+  },
+  "stop_speed_threshold_mps": 0.1,
+  "primary_efficiency_metric": "schedule_efficiency",
+  "ride_effectiveness_note": "waiting_fraction = custom_wait_s / travel_time_s per vehicle; system_idle_share = sum(custom_wait_s)/sum(travel_time_s). Lower idle share = higher ride effectiveness.",
+  "metric_definitions": {
+    "travel_time_s": "Wall-clock time in network (LibSignal ATT = mean over completed).",
+    "route_distance_m": "Sum of edge lengths on assigned route.",
+    "distance_traveled_m": "SUMO odometer at trip end (or horizon for censored).",
+    "custom_wait_s": "Uncapped idle time (speed < 0.1 m/s each step).",
+    "waiting_fraction": "custom_wait_s / travel_time_s (per-vehicle idle share).",
+    "moving_fraction": "1 - waiting_fraction.",
+    "schedule_efficiency": "free_flow_time_s / travel_time_s in [0,1] (higher is better).",
+    "system_idle_share": "sum(custom_wait_s) / sum(travel_time_s) over a record set.",
+    "throughput": "Number of completed trips in the eval window."
+  },
+  "sumo_accumulated_wait_note": "accumulated_waiting_time_s uses SUMO getAccumulatedWaitingTime(), capped by default --waiting-time-memory=100s. Prefer custom_wait_s for tails/fairness.",
+  "travel_time_stats_completed": {
+    "mean": 305.25563909774434,
+    "median": 177.0,
+    "p95": 1008.7999999999997,
+    "max": 1698.0
+  },
+  "travel_time_stats_incomplete": {
+    "mean": 793.3852167732765,
+    "median": 785.0,
+    "p95": 1504.5000000000002,
+    "max": 1795.0
+  },
+  "route_distance_stats_completed": null,
+  "distance_traveled_stats_completed": {
+    "mean": 1337.2306151898733,
+    "median": 1339.327,
+    "p95": 2340.3697,
+    "max": 2819.14
+  },
+  "schedule_efficiency_stats_completed": null,
+  "moving_fraction_stats_completed": {
+    "mean": 0.7707228070175438,
+    "median": 0.9765,
+    "p95": 1.0,
+    "max": 1.0
+  },
+  "waiting_fraction_stats_completed": {
+    "mean": 0.2292771929824561,
+    "median": 0.0235,
+    "p95": 0.8390699999999999,
+    "max": 0.9741
+  },
+  "custom_wait_stats_completed": {
+    "mean": 156.50375939849624,
+    "median": 4.0,
+    "p95": 834.4999999999998,
+    "max": 1523.0
+  },
+  "custom_wait_stats_incomplete": {
+    "mean": 689.9019189765459,
+    "median": 684.0,
+    "p95": 1350.7,
+    "max": 1732.0
+  },
+  "custom_wait_stats_all": {
+    "mean": 572.0581395348837,
+    "median": 577.5,
+    "p95": 1325.5,
+    "max": 1732.0
+  },
+  "delay_stats_completed": null,
+  "time_loss_stats_all": {
+    "mean": 599.2029512735327,
+    "median": 612.604,
+    "p95": 1366.5040000000001,
+    "max": 1756.992
+  },
+  "system_idle_share_completed": 0.5126973570777605,
+  "system_idle_share_all": 0.8344603381014304,
+  "mean_schedule_efficiency_completed": null,
+  "mean_travel_time_s": 305.25563909774434,
+  "median_travel_time_s": 177.0,
+  "p95_travel_time_s": 1008.7999999999997,
+  "throughput_completed": 399,
+  "vehicle_type_counts": {
+    "pkw": 1806
+  },
+  "csv_path": "data/output_data/tsc/sumo_colight_rich_odh_l1_1x21/sumo1x21/l1_odh/logger/new_metrics_hold_00.csv",
+  "output_dir": "data/output_data/tsc/sumo_colight_rich_odh_l1_1x21/sumo1x21/l1_odh/logger/",
+  "agent": "colight_rich_odh_l1_1x21",
+  "network": "sumo1x21",
+  "world": "sumo",
+  "prefix": "l1_odh",
+  "seed": 42,
+  "avg_travel_time_metric": 305.25563909774434,
+  "throughput_metric": 399,
+  "best_episode": 40,
+  "best_att": 297.4763790588465,
+  "best_metric_source": "heldout",
+  "demand_file": "raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml",
+  "heldout_index": 0,
+  "episode": 500,
+  "checkpoint": "final"
+}

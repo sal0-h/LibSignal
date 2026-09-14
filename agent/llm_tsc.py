@@ -55,6 +55,52 @@ def _compass_from_atan2(angle: float) -> str:
     return "W"
 
 
+def _rescale_observation_bins(
+    early_queued: int,
+    segments: Sequence[int],
+    noisy_total: int,
+) -> Tuple[int, List[int]]:
+    """Reconcile Traffic-R1's spatial bins with a noisy lane total.
+
+    ``lane_count`` is the configured detector reading, while Traffic-R1's prompt
+    needs a queue count plus spatial segment counts.  The vehicle records provide
+    the spatial proportions; the detector total supplies the noisy magnitude.
+    Largest-remainder apportionment keeps the result integral, deterministic, and
+    exactly equal to the detector total.
+
+    A positive detector reading with no visible vehicle records has no recoverable
+    spatial location.  We represent that false-positive count in the farthest
+    segment rather than fabricating an urgent queue.
+    """
+    bins = [max(0, int(early_queued))]
+    bins.extend(max(0, int(value)) for value in segments)
+    target = max(0, int(noisy_total))
+    raw_total = sum(bins)
+
+    if raw_total == target:
+        return bins[0], bins[1:]
+
+    if raw_total == 0:
+        if len(bins) == 1:
+            return target, []
+        # No spatial evidence exists for a positive false-positive reading.
+        # Segment 3 (the farthest segment) is the least urgent valid bucket.
+        return 0, [0] * (len(bins) - 2) + [target]
+
+    scaled = [value * target / raw_total for value in bins]
+    apportioned = [math.floor(value) for value in scaled]
+    remainder = target - sum(apportioned)
+    if remainder:
+        # Stable index tie-break makes equal fractional remainders reproducible.
+        order = sorted(
+            range(len(bins)),
+            key=lambda index: (-(scaled[index] - apportioned[index]), index),
+        )
+        for index in order[:remainder]:
+            apportioned[index] += 1
+    return apportioned[0], apportioned[1:]
+
+
 @Registry.register_model("traffic_r1")
 @Registry.register_model("deepseek")
 @Registry.register_model("deepseek_r1_8b_2048")
@@ -386,6 +432,14 @@ class LLMTSCAgent(BaseAgent):
                     int(relative_position * self.n_segments),
                 )
                 segments[segment] += 1
+            noisy_total = lane_observation.get("lane_count")
+            if noisy_total is None:
+                noisy_total = early + sum(segments)
+            early, segments = _rescale_observation_bins(
+                early,
+                segments,
+                noisy_total,
+            )
             lane_counts[(approach, movement)] = {
                 "early_queued": early,
                 "segments": segments,
