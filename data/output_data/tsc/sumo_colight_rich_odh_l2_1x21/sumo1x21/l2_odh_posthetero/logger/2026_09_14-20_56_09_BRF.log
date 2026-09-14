@@ -1,0 +1,1761 @@
+early_stop enabled: mode=cycle_mean, min_episodes=30, max_episodes=500, patience=3, min_delta=0.0500, abs_floor=1.00, cycle_len=10, metric=wait
+episode:0/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:0, rewards:-296.81354166666665, queue:8.299206349206349, delay:0.22096386460400133, throughput:858
+episode:0/500, real avg travel time:416.63752913752916
+episode:0/500, median wait:101.0 (n=858)
+HELDOUT episode:0/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:456.02597402597405, rewards:-420.9033420138889, queue:11.25, delay:0.38196856786334327, throughput:154
+HELDOUT episode:0/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:100.0
+HELDOUT episode:0/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:471.82941176470587, rewards:-426.29227430555557, queue:11.484656084656084, delay:0.3895992541439319, throughput:170
+HELDOUT episode:0/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:206.5
+HELDOUT episode:0/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:517.7528089887641, rewards:-432.12039930555557, queue:11.382010582010581, delay:0.3916598849826389, throughput:178
+HELDOUT episode:0/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:254.0
+HELDOUT_MEAN episode:0/500, travel time:481.8693982598147 (n=3)
+New best heldout ATT=481.8694 at episode 0 (saved model/best_*.pt)
+episode:1/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:0, rewards:-299.7087673611111, queue:8.467460317460317, delay:0.23120317408647487, throughput:907
+episode:1/500, real avg travel time:379.7805953693495
+episode:1/500, median wait:84.0 (n=907)
+episode:2/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:0, rewards:-327.8961154513889, queue:8.818783068783068, delay:0.24865709738756614, throughput:856
+episode:2/500, real avg travel time:433.5070093457944
+episode:2/500, median wait:103.0 (n=856)
+episode:3/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:0, rewards:-286.33374565972224, queue:8.02089947089947, delay:0.23928962182746363, throughput:879
+episode:3/500, real avg travel time:412.24232081911265
+episode:3/500, median wait:94.0 (n=879)
+episode:4/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:0, rewards:-287.41202256944445, queue:8.121428571428572, delay:0.21810457744295636, throughput:946
+episode:4/500, real avg travel time:401.13953488372096
+episode:4/500, median wait:96.0 (n=946)
+episode:5/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:24.121978759765625, rewards:-296.76397569444447, queue:8.216931216931217, delay:0.22989778064546132, throughput:832
+episode:5/500, real avg travel time:400.4987980769231
+episode:5/500, median wait:93.0 (n=832)
+episode:6/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:21.644487380981445, rewards:-324.28444010416666, queue:8.730687830687831, delay:0.2548806165261243, throughput:886
+episode:6/500, real avg travel time:390.8566591422122
+episode:6/500, median wait:76.0 (n=886)
+episode:7/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:21.49954605102539, rewards:-321.3960069444444, queue:8.853703703703705, delay:0.25387521572213956, throughput:902
+episode:7/500, real avg travel time:412.72616407982264
+episode:7/500, median wait:95.5 (n=902)
+episode:8/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:20.239246368408203, rewards:-348.7083984375, queue:9.367724867724867, delay:0.27149706643725197, throughput:732
+episode:8/500, real avg travel time:454.1243169398907
+episode:8/500, median wait:139.0 (n=732)
+episode:9/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:19.860851287841797, rewards:-314.2037109375, queue:8.651851851851852, delay:0.24510094375206679, throughput:767
+episode:9/500, real avg travel time:442.41981747066495
+episode:9/500, median wait:108.0 (n=767)
+episode:10/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:20.752256393432617, rewards:-300.2641493055556, queue:8.182275132275132, delay:0.23257068452380952, throughput:741
+episode:10/500, real avg travel time:430.2078272604588
+episode:10/500, median wait:108.0 (n=741)
+HELDOUT episode:10/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:357.0133333333333, rewards:-387.34739583333334, queue:10.75952380952381, delay:0.27996567822007273, throughput:375
+HELDOUT episode:10/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:25.0
+HELDOUT episode:10/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:315.5098039215686, rewards:-379.10017361111113, queue:10.614550264550264, delay:0.2765435435784557, throughput:357
+HELDOUT episode:10/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:11.0
+HELDOUT episode:10/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:369.8855585831063, rewards:-393.39314236111113, queue:10.877513227513228, delay:0.28359210301959326, throughput:367
+HELDOUT episode:10/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:19.0
+HELDOUT_MEAN episode:10/500, travel time:347.4695652793361 (n=3)
+New best heldout ATT=347.4696 at episode 10 (saved model/best_*.pt)
+episode:11/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:21.686229705810547, rewards:-337.65026041666664, queue:9.281216931216932, delay:0.2758651814132771, throughput:832
+episode:11/500, real avg travel time:384.33052884615387
+episode:11/500, median wait:66.5 (n=832)
+episode:12/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:22.457666397094727, rewards:-365.1184895833333, queue:9.95, delay:0.297508796812996, throughput:707
+episode:12/500, real avg travel time:475.9066478076379
+episode:12/500, median wait:155.0 (n=707)
+episode:13/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:23.20355987548828, rewards:-364.1564670138889, queue:9.992063492063492, delay:0.3077982907572751, throughput:665
+episode:13/500, real avg travel time:462.26165413533835
+episode:13/500, median wait:124.0 (n=665)
+episode:14/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:22.080860137939453, rewards:-335.11217447916664, queue:9.186243386243387, delay:0.2683467481502149, throughput:789
+episode:14/500, real avg travel time:413.2598225602028
+episode:14/500, median wait:110.0 (n=789)
+episode:15/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:22.83089828491211, rewards:-350.3224609375, queue:9.615343915343916, delay:0.2810566574177414, throughput:687
+episode:15/500, real avg travel time:430.10480349344977
+episode:15/500, median wait:99.0 (n=687)
+episode:16/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:22.278533935546875, rewards:-345.27157118055555, queue:9.468783068783068, delay:0.2764982354704034, throughput:732
+episode:16/500, real avg travel time:417.41803278688525
+episode:16/500, median wait:101.5 (n=732)
+episode:17/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:21.222978591918945, rewards:-369.5278645833333, queue:10.182275132275132, delay:0.30057150220114087, throughput:667
+episode:17/500, real avg travel time:427.5367316341829
+episode:17/500, median wait:87.0 (n=667)
+episode:18/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:21.895313262939453, rewards:-388.62847222222223, queue:10.46984126984127, delay:0.29684696903935187, throughput:635
+episode:18/500, real avg travel time:408.91811023622046
+episode:18/500, median wait:99.0 (n=635)
+episode:19/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:22.505674362182617, rewards:-367.441796875, queue:10.112698412698412, delay:0.2887145350219081, throughput:622
+episode:19/500, real avg travel time:405.80707395498393
+episode:19/500, median wait:69.5 (n=622)
+cycle_mean cycle=1 m_prev=98.95 m_curr=101.95 rel=+0.0303 delta=+3.00 flat=True improved=False patience=1/3
+episode:20/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:22.308595657348633, rewards:-371.5673611111111, queue:10.109788359788359, delay:0.2880424701347553, throughput:626
+episode:20/500, real avg travel time:440.5271565495208
+episode:20/500, median wait:133.5 (n=626)
+HELDOUT episode:20/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:331.875, rewards:-388.34796006944447, queue:10.74021164021164, delay:0.27467063621238424, throughput:368
+HELDOUT episode:20/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:3.0
+HELDOUT episode:20/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:366.39766081871346, rewards:-394.00316840277776, queue:10.87962962962963, delay:0.2809494099289021, throughput:342
+HELDOUT episode:20/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:13.5
+HELDOUT episode:20/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:338.18639053254435, rewards:-398.2467447916667, queue:10.962433862433862, delay:0.2819257140790344, throughput:338
+HELDOUT episode:20/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:5.5
+HELDOUT_MEAN episode:20/500, travel time:345.48635045041925 (n=3)
+New best heldout ATT=345.4864 at episode 20 (saved model/best_*.pt)
+episode:21/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:22.263559341430664, rewards:-352.1197482638889, queue:9.813756613756613, delay:0.2550857624679646, throughput:605
+episode:21/500, real avg travel time:363.1471074380165
+episode:21/500, median wait:61.0 (n=605)
+episode:22/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:21.935819625854492, rewards:-370.02582465277777, queue:10.234126984126984, delay:0.26650101596085485, throughput:508
+episode:22/500, real avg travel time:358.3622047244094
+episode:22/500, median wait:39.0 (n=508)
+episode:23/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:23.069108963012695, rewards:-373.19739583333336, queue:10.345767195767197, delay:0.27651212177579365, throughput:451
+episode:23/500, real avg travel time:373.59645232815967
+episode:23/500, median wait:61.0 (n=451)
+episode:24/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:23.396202087402344, rewards:-363.4095052083333, queue:10.10873015873016, delay:0.26491374666728673, throughput:537
+episode:24/500, real avg travel time:411.73929236499066
+episode:24/500, median wait:87.0 (n=537)
+episode:25/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:25.180110931396484, rewards:-359.35809461805553, queue:10.067195767195766, delay:0.2579606636491402, throughput:508
+episode:25/500, real avg travel time:408.84842519685037
+episode:25/500, median wait:79.0 (n=508)
+episode:26/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:24.10555648803711, rewards:-360.34485677083336, queue:9.997354497354497, delay:0.2558507041325645, throughput:479
+episode:26/500, real avg travel time:362.69311064718164
+episode:26/500, median wait:56.0 (n=479)
+episode:27/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:23.657812118530273, rewards:-356.071875, queue:10.007936507936508, delay:0.25463820361586476, throughput:512
+episode:27/500, real avg travel time:347.927734375
+episode:27/500, median wait:51.0 (n=512)
+episode:28/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:26.10300064086914, rewards:-359.54969618055554, queue:10.02037037037037, delay:0.24930778382316468, throughput:506
+episode:28/500, real avg travel time:360.6482213438735
+episode:28/500, median wait:42.5 (n=506)
+episode:29/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:26.272966384887695, rewards:-361.9828125, queue:10.014021164021164, delay:0.2625425792875744, throughput:469
+episode:29/500, real avg travel time:344.50959488272923
+episode:29/500, median wait:47.0 (n=469)
+cycle_mean cycle=2 m_prev=101.95 m_curr=65.70 rel=-0.3556 delta=-36.25 flat=False improved=True patience=0/3
+episode:30/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:29.276464462280273, rewards:-332.74012586805554, queue:9.2984126984127, delay:0.2694018005694031, throughput:623
+episode:30/500, real avg travel time:385.31621187800965
+episode:30/500, median wait:90.0 (n=623)
+HELDOUT episode:30/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:402.1719197707736, rewards:-400.2575954861111, queue:11.053703703703704, delay:0.3192321131469081, throughput:349
+HELDOUT episode:30/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:10.0
+HELDOUT episode:30/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:370.1243523316062, rewards:-417.9841579861111, queue:11.39100529100529, delay:0.33867452308614415, throughput:386
+HELDOUT episode:30/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:6.0
+HELDOUT episode:30/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:382.7229916897507, rewards:-414.4516927083333, queue:11.266137566137566, delay:0.33845266513723543, throughput:361
+HELDOUT episode:30/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:10.0
+HELDOUT_MEAN episode:30/500, travel time:385.00642126404347 (n=3)
+episode:31/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:29.56928253173828, rewards:-389.754296875, queue:10.683862433862434, delay:0.30330700748181216, throughput:536
+episode:31/500, real avg travel time:485.535447761194
+episode:31/500, median wait:105.0 (n=536)
+episode:32/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:48.54222106933594, rewards:-391.8122829861111, queue:10.695502645502646, delay:0.2725479045242229, throughput:490
+episode:32/500, real avg travel time:455.6387755102041
+episode:32/500, median wait:120.5 (n=490)
+episode:33/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:61.380882263183594, rewards:-394.33958333333334, queue:10.869047619047619, delay:0.3261203664951223, throughput:551
+episode:33/500, real avg travel time:445.0852994555354
+episode:33/500, median wait:98.0 (n=551)
+episode:34/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:78.75239562988281, rewards:-365.58246527777777, queue:10.07883597883598, delay:0.27871652431588956, throughput:535
+episode:34/500, real avg travel time:387.1588785046729
+episode:34/500, median wait:75.0 (n=535)
+episode:35/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:72.33683776855469, rewards:-355.56041666666664, queue:9.82010582010582, delay:0.2693999759734623, throughput:533
+episode:35/500, real avg travel time:479.6641651031895
+episode:35/500, median wait:165.0 (n=533)
+episode:36/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:75.16984558105469, rewards:-368.0086371527778, queue:10.202380952380953, delay:0.27378359194155094, throughput:436
+episode:36/500, real avg travel time:351.552752293578
+episode:36/500, median wait:22.0 (n=436)
+episode:37/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:43.75663375854492, rewards:-348.1811414930556, queue:9.570634920634921, delay:0.26685950869605657, throughput:575
+episode:37/500, real avg travel time:388.5704347826087
+episode:37/500, median wait:102.0 (n=575)
+episode:38/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:45.28221130371094, rewards:-381.04856770833334, queue:10.469047619047618, delay:0.2663248859385334, throughput:394
+episode:38/500, real avg travel time:356.502538071066
+episode:38/500, median wait:22.0 (n=394)
+episode:39/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:82.46759033203125, rewards:-376.73493923611113, queue:10.221957671957671, delay:0.2653659073764054, throughput:391
+episode:39/500, real avg travel time:411.85677749360616
+episode:39/500, median wait:85.0 (n=391)
+cycle_mean cycle=3 m_prev=65.70 m_curr=88.45 rel=+0.3463 delta=+22.75 flat=False improved=False patience=1/3
+episode:40/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:110.64815521240234, rewards:-374.9095052083333, queue:10.238359788359789, delay:0.26430769017133765, throughput:389
+episode:40/500, real avg travel time:418.5912596401028
+episode:40/500, median wait:41.0 (n=389)
+HELDOUT episode:40/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:344.7703927492447, rewards:-399.98919270833335, queue:10.926190476190476, delay:0.2859608806630291, throughput:331
+HELDOUT episode:40/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:18.0
+HELDOUT episode:40/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:337.25, rewards:-393.78411458333335, queue:10.778571428571428, delay:0.2832314466042493, throughput:316
+HELDOUT episode:40/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:15.0
+HELDOUT episode:40/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:356.809968847352, rewards:-400.97630208333334, queue:10.93968253968254, delay:0.2905145877252811, throughput:321
+HELDOUT episode:40/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:15.0
+HELDOUT_MEAN episode:40/500, travel time:346.2767871988656 (n=3)
+episode:41/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:100.205078125, rewards:-354.048046875, queue:9.687301587301587, delay:0.2943454318576389, throughput:545
+episode:41/500, real avg travel time:451.9633027522936
+episode:41/500, median wait:153.0 (n=545)
+episode:42/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:71.25147247314453, rewards:-363.2812065972222, queue:9.936243386243387, delay:0.2985265338231647, throughput:556
+episode:42/500, real avg travel time:376.9352517985611
+episode:42/500, median wait:78.5 (n=556)
+episode:43/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:83.33540344238281, rewards:-332.1264973958333, queue:9.324867724867724, delay:0.2776357176442626, throughput:612
+episode:43/500, real avg travel time:375.96078431372547
+episode:43/500, median wait:86.5 (n=612)
+episode:44/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:104.82595825195312, rewards:-354.115625, queue:9.74973544973545, delay:0.2940608917720734, throughput:587
+episode:44/500, real avg travel time:435.3833049403748
+episode:44/500, median wait:149.0 (n=587)
+episode:45/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:78.12757873535156, rewards:-361.5239366319444, queue:10.049470899470899, delay:0.26552329088645005, throughput:540
+episode:45/500, real avg travel time:384.5444444444444
+episode:45/500, median wait:58.0 (n=540)
+episode:46/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:69.94013977050781, rewards:-395.1025173611111, queue:10.736243386243386, delay:0.30065113854786707, throughput:343
+episode:46/500, real avg travel time:393.59475218658895
+episode:46/500, median wait:16.0 (n=343)
+episode:47/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:64.31591033935547, rewards:-366.8432725694444, queue:10.076719576719576, delay:0.27397758039847886, throughput:473
+episode:47/500, real avg travel time:332.5877378435518
+episode:47/500, median wait:60.0 (n=473)
+episode:48/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:70.21090698242188, rewards:-395.9486111111111, queue:10.674603174603174, delay:0.28114013671875, throughput:372
+episode:48/500, real avg travel time:405.31451612903226
+episode:48/500, median wait:41.5 (n=372)
+episode:49/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:91.22438049316406, rewards:-371.51393229166666, queue:10.230687830687831, delay:0.2785097475405093, throughput:377
+episode:49/500, real avg travel time:418.7665782493369
+episode:49/500, median wait:37.0 (n=377)
+cycle_mean cycle=4 m_prev=88.45 m_curr=72.05 rel=-0.1854 delta=-16.40 flat=False improved=True patience=0/3
+episode:50/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:124.47848510742188, rewards:-397.9513888888889, queue:10.853174603174603, delay:0.2714064502211475, throughput:316
+episode:50/500, real avg travel time:360.4240506329114
+episode:50/500, median wait:25.0 (n=316)
+HELDOUT episode:50/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:388.3601108033241, rewards:-386.38159722222224, queue:10.758465608465608, delay:0.28107632430142193, throughput:361
+HELDOUT episode:50/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:21.0
+HELDOUT episode:50/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:330.91616766467064, rewards:-385.374609375, queue:10.72962962962963, delay:0.28039977058531745, throughput:334
+HELDOUT episode:50/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:16.0
+HELDOUT episode:50/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:356.62654320987656, rewards:-400.18194444444447, queue:11.001058201058202, delay:0.2816496672453704, throughput:324
+HELDOUT episode:50/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:15.0
+HELDOUT_MEAN episode:50/500, travel time:358.63427389262375 (n=3)
+episode:51/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:198.08168029785156, rewards:-380.47582465277776, queue:10.420105820105821, delay:0.3051515609499008, throughput:452
+episode:51/500, real avg travel time:440.82522123893807
+episode:51/500, median wait:143.0 (n=452)
+episode:52/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:152.0369415283203, rewards:-404.99140625, queue:11.022751322751322, delay:0.29845096648685515, throughput:351
+episode:52/500, real avg travel time:408.997150997151
+episode:52/500, median wait:25.0 (n=351)
+episode:53/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:120.84952545166016, rewards:-397.71796875, queue:10.853968253968254, delay:0.28672633902736444, throughput:373
+episode:53/500, real avg travel time:448.34048257372655
+episode:53/500, median wait:86.0 (n=373)
+episode:54/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:131.4032745361328, rewards:-377.49696180555554, queue:10.221957671957671, delay:0.28653535388764884, throughput:498
+episode:54/500, real avg travel time:445.4357429718876
+episode:54/500, median wait:100.0 (n=498)
+episode:55/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:98.47024536132812, rewards:-340.9306206597222, queue:9.394444444444444, delay:0.26221650946077213, throughput:581
+episode:55/500, real avg travel time:392.50946643717725
+episode:55/500, median wait:92.0 (n=581)
+episode:56/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:84.14928436279297, rewards:-352.4462673611111, queue:9.588888888888889, delay:0.3116566168568122, throughput:497
+episode:56/500, real avg travel time:393.9517102615694
+episode:56/500, median wait:83.0 (n=497)
+episode:57/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:67.11492156982422, rewards:-400.4798611111111, queue:11.047883597883597, delay:0.3310346007977844, throughput:378
+episode:57/500, real avg travel time:453.56349206349205
+episode:57/500, median wait:22.0 (n=378)
+episode:58/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:69.68167114257812, rewards:-393.21592881944446, queue:10.66851851851852, delay:0.3472817718667328, throughput:503
+episode:58/500, real avg travel time:421.3280318091451
+episode:58/500, median wait:99.0 (n=503)
+episode:59/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:91.87499237060547, rewards:-384.2550347222222, queue:10.58148148148148, delay:0.3402088629505622, throughput:365
+episode:59/500, real avg travel time:374.22739726027396
+episode:59/500, median wait:20.0 (n=365)
+cycle_mean cycle=5 m_prev=72.05 m_curr=69.50 rel=-0.0354 delta=-2.55 flat=True improved=False patience=1/3
+episode:60/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:126.74491119384766, rewards:-409.92469618055554, queue:11.153703703703703, delay:0.3519232855902778, throughput:331
+episode:60/500, real avg travel time:417.32326283987913
+episode:60/500, median wait:24.0 (n=331)
+HELDOUT episode:60/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:417.11730205278593, rewards:-413.728125, queue:11.410846560846561, delay:0.3448049716848545, throughput:341
+HELDOUT episode:60/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:8.0
+HELDOUT episode:60/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:367.3309523809524, rewards:-416.067578125, queue:11.424074074074074, delay:0.3580477275545635, throughput:420
+HELDOUT episode:60/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:7.0
+HELDOUT episode:60/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:399.8061797752809, rewards:-426.2975260416667, queue:11.519312169312169, delay:0.36725712528935184, throughput:356
+HELDOUT episode:60/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:16.5
+HELDOUT_MEAN episode:60/500, travel time:394.7514780696731 (n=3)
+episode:61/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:116.74964141845703, rewards:-420.9939236111111, queue:11.470899470899472, delay:0.35196859369833, throughput:348
+episode:61/500, real avg travel time:398.33045977011494
+episode:61/500, median wait:16.5 (n=348)
+episode:62/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:84.46854400634766, rewards:-418.64105902777777, queue:11.492857142857142, delay:0.36323765345982145, throughput:339
+episode:62/500, real avg travel time:414.66961651917404
+episode:62/500, median wait:20.0 (n=339)
+episode:63/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:82.84208679199219, rewards:-394.62135416666666, queue:10.734126984126984, delay:0.3038148910280258, throughput:420
+episode:63/500, real avg travel time:520.4595238095238
+episode:63/500, median wait:199.5 (n=420)
+episode:64/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:97.48480987548828, rewards:-404.8141059027778, queue:11.02089947089947, delay:0.287599044880539, throughput:329
+episode:64/500, real avg travel time:365.82978723404256
+episode:64/500, median wait:20.0 (n=329)
+episode:65/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:88.7377700805664, rewards:-406.41085069444443, queue:10.995238095238095, delay:0.3001042764653605, throughput:308
+episode:65/500, real avg travel time:346.83116883116884
+episode:65/500, median wait:10.0 (n=308)
+episode:66/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:117.52836608886719, rewards:-399.51184895833336, queue:10.823280423280423, delay:0.284456218739666, throughput:331
+episode:66/500, real avg travel time:360.7583081570997
+episode:66/500, median wait:6.0 (n=331)
+episode:67/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:85.43024444580078, rewards:-389.72664930555555, queue:10.674603174603174, delay:0.29153997835028106, throughput:371
+episode:67/500, real avg travel time:379.355795148248
+episode:67/500, median wait:32.0 (n=371)
+episode:68/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:72.37442016601562, rewards:-397.12469618055553, queue:10.7494708994709, delay:0.2919219809234458, throughput:366
+episode:68/500, real avg travel time:383.59016393442624
+episode:68/500, median wait:23.5 (n=366)
+episode:69/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:62.38521957397461, rewards:-398.5375, queue:10.775925925925925, delay:0.2927070092902612, throughput:340
+episode:69/500, real avg travel time:386.5470588235294
+episode:69/500, median wait:29.5 (n=340)
+cycle_mean cycle=6 m_prev=69.50 m_curr=38.10 rel=-0.4518 delta=-31.40 flat=False improved=True patience=0/3
+episode:70/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:69.21466064453125, rewards:-408.31640625, queue:10.964814814814815, delay:0.2869579173900463, throughput:287
+episode:70/500, real avg travel time:387.79094076655053
+episode:70/500, median wait:22.0 (n=287)
+HELDOUT episode:70/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:347.41715976331363, rewards:-398.4176215277778, queue:10.877777777777778, delay:0.28651626829117066, throughput:338
+HELDOUT episode:70/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:16.5
+HELDOUT episode:70/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:355.140625, rewards:-401.5503038194444, queue:10.962169312169312, delay:0.29193935495205026, throughput:320
+HELDOUT episode:70/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:19.5
+HELDOUT episode:70/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:389.73026315789474, rewards:-420.43611111111113, queue:11.312433862433862, delay:0.302155445240162, throughput:304
+HELDOUT episode:70/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:19.5
+HELDOUT_MEAN episode:70/500, travel time:364.0960159737361 (n=3)
+episode:71/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:68.63874816894531, rewards:-402.846875, queue:10.945767195767196, delay:0.29914599221850197, throughput:329
+episode:71/500, real avg travel time:386.7537993920973
+episode:71/500, median wait:20.0 (n=329)
+episode:72/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:96.23450469970703, rewards:-407.8353298611111, queue:10.997354497354497, delay:0.2962512142443783, throughput:352
+episode:72/500, real avg travel time:369.0198863636364
+episode:72/500, median wait:33.0 (n=352)
+episode:73/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:69.43112182617188, rewards:-408.25008680555555, queue:11.006349206349206, delay:0.29591920237061836, throughput:326
+episode:73/500, real avg travel time:374.34355828220856
+episode:73/500, median wait:16.5 (n=326)
+episode:74/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:57.50247573852539, rewards:-413.6568576388889, queue:11.12936507936508, delay:0.2966999679646164, throughput:308
+episode:74/500, real avg travel time:342.41883116883116
+episode:74/500, median wait:9.0 (n=308)
+episode:75/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:56.0380744934082, rewards:-389.16024305555555, queue:10.636507936507936, delay:0.29207389064566797, throughput:345
+episode:75/500, real avg travel time:357.7130434782609
+episode:75/500, median wait:30.0 (n=345)
+episode:76/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:84.1939468383789, rewards:-413.56484375, queue:11.097619047619048, delay:0.2945454915364583, throughput:335
+episode:76/500, real avg travel time:380.155223880597
+episode:76/500, median wait:47.0 (n=335)
+episode:77/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:98.021484375, rewards:-400.12078993055553, queue:10.936243386243387, delay:0.3032418064339451, throughput:319
+episode:77/500, real avg travel time:385.69278996865205
+episode:77/500, median wait:42.0 (n=319)
+episode:78/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:72.04194641113281, rewards:-405.915234375, queue:10.94920634920635, delay:0.29649803524925594, throughput:343
+episode:78/500, real avg travel time:387.7813411078717
+episode:78/500, median wait:71.0 (n=343)
+episode:79/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:108.95856475830078, rewards:-416.29891493055555, queue:11.03068783068783, delay:0.2883185492621528, throughput:283
+episode:79/500, real avg travel time:448.71378091872793
+episode:79/500, median wait:180.0 (n=283)
+cycle_mean cycle=7 m_prev=38.10 m_curr=47.05 rel=+0.2349 delta=+8.95 flat=False improved=False patience=1/3
+episode:80/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:92.72528076171875, rewards:-397.93350694444445, queue:10.797354497354497, delay:0.28616584898933534, throughput:315
+episode:80/500, real avg travel time:434.66031746031746
+episode:80/500, median wait:109.0 (n=315)
+HELDOUT episode:80/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:359.9260355029586, rewards:-405.3297309027778, queue:10.95, delay:0.2893503986338459, throughput:338
+HELDOUT episode:80/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:60.5
+HELDOUT episode:80/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:356.0627062706271, rewards:-399.4309895833333, queue:10.93915343915344, delay:0.2875161468667328, throughput:303
+HELDOUT episode:80/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:25.0
+HELDOUT episode:80/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:396.10227272727275, rewards:-414.51896701388887, queue:11.185185185185185, delay:0.28962990089699076, throughput:352
+HELDOUT episode:80/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:72.5
+HELDOUT_MEAN episode:80/500, travel time:370.6970048336195 (n=3)
+episode:81/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:146.22293090820312, rewards:-409.42278645833335, queue:10.893650793650794, delay:0.29377803096064814, throughput:308
+episode:81/500, real avg travel time:365.07142857142856
+episode:81/500, median wait:72.5 (n=308)
+episode:82/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:190.55294799804688, rewards:-423.586328125, queue:11.277777777777779, delay:0.30247479797040344, throughput:299
+episode:82/500, real avg travel time:413.7157190635451
+episode:82/500, median wait:80.0 (n=299)
+episode:83/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:217.84780883789062, rewards:-422.8003038194444, queue:11.10925925925926, delay:0.3641787251467427, throughput:177
+episode:83/500, real avg travel time:449.45197740112997
+episode:83/500, median wait:246.0 (n=177)
+episode:84/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:237.69769287109375, rewards:-423.75889756944446, queue:10.896031746031746, delay:0.37896986865492727, throughput:179
+episode:84/500, real avg travel time:540.731843575419
+episode:84/500, median wait:300.0 (n=179)
+episode:85/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:252.85972595214844, rewards:-414.6345920138889, queue:10.936243386243387, delay:0.37242722284226193, throughput:157
+episode:85/500, real avg travel time:530.2229299363057
+episode:85/500, median wait:300.0 (n=157)
+episode:86/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:241.5360870361328, rewards:-416.46258680555553, queue:10.916666666666666, delay:0.3753265865265377, throughput:183
+episode:86/500, real avg travel time:536.7267759562842
+episode:86/500, median wait:300.0 (n=183)
+episode:87/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:148.43563842773438, rewards:-426.01571180555555, queue:11.17089947089947, delay:0.39495103624131944, throughput:203
+episode:87/500, real avg travel time:528.0935960591133
+episode:87/500, median wait:300.0 (n=203)
+episode:88/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:104.8228530883789, rewards:-398.4375434027778, queue:10.642063492063492, delay:0.368871101500496, throughput:246
+episode:88/500, real avg travel time:453.2317073170732
+episode:88/500, median wait:112.0 (n=246)
+episode:89/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:73.77397155761719, rewards:-408.36688368055553, queue:11.055291005291005, delay:0.3634127823764054, throughput:333
+episode:89/500, real avg travel time:480.71771771771773
+episode:89/500, median wait:223.0 (n=333)
+cycle_mean cycle=8 m_prev=47.05 m_curr=204.25 rel=+3.3411 delta=+157.20 flat=False improved=False patience=2/3
+episode:90/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:65.68135070800781, rewards:-392.77174479166666, queue:10.852645502645503, delay:0.2918188024450232, throughput:374
+episode:90/500, real avg travel time:362.8636363636364
+episode:90/500, median wait:69.0 (n=374)
+HELDOUT episode:90/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:341.44474393531, rewards:-381.27690972222223, queue:10.714285714285714, delay:0.2880397574611442, throughput:371
+HELDOUT episode:90/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:16.0
+HELDOUT episode:90/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:354.74386920980925, rewards:-388.923046875, queue:10.83068783068783, delay:0.2778336136429398, throughput:367
+HELDOUT episode:90/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:20.0
+HELDOUT episode:90/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:357.02994011976045, rewards:-403.8019097222222, queue:11.031746031746032, delay:0.2938892182849702, throughput:334
+HELDOUT episode:90/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:28.0
+HELDOUT_MEAN episode:90/500, travel time:351.0728510882932 (n=3)
+episode:91/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:76.01687622070312, rewards:-380.96080729166664, queue:10.693386243386243, delay:0.2856674275070271, throughput:392
+episode:91/500, real avg travel time:355.65816326530614
+episode:91/500, median wait:40.5 (n=392)
+episode:92/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:96.57632446289062, rewards:-390.09869791666665, queue:10.831746031746032, delay:0.29539187799685845, throughput:385
+episode:92/500, real avg travel time:352.3090909090909
+episode:92/500, median wait:23.0 (n=385)
+episode:93/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:107.05795288085938, rewards:-388.59171006944445, queue:10.793121693121693, delay:0.2911735413566468, throughput:390
+episode:93/500, real avg travel time:363.75384615384615
+episode:93/500, median wait:40.0 (n=390)
+episode:94/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:123.9917984008789, rewards:-348.4728298611111, queue:9.604232804232804, delay:0.2829560779389881, throughput:612
+episode:94/500, real avg travel time:419.6813725490196
+episode:94/500, median wait:99.0 (n=612)
+episode:95/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:135.15757751464844, rewards:-359.87901475694446, queue:9.992328042328042, delay:0.30001130280671295, throughput:570
+episode:95/500, real avg travel time:409.26491228070176
+episode:95/500, median wait:99.0 (n=570)
+episode:96/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:142.59359741210938, rewards:-394.5016059027778, queue:10.615873015873015, delay:0.303485591827877, throughput:427
+episode:96/500, real avg travel time:367.37704918032784
+episode:96/500, median wait:39.0 (n=427)
+episode:97/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:143.28823852539062, rewards:-391.5927517361111, queue:10.84973544973545, delay:0.3189361733734292, throughput:461
+episode:97/500, real avg travel time:523.4164859002169
+episode:97/500, median wait:122.0 (n=461)
+episode:98/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:89.29434967041016, rewards:-405.27239583333335, queue:11.066931216931216, delay:0.320846767526455, throughput:457
+episode:98/500, real avg travel time:413.89277899343546
+episode:98/500, median wait:50.0 (n=457)
+episode:99/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:88.96663665771484, rewards:-394.40130208333335, queue:10.752910052910053, delay:0.3294007316468254, throughput:420
+episode:99/500, real avg travel time:499.23809523809524
+episode:99/500, median wait:166.5 (n=420)
+cycle_mean cycle=9 m_prev=204.25 m_curr=74.80 rel=-0.6338 delta=-129.45 flat=False improved=True patience=0/3
+episode:100/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:103.08895111083984, rewards:-403.3751736111111, queue:11.02063492063492, delay:0.3410484031394676, throughput:382
+episode:100/500, real avg travel time:431.848167539267
+episode:100/500, median wait:46.5 (n=382)
+HELDOUT episode:100/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:379.978978978979, rewards:-414.26063368055554, queue:11.416402116402116, delay:0.33000200867022156, throughput:333
+HELDOUT episode:100/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:7.0
+HELDOUT episode:100/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:363.953431372549, rewards:-416.4586371527778, queue:11.343915343915343, delay:0.3394408210875496, throughput:408
+HELDOUT episode:100/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:7.0
+HELDOUT episode:100/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:388.7202216066482, rewards:-431.63055555555553, queue:11.696296296296296, delay:0.34854148582175926, throughput:361
+HELDOUT episode:100/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:11.0
+HELDOUT_MEAN episode:100/500, travel time:377.5508773193921 (n=3)
+episode:101/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:91.77413940429688, rewards:-397.98046875, queue:10.917724867724868, delay:0.3268635098896329, throughput:444
+episode:101/500, real avg travel time:434.3288288288288
+episode:101/500, median wait:72.0 (n=444)
+episode:102/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:90.47315216064453, rewards:-361.45709635416665, queue:10.007407407407408, delay:0.2633535072286293, throughput:571
+episode:102/500, real avg travel time:347.41506129597195
+episode:102/500, median wait:68.0 (n=571)
+episode:103/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:77.03982543945312, rewards:-388.57452256944447, queue:10.815608465608465, delay:0.287893951254547, throughput:348
+episode:103/500, real avg travel time:341.39942528735634
+episode:103/500, median wait:28.5 (n=348)
+episode:104/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:94.6707992553711, rewards:-387.38190104166665, queue:10.66851851851852, delay:0.27662734581679893, throughput:370
+episode:104/500, real avg travel time:335.0162162162162
+episode:104/500, median wait:22.0 (n=370)
+episode:105/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:117.51583862304688, rewards:-377.1345486111111, queue:10.512698412698413, delay:0.28560610170717593, throughput:345
+episode:105/500, real avg travel time:331.70144927536234
+episode:105/500, median wait:24.0 (n=345)
+episode:106/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:148.0632781982422, rewards:-387.189453125, queue:10.685185185185185, delay:0.2822861121445106, throughput:371
+episode:106/500, real avg travel time:382.82479784366575
+episode:106/500, median wait:35.0 (n=371)
+episode:107/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:137.4597625732422, rewards:-380.046484375, queue:10.667460317460318, delay:0.2853141663566468, throughput:388
+episode:107/500, real avg travel time:336.89690721649487
+episode:107/500, median wait:19.0 (n=388)
+episode:108/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:133.4582061767578, rewards:-383.7115451388889, queue:10.746296296296297, delay:0.26998820632853837, throughput:393
+episode:108/500, real avg travel time:338.2442748091603
+episode:108/500, median wait:36.0 (n=393)
+episode:109/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:126.84689331054688, rewards:-383.6845920138889, queue:10.596031746031747, delay:0.2807254851810516, throughput:361
+episode:109/500, real avg travel time:367.0387811634349
+episode:109/500, median wait:39.0 (n=361)
+cycle_mean cycle=10 m_prev=74.80 m_curr=39.00 rel=-0.4786 delta=-35.80 flat=False improved=True patience=0/3
+episode:110/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:126.62602233886719, rewards:-388.21180555555554, queue:10.735185185185186, delay:0.2802702404203869, throughput:368
+episode:110/500, real avg travel time:348.9429347826087
+episode:110/500, median wait:57.0 (n=368)
+HELDOUT episode:110/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:353.3369565217391, rewards:-388.0259114583333, queue:10.790740740740741, delay:0.2841582444609788, throughput:368
+HELDOUT episode:110/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:21.0
+HELDOUT episode:110/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:330.7702349869452, rewards:-381.25724826388887, queue:10.672751322751322, delay:0.27755669487847223, throughput:383
+HELDOUT episode:110/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:22.0
+HELDOUT episode:110/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:347.56948228882834, rewards:-389.83385416666664, queue:10.817195767195766, delay:0.28747755585524143, throughput:367
+HELDOUT episode:110/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:23.0
+HELDOUT_MEAN episode:110/500, travel time:343.8922245991709 (n=3)
+New best heldout ATT=343.8922 at episode 110 (saved model/best_*.pt)
+episode:111/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:130.30726623535156, rewards:-377.0158420138889, queue:10.60899470899471, delay:0.2804912587322255, throughput:387
+episode:111/500, real avg travel time:326.4547803617571
+episode:111/500, median wait:16.0 (n=387)
+episode:112/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:137.96304321289062, rewards:-391.1299045138889, queue:10.907407407407407, delay:0.2952732308201058, throughput:378
+episode:112/500, real avg travel time:345.3941798941799
+episode:112/500, median wait:25.5 (n=378)
+episode:113/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:138.297119140625, rewards:-385.7646701388889, queue:10.786507936507936, delay:0.28144873563574735, throughput:346
+episode:113/500, real avg travel time:332.9335260115607
+episode:113/500, median wait:22.5 (n=346)
+episode:114/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:151.3474578857422, rewards:-384.92699652777776, queue:10.66957671957672, delay:0.2817823621961806, throughput:384
+episode:114/500, real avg travel time:347.2447916666667
+episode:114/500, median wait:21.0 (n=384)
+episode:115/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:140.95066833496094, rewards:-380.93958333333336, queue:10.625396825396825, delay:0.27878763511698085, throughput:363
+episode:115/500, real avg travel time:302.6914600550964
+episode:115/500, median wait:13.0 (n=363)
+episode:116/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:103.6019515991211, rewards:-382.3174045138889, queue:10.694179894179895, delay:0.2856659419952877, throughput:356
+episode:116/500, real avg travel time:327.9241573033708
+episode:116/500, median wait:19.5 (n=356)
+episode:117/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:98.51538848876953, rewards:-383.5885416666667, queue:10.771957671957672, delay:0.29314300698578044, throughput:384
+episode:117/500, real avg travel time:351.5520833333333
+episode:117/500, median wait:19.5 (n=384)
+episode:118/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:99.62903594970703, rewards:-385.0626736111111, queue:10.790476190476191, delay:0.27423496145419973, throughput:377
+episode:118/500, real avg travel time:316.58355437665784
+episode:118/500, median wait:20.0 (n=377)
+episode:119/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:117.87580108642578, rewards:-385.21184895833335, queue:10.564285714285715, delay:0.2777819759631283, throughput:368
+episode:119/500, real avg travel time:375.2282608695652
+episode:119/500, median wait:20.0 (n=368)
+cycle_mean cycle=11 m_prev=39.00 m_curr=23.40 rel=-0.4000 delta=-15.60 flat=False improved=True patience=0/3
+episode:120/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:108.70674896240234, rewards:-391.59674479166665, queue:10.913756613756613, delay:0.2810022747705853, throughput:344
+episode:120/500, real avg travel time:340.7936046511628
+episode:120/500, median wait:20.0 (n=344)
+HELDOUT episode:120/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:345.9608355091384, rewards:-383.51744791666664, queue:10.738624338624339, delay:0.27877455615492724, throughput:383
+HELDOUT episode:120/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:18.0
+HELDOUT episode:120/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:338.2246575342466, rewards:-376.0472222222222, queue:10.59074074074074, delay:0.2775163277116402, throughput:365
+HELDOUT episode:120/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:26.0
+HELDOUT episode:120/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:357.75616438356167, rewards:-388.16137152777776, queue:10.775132275132275, delay:0.2878724113343254, throughput:365
+HELDOUT episode:120/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:19.0
+HELDOUT_MEAN episode:120/500, travel time:347.3138858089822 (n=3)
+episode:121/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:118.62445831298828, rewards:-374.8808159722222, queue:10.51005291005291, delay:0.2762276462776951, throughput:393
+episode:121/500, real avg travel time:330.8269720101781
+episode:121/500, median wait:24.0 (n=393)
+episode:122/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:123.52469635009766, rewards:-395.69474826388887, queue:10.9994708994709, delay:0.29381119662491734, throughput:391
+episode:122/500, real avg travel time:340.38874680306907
+episode:122/500, median wait:38.0 (n=391)
+episode:123/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:112.92684173583984, rewards:-390.9418836805556, queue:10.896560846560847, delay:0.28916848803323414, throughput:361
+episode:123/500, real avg travel time:332.60941828254846
+episode:123/500, median wait:17.0 (n=361)
+episode:124/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:111.32303619384766, rewards:-386.8396701388889, queue:10.713227513227514, delay:0.2828662044787533, throughput:380
+episode:124/500, real avg travel time:353.8
+episode:124/500, median wait:17.5 (n=380)
+episode:125/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:102.25759887695312, rewards:-384.2230034722222, queue:10.702116402116403, delay:0.2791760318493717, throughput:356
+episode:125/500, real avg travel time:314.3342696629214
+episode:125/500, median wait:17.5 (n=356)
+episode:126/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:94.09683227539062, rewards:-377.6762586805556, queue:10.585185185185185, delay:0.28404883329199737, throughput:367
+episode:126/500, real avg travel time:331.50408719346046
+episode:126/500, median wait:19.0 (n=367)
+episode:127/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:84.97311401367188, rewards:-379.89852430555555, queue:10.597883597883598, delay:0.2807919456845238, throughput:395
+episode:127/500, real avg travel time:326.2329113924051
+episode:127/500, median wait:21.0 (n=395)
+episode:128/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:75.94011688232422, rewards:-381.80412326388887, queue:10.691534391534391, delay:0.2809970431857639, throughput:394
+episode:128/500, real avg travel time:329.53807106598987
+episode:128/500, median wait:19.0 (n=394)
+episode:129/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:60.578678131103516, rewards:-384.330859375, queue:10.605820105820106, delay:0.28169223038607805, throughput:357
+episode:129/500, real avg travel time:359.7871148459384
+episode:129/500, median wait:28.0 (n=357)
+cycle_mean cycle=12 m_prev=23.40 m_curr=22.10 rel=-0.0556 delta=-1.30 flat=False improved=True patience=0/3
+episode:130/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:52.14760208129883, rewards:-382.13728298611113, queue:10.667460317460318, delay:0.2746324650194279, throughput:383
+episode:130/500, real avg travel time:349.73107049608353
+episode:130/500, median wait:26.0 (n=383)
+HELDOUT episode:130/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:355.6046511627907, rewards:-379.7549045138889, queue:10.653174603174604, delay:0.27805046606316136, throughput:387
+HELDOUT episode:130/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:20.0
+HELDOUT episode:130/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:349.2412868632708, rewards:-377.08914930555557, queue:10.59047619047619, delay:0.28246598823991403, throughput:373
+HELDOUT episode:130/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:17.0
+HELDOUT episode:130/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:338.05849582172704, rewards:-389.8168836805556, queue:10.802645502645502, delay:0.28726922898065477, throughput:359
+HELDOUT episode:130/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:15.0
+HELDOUT_MEAN episode:130/500, travel time:347.6348112825962 (n=3)
+episode:131/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:48.644161224365234, rewards:-379.973828125, queue:10.696825396825396, delay:0.2909376033399471, throughput:370
+episode:131/500, real avg travel time:343.97297297297297
+episode:131/500, median wait:16.0 (n=370)
+episode:132/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:53.34915542602539, rewards:-393.75737847222223, queue:11.001322751322752, delay:0.28834596664186507, throughput:401
+episode:132/500, real avg travel time:337.59850374064837
+episode:132/500, median wait:16.0 (n=401)
+episode:133/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:49.79280471801758, rewards:-389.7790798611111, queue:10.822222222222223, delay:0.2864336932146991, throughput:370
+episode:133/500, real avg travel time:354.35675675675674
+episode:133/500, median wait:20.0 (n=370)
+episode:134/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:42.012569427490234, rewards:-376.988671875, queue:10.417195767195768, delay:0.27343168712797616, throughput:441
+episode:134/500, real avg travel time:355.0521541950113
+episode:134/500, median wait:29.0 (n=441)
+episode:135/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:41.97645568847656, rewards:-375.6336371527778, queue:10.506084656084656, delay:0.27783968486483135, throughput:391
+episode:135/500, real avg travel time:322.0332480818414
+episode:135/500, median wait:15.0 (n=391)
+episode:136/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:42.57999801635742, rewards:-373.94965277777777, queue:10.517989417989417, delay:0.2798138976727844, throughput:395
+episode:136/500, real avg travel time:350.5873417721519
+episode:136/500, median wait:24.0 (n=395)
+episode:137/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:41.38877487182617, rewards:-383.7120659722222, queue:10.748941798941798, delay:0.2886037998098545, throughput:362
+episode:137/500, real avg travel time:333.9033149171271
+episode:137/500, median wait:14.0 (n=362)
+episode:138/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:45.29180908203125, rewards:-381.38546006944443, queue:10.642328042328042, delay:0.2861078171502976, throughput:367
+episode:138/500, real avg travel time:335.87193460490465
+episode:138/500, median wait:11.0 (n=367)
+episode:139/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:40.698177337646484, rewards:-384.8385416666667, queue:10.598677248677248, delay:0.28123078522858797, throughput:374
+episode:139/500, real avg travel time:380.17379679144386
+episode:139/500, median wait:22.0 (n=374)
+cycle_mean cycle=13 m_prev=22.10 m_curr=19.30 rel=-0.1267 delta=-2.80 flat=False improved=True patience=0/3
+episode:140/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:39.80290985107422, rewards:-387.3172309027778, queue:10.731481481481481, delay:0.2798037574404762, throughput:342
+episode:140/500, real avg travel time:339.6900584795322
+episode:140/500, median wait:18.5 (n=342)
+HELDOUT episode:140/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:354.00763358778624, rewards:-384.4718315972222, queue:10.756878306878306, delay:0.2840571650752315, throughput:393
+HELDOUT episode:140/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:24.0
+HELDOUT episode:140/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:321.14322250639384, rewards:-377.42278645833335, queue:10.619312169312169, delay:0.27329295324900793, throughput:391
+HELDOUT episode:140/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:18.0
+HELDOUT episode:140/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:354.0736842105263, rewards:-386.31879340277777, queue:10.714021164021164, delay:0.28754656756365743, throughput:380
+HELDOUT episode:140/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:14.5
+HELDOUT_MEAN episode:140/500, travel time:343.07484676823543 (n=3)
+New best heldout ATT=343.0748 at episode 140 (saved model/best_*.pt)
+episode:141/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:37.71373748779297, rewards:-371.6674913194444, queue:10.493386243386244, delay:0.2850371184172454, throughput:368
+episode:141/500, real avg travel time:299.69565217391306
+episode:141/500, median wait:16.0 (n=368)
+episode:142/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:32.73357009887695, rewards:-390.919140625, queue:10.895767195767196, delay:0.2871387945911872, throughput:421
+episode:142/500, real avg travel time:345.7410926365796
+episode:142/500, median wait:22.0 (n=421)
+episode:143/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:32.78578567504883, rewards:-389.787890625, queue:10.833068783068782, delay:0.2849461792638062, throughput:371
+episode:143/500, real avg travel time:333.70080862533695
+episode:143/500, median wait:19.0 (n=371)
+episode:144/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:32.12995529174805, rewards:-388.44344618055555, queue:10.746560846560847, delay:0.2756560794890873, throughput:390
+episode:144/500, real avg travel time:335.55897435897435
+episode:144/500, median wait:17.0 (n=390)
+episode:145/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:30.19135284423828, rewards:-380.98689236111113, queue:10.595238095238095, delay:0.2825428473255622, throughput:363
+episode:145/500, real avg travel time:332.4573002754821
+episode:145/500, median wait:13.0 (n=363)
+episode:146/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:27.879858016967773, rewards:-389.57170138888887, queue:10.78042328042328, delay:0.2870198890645668, throughput:369
+episode:146/500, real avg travel time:328.49051490514904
+episode:146/500, median wait:19.0 (n=369)
+episode:147/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:30.033275604248047, rewards:-376.91102430555554, queue:10.607407407407408, delay:0.2921814287781085, throughput:377
+episode:147/500, real avg travel time:324.6604774535809
+episode:147/500, median wait:14.0 (n=377)
+episode:148/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:28.054656982421875, rewards:-383.8161892361111, queue:10.713227513227514, delay:0.27479629112929893, throughput:384
+episode:148/500, real avg travel time:340.9583333333333
+episode:148/500, median wait:17.0 (n=384)
+episode:149/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:24.561105728149414, rewards:-379.785546875, queue:10.497354497354497, delay:0.2868839001529431, throughput:390
+episode:149/500, real avg travel time:392.5948717948718
+episode:149/500, median wait:24.0 (n=390)
+cycle_mean cycle=14 m_prev=19.30 m_curr=17.95 rel=-0.0699 delta=-1.35 flat=False improved=True patience=0/3
+episode:150/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:24.126562118530273, rewards:-384.4187934027778, queue:10.695238095238095, delay:0.27918358858300263, throughput:375
+episode:150/500, real avg travel time:334.92266666666666
+episode:150/500, median wait:19.0 (n=375)
+HELDOUT episode:150/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:332.1968085106383, rewards:-382.90421006944445, queue:10.730952380952381, delay:0.2813007657490079, throughput:376
+HELDOUT episode:150/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:17.5
+HELDOUT episode:150/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:327.1145038167939, rewards:-371.055078125, queue:10.47037037037037, delay:0.27590554858010913, throughput:393
+HELDOUT episode:150/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:19.0
+HELDOUT episode:150/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:357.10693641618496, rewards:-394.0603298611111, queue:10.894708994708994, delay:0.29661393745866405, throughput:346
+HELDOUT episode:150/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:17.0
+HELDOUT_MEAN episode:150/500, travel time:338.80608291453905 (n=3)
+New best heldout ATT=338.8061 at episode 150 (saved model/best_*.pt)
+episode:151/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:25.54591941833496, rewards:-378.00334201388887, queue:10.61957671957672, delay:0.28498034603381284, throughput:369
+episode:151/500, real avg travel time:327.24119241192415
+episode:151/500, median wait:16.0 (n=369)
+episode:152/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:24.461740493774414, rewards:-393.871875, queue:10.941798941798941, delay:0.2945330261553406, throughput:372
+episode:152/500, real avg travel time:342.9516129032258
+episode:152/500, median wait:19.0 (n=372)
+episode:153/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:21.069549560546875, rewards:-391.5388888888889, queue:10.836243386243387, delay:0.29363019024884257, throughput:348
+episode:153/500, real avg travel time:341.1867816091954
+episode:153/500, median wait:18.0 (n=348)
+episode:154/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:20.05006217956543, rewards:-377.5226128472222, queue:10.535978835978836, delay:0.2799542785321594, throughput:371
+episode:154/500, real avg travel time:330.96495956873315
+episode:154/500, median wait:15.0 (n=371)
+episode:155/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:18.87496566772461, rewards:-379.27482638888887, queue:10.537830687830688, delay:0.2822423218419312, throughput:366
+episode:155/500, real avg travel time:305.4726775956284
+episode:155/500, median wait:11.0 (n=366)
+episode:156/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:19.403791427612305, rewards:-373.9299045138889, queue:10.446296296296296, delay:0.27597013604704035, throughput:414
+episode:156/500, real avg travel time:349.2173913043478
+episode:156/500, median wait:24.0 (n=414)
+episode:157/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:18.30011749267578, rewards:-383.77452256944446, queue:10.806084656084655, delay:0.28877405237268516, throughput:386
+episode:157/500, real avg travel time:337.48704663212436
+episode:157/500, median wait:18.0 (n=386)
+episode:158/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:17.747161865234375, rewards:-380.6951388888889, queue:10.701058201058201, delay:0.27677211862392526, throughput:413
+episode:158/500, real avg travel time:331.49152542372883
+episode:158/500, median wait:21.0 (n=413)
+episode:159/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:19.47471046447754, rewards:-382.9257378472222, queue:10.563492063492063, delay:0.2777294663525132, throughput:363
+episode:159/500, real avg travel time:360.44628099173553
+episode:159/500, median wait:19.0 (n=363)
+cycle_mean cycle=15 m_prev=17.95 m_curr=18.00 rel=+0.0028 delta=+0.05 flat=True improved=False patience=1/3
+episode:160/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:17.647125244140625, rewards:-392.94184027777777, queue:10.846825396825396, delay:0.27881466497189156, throughput:360
+episode:160/500, real avg travel time:346.1277777777778
+episode:160/500, median wait:16.0 (n=360)
+HELDOUT episode:160/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:340.3946666666667, rewards:-381.0436197916667, queue:10.667195767195768, delay:0.28416341145833335, throughput:375
+HELDOUT episode:160/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:16.0
+HELDOUT episode:160/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:321.5644329896907, rewards:-378.9626736111111, queue:10.624074074074073, delay:0.2765024013620205, throughput:388
+HELDOUT episode:160/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:14.0
+HELDOUT episode:160/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:346.88022284122565, rewards:-396.295703125, queue:10.906613756613757, delay:0.29056276997561176, throughput:359
+HELDOUT episode:160/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:21.0
+HELDOUT_MEAN episode:160/500, travel time:336.27977416586106 (n=3)
+New best heldout ATT=336.2798 at episode 160 (saved model/best_*.pt)
+episode:161/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:16.752084732055664, rewards:-387.9634114583333, queue:10.883597883597883, delay:0.29433881164227843, throughput:368
+episode:161/500, real avg travel time:362.98097826086956
+episode:161/500, median wait:20.5 (n=368)
+episode:162/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:16.628801345825195, rewards:-398.13155381944443, queue:11.026455026455027, delay:0.2922975570436508, throughput:377
+episode:162/500, real avg travel time:331.973474801061
+episode:162/500, median wait:16.0 (n=377)
+episode:163/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:14.600788116455078, rewards:-381.84661458333335, queue:10.625396825396825, delay:0.2840780914145172, throughput:392
+episode:163/500, real avg travel time:356.4795918367347
+episode:163/500, median wait:21.0 (n=392)
+episode:164/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:13.894525527954102, rewards:-386.12890625, queue:10.687301587301587, delay:0.2774270355386078, throughput:401
+episode:164/500, real avg travel time:338.4114713216958
+episode:164/500, median wait:20.0 (n=401)
+episode:165/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:11.175772666931152, rewards:-374.8237413194444, queue:10.49100529100529, delay:0.27448239604001323, throughput:357
+episode:165/500, real avg travel time:311.1764705882353
+episode:165/500, median wait:11.0 (n=357)
+episode:166/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:11.876261711120605, rewards:-381.47582465277776, queue:10.664550264550265, delay:0.2808348640562996, throughput:366
+episode:166/500, real avg travel time:344.327868852459
+episode:166/500, median wait:16.5 (n=366)
+episode:167/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:14.920008659362793, rewards:-375.1991753472222, queue:10.56058201058201, delay:0.29078097873263886, throughput:399
+episode:167/500, real avg travel time:359.0025062656642
+episode:167/500, median wait:20.0 (n=399)
+episode:168/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:16.191173553466797, rewards:-380.31341145833335, queue:10.645502645502646, delay:0.2695633499710648, throughput:397
+episode:168/500, real avg travel time:325.2468513853904
+episode:168/500, median wait:15.0 (n=397)
+episode:169/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:13.963414192199707, rewards:-383.5361545138889, queue:10.613227513227514, delay:0.27672584170386905, throughput:332
+episode:169/500, real avg travel time:356.2379518072289
+episode:169/500, median wait:11.0 (n=332)
+cycle_mean cycle=16 m_prev=18.00 m_curr=16.70 rel=-0.0722 delta=-1.30 flat=False improved=True patience=0/3
+episode:170/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:13.500320434570312, rewards:-389.0580729166667, queue:10.77989417989418, delay:0.27880378198371364, throughput:349
+episode:170/500, real avg travel time:341.44412607449857
+episode:170/500, median wait:17.0 (n=349)
+HELDOUT episode:170/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:361.4182305630027, rewards:-385.01714409722223, queue:10.796560846560846, delay:0.28268016028025794, throughput:373
+HELDOUT episode:170/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:18.0
+HELDOUT episode:170/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:327.4293628808864, rewards:-376.40859375, queue:10.636243386243386, delay:0.27736202825314155, throughput:361
+HELDOUT episode:170/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:14.0
+HELDOUT episode:170/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:332.9224376731302, rewards:-389.32543402777776, queue:10.815079365079365, delay:0.2879752345816799, throughput:361
+HELDOUT episode:170/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:17.0
+HELDOUT_MEAN episode:170/500, travel time:340.59001037233975 (n=3)
+episode:171/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:12.573578834533691, rewards:-384.066015625, queue:10.73994708994709, delay:0.28587003839079034, throughput:370
+episode:171/500, real avg travel time:345.4945945945946
+episode:171/500, median wait:18.0 (n=370)
+episode:172/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:12.78538990020752, rewards:-389.62751736111113, queue:10.884656084656084, delay:0.28977728949652776, throughput:381
+episode:172/500, real avg travel time:349.5590551181102
+episode:172/500, median wait:15.0 (n=381)
+episode:173/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:12.66870403289795, rewards:-387.14635416666664, queue:10.756878306878306, delay:0.28129824683779764, throughput:370
+episode:173/500, real avg travel time:333.8621621621622
+episode:173/500, median wait:15.0 (n=370)
+episode:174/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:12.468934059143066, rewards:-387.4349392361111, queue:10.771693121693122, delay:0.2740274096292163, throughput:395
+episode:174/500, real avg travel time:321.6
+episode:174/500, median wait:14.0 (n=395)
+episode:175/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:12.81432819366455, rewards:-379.8810329861111, queue:10.62936507936508, delay:0.27102095992476855, throughput:363
+episode:175/500, real avg travel time:312.54545454545456
+episode:175/500, median wait:15.0 (n=363)
+episode:176/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:12.809483528137207, rewards:-381.21410590277776, queue:10.657407407407407, delay:0.29236036835524143, throughput:359
+episode:176/500, real avg travel time:344.6852367688022
+episode:176/500, median wait:14.0 (n=359)
+episode:177/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:13.8648099899292, rewards:-380.9576388888889, queue:10.6510582010582, delay:0.2837628722821594, throughput:385
+episode:177/500, real avg travel time:336.9428571428571
+episode:177/500, median wait:14.0 (n=385)
+episode:178/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:14.19384479522705, rewards:-379.6857638888889, queue:10.649470899470899, delay:0.2779834888599537, throughput:388
+episode:178/500, real avg travel time:319.5644329896907
+episode:178/500, median wait:15.0 (n=388)
+episode:179/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:13.572797775268555, rewards:-386.38745659722224, queue:10.656084656084657, delay:0.287718337931961, throughput:335
+episode:179/500, real avg travel time:354.36119402985076
+episode:179/500, median wait:17.0 (n=335)
+cycle_mean cycle=17 m_prev=16.70 m_curr=15.40 rel=-0.0778 delta=-1.30 flat=False improved=True patience=0/3
+episode:180/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:14.676570892333984, rewards:-382.62335069444447, queue:10.645767195767196, delay:0.26442759680369543, throughput:383
+episode:180/500, real avg travel time:350.05483028720624
+episode:180/500, median wait:20.0 (n=383)
+HELDOUT episode:180/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:332.65860215053766, rewards:-382.38854166666664, queue:10.692857142857143, delay:0.27781743448247354, throughput:372
+HELDOUT episode:180/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:16.5
+HELDOUT episode:180/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:325.4170854271357, rewards:-376.1796440972222, queue:10.583597883597884, delay:0.27073861581307873, throughput:398
+HELDOUT episode:180/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:18.5
+HELDOUT episode:180/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:337.66, rewards:-391.7055989583333, queue:10.864285714285714, delay:0.2916437381159061, throughput:350
+HELDOUT episode:180/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:15.0
+HELDOUT_MEAN episode:180/500, travel time:331.91189585922444 (n=3)
+New best heldout ATT=331.9119 at episode 180 (saved model/best_*.pt)
+episode:181/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:15.075507164001465, rewards:-377.11449652777776, queue:10.535978835978836, delay:0.2778998480902778, throughput:392
+episode:181/500, real avg travel time:346.82397959183675
+episode:181/500, median wait:14.5 (n=392)
+episode:182/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:13.953777313232422, rewards:-396.6983940972222, queue:10.93968253968254, delay:0.2893167162698413, throughput:411
+episode:182/500, real avg travel time:375.0827250608273
+episode:182/500, median wait:23.0 (n=411)
+episode:183/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:13.983369827270508, rewards:-389.558203125, queue:10.923809523809524, delay:0.28929440130001655, throughput:356
+episode:183/500, real avg travel time:351.66011235955057
+episode:183/500, median wait:18.0 (n=356)
+episode:184/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:13.902692794799805, rewards:-384.97782118055557, queue:10.664550264550265, delay:0.2655980670262897, throughput:386
+episode:184/500, real avg travel time:312.6062176165803
+episode:184/500, median wait:13.0 (n=386)
+episode:185/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:14.496572494506836, rewards:-377.92504340277776, queue:10.504497354497355, delay:0.27776718543320106, throughput:361
+episode:185/500, real avg travel time:305.17174515235456
+episode:185/500, median wait:12.0 (n=361)
+episode:186/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:13.89637279510498, rewards:-381.105859375, queue:10.611904761904762, delay:0.279960285166584, throughput:383
+episode:186/500, real avg travel time:337.4281984334204
+episode:186/500, median wait:14.0 (n=383)
+episode:187/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:14.281119346618652, rewards:-384.3934027777778, queue:10.80132275132275, delay:0.2925549380993717, throughput:362
+episode:187/500, real avg travel time:323.8674033149171
+episode:187/500, median wait:14.0 (n=362)
+episode:188/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:14.36491870880127, rewards:-381.6176649305556, queue:10.700793650793651, delay:0.27540422066178905, throughput:378
+episode:188/500, real avg travel time:340.15608465608466
+episode:188/500, median wait:13.0 (n=378)
+episode:189/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:14.692716598510742, rewards:-377.82491319444443, queue:10.462433862433862, delay:0.27222335250289353, throughput:367
+episode:189/500, real avg travel time:376.70027247956403
+episode:189/500, median wait:25.0 (n=367)
+cycle_mean cycle=18 m_prev=15.40 m_curr=16.65 rel=+0.0812 delta=+1.25 flat=False improved=False patience=1/3
+episode:190/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:13.522268295288086, rewards:-390.3683159722222, queue:10.777777777777779, delay:0.2780719736896495, throughput:363
+episode:190/500, real avg travel time:338.3278236914601
+episode:190/500, median wait:20.0 (n=363)
+HELDOUT episode:190/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:335.7154255319149, rewards:-381.19197048611113, queue:10.662698412698413, delay:0.2832532448743386, throughput:376
+HELDOUT episode:190/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:15.5
+HELDOUT episode:190/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:328.9920424403183, rewards:-378.9654947916667, queue:10.623809523809523, delay:0.2750736942997685, throughput:377
+HELDOUT episode:190/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:14.0
+HELDOUT episode:190/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:360.4432132963989, rewards:-393.71996527777776, queue:10.853439153439153, delay:0.2927019068803737, throughput:361
+HELDOUT episode:190/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:17.0
+HELDOUT_MEAN episode:190/500, travel time:341.7168937562107 (n=3)
+episode:191/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:13.678582191467285, rewards:-385.7237847222222, queue:10.813227513227513, delay:0.28491666279141864, throughput:373
+episode:191/500, real avg travel time:315.82573726541557
+episode:191/500, median wait:16.0 (n=373)
+episode:192/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:12.817438125610352, rewards:-374.484765625, queue:10.505820105820106, delay:0.2765655033172123, throughput:433
+episode:192/500, real avg travel time:378.8568129330254
+episode:192/500, median wait:27.0 (n=433)
+episode:193/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:11.314729690551758, rewards:-385.8197916666667, queue:10.761640211640211, delay:0.2842812189980159, throughput:365
+episode:193/500, real avg travel time:330.2958904109589
+episode:193/500, median wait:19.0 (n=365)
+episode:194/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:11.659998893737793, rewards:-386.1661892361111, queue:10.684920634920635, delay:0.26658239616918816, throughput:395
+episode:194/500, real avg travel time:309.6379746835443
+episode:194/500, median wait:13.0 (n=395)
+episode:195/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:13.460641860961914, rewards:-385.6564670138889, queue:10.747089947089947, delay:0.2827273091311177, throughput:363
+episode:195/500, real avg travel time:299.8595041322314
+episode:195/500, median wait:13.0 (n=363)
+episode:196/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:13.627521514892578, rewards:-382.72083333333336, queue:10.626190476190477, delay:0.2828857421875, throughput:367
+episode:196/500, real avg travel time:344.06811989100817
+episode:196/500, median wait:22.0 (n=367)
+episode:197/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:14.439661026000977, rewards:-384.5849826388889, queue:10.797619047619047, delay:0.2902478414868552, throughput:360
+episode:197/500, real avg travel time:324.06666666666666
+episode:197/500, median wait:18.0 (n=360)
+episode:198/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:13.039721488952637, rewards:-380.93402777777777, queue:10.66878306878307, delay:0.28090410182084985, throughput:373
+episode:198/500, real avg travel time:323.79088471849866
+episode:198/500, median wait:17.0 (n=373)
+episode:199/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:12.69335651397705, rewards:-388.36888020833334, queue:10.690740740740742, delay:0.28725947627314813, throughput:385
+episode:199/500, real avg travel time:375.94805194805195
+episode:199/500, median wait:24.0 (n=385)
+cycle_mean cycle=19 m_prev=16.65 m_curr=18.90 rel=+0.1351 delta=+2.25 flat=False improved=False patience=2/3
+episode:200/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:11.657175064086914, rewards:-381.3989583333333, queue:10.65079365079365, delay:0.26938119716745207, throughput:369
+episode:200/500, real avg travel time:327.05962059620595
+episode:200/500, median wait:19.0 (n=369)
+HELDOUT episode:200/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:337.45501285347046, rewards:-385.0216579861111, queue:10.761640211640211, delay:0.27944988270916005, throughput:389
+HELDOUT episode:200/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:25.0
+HELDOUT episode:200/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:316.8483290488432, rewards:-380.1406684027778, queue:10.686772486772487, delay:0.27405108093584657, throughput:389
+HELDOUT episode:200/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:19.0
+HELDOUT episode:200/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:358.50958904109586, rewards:-392.8021267361111, queue:10.821693121693121, delay:0.29364449637276785, throughput:365
+HELDOUT episode:200/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:21.0
+HELDOUT_MEAN episode:200/500, travel time:337.60431031446984 (n=3)
+episode:201/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:12.74598217010498, rewards:-384.43680555555557, queue:10.805291005291005, delay:0.28202621217757934, throughput:364
+episode:201/500, real avg travel time:347.7967032967033
+episode:201/500, median wait:14.0 (n=364)
+episode:202/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:13.389719009399414, rewards:-394.59053819444443, queue:10.931481481481482, delay:0.29388450339988426, throughput:383
+episode:202/500, real avg travel time:335.53524804177545
+episode:202/500, median wait:19.0 (n=383)
+episode:203/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:11.663336753845215, rewards:-383.53619791666665, queue:10.712169312169312, delay:0.28915137235449734, throughput:358
+episode:203/500, real avg travel time:345.7513966480447
+episode:203/500, median wait:16.5 (n=358)
+episode:204/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:10.715612411499023, rewards:-388.31219618055553, queue:10.705291005291006, delay:0.2794486232535549, throughput:355
+episode:204/500, real avg travel time:337.9042253521127
+episode:204/500, median wait:14.0 (n=355)
+episode:205/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:10.560845375061035, rewards:-387.75907118055557, queue:10.824867724867724, delay:0.2801231101707176, throughput:360
+episode:205/500, real avg travel time:315.44444444444446
+episode:205/500, median wait:15.0 (n=360)
+episode:206/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:11.960870742797852, rewards:-382.160546875, queue:10.665343915343914, delay:0.2808061549272487, throughput:376
+episode:206/500, real avg travel time:335.63829787234044
+episode:206/500, median wait:23.5 (n=376)
+episode:207/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:11.296607971191406, rewards:-384.46527777777777, queue:10.769312169312169, delay:0.3014104611028439, throughput:347
+episode:207/500, real avg travel time:330.72334293948126
+episode:207/500, median wait:15.0 (n=347)
+episode:208/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:10.323847770690918, rewards:-381.18723958333334, queue:10.661904761904761, delay:0.2806955165963955, throughput:393
+episode:208/500, real avg travel time:354.63358778625957
+episode:208/500, median wait:13.0 (n=393)
+episode:209/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:10.234969139099121, rewards:-388.4646701388889, queue:10.68068783068783, delay:0.2849736935247189, throughput:358
+episode:209/500, real avg travel time:385.1927374301676
+episode:209/500, median wait:27.5 (n=358)
+cycle_mean cycle=20 m_prev=18.90 m_curr=17.65 rel=-0.0661 delta=-1.25 flat=False improved=True patience=0/3
+episode:210/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:10.39414119720459, rewards:-384.709375, queue:10.654761904761905, delay:0.27288027162905093, throughput:386
+episode:210/500, real avg travel time:356.0984455958549
+episode:210/500, median wait:21.5 (n=386)
+HELDOUT episode:210/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:337.23387096774195, rewards:-386.3823350694444, queue:10.75925925925926, delay:0.2893616691468254, throughput:372
+HELDOUT episode:210/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:17.0
+HELDOUT episode:210/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:311.71270718232046, rewards:-375.17413194444447, queue:10.57883597883598, delay:0.2773960658482143, throughput:362
+HELDOUT episode:210/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:16.0
+HELDOUT episode:210/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:346.5, rewards:-386.439453125, queue:10.739417989417989, delay:0.2928215874565972, throughput:376
+HELDOUT episode:210/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:21.5
+HELDOUT_MEAN episode:210/500, travel time:331.81552605002076 (n=3)
+New best heldout ATT=331.8155 at episode 210 (saved model/best_*.pt)
+episode:211/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:11.67652416229248, rewards:-381.49735243055557, queue:10.678042328042329, delay:0.2911571361400463, throughput:374
+episode:211/500, real avg travel time:358.83422459893046
+episode:211/500, median wait:22.5 (n=374)
+episode:212/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:10.1709566116333, rewards:-390.4812934027778, queue:10.913227513227513, delay:0.283700287026703, throughput:424
+episode:212/500, real avg travel time:364.08254716981133
+episode:212/500, median wait:24.5 (n=424)
+episode:213/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:9.208968162536621, rewards:-390.36059027777776, queue:10.802380952380952, delay:0.28889144009383266, throughput:360
+episode:213/500, real avg travel time:366.6277777777778
+episode:213/500, median wait:19.5 (n=360)
+episode:214/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:9.154685974121094, rewards:-386.54296875, queue:10.72883597883598, delay:0.28260381789434524, throughput:381
+episode:214/500, real avg travel time:338.4803149606299
+episode:214/500, median wait:20.0 (n=381)
+episode:215/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:10.084049224853516, rewards:-384.0922743055556, queue:10.774338624338624, delay:0.2825127495659722, throughput:348
+episode:215/500, real avg travel time:320.70402298850576
+episode:215/500, median wait:15.5 (n=348)
+episode:216/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:10.5995454788208, rewards:-375.82543402777776, queue:10.512698412698413, delay:0.2794408404637897, throughput:385
+episode:216/500, real avg travel time:340.4415584415584
+episode:216/500, median wait:20.0 (n=385)
+episode:217/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:10.208718299865723, rewards:-381.6787326388889, queue:10.731746031746031, delay:0.28846842447916665, throughput:380
+episode:217/500, real avg travel time:346.94736842105266
+episode:217/500, median wait:21.5 (n=380)
+episode:218/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:10.868035316467285, rewards:-384.771875, queue:10.781481481481482, delay:0.2812527126736111, throughput:395
+episode:218/500, real avg travel time:325.4151898734177
+episode:218/500, median wait:23.0 (n=395)
+episode:219/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:10.591666221618652, rewards:-382.6176649305556, queue:10.515608465608466, delay:0.2782730021804729, throughput:378
+episode:219/500, real avg travel time:378.8042328042328
+episode:219/500, median wait:22.0 (n=378)
+cycle_mean cycle=21 m_prev=17.65 m_curr=21.00 rel=+0.1898 delta=+3.35 flat=False improved=False patience=1/3
+episode:220/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:11.001296997070312, rewards:-387.2322482638889, queue:10.728306878306878, delay:0.27688882817667, throughput:366
+episode:220/500, real avg travel time:353.25956284153006
+episode:220/500, median wait:28.5 (n=366)
+HELDOUT episode:220/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:322.19525065963063, rewards:-381.83845486111113, queue:10.705291005291006, delay:0.28243482478711973, throughput:379
+HELDOUT episode:220/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:11.0
+HELDOUT episode:220/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:340.05974025974024, rewards:-380.6952690972222, queue:10.705026455026456, delay:0.2782710968501984, throughput:385
+HELDOUT episode:220/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:23.0
+HELDOUT episode:220/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:343.1295774647887, rewards:-391.77916666666664, queue:10.875132275132275, delay:0.292739173848793, throughput:355
+HELDOUT episode:220/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:14.0
+HELDOUT_MEAN episode:220/500, travel time:335.1281894613865 (n=3)
+episode:221/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:11.058292388916016, rewards:-383.6447048611111, queue:10.728571428571428, delay:0.2820696472490906, throughput:404
+episode:221/500, real avg travel time:350.5470297029703
+episode:221/500, median wait:21.0 (n=404)
+episode:222/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:9.498503684997559, rewards:-394.1811631944444, queue:10.995238095238095, delay:0.29641352254877645, throughput:374
+episode:222/500, real avg travel time:334.40909090909093
+episode:222/500, median wait:15.0 (n=374)
+episode:223/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:9.02223014831543, rewards:-385.839453125, queue:10.78941798941799, delay:0.28238247664517196, throughput:355
+episode:223/500, real avg travel time:343.32394366197184
+episode:223/500, median wait:17.0 (n=355)
+episode:224/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:9.223311424255371, rewards:-398.69557291666666, queue:10.926984126984127, delay:0.28486634915467923, throughput:376
+episode:224/500, real avg travel time:340.218085106383
+episode:224/500, median wait:25.0 (n=376)
+episode:225/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:8.859461784362793, rewards:-379.2934461805556, queue:10.582275132275132, delay:0.27859248408564813, throughput:369
+episode:225/500, real avg travel time:331.37127371273715
+episode:225/500, median wait:21.0 (n=369)
+episode:226/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:8.016950607299805, rewards:-380.1209201388889, queue:10.619047619047619, delay:0.28038465711805555, throughput:377
+episode:226/500, real avg travel time:344.17771883289123
+episode:226/500, median wait:24.0 (n=377)
+episode:227/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:9.167200088500977, rewards:-379.097265625, queue:10.632804232804233, delay:0.2864113136574074, throughput:403
+episode:227/500, real avg travel time:352.575682382134
+episode:227/500, median wait:20.0 (n=403)
+episode:228/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:9.706521987915039, rewards:-378.60651041666665, queue:10.576984126984128, delay:0.27493563858920306, throughput:389
+episode:228/500, real avg travel time:320.36503856041134
+episode:228/500, median wait:15.0 (n=389)
+episode:229/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:9.95157527923584, rewards:-381.5562934027778, queue:10.563227513227513, delay:0.2789230427414021, throughput:346
+episode:229/500, real avg travel time:366.19075144508673
+episode:229/500, median wait:15.5 (n=346)
+cycle_mean cycle=22 m_prev=21.00 m_curr=20.20 rel=-0.0381 delta=-0.80 flat=True improved=False patience=2/3
+episode:230/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:9.409032821655273, rewards:-374.59934895833334, queue:10.494179894179894, delay:0.26244860452318947, throughput:389
+episode:230/500, real avg travel time:331.2185089974293
+episode:230/500, median wait:19.0 (n=389)
+HELDOUT episode:230/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:348.76103896103893, rewards:-382.6138020833333, queue:10.688888888888888, delay:0.2810461619543651, throughput:385
+HELDOUT episode:230/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:19.0
+HELDOUT episode:230/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:319.27027027027026, rewards:-378.7648003472222, queue:10.658201058201058, delay:0.2773648055142196, throughput:370
+HELDOUT episode:230/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:16.5
+HELDOUT episode:230/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:347.5946666666667, rewards:-388.20629340277776, queue:10.786243386243386, delay:0.2905826952091601, throughput:375
+HELDOUT episode:230/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:25.0
+HELDOUT_MEAN episode:230/500, travel time:338.54199196599194 (n=3)
+episode:231/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:8.685088157653809, rewards:-381.65681423611113, queue:10.765079365079366, delay:0.2826126663773148, throughput:392
+episode:231/500, real avg travel time:335.7091836734694
+episode:231/500, median wait:20.0 (n=392)
+episode:232/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:8.783500671386719, rewards:-387.6401475694444, queue:10.867989417989419, delay:0.29966792353877314, throughput:392
+episode:232/500, real avg travel time:342.1301020408163
+episode:232/500, median wait:18.0 (n=392)
+episode:233/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:9.153179168701172, rewards:-381.31805555555553, queue:10.648677248677249, delay:0.28241496414103834, throughput:372
+episode:233/500, real avg travel time:366.5967741935484
+episode:233/500, median wait:17.5 (n=372)
+episode:234/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:9.209452629089355, rewards:-393.150390625, queue:10.902910052910054, delay:0.2750664605034722, throughput:378
+episode:234/500, real avg travel time:310.28306878306876
+episode:234/500, median wait:16.0 (n=378)
+episode:235/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:9.238738059997559, rewards:-384.12335069444447, queue:10.723544973544973, delay:0.2801695162657077, throughput:357
+episode:235/500, real avg travel time:323.19607843137254
+episode:235/500, median wait:14.0 (n=357)
+episode:236/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:9.772822380065918, rewards:-370.5669270833333, queue:10.443121693121693, delay:0.2815878570395172, throughput:405
+episode:236/500, real avg travel time:334.9012345679012
+episode:236/500, median wait:21.0 (n=405)
+episode:237/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:9.630223274230957, rewards:-384.1458767361111, queue:10.78968253968254, delay:0.29304767588458996, throughput:370
+episode:237/500, real avg travel time:345.32702702702704
+episode:237/500, median wait:19.0 (n=370)
+episode:238/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:10.105725288391113, rewards:-371.58016493055555, queue:10.4489417989418, delay:0.2734510310743221, throughput:406
+episode:238/500, real avg travel time:311.9113300492611
+episode:238/500, median wait:16.0 (n=406)
+episode:239/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:9.995258331298828, rewards:-383.96215277777776, queue:10.633862433862435, delay:0.28366469933242394, throughput:348
+episode:239/500, real avg travel time:352.64367816091954
+episode:239/500, median wait:24.0 (n=348)
+cycle_mean cycle=23 m_prev=20.20 m_curr=18.45 rel=-0.0866 delta=-1.75 flat=False improved=True patience=0/3
+episode:240/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:10.347745895385742, rewards:-385.22126736111113, queue:10.692063492063491, delay:0.270843021453373, throughput:378
+episode:240/500, real avg travel time:335.8174603174603
+episode:240/500, median wait:20.0 (n=378)
+HELDOUT episode:240/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:334.37142857142857, rewards:-381.6677951388889, queue:10.66931216931217, delay:0.27664895032448744, throughput:385
+HELDOUT episode:240/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:16.0
+HELDOUT episode:240/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:333.7447916666667, rewards:-378.9241753472222, queue:10.652645502645502, delay:0.2734941432084987, throughput:384
+HELDOUT episode:240/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:21.0
+HELDOUT episode:240/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:340.5, rewards:-389.55230034722223, queue:10.808994708994708, delay:0.2922816039393188, throughput:350
+HELDOUT episode:240/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:19.0
+HELDOUT_MEAN episode:240/500, travel time:336.20540674603177 (n=3)
+episode:241/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:8.269196510314941, rewards:-380.07313368055554, queue:10.705555555555556, delay:0.2760424094225364, throughput:398
+episode:241/500, real avg travel time:355.30904522613065
+episode:241/500, median wait:33.0 (n=398)
+episode:242/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:8.64945125579834, rewards:-391.0525607638889, queue:10.965343915343915, delay:0.2925436998801257, throughput:399
+episode:242/500, real avg travel time:337.5989974937343
+episode:242/500, median wait:15.0 (n=399)
+episode:243/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:8.769916534423828, rewards:-382.4208767361111, queue:10.677248677248677, delay:0.2797192770337302, throughput:385
+episode:243/500, real avg travel time:345.5090909090909
+episode:243/500, median wait:25.0 (n=385)
+episode:244/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:8.904303550720215, rewards:-389.56024305555553, queue:10.797089947089948, delay:0.28308909582713293, throughput:367
+episode:244/500, real avg travel time:336.8773841961853
+episode:244/500, median wait:13.0 (n=367)
+episode:245/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:9.35700511932373, rewards:-382.23198784722223, queue:10.663492063492063, delay:0.28044804971684856, throughput:367
+episode:245/500, real avg travel time:316.8065395095368
+episode:245/500, median wait:16.0 (n=367)
+episode:246/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:8.336785316467285, rewards:-387.26553819444445, queue:10.767460317460317, delay:0.28799396494708995, throughput:372
+episode:246/500, real avg travel time:361.51881720430106
+episode:246/500, median wait:27.0 (n=372)
+episode:247/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:8.112802505493164, rewards:-382.66297743055554, queue:10.758465608465608, delay:0.2889921965422454, throughput:385
+episode:247/500, real avg travel time:335.9220779220779
+episode:247/500, median wait:21.0 (n=385)
+episode:248/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:8.321250915527344, rewards:-380.89913194444443, queue:10.656613756613757, delay:0.2712631629257606, throughput:399
+episode:248/500, real avg travel time:328.3233082706767
+episode:248/500, median wait:14.0 (n=399)
+episode:249/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:8.783097267150879, rewards:-388.27139756944445, queue:10.626455026455027, delay:0.2838866864562665, throughput:370
+episode:249/500, real avg travel time:384.5567567567568
+episode:249/500, median wait:28.0 (n=370)
+cycle_mean cycle=24 m_prev=18.45 m_curr=21.20 rel=+0.1491 delta=+2.75 flat=False improved=False patience=1/3
+episode:250/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:9.089754104614258, rewards:-385.858984375, queue:10.715608465608465, delay:0.2799813083870701, throughput:355
+episode:250/500, real avg travel time:334.60845070422533
+episode:250/500, median wait:17.0 (n=355)
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:333.28877005347596, rewards:-378.9857204861111, queue:10.59920634920635, delay:0.2729269683676422, throughput:374
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:16.0
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:315.20942408376965, rewards:-373.71649305555553, queue:10.536507936507936, delay:0.27411589445891205, throughput:382
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:18.0
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:342.0593220338983, rewards:-388.5894965277778, queue:10.818253968253968, delay:0.2879481078455688, throughput:354
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:16.0
+HELDOUT_MEAN episode:250/500, travel time:330.18583872371465 (n=3)
+New best heldout ATT=330.1858 at episode 250 (saved model/best_*.pt)
+episode:251/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:8.12072467803955, rewards:-376.027734375, queue:10.575925925925926, delay:0.28273706183862435, throughput:376
+episode:251/500, real avg travel time:332.6010638297872
+episode:251/500, median wait:17.5 (n=376)
+episode:252/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:7.050980567932129, rewards:-383.4368489583333, queue:10.681746031746032, delay:0.28226738177910055, throughput:394
+episode:252/500, real avg travel time:345.005076142132
+episode:252/500, median wait:19.5 (n=394)
+episode:253/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:6.803122520446777, rewards:-384.24097222222224, queue:10.637566137566138, delay:0.28252288979828044, throughput:381
+episode:253/500, real avg travel time:344.5275590551181
+episode:253/500, median wait:22.0 (n=381)
+episode:254/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:6.891561031341553, rewards:-385.3398003472222, queue:10.684920634920635, delay:0.2771654240038029, throughput:367
+episode:254/500, real avg travel time:323.13623978201633
+episode:254/500, median wait:12.0 (n=367)
+episode:255/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:7.308342933654785, rewards:-378.9186197916667, queue:10.587037037037037, delay:0.2741373052041997, throughput:356
+episode:255/500, real avg travel time:316.8426966292135
+episode:255/500, median wait:13.0 (n=356)
+episode:256/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:7.670058727264404, rewards:-378.87230902777776, queue:10.541798941798941, delay:0.27763768756200397, throughput:387
+episode:256/500, real avg travel time:355.99483204134367
+episode:256/500, median wait:26.0 (n=387)
+episode:257/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:7.917144298553467, rewards:-376.9991753472222, queue:10.638095238095238, delay:0.2828635886863426, throughput:400
+episode:257/500, real avg travel time:344.7275
+episode:257/500, median wait:23.5 (n=400)
+episode:258/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:8.097511291503906, rewards:-379.6959201388889, queue:10.623015873015873, delay:0.2711183255311673, throughput:386
+episode:258/500, real avg travel time:340.0777202072539
+episode:258/500, median wait:12.0 (n=386)
+episode:259/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:7.613226890563965, rewards:-375.51293402777776, queue:10.444179894179895, delay:0.2672305152529762, throughput:376
+episode:259/500, real avg travel time:354.0824468085106
+episode:259/500, median wait:16.0 (n=376)
+cycle_mean cycle=25 m_prev=21.20 m_curr=17.85 rel=-0.1580 delta=-3.35 flat=False improved=True patience=0/3
+episode:260/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:7.628037452697754, rewards:-386.0766493055556, queue:10.653703703703703, delay:0.2784089265046296, throughput:367
+episode:260/500, real avg travel time:329.2043596730245
+episode:260/500, median wait:19.0 (n=367)
+HELDOUT episode:260/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:335.3076923076923, rewards:-379.5651041666667, queue:10.647883597883597, delay:0.27987150969328706, throughput:377
+HELDOUT episode:260/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:20.0
+HELDOUT episode:260/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:331.4392764857881, rewards:-377.1392795138889, queue:10.618518518518519, delay:0.27237083798363093, throughput:387
+HELDOUT episode:260/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:13.0
+HELDOUT episode:260/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:341.0273224043716, rewards:-386.719140625, queue:10.712962962962964, delay:0.2820281498015873, throughput:366
+HELDOUT episode:260/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:21.0
+HELDOUT_MEAN episode:260/500, travel time:335.92476373261735 (n=3)
+episode:261/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:7.460949897766113, rewards:-378.84657118055554, queue:10.672486772486772, delay:0.2853529188368056, throughput:358
+episode:261/500, real avg travel time:341.93575418994413
+episode:261/500, median wait:14.5 (n=358)
+episode:262/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:7.801558494567871, rewards:-389.1041232638889, queue:10.824603174603174, delay:0.28442295619419644, throughput:404
+episode:262/500, real avg travel time:352.5792079207921
+episode:262/500, median wait:26.0 (n=404)
+episode:263/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:8.288214683532715, rewards:-380.7390625, queue:10.655820105820105, delay:0.2783655560205853, throughput:371
+episode:263/500, real avg travel time:352.62264150943395
+episode:263/500, median wait:25.0 (n=371)
+episode:264/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:7.62501335144043, rewards:-389.6001302083333, queue:10.829365079365079, delay:0.27112197472304894, throughput:391
+episode:264/500, real avg travel time:338.36572890025576
+episode:264/500, median wait:17.0 (n=391)
+episode:265/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:7.834433555603027, rewards:-381.4888020833333, queue:10.661904761904761, delay:0.27752708152488426, throughput:374
+episode:265/500, real avg travel time:307.7807486631016
+episode:265/500, median wait:9.5 (n=374)
+episode:266/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:7.261831283569336, rewards:-380.0439670138889, queue:10.61111111111111, delay:0.2813348679315476, throughput:395
+episode:266/500, real avg travel time:333.82278481012656
+episode:266/500, median wait:20.0 (n=395)
+episode:267/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:6.979249477386475, rewards:-379.38029513888887, queue:10.623544973544973, delay:0.28790409148685514, throughput:378
+episode:267/500, real avg travel time:329.80687830687833
+episode:267/500, median wait:14.5 (n=378)
+episode:268/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:6.895421028137207, rewards:-377.18758680555555, queue:10.60026455026455, delay:0.27582287662243715, throughput:372
+episode:268/500, real avg travel time:301.51075268817203
+episode:268/500, median wait:10.0 (n=372)
+episode:269/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:7.493194103240967, rewards:-389.09318576388887, queue:10.725661375661376, delay:0.2816047466621197, throughput:353
+episode:269/500, real avg travel time:372.1558073654391
+episode:269/500, median wait:26.0 (n=353)
+cycle_mean cycle=26 m_prev=17.85 m_curr=18.15 rel=+0.0168 delta=+0.30 flat=True improved=False patience=1/3
+episode:270/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:7.1299147605896, rewards:-379.20390625, queue:10.587037037037037, delay:0.2693983128461888, throughput:383
+episode:270/500, real avg travel time:371.9477806788512
+episode:270/500, median wait:26.0 (n=383)
+HELDOUT episode:270/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:337.38315217391306, rewards:-382.0966579861111, queue:10.673015873015872, delay:0.2793410205336475, throughput:368
+HELDOUT episode:270/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:21.5
+HELDOUT episode:270/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:334.3543307086614, rewards:-379.6165364583333, queue:10.7, delay:0.2771568015769676, throughput:381
+HELDOUT episode:270/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:22.0
+HELDOUT episode:270/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:357.0, rewards:-388.1109375, queue:10.793915343915344, delay:0.2869606300636574, throughput:358
+HELDOUT episode:270/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:18.5
+HELDOUT_MEAN episode:270/500, travel time:342.9124942941915 (n=3)
+episode:271/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:7.1712727546691895, rewards:-380.6829861111111, queue:10.684391534391535, delay:0.2876977668237434, throughput:370
+episode:271/500, real avg travel time:337.84054054054053
+episode:271/500, median wait:24.0 (n=370)
+episode:272/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:6.9511637687683105, rewards:-387.6819878472222, queue:10.82883597883598, delay:0.2862941196986607, throughput:390
+episode:272/500, real avg travel time:344.94871794871796
+episode:272/500, median wait:14.5 (n=390)
+episode:273/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:6.976613998413086, rewards:-386.3973090277778, queue:10.755291005291005, delay:0.2838438326719577, throughput:379
+episode:273/500, real avg travel time:340.0976253298153
+episode:273/500, median wait:19.0 (n=379)
+episode:274/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:6.608693599700928, rewards:-386.2249565972222, queue:10.686772486772487, delay:0.2763303726438492, throughput:373
+episode:274/500, real avg travel time:330.4101876675603
+episode:274/500, median wait:15.0 (n=373)
+episode:275/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:7.098854064941406, rewards:-381.47109375, queue:10.616402116402117, delay:0.27316022600446427, throughput:374
+episode:275/500, real avg travel time:323.22192513368987
+episode:275/500, median wait:20.5 (n=374)
+episode:276/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:7.263720512390137, rewards:-379.362890625, queue:10.594179894179895, delay:0.28083528387483464, throughput:365
+episode:276/500, real avg travel time:330.6986301369863
+episode:276/500, median wait:21.0 (n=365)
+episode:277/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:7.863433361053467, rewards:-383.66809895833336, queue:10.763227513227513, delay:0.2882534773892196, throughput:394
+episode:277/500, real avg travel time:354.98477157360406
+episode:277/500, median wait:21.5 (n=394)
+episode:278/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:8.448443412780762, rewards:-385.31532118055554, queue:10.781481481481482, delay:0.2740625775049603, throughput:381
+episode:278/500, real avg travel time:326.40157480314963
+episode:278/500, median wait:16.0 (n=381)
+episode:279/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:8.791777610778809, rewards:-386.64869791666666, queue:10.6505291005291, delay:0.2748120827649636, throughput:364
+episode:279/500, real avg travel time:389.6868131868132
+episode:279/500, median wait:28.5 (n=364)
+cycle_mean cycle=27 m_prev=18.15 m_curr=20.60 rel=+0.1350 delta=+2.45 flat=False improved=False patience=2/3
+episode:280/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:8.576607704162598, rewards:-385.5024305555556, queue:10.687830687830688, delay:0.277417896412037, throughput:343
+episode:280/500, real avg travel time:331.6734693877551
+episode:280/500, median wait:16.0 (n=343)
+HELDOUT episode:280/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:336.60477453580904, rewards:-380.82999131944445, queue:10.673544973544974, delay:0.28083518699363424, throughput:377
+HELDOUT episode:280/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:17.0
+HELDOUT episode:280/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:346.03553299492387, rewards:-377.1424045138889, queue:10.656613756613757, delay:0.2755935588210979, throughput:394
+HELDOUT episode:280/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:21.0
+HELDOUT episode:280/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:334.00852272727275, rewards:-389.46484375, queue:10.846296296296297, delay:0.2916888524615575, throughput:352
+HELDOUT episode:280/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:13.0
+HELDOUT_MEAN episode:280/500, travel time:338.8829434193352 (n=3)
+episode:281/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:8.04100227355957, rewards:-383.65399305555553, queue:10.734391534391534, delay:0.28257749850157077, throughput:368
+episode:281/500, real avg travel time:333.5923913043478
+episode:281/500, median wait:17.0 (n=368)
+episode:282/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:8.113651275634766, rewards:-389.8520833333333, queue:10.907671957671958, delay:0.2863010628513558, throughput:379
+episode:282/500, real avg travel time:319.2269129287599
+episode:282/500, median wait:10.0 (n=379)
+episode:283/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:7.610213756561279, rewards:-388.35264756944446, queue:10.822751322751323, delay:0.27904743820271166, throughput:386
+episode:283/500, real avg travel time:348.2538860103627
+episode:283/500, median wait:21.0 (n=386)
+episode:284/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:7.700821876525879, rewards:-384.6740451388889, queue:10.765873015873016, delay:0.2714158154038525, throughput:406
+episode:284/500, real avg travel time:319.1650246305419
+episode:284/500, median wait:18.0 (n=406)
+episode:285/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:7.445450782775879, rewards:-384.40876736111113, queue:10.720899470899472, delay:0.2874551117104828, throughput:339
+episode:285/500, real avg travel time:308.8259587020649
+episode:285/500, median wait:11.0 (n=339)
+episode:286/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:7.966543197631836, rewards:-380.07018229166664, queue:10.638095238095238, delay:0.2789600513599537, throughput:376
+episode:286/500, real avg travel time:336.2845744680851
+episode:286/500, median wait:25.5 (n=376)
+episode:287/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:6.2698187828063965, rewards:-385.12847222222223, queue:10.836507936507937, delay:0.2950387137276786, throughput:370
+episode:287/500, real avg travel time:323.9
+episode:287/500, median wait:16.0 (n=370)
+episode:288/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:6.17808723449707, rewards:-381.4486111111111, queue:10.700793650793651, delay:0.27541584640583666, throughput:378
+episode:288/500, real avg travel time:318.5978835978836
+episode:288/500, median wait:20.0 (n=378)
+episode:289/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:6.751964092254639, rewards:-385.78914930555555, queue:10.63994708994709, delay:0.2766727185123181, throughput:357
+episode:289/500, real avg travel time:398.6190476190476
+episode:289/500, median wait:31.0 (n=357)
+cycle_mean cycle=28 m_prev=20.60 m_curr=18.55 rel=-0.0995 delta=-2.05 flat=False improved=True patience=0/3
+episode:290/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:6.709681510925293, rewards:-389.0876736111111, queue:10.806084656084655, delay:0.2767113095238095, throughput:374
+episode:290/500, real avg travel time:342.44117647058823
+episode:290/500, median wait:20.0 (n=374)
+HELDOUT episode:290/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:329.9623655913978, rewards:-382.84136284722223, queue:10.719047619047618, delay:0.2855353784308862, throughput:372
+HELDOUT episode:290/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:19.0
+HELDOUT episode:290/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:322.8031914893617, rewards:-379.5779079861111, queue:10.66904761904762, delay:0.27525411938864086, throughput:376
+HELDOUT episode:290/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:17.0
+HELDOUT episode:290/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:344.27298050139274, rewards:-387.82964409722223, queue:10.778306878306879, delay:0.29086055049189813, throughput:359
+HELDOUT episode:290/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:17.0
+HELDOUT_MEAN episode:290/500, travel time:332.34617919405076 (n=3)
+episode:291/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:6.076842784881592, rewards:-386.90355902777776, queue:10.865079365079366, delay:0.28272194837136244, throughput:387
+episode:291/500, real avg travel time:333.7002583979328
+episode:291/500, median wait:17.0 (n=387)
+episode:292/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:6.852163314819336, rewards:-390.4775173611111, queue:10.89126984126984, delay:0.29501668940145503, throughput:390
+episode:292/500, real avg travel time:349.4923076923077
+episode:292/500, median wait:17.0 (n=390)
+episode:293/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:7.298146724700928, rewards:-387.0844618055556, queue:10.765608465608466, delay:0.2857571394985946, throughput:371
+episode:293/500, real avg travel time:349.1913746630728
+episode:293/500, median wait:16.0 (n=371)
+episode:294/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:6.91987419128418, rewards:-381.48949652777776, queue:10.607407407407408, delay:0.27440527860449737, throughput:401
+episode:294/500, real avg travel time:370.6483790523691
+episode:294/500, median wait:23.0 (n=401)
+episode:295/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:7.13062047958374, rewards:-377.86822916666665, queue:10.557671957671957, delay:0.2734075314153439, throughput:365
+episode:295/500, real avg travel time:321.6246575342466
+episode:295/500, median wait:13.0 (n=365)
+episode:296/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:7.6798176765441895, rewards:-380.936328125, queue:10.651587301587302, delay:0.2827694524532903, throughput:401
+episode:296/500, real avg travel time:344.8379052369077
+episode:296/500, median wait:28.0 (n=401)
+episode:297/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:7.458093166351318, rewards:-380.96931423611113, queue:10.694444444444445, delay:0.28955539925388557, throughput:378
+episode:297/500, real avg travel time:326.5846560846561
+episode:297/500, median wait:13.5 (n=378)
+episode:298/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:8.869585037231445, rewards:-382.62977430555554, queue:10.736507936507936, delay:0.27866365947420635, throughput:397
+episode:298/500, real avg travel time:362.22166246851384
+episode:298/500, median wait:14.0 (n=397)
+episode:299/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:8.805197715759277, rewards:-371.65520833333335, queue:10.223809523809523, delay:0.2675540500217014, throughput:391
+episode:299/500, real avg travel time:354.15089514066494
+episode:299/500, median wait:18.0 (n=391)
+cycle_mean cycle=29 m_prev=18.55 m_curr=17.95 rel=-0.0323 delta=-0.60 flat=True improved=False patience=1/3
+episode:300/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:7.343904495239258, rewards:-388.5416232638889, queue:10.778571428571428, delay:0.2733569271350033, throughput:351
+episode:300/500, real avg travel time:356.0569800569801
+episode:300/500, median wait:16.0 (n=351)
+HELDOUT episode:300/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:336.35277777777776, rewards:-378.91631944444447, queue:10.67089947089947, delay:0.28003675672743056, throughput:360
+HELDOUT episode:300/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:11.0
+HELDOUT episode:300/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:323.9236842105263, rewards:-379.6918836805556, queue:10.704497354497354, delay:0.2778515689587467, throughput:380
+HELDOUT episode:300/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:16.5
+HELDOUT episode:300/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:346.79479768786126, rewards:-390.753125, queue:10.852910052910053, delay:0.2850598532056052, throughput:346
+HELDOUT episode:300/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:13.0
+HELDOUT_MEAN episode:300/500, travel time:335.6904198920551 (n=3)
+episode:301/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:7.841277599334717, rewards:-373.21362847222224, queue:10.456084656084656, delay:0.27889982354704035, throughput:438
+episode:301/500, real avg travel time:357.74657534246575
+episode:301/500, median wait:28.0 (n=438)
+episode:302/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:7.084461688995361, rewards:-387.09626736111113, queue:10.827513227513228, delay:0.28835029400214945, throughput:380
+episode:302/500, real avg travel time:374.7368421052632
+episode:302/500, median wait:21.5 (n=380)
+episode:303/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:6.79171085357666, rewards:-389.923828125, queue:10.803174603174604, delay:0.28297920025214945, throughput:384
+episode:303/500, real avg travel time:340.0208333333333
+episode:303/500, median wait:21.0 (n=384)
+episode:304/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:6.339544773101807, rewards:-385.27235243055554, queue:10.63862433862434, delay:0.2760267146680721, throughput:368
+episode:304/500, real avg travel time:313.7826086956522
+episode:304/500, median wait:15.0 (n=368)
+episode:305/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:6.245742321014404, rewards:-380.965234375, queue:10.61058201058201, delay:0.27903016105530754, throughput:366
+episode:305/500, real avg travel time:331.4726775956284
+episode:305/500, median wait:22.5 (n=366)
+episode:306/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:6.297089099884033, rewards:-383.62530381944447, queue:10.681746031746032, delay:0.285854408223793, throughput:363
+episode:306/500, real avg travel time:351.93112947658403
+episode:306/500, median wait:21.0 (n=363)
+episode:307/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:6.844320297241211, rewards:-386.6953559027778, queue:10.85, delay:0.29534363115906087, throughput:359
+episode:307/500, real avg travel time:338.6183844011142
+episode:307/500, median wait:13.0 (n=359)
+episode:308/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:6.383197784423828, rewards:-375.4580295138889, queue:10.557142857142857, delay:0.27689738601603836, throughput:391
+episode:308/500, real avg travel time:321.80306905370844
+episode:308/500, median wait:14.0 (n=391)
+episode:309/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:6.228291034698486, rewards:-379.72907986111113, queue:10.464550264550265, delay:0.273084400318287, throughput:384
+episode:309/500, real avg travel time:381.1770833333333
+episode:309/500, median wait:23.5 (n=384)
+cycle_mean cycle=30 m_prev=17.95 m_curr=19.55 rel=+0.0891 delta=+1.60 flat=False improved=False patience=2/3
+episode:310/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:6.270009994506836, rewards:-385.8002604166667, queue:10.713756613756614, delay:0.2683638153883515, throughput:360
+episode:310/500, real avg travel time:343.27777777777777
+episode:310/500, median wait:21.0 (n=360)
+HELDOUT episode:310/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:339.54639175257734, rewards:-376.59952256944445, queue:10.58095238095238, delay:0.281052330057457, throughput:388
+HELDOUT episode:310/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:19.0
+HELDOUT episode:310/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:328.84514435695536, rewards:-378.7732204861111, queue:10.693650793650793, delay:0.2735517875227348, throughput:381
+HELDOUT episode:310/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:9.0
+HELDOUT episode:310/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:351.15606936416185, rewards:-389.5123697916667, queue:10.82883597883598, delay:0.2863709141968419, throughput:346
+HELDOUT episode:310/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:14.0
+HELDOUT_MEAN episode:310/500, travel time:339.8492018245649 (n=3)
+episode:311/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:7.231543064117432, rewards:-374.85924479166664, queue:10.530952380952382, delay:0.2783374604724702, throughput:405
+episode:311/500, real avg travel time:333.8296296296296
+episode:311/500, median wait:22.0 (n=405)
+episode:312/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:7.9921393394470215, rewards:-391.07999131944445, queue:10.867724867724867, delay:0.29094528924851193, throughput:419
+episode:312/500, real avg travel time:360.27207637231504
+episode:312/500, median wait:17.0 (n=419)
+episode:313/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:7.743115425109863, rewards:-383.8127170138889, queue:10.67962962962963, delay:0.27729392076926257, throughput:380
+episode:313/500, real avg travel time:356.9342105263158
+episode:313/500, median wait:23.0 (n=380)
+episode:314/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:7.162631034851074, rewards:-393.6468315972222, queue:10.824074074074074, delay:0.2780618980448082, throughput:355
+episode:314/500, real avg travel time:317.7661971830986
+episode:314/500, median wait:13.0 (n=355)
+episode:315/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:7.357030391693115, rewards:-372.6390190972222, queue:10.501322751322752, delay:0.27179581576554235, throughput:389
+episode:315/500, real avg travel time:312.65552699228795
+episode:315/500, median wait:16.0 (n=389)
+episode:316/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:7.5541911125183105, rewards:-385.5762152777778, queue:10.693121693121693, delay:0.2898967440166171, throughput:392
+episode:316/500, real avg travel time:362.32397959183675
+episode:316/500, median wait:30.5 (n=392)
+episode:317/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:7.101638317108154, rewards:-385.5190538194444, queue:10.78068783068783, delay:0.296654789031498, throughput:382
+episode:317/500, real avg travel time:364.22513089005236
+episode:317/500, median wait:16.0 (n=382)
+episode:318/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:6.637073993682861, rewards:-378.84288194444446, queue:10.616137566137565, delay:0.27328468605324074, throughput:389
+episode:318/500, real avg travel time:319.39331619537273
+episode:318/500, median wait:11.0 (n=389)
+episode:319/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:7.404271125793457, rewards:-388.36163194444447, queue:10.72962962962963, delay:0.285335609395668, throughput:348
+episode:319/500, real avg travel time:349.4022988505747
+episode:319/500, median wait:12.0 (n=348)
+cycle_mean cycle=31 m_prev=19.55 m_curr=18.15 rel=-0.0716 delta=-1.40 flat=False improved=True patience=0/3
+episode:320/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:7.403228282928467, rewards:-389.5286892361111, queue:10.787566137566138, delay:0.27450435577876986, throughput:359
+episode:320/500, real avg travel time:310.6908077994429
+episode:320/500, median wait:17.0 (n=359)
+HELDOUT episode:320/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:337.34715025906735, rewards:-380.42174479166664, queue:10.634126984126985, delay:0.27601143973214287, throughput:386
+HELDOUT episode:320/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:17.5
+HELDOUT episode:320/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:342.3038961038961, rewards:-377.50234375, queue:10.652645502645502, delay:0.275331462880291, throughput:385
+HELDOUT episode:320/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:18.0
+HELDOUT episode:320/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:341.0, rewards:-386.89461805555555, queue:10.767724867724867, delay:0.28500379128430886, throughput:369
+HELDOUT episode:320/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:17.0
+HELDOUT_MEAN episode:320/500, travel time:340.21701545432114 (n=3)
+episode:321/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:7.5760416984558105, rewards:-385.95729166666666, queue:10.799206349206349, delay:0.2891020921172288, throughput:358
+episode:321/500, real avg travel time:330.2374301675978
+episode:321/500, median wait:14.5 (n=358)
+episode:322/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:6.711185932159424, rewards:-393.1289496527778, queue:10.98994708994709, delay:0.29393136160714284, throughput:374
+episode:322/500, real avg travel time:336.0802139037433
+episode:322/500, median wait:11.0 (n=374)
+episode:323/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:6.448934078216553, rewards:-389.0814236111111, queue:10.865079365079366, delay:0.2864261687748016, throughput:373
+episode:323/500, real avg travel time:343.2171581769437
+episode:323/500, median wait:21.0 (n=373)
+episode:324/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:7.118677616119385, rewards:-392.4287326388889, queue:10.86058201058201, delay:0.2839619308552414, throughput:351
+episode:324/500, real avg travel time:330.84330484330485
+episode:324/500, median wait:9.0 (n=351)
+episode:325/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:6.871799945831299, rewards:-382.24956597222223, queue:10.645767195767196, delay:0.27660451414723874, throughput:359
+episode:325/500, real avg travel time:324.76044568245123
+episode:325/500, median wait:20.0 (n=359)
+episode:326/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:7.194317817687988, rewards:-375.62816840277776, queue:10.52936507936508, delay:0.2754400344122024, throughput:401
+episode:326/500, real avg travel time:346.5935162094763
+episode:326/500, median wait:22.0 (n=401)
+episode:327/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:6.988973617553711, rewards:-383.1564236111111, queue:10.739417989417989, delay:0.28458368210565477, throughput:357
+episode:327/500, real avg travel time:324.2577030812325
+episode:327/500, median wait:12.0 (n=357)
+episode:328/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:6.665966987609863, rewards:-382.976953125, queue:10.752116402116402, delay:0.26780369672825727, throughput:399
+episode:328/500, real avg travel time:320.6040100250627
+episode:328/500, median wait:13.0 (n=399)
+episode:329/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:6.435535907745361, rewards:-383.78515625, queue:10.601587301587301, delay:0.2743052326182209, throughput:355
+episode:329/500, real avg travel time:352.23661971830984
+episode:329/500, median wait:14.0 (n=355)
+cycle_mean cycle=32 m_prev=18.15 m_curr=15.35 rel=-0.1543 delta=-2.80 flat=False improved=True patience=0/3
+episode:330/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:6.544810771942139, rewards:-387.2080295138889, queue:10.761375661375661, delay:0.27201964363219244, throughput:351
+episode:330/500, real avg travel time:327.2564102564103
+episode:330/500, median wait:17.0 (n=351)
+HELDOUT episode:330/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:342.2631578947368, rewards:-380.65711805555554, queue:10.692592592592593, delay:0.27557056568287036, throughput:361
+HELDOUT episode:330/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:11.0
+HELDOUT episode:330/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:334.0899470899471, rewards:-371.69427083333335, queue:10.544708994708994, delay:0.2747940951554233, throughput:378
+HELDOUT episode:330/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:18.5
+HELDOUT episode:330/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:324.9186046511628, rewards:-388.7948784722222, queue:10.824074074074074, delay:0.2944950810185185, throughput:344
+HELDOUT episode:330/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:14.5
+HELDOUT_MEAN episode:330/500, travel time:333.75723654528224 (n=3)
+episode:331/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:5.9631218910217285, rewards:-379.1829861111111, queue:10.654761904761905, delay:0.2803367332175926, throughput:392
+episode:331/500, real avg travel time:332.58673469387753
+episode:331/500, median wait:14.0 (n=392)
+episode:332/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:6.123240947723389, rewards:-381.96002604166665, queue:10.693915343915345, delay:0.29512435670882936, throughput:401
+episode:332/500, real avg travel time:355.5436408977556
+episode:332/500, median wait:16.0 (n=401)
+episode:333/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:6.014590740203857, rewards:-380.85863715277776, queue:10.600529100529101, delay:0.27547087492766203, throughput:394
+episode:333/500, real avg travel time:356.47969543147207
+episode:333/500, median wait:19.0 (n=394)
+episode:334/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:6.40443229675293, rewards:-387.7107638888889, queue:10.748941798941798, delay:0.2869823314525463, throughput:359
+episode:334/500, real avg travel time:341.67130919220057
+episode:334/500, median wait:9.0 (n=359)
+episode:335/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:6.35137939453125, rewards:-379.3960069444444, queue:10.596031746031747, delay:0.2804280276020999, throughput:359
+episode:335/500, real avg travel time:311.2284122562674
+episode:335/500, median wait:14.0 (n=359)
+episode:336/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:6.538884162902832, rewards:-382.42256944444443, queue:10.631746031746031, delay:0.2756326988260582, throughput:382
+episode:336/500, real avg travel time:315.9973821989529
+episode:336/500, median wait:17.0 (n=382)
+episode:337/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:6.327528953552246, rewards:-384.74861111111113, queue:10.763227513227513, delay:0.2933135178984788, throughput:348
+episode:337/500, real avg travel time:332.1810344827586
+episode:337/500, median wait:14.0 (n=348)
+episode:338/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:6.110831260681152, rewards:-384.67118055555557, queue:10.75978835978836, delay:0.26928265283978176, throughput:391
+episode:338/500, real avg travel time:356.4910485933504
+episode:338/500, median wait:16.0 (n=391)
+episode:339/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:6.187236309051514, rewards:-386.7637152777778, queue:10.66851851851852, delay:0.28040341977719907, throughput:342
+episode:339/500, real avg travel time:338.2397660818713
+episode:339/500, median wait:23.5 (n=342)
+cycle_mean cycle=33 m_prev=15.35 m_curr=15.95 rel=+0.0391 delta=+0.60 flat=True improved=False patience=1/3
+episode:340/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:6.329402446746826, rewards:-388.68524305555553, queue:10.792592592592593, delay:0.27562740265376984, throughput:347
+episode:340/500, real avg travel time:326.86167146974066
+episode:340/500, median wait:19.0 (n=347)
+HELDOUT episode:340/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:334.8776041666667, rewards:-386.41480034722224, queue:10.797883597883597, delay:0.28575113286417, throughput:384
+HELDOUT episode:340/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:21.0
+HELDOUT episode:340/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:326.4550264550264, rewards:-383.3174045138889, queue:10.765608465608466, delay:0.27393314422123016, throughput:378
+HELDOUT episode:340/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:11.0
+HELDOUT episode:340/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:353.5828729281768, rewards:-389.4692274305556, queue:10.797354497354497, delay:0.29066652974123675, throughput:362
+HELDOUT episode:340/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:18.0
+HELDOUT_MEAN episode:340/500, travel time:338.30516784995666 (n=3)
+episode:341/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:6.710189342498779, rewards:-386.7580295138889, queue:10.871693121693122, delay:0.2877404591393849, throughput:360
+episode:341/500, real avg travel time:345.43611111111113
+episode:341/500, median wait:15.0 (n=360)
+episode:342/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:6.808144569396973, rewards:-390.4145833333333, queue:10.841269841269842, delay:0.283674548921131, throughput:399
+episode:342/500, real avg travel time:318.3809523809524
+episode:342/500, median wait:15.0 (n=399)
+episode:343/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:6.757183074951172, rewards:-391.34874131944446, queue:10.857936507936508, delay:0.2851735594411376, throughput:358
+episode:343/500, real avg travel time:324.2709497206704
+episode:343/500, median wait:17.0 (n=358)
+episode:344/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:6.611013412475586, rewards:-384.01336805555553, queue:10.69973544973545, delay:0.2779190628616898, throughput:409
+episode:344/500, real avg travel time:343.3447432762836
+episode:344/500, median wait:22.0 (n=409)
+episode:345/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:6.08624792098999, rewards:-380.2843315972222, queue:10.632010582010581, delay:0.2776518322172619, throughput:367
+episode:345/500, real avg travel time:314.77384196185284
+episode:345/500, median wait:14.0 (n=367)
+episode:346/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:6.475486755371094, rewards:-374.5605902777778, queue:10.518783068783069, delay:0.273506996114418, throughput:409
+episode:346/500, real avg travel time:328.58924205378975
+episode:346/500, median wait:16.0 (n=409)
+episode:347/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:6.509256839752197, rewards:-380.8663628472222, queue:10.681216931216932, delay:0.2922812164145172, throughput:369
+episode:347/500, real avg travel time:340.1029810298103
+episode:347/500, median wait:14.0 (n=369)
+episode:348/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:6.408576011657715, rewards:-377.9861111111111, queue:10.643915343915344, delay:0.2758268487516534, throughput:399
+episode:348/500, real avg travel time:335.8546365914787
+episode:348/500, median wait:12.0 (n=399)
+episode:349/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:6.418868064880371, rewards:-385.64140625, queue:10.642592592592592, delay:0.2747369352471892, throughput:351
+episode:349/500, real avg travel time:345.7920227920228
+episode:349/500, median wait:15.0 (n=351)
+cycle_mean cycle=34 m_prev=15.95 m_curr=15.90 rel=-0.0031 delta=-0.05 flat=True improved=False patience=2/3
+episode:350/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:5.343027591705322, rewards:-384.27256944444446, queue:10.683597883597884, delay:0.26788662703579696, throughput:367
+episode:350/500, real avg travel time:332.7765667574932
+episode:350/500, median wait:20.0 (n=367)
+HELDOUT episode:350/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:337.79224376731304, rewards:-384.8901475694444, queue:10.746031746031745, delay:0.2812329489087302, throughput:361
+HELDOUT episode:350/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:13.0
+HELDOUT episode:350/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:319.3170731707317, rewards:-374.4815972222222, queue:10.565343915343915, delay:0.2772913372705853, throughput:369
+HELDOUT episode:350/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:20.0
+HELDOUT episode:350/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:347.37215909090907, rewards:-393.7015625, queue:10.938624338624338, delay:0.29140205181464945, throughput:352
+HELDOUT episode:350/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:17.0
+HELDOUT_MEAN episode:350/500, travel time:334.8271586763179 (n=3)
+episode:351/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:5.241869926452637, rewards:-384.2, queue:10.803174603174604, delay:0.2838375999813988, throughput:360
+episode:351/500, real avg travel time:339.64166666666665
+episode:351/500, median wait:20.0 (n=360)
+episode:352/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:4.945125102996826, rewards:-388.05737847222224, queue:10.817195767195766, delay:0.2822685443535053, throughput:409
+episode:352/500, real avg travel time:343.7090464547677
+episode:352/500, median wait:24.0 (n=409)
+episode:353/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:5.484602928161621, rewards:-390.8993923611111, queue:10.862169312169312, delay:0.28771646489541997, throughput:371
+episode:353/500, real avg travel time:325.1132075471698
+episode:353/500, median wait:15.0 (n=371)
+episode:354/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:5.192811489105225, rewards:-389.0391059027778, queue:10.808201058201059, delay:0.27283883876901455, throughput:375
+episode:354/500, real avg travel time:326.232
+episode:354/500, median wait:16.0 (n=375)
+episode:355/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:4.843094825744629, rewards:-363.12684461805554, queue:10.232275132275133, delay:0.2745855422247024, throughput:394
+episode:355/500, real avg travel time:314.2233502538071
+episode:355/500, median wait:20.0 (n=394)
+episode:356/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:4.647372722625732, rewards:-383.23090277777777, queue:10.612433862433862, delay:0.2837526351686508, throughput:357
+episode:356/500, real avg travel time:336.3529411764706
+episode:356/500, median wait:17.0 (n=357)
+episode:357/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:4.70998477935791, rewards:-378.1362413194444, queue:10.696031746031746, delay:0.2924888974144345, throughput:370
+episode:357/500, real avg travel time:339.36756756756756
+episode:357/500, median wait:18.0 (n=370)
+episode:358/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:4.727642059326172, rewards:-383.05399305555557, queue:10.706349206349206, delay:0.28165218615658066, throughput:370
+episode:358/500, real avg travel time:316.08378378378376
+episode:358/500, median wait:18.5 (n=370)
+episode:359/500, train_demand:raw_data/ingolstadt21/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:5.426321506500244, rewards:-380.2396267361111, queue:10.53888888888889, delay:0.27770605339575066, throughput:349
+episode:359/500, real avg travel time:355.9025787965616
+episode:359/500, median wait:17.0 (n=349)
+cycle_mean cycle=35 m_prev=15.90 m_curr=18.55 rel=+0.1667 delta=+2.65 flat=False improved=False patience=3/3
+early_stop at episode 359/500 (cycle_mean wait, m=18.55, best ATT=330.19 at episode 250, source=heldout)
+reloaded best checkpoint from episode 250 (ATT=330.19, source=heldout)
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:339.625, rewards:-379.14409722222223, queue:10.626455026455027, delay:0.2751747413917824, throughput:384
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:25.0
+Saved 1777 vehicle trip records to data/output_data/tsc/sumo_colight_rich_odh_l2_1x21/sumo1x21/l2_odh_posthetero/logger/new_metrics_hold_00.csv (ATT=339.62s, completion=21.6%)
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:312.6825842696629, rewards:-378.5519097222222, queue:10.634920634920634, delay:0.2740060634713955, throughput:356
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:14.5
+Saved 1768 vehicle trip records to data/output_data/tsc/sumo_colight_rich_odh_l2_1x21/sumo1x21/l2_odh_posthetero/logger/new_metrics_hold_01.csv (ATT=312.68s, completion=20.1%)
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:348.57703081232495, rewards:-386.76397569444447, queue:10.758201058201058, delay:0.29268369321469906, throughput:357
+HELDOUT episode:500/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:21.0
+Saved 1787 vehicle trip records to data/output_data/tsc/sumo_colight_rich_odh_l2_1x21/sumo1x21/l2_odh_posthetero/logger/new_metrics_hold_02.csv (ATT=348.58s, completion=20.0%)
+HELDOUT_MEAN episode:500/500, travel time:333.62820502732933 (n=3)
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, travel time:346.2986301369863, rewards:-382.5724392361111, queue:10.742857142857142, delay:0.28058636377728174, throughput:365
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_00.rou.xml, median wait:17.0
+Saved 1765 vehicle trip records to data/output_data/tsc/sumo_colight_rich_odh_l2_1x21/sumo1x21/l2_odh_posthetero/logger/new_metrics_best_hold_00.csv (ATT=346.30s, completion=20.7%)
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, travel time:327.4010152284264, rewards:-377.38715277777777, queue:10.608201058201058, delay:0.27619851733010914, throughput:394
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_01.rou.xml, median wait:22.5
+Saved 1776 vehicle trip records to data/output_data/tsc/sumo_colight_rich_odh_l2_1x21/sumo1x21/l2_odh_posthetero/logger/new_metrics_best_hold_01.csv (ATT=327.40s, completion=22.2%)
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, travel time:349.92550143266476, rewards:-390.20941840277777, queue:10.856878306878308, delay:0.29401041666666666, throughput:349
+HELDOUT episode:250/500, demand:raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml, median wait:16.0
+Saved 1784 vehicle trip records to data/output_data/tsc/sumo_colight_rich_odh_l2_1x21/sumo1x21/l2_odh_posthetero/logger/new_metrics_best_hold_02.csv (ATT=349.93s, completion=19.6%)
+HELDOUT_MEAN episode:250/500, travel time:341.2083822660258 (n=3)
+Total time taken: 6523.674067974091

@@ -1,0 +1,113 @@
+{
+  "generated_at": "2026-09-14T21:18:56",
+  "n_vehicles_logged": 1915,
+  "n_completed_trips": 802,
+  "n_incomplete_trips": 1113,
+  "completion_rate": 0.41879895561357705,
+  "trip_status_counts": {
+    "completed": 802,
+    "on_map_at_end": 1113
+  },
+  "stop_speed_threshold_mps": 0.1,
+  "primary_efficiency_metric": "schedule_efficiency",
+  "ride_effectiveness_note": "waiting_fraction = custom_wait_s / travel_time_s per vehicle; system_idle_share = sum(custom_wait_s)/sum(travel_time_s). Lower idle share = higher ride effectiveness.",
+  "metric_definitions": {
+    "travel_time_s": "Wall-clock time in network (LibSignal ATT = mean over completed).",
+    "route_distance_m": "Sum of edge lengths on assigned route.",
+    "distance_traveled_m": "SUMO odometer at trip end (or horizon for censored).",
+    "custom_wait_s": "Uncapped idle time (speed < 0.1 m/s each step).",
+    "waiting_fraction": "custom_wait_s / travel_time_s (per-vehicle idle share).",
+    "moving_fraction": "1 - waiting_fraction.",
+    "schedule_efficiency": "free_flow_time_s / travel_time_s in [0,1] (higher is better).",
+    "system_idle_share": "sum(custom_wait_s) / sum(travel_time_s) over a record set.",
+    "throughput": "Number of completed trips in the eval window."
+  },
+  "sumo_accumulated_wait_note": "accumulated_waiting_time_s uses SUMO getAccumulatedWaitingTime(), capped by default --waiting-time-memory=100s. Prefer custom_wait_s for tails/fairness.",
+  "travel_time_stats_completed": {
+    "mean": 306.714463840399,
+    "median": 233.5,
+    "p95": 817.9499999999999,
+    "max": 1601.0
+  },
+  "travel_time_stats_incomplete": {
+    "mean": 680.4573225516622,
+    "median": 688.0,
+    "p95": 1347.1999999999996,
+    "max": 1797.0
+  },
+  "route_distance_stats_completed": null,
+  "distance_traveled_stats_completed": {
+    "mean": 1553.8776292134833,
+    "median": 1558.329,
+    "p95": 2602.193,
+    "max": 3297.712
+  },
+  "schedule_efficiency_stats_completed": null,
+  "moving_fraction_stats_completed": {
+    "mean": 0.7857188279301744,
+    "median": 0.8769499999999999,
+    "p95": 1.0,
+    "max": 1.0
+  },
+  "waiting_fraction_stats_completed": {
+    "mean": 0.21428117206982547,
+    "median": 0.12304999999999999,
+    "p95": 0.6784949999999998,
+    "max": 0.9147
+  },
+  "custom_wait_stats_completed": {
+    "mean": 110.28304239401496,
+    "median": 25.0,
+    "p95": 519.8999999999999,
+    "max": 1335.0
+  },
+  "custom_wait_stats_incomplete": {
+    "mean": 507.4043126684636,
+    "median": 485.0,
+    "p95": 1143.9999999999993,
+    "max": 1547.0
+  },
+  "custom_wait_stats_all": {
+    "mean": 341.09033942558744,
+    "median": 261.0,
+    "p95": 999.7999999999997,
+    "max": 1547.0
+  },
+  "delay_stats_completed": null,
+  "time_loss_stats_all": {
+    "mean": 403.1114057441253,
+    "median": 313.342,
+    "p95": 1091.6061,
+    "max": 1598.239
+  },
+  "system_idle_share_completed": 0.3595625749537573,
+  "system_idle_share_all": 0.651017507629563,
+  "mean_schedule_efficiency_completed": null,
+  "mean_travel_time_s": 306.714463840399,
+  "median_travel_time_s": 233.5,
+  "p95_travel_time_s": 817.9499999999999,
+  "throughput_completed": 802,
+  "vehicle_type_counts": {
+    "car": 1526,
+    "truck": 389
+  },
+  "csv_path": "data/output_data/tsc/sumo_presslight_odh_l2_1x21/sumo1x21/l2_odh_posthetero/logger/new_metrics_best_hold_02.csv",
+  "output_dir": "data/output_data/tsc/sumo_presslight_odh_l2_1x21/sumo1x21/l2_odh_posthetero/logger/",
+  "agent": "presslight_odh_l2_1x21",
+  "network": "sumo1x21",
+  "world": "sumo",
+  "prefix": "l2_odh_posthetero",
+  "seed": 42,
+  "avg_travel_time_metric": 306.714463840399,
+  "throughput_metric": 802,
+  "best_episode": 60,
+  "best_att": 283.3767220957638,
+  "best_metric_source": "heldout",
+  "demand_file": "raw_data/ingolstadt21/od_hubs/demand_set/hold_02.rou.xml",
+  "heldout_index": 2,
+  "episode": 60,
+  "checkpoint": "best",
+  "checkpoint_episode": 60,
+  "checkpoint_loaded": "best",
+  "best_att_during_train": 283.3767220957638
+}

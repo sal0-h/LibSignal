@@ -1,0 +1,510 @@
+early_stop enabled: mode=cycle_mean, min_episodes=30, max_episodes=500, patience=3, min_delta=0.0500, abs_floor=1.00, cycle_len=10, metric=wait
+episode:0/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:0, rewards:-5.3883338080512155, queue:5.707986111111111, delay:0.050121837192111544, throughput:673
+episode:0/500, real avg travel time:235.88855869242198
+episode:0/500, median wait:51.0 (n=673)
+HELDOUT episode:0/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:416.05357142857144, rewards:-65.56722005208333, queue:9.920833333333333, delay:0.09871271981133355, throughput:280
+HELDOUT episode:0/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:92.0
+HELDOUT episode:0/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:410.14144736842104, rewards:-62.36389431423611, queue:9.734027777777778, delay:0.10621623992919922, throughput:304
+HELDOUT episode:0/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:100.0
+HELDOUT episode:0/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:442.4983277591973, rewards:-63.13388671875, queue:9.972743055555556, delay:0.10646766026814779, throughput:299
+HELDOUT episode:0/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:172.0
+HELDOUT_MEAN episode:0/500, travel time:422.8977821853966 (n=3)
+New best heldout ATT=422.8978 at episode 0 (saved model/best_*.pt)
+episode:1/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:0, rewards:-4.736666870117188, queue:5.886805555555555, delay:0.0551262378692627, throughput:701
+episode:1/500, real avg travel time:253.57203994293866
+episode:1/500, median wait:63.0 (n=701)
+episode:2/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:0, rewards:-5.755556233723959, queue:5.8050347222222225, delay:0.05478588740030924, throughput:723
+episode:2/500, real avg travel time:239.50345781466115
+episode:2/500, median wait:54.0 (n=723)
+episode:3/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:0, rewards:-6.226666259765625, queue:5.976736111111111, delay:0.06032249662611219, throughput:766
+episode:3/500, real avg travel time:253.25718015665797
+episode:3/500, median wait:58.0 (n=766)
+episode:4/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:0, rewards:-4.457223849826389, queue:5.7515625, delay:0.05121135711669922, throughput:677
+episode:4/500, real avg travel time:237.04431314623338
+episode:4/500, median wait:53.0 (n=677)
+episode:5/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:0.8480104207992554, rewards:-10.449445258246527, queue:6.436284722222222, delay:0.07178664737277561, throughput:595
+episode:5/500, real avg travel time:257.48067226890754
+episode:5/500, median wait:51.0 (n=595)
+episode:6/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:1.0710464715957642, rewards:-15.14000244140625, queue:7.684375, delay:0.09717578887939453, throughput:536
+episode:6/500, real avg travel time:377.45522388059703
+episode:6/500, median wait:120.0 (n=536)
+episode:7/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:1.8536428213119507, rewards:-18.96000298394097, queue:7.347916666666666, delay:0.08816238509284126, throughput:569
+episode:7/500, real avg travel time:342.7873462214411
+episode:7/500, median wait:100.0 (n=569)
+episode:8/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:2.5377960205078125, rewards:-19.109441460503472, queue:7.722395833333334, delay:0.09021646711561415, throughput:537
+episode:8/500, real avg travel time:339.8081936685289
+episode:8/500, median wait:81.0 (n=537)
+episode:9/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:3.411149740219116, rewards:-11.706111653645833, queue:6.923784722222222, delay:0.08374203575981988, throughput:597
+episode:9/500, real avg travel time:328.1139028475712
+episode:9/500, median wait:73.0 (n=597)
+episode:10/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:3.6781182289123535, rewards:-7.8733330620659725, queue:6.430208333333334, delay:0.07424786355760363, throughput:615
+episode:10/500, real avg travel time:309.9674796747967
+episode:10/500, median wait:90.0 (n=615)
+HELDOUT episode:10/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:289.03663003663, rewards:-13.472222222222221, queue:7.035069444444445, delay:0.07594945695665148, throughput:546
+HELDOUT episode:10/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:49.5
+HELDOUT episode:10/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:298.1988416988417, rewards:-17.746116807725695, queue:7.642708333333333, delay:0.08663761350843642, throughput:518
+HELDOUT episode:10/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:53.0
+HELDOUT episode:10/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:293.40462427745666, rewards:-15.353329806857639, queue:7.3375, delay:0.08323526382446289, throughput:519
+HELDOUT episode:10/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:47.0
+HELDOUT_MEAN episode:10/500, travel time:293.5466986709761 (n=3)
+New best heldout ATT=293.5467 at episode 10 (saved model/best_*.pt)
+episode:11/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:3.7664523124694824, rewards:-7.967223442925347, queue:6.4300347222222225, delay:0.06967141363355848, throughput:637
+episode:11/500, real avg travel time:283.17425431711143
+episode:11/500, median wait:53.0 (n=637)
+episode:12/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:3.5390639305114746, rewards:-9.881111653645833, queue:6.347916666666666, delay:0.06922764778137207, throughput:658
+episode:12/500, real avg travel time:282.79939209726444
+episode:12/500, median wait:59.0 (n=658)
+episode:13/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:3.4009006023406982, rewards:-8.74166531032986, queue:6.646354166666667, delay:0.07165567609998914, throughput:692
+episode:13/500, real avg travel time:286.4291907514451
+episode:13/500, median wait:60.0 (n=692)
+episode:14/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:3.3066532611846924, rewards:-6.232778591579861, queue:5.936805555555556, delay:0.05948398378160265, throughput:658
+episode:14/500, real avg travel time:251.32978723404256
+episode:14/500, median wait:45.0 (n=658)
+episode:15/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:3.127977132797241, rewards:-6.156668429904514, queue:6.0109375, delay:0.06326814757453071, throughput:702
+episode:15/500, real avg travel time:260.86467236467234
+episode:15/500, median wait:45.0 (n=702)
+episode:16/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:2.935849905014038, rewards:-4.745555284288194, queue:5.840451388888889, delay:0.05624816682603624, throughput:693
+episode:16/500, real avg travel time:238.2034632034632
+episode:16/500, median wait:37.0 (n=693)
+episode:17/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:2.8800809383392334, rewards:-5.332223171657986, queue:6.026909722222222, delay:0.061075592041015626, throughput:698
+episode:17/500, real avg travel time:244.31232091690543
+episode:17/500, median wait:41.5 (n=698)
+episode:18/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:2.7495388984680176, rewards:-5.044444783528646, queue:5.798958333333333, delay:0.05500919553968642, throughput:731
+episode:18/500, real avg travel time:233.34473324213405
+episode:18/500, median wait:38.0 (n=731)
+episode:19/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:2.662968397140503, rewards:-4.32388916015625, queue:5.809201388888889, delay:0.0558723873562283, throughput:694
+episode:19/500, real avg travel time:236.7622478386167
+episode:19/500, median wait:34.0 (n=694)
+cycle_mean cycle=1 m_prev=70.40 m_curr=50.25 rel=-0.2862 delta=-20.15 flat=False improved=True patience=0/3
+episode:20/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:2.6135573387145996, rewards:-5.828888617621528, queue:5.711631944444444, delay:0.051745065053304035, throughput:655
+episode:20/500, real avg travel time:225.7297709923664
+episode:20/500, median wait:35.0 (n=655)
+HELDOUT episode:20/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:244.3503759398496, rewards:-6.9477783203125, queue:5.993402777777778, delay:0.05562726126776801, throughput:665
+HELDOUT episode:20/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:39.0
+HELDOUT episode:20/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:227.81100141043723, rewards:-4.90666741265191, queue:5.873784722222222, delay:0.05830859078301324, throughput:709
+HELDOUT episode:20/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:30.0
+HELDOUT episode:20/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:231.00860832137732, rewards:-4.420000542534722, queue:5.8225694444444445, delay:0.05714724858601888, throughput:697
+HELDOUT episode:20/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:34.0
+HELDOUT_MEAN episode:20/500, travel time:234.38999522388804 (n=3)
+New best heldout ATT=234.3900 at episode 20 (saved model/best_*.pt)
+episode:21/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:2.501260757446289, rewards:-4.153888956705729, queue:5.844618055555555, delay:0.057144917382134335, throughput:695
+episode:21/500, real avg travel time:241.2978417266187
+episode:21/500, median wait:39.0 (n=695)
+episode:22/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:2.4759037494659424, rewards:-6.444443766276041, queue:5.826909722222222, delay:0.0576312435997857, throughput:712
+episode:22/500, real avg travel time:239.95224719101122
+episode:22/500, median wait:42.0 (n=712)
+episode:23/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:2.3937201499938965, rewards:-4.9038886176215275, queue:5.778472222222222, delay:0.0590048631032308, throughput:773
+episode:23/500, real avg travel time:232.98706338939198
+episode:23/500, median wait:40.0 (n=773)
+episode:24/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:2.296447515487671, rewards:-4.611666870117188, queue:5.663020833333333, delay:0.05141989390055338, throughput:682
+episode:24/500, real avg travel time:227.1041055718475
+episode:24/500, median wait:32.0 (n=682)
+episode:25/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:2.2826428413391113, rewards:-4.148888821072049, queue:5.756770833333333, delay:0.05834665298461914, throughput:710
+episode:25/500, real avg travel time:233.33802816901408
+episode:25/500, median wait:36.0 (n=710)
+episode:26/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:2.241896390914917, rewards:-5.781666395399306, queue:5.6663194444444445, delay:0.05010162989298503, throughput:717
+episode:26/500, real avg travel time:225.3068340306834
+episode:26/500, median wait:32.0 (n=717)
+episode:27/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:2.1603784561157227, rewards:-4.827222696940104, queue:5.828819444444444, delay:0.05596317185295953, throughput:716
+episode:27/500, real avg travel time:229.2709497206704
+episode:27/500, median wait:34.0 (n=716)
+episode:28/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:2.15488338470459, rewards:-4.856110636393229, queue:5.670486111111111, delay:0.052315717273288306, throughput:747
+episode:28/500, real avg travel time:225.02409638554218
+episode:28/500, median wait:34.0 (n=747)
+episode:29/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:2.142230987548828, rewards:-4.0055555555555555, queue:5.763715277777778, delay:0.05576271480984158, throughput:705
+episode:29/500, real avg travel time:232.41985815602837
+episode:29/500, median wait:37.0 (n=705)
+cycle_mean cycle=2 m_prev=50.25 m_curr=36.10 rel=-0.2816 delta=-14.15 flat=False improved=True patience=0/3
+episode:30/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:2.137547731399536, rewards:-3.997777642144097, queue:5.673263888888889, delay:0.052213425106472436, throughput:666
+episode:30/500, real avg travel time:232.54054054054055
+episode:30/500, median wait:36.0 (n=666)
+HELDOUT episode:30/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:241.46666666666667, rewards:-9.13111300998264, queue:6.074305555555555, delay:0.058431577682495114, throughput:660
+HELDOUT episode:30/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:39.0
+HELDOUT episode:30/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:228.349932705249, rewards:-4.493889702690972, queue:5.699826388888889, delay:0.05451490084330241, throughput:743
+HELDOUT episode:30/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:36.0
+HELDOUT episode:30/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:230.2284122562674, rewards:-5.378887600368923, queue:5.714756944444445, delay:0.05347741444905599, throughput:718
+HELDOUT episode:30/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:34.0
+HELDOUT_MEAN episode:30/500, travel time:233.34833720939437 (n=3)
+New best heldout ATT=233.3483 at episode 30 (saved model/best_*.pt)
+episode:31/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:2.1028621196746826, rewards:-4.6444447835286455, queue:5.802604166666667, delay:0.05693393283420139, throughput:705
+episode:31/500, real avg travel time:244.354609929078
+episode:31/500, median wait:42.0 (n=705)
+episode:32/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:2.0840792655944824, rewards:-5.837221950954861, queue:5.7640625, delay:0.05615071190728082, throughput:708
+episode:32/500, real avg travel time:229.78389830508473
+episode:32/500, median wait:38.0 (n=708)
+episode:33/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:2.0417866706848145, rewards:-4.657222832573785, queue:5.708506944444444, delay:0.05666004816691081, throughput:774
+episode:33/500, real avg travel time:222.80361757105942
+episode:33/500, median wait:32.0 (n=774)
+episode:34/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:1.9518392086029053, rewards:-3.501667277018229, queue:5.598611111111111, delay:0.04983896679348416, throughput:692
+episode:34/500, real avg travel time:223.21531791907515
+episode:34/500, median wait:35.5 (n=692)
+episode:35/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:1.8552801609039307, rewards:-4.079445054796007, queue:5.635763888888889, delay:0.052547179328070744, throughput:724
+episode:35/500, real avg travel time:224.47237569060775
+episode:35/500, median wait:34.0 (n=724)
+episode:36/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:1.5986576080322266, rewards:-3.4877777099609375, queue:5.570833333333334, delay:0.04909560415479872, throughput:721
+episode:36/500, real avg travel time:215.80443828016644
+episode:36/500, median wait:29.0 (n=721)
+episode:37/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:1.3334777355194092, rewards:-6.142777506510416, queue:5.692361111111111, delay:0.05364077885945638, throughput:736
+episode:37/500, real avg travel time:224.71467391304347
+episode:37/500, median wait:31.0 (n=736)
+episode:38/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:1.2195351123809814, rewards:-4.005555894639757, queue:5.586458333333334, delay:0.04772748947143555, throughput:747
+episode:38/500, real avg travel time:214.72690763052208
+episode:38/500, median wait:30.0 (n=747)
+episode:39/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:1.1467456817626953, rewards:-3.798334418402778, queue:5.6097222222222225, delay:0.049950461917453344, throughput:717
+episode:39/500, real avg travel time:221.87168758716876
+episode:39/500, median wait:32.0 (n=717)
+cycle_mean cycle=3 m_prev=36.10 m_curr=33.95 rel=-0.0596 delta=-2.15 flat=False improved=True patience=0/3
+episode:40/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:1.0703696012496948, rewards:-4.006111653645833, queue:5.6090277777777775, delay:0.04822707706027561, throughput:676
+episode:40/500, real avg travel time:220.50887573964496
+episode:40/500, median wait:30.0 (n=676)
+HELDOUT episode:40/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:222.36338028169016, rewards:-5.755556233723959, queue:5.622048611111111, delay:0.049441040886773, throughput:710
+HELDOUT episode:40/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:33.0
+HELDOUT episode:40/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:220.32421340629276, rewards:-5.815555826822917, queue:5.6715277777777775, delay:0.053503301408555776, throughput:731
+HELDOUT episode:40/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:32.0
+HELDOUT episode:40/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:219.8619718309859, rewards:-5.715001085069445, queue:5.645138888888889, delay:0.049835756089952256, throughput:710
+HELDOUT episode:40/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:28.0
+HELDOUT_MEAN episode:40/500, travel time:220.8498551729896 (n=3)
+New best heldout ATT=220.8499 at episode 40 (saved model/best_*.pt)
+episode:41/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:0.9935248494148254, rewards:-3.977778116861979, queue:5.610243055555555, delay:0.05223370658026801, throughput:707
+episode:41/500, real avg travel time:221.88118811881188
+episode:41/500, median wait:34.0 (n=707)
+episode:42/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:0.9478320479393005, rewards:-4.842220730251736, queue:5.610416666666667, delay:0.04909325175815159, throughput:729
+episode:42/500, real avg travel time:216.4224965706447
+episode:42/500, median wait:30.0 (n=729)
+episode:43/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:0.9068368673324585, rewards:-5.543888346354167, queue:5.683333333333334, delay:0.053609074486626516, throughput:769
+episode:43/500, real avg travel time:218.27958387516256
+episode:43/500, median wait:32.0 (n=769)
+episode:44/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:0.8759765028953552, rewards:-3.6427781846788196, queue:5.531770833333334, delay:0.04543544981214735, throughput:689
+episode:44/500, real avg travel time:214.37155297532655
+episode:44/500, median wait:31.0 (n=689)
+episode:45/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:0.8338243365287781, rewards:-4.002777777777778, queue:5.603125, delay:0.047933271196153426, throughput:728
+episode:45/500, real avg travel time:216.8598901098901
+episode:45/500, median wait:29.0 (n=728)
+episode:46/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:0.8189201951026917, rewards:-3.801666259765625, queue:5.607291666666667, delay:0.048983197742038305, throughput:721
+episode:46/500, real avg travel time:218.75450762829405
+episode:46/500, median wait:35.0 (n=721)
+episode:47/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:0.7969921827316284, rewards:-4.262777370876736, queue:5.596527777777778, delay:0.049344539642333984, throughput:742
+episode:47/500, real avg travel time:217.32614555256066
+episode:47/500, median wait:32.0 (n=742)
+episode:48/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:0.7756456136703491, rewards:-3.9727779812282984, queue:5.563194444444444, delay:0.0465507984161377, throughput:747
+episode:48/500, real avg travel time:208.5528781793842
+episode:48/500, median wait:30.0 (n=747)
+episode:49/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:0.7630974054336548, rewards:-3.7861117892795138, queue:5.6375, delay:0.05137677192687988, throughput:716
+episode:49/500, real avg travel time:226.0558659217877
+episode:49/500, median wait:33.0 (n=716)
+cycle_mean cycle=4 m_prev=33.95 m_curr=31.60 rel=-0.0692 delta=-2.35 flat=False improved=True patience=0/3
+episode:50/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:0.7510842084884644, rewards:-4.556111314561632, queue:5.553472222222222, delay:0.04559345775180393, throughput:678
+episode:50/500, real avg travel time:214.28761061946904
+episode:50/500, median wait:34.0 (n=678)
+HELDOUT episode:50/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:216.8663853727145, rewards:-4.428888278537326, queue:5.580034722222222, delay:0.04731938044230143, throughput:711
+HELDOUT episode:50/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:33.0
+HELDOUT episode:50/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:212.13245033112582, rewards:-4.028333197699653, queue:5.5628472222222225, delay:0.04777453210618761, throughput:755
+HELDOUT episode:50/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:30.0
+HELDOUT episode:50/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:213.65934065934067, rewards:-4.114444308810764, queue:5.587326388888889, delay:0.04787504408094618, throughput:728
+HELDOUT episode:50/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:28.0
+HELDOUT_MEAN episode:50/500, travel time:214.2193921210603 (n=3)
+New best heldout ATT=214.2194 at episode 50 (saved model/best_*.pt)
+episode:51/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:0.7373552322387695, rewards:-3.526111518012153, queue:5.566493055555555, delay:0.04717068672180176, throughput:719
+episode:51/500, real avg travel time:216.3337969401947
+episode:51/500, median wait:30.0 (n=719)
+episode:52/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:0.7304192185401917, rewards:-3.712222629123264, queue:5.628298611111111, delay:0.05086800787183973, throughput:725
+episode:52/500, real avg travel time:218.39586206896553
+episode:52/500, median wait:32.0 (n=725)
+episode:53/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:0.726808488368988, rewards:-4.505555216471354, queue:5.623784722222222, delay:0.0522857666015625, throughput:783
+episode:53/500, real avg travel time:216.53256704980842
+episode:53/500, median wait:30.0 (n=783)
+episode:54/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:0.7250844240188599, rewards:-3.7616668701171876, queue:5.5125, delay:0.043822431564331056, throughput:686
+episode:54/500, real avg travel time:208.23615160349854
+episode:54/500, median wait:29.0 (n=686)
+episode:55/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:0.7173289060592651, rewards:-3.7677781846788196, queue:5.573090277777778, delay:0.04739337497287326, throughput:726
+episode:55/500, real avg travel time:213.43526170798899
+episode:55/500, median wait:31.0 (n=726)
+episode:56/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:0.7075418829917908, rewards:-3.205000474717882, queue:5.566145833333334, delay:0.04660264121161567, throughput:723
+episode:56/500, real avg travel time:214.3914246196404
+episode:56/500, median wait:30.0 (n=723)
+episode:57/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:0.7022573947906494, rewards:-3.941666666666667, queue:5.540451388888889, delay:0.0461433834499783, throughput:741
+episode:57/500, real avg travel time:210.8488529014845
+episode:57/500, median wait:29.0 (n=741)
+episode:58/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:0.6990642547607422, rewards:-4.047221544053819, queue:5.559375, delay:0.04672927856445312, throughput:748
+episode:58/500, real avg travel time:208.1831550802139
+episode:58/500, median wait:27.0 (n=748)
+episode:59/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:0.6835275292396545, rewards:-3.709445529513889, queue:5.540451388888889, delay:0.047448380788167314, throughput:718
+episode:59/500, real avg travel time:213.3551532033426
+episode:59/500, median wait:29.5 (n=718)
+cycle_mean cycle=5 m_prev=31.60 m_curr=30.15 rel=-0.0459 delta=-1.45 flat=True improved=False patience=1/3
+episode:60/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:0.6753687262535095, rewards:-3.520555623372396, queue:5.4996527777777775, delay:0.04004471831851535, throughput:680
+episode:60/500, real avg travel time:205.21470588235294
+episode:60/500, median wait:25.0 (n=680)
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:206.7134831460674, rewards:-4.000000678168403, queue:5.506423611111111, delay:0.043185128106011286, throughput:712
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:27.0
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:210.75534759358288, rewards:-4.062222290039062, queue:5.5609375, delay:0.04871910942925347, throughput:748
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:31.0
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:206.53185595567868, rewards:-3.719443766276042, queue:5.5472222222222225, delay:0.04721819029914008, throughput:722
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:24.0
+HELDOUT_MEAN episode:60/500, travel time:208.000228898443 (n=3)
+New best heldout ATT=208.0002 at episode 60 (saved model/best_*.pt)
+episode:61/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:0.6683976650238037, rewards:-3.8844445122612847, queue:5.553993055555556, delay:0.04764017528957791, throughput:710
+episode:61/500, real avg travel time:212.44366197183098
+episode:61/500, median wait:27.0 (n=710)
+episode:62/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:0.6620184779167175, rewards:-3.3850002712673612, queue:5.543923611111111, delay:0.04786382251315647, throughput:732
+episode:62/500, real avg travel time:208.2486338797814
+episode:62/500, median wait:26.0 (n=732)
+episode:63/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:0.6629644632339478, rewards:-4.423333740234375, queue:5.625520833333334, delay:0.05280890464782715, throughput:778
+episode:63/500, real avg travel time:214.89203084832906
+episode:63/500, median wait:29.0 (n=778)
+episode:64/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:0.6492195725440979, rewards:-3.203334214952257, queue:5.528298611111111, delay:0.04475608931647407, throughput:689
+episode:64/500, real avg travel time:211.53701015965166
+episode:64/500, median wait:28.0 (n=689)
+episode:65/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:0.6407805681228638, rewards:-3.5200008816189237, queue:5.600520833333333, delay:0.04942751460605198, throughput:722
+episode:65/500, real avg travel time:215.49307479224376
+episode:65/500, median wait:30.0 (n=722)
+episode:66/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:0.6439607739448547, rewards:-3.4800001356336807, queue:5.542013888888889, delay:0.04655637741088867, throughput:722
+episode:66/500, real avg travel time:210.24930747922437
+episode:66/500, median wait:28.5 (n=722)
+episode:67/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:0.6355980634689331, rewards:-3.5916673448350696, queue:5.608159722222222, delay:0.04948659472995334, throughput:736
+episode:67/500, real avg travel time:213.2336956521739
+episode:67/500, median wait:28.0 (n=736)
+episode:68/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:0.6393399834632874, rewards:-3.8805552164713544, queue:5.5578125, delay:0.04733838505215115, throughput:749
+episode:68/500, real avg travel time:207.935914552737
+episode:68/500, median wait:26.0 (n=749)
+episode:69/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:0.6402289867401123, rewards:-3.605554877387153, queue:5.576909722222222, delay:0.048362350463867186, throughput:714
+episode:69/500, real avg travel time:216.11344537815125
+episode:69/500, median wait:27.0 (n=714)
+cycle_mean cycle=6 m_prev=30.15 m_curr=27.45 rel=-0.0896 delta=-2.70 flat=False improved=True patience=0/3
+episode:70/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:0.6397144198417664, rewards:-3.3688893636067707, queue:5.516319444444444, delay:0.042883878284030494, throughput:677
+episode:70/500, real avg travel time:208.61742983751847
+episode:70/500, median wait:27.0 (n=677)
+HELDOUT episode:70/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:209.78902953586498, rewards:-3.828333197699653, queue:5.540451388888889, delay:0.04543830023871528, throughput:711
+HELDOUT episode:70/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:28.0
+HELDOUT episode:70/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:211.23466666666667, rewards:-4.169444105360243, queue:5.563020833333334, delay:0.0488345464070638, throughput:750
+HELDOUT episode:70/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:25.0
+HELDOUT episode:70/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:206.125, rewards:-4.076666937934028, queue:5.537847222222222, delay:0.04694493611653646, throughput:728
+HELDOUT episode:70/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:25.0
+HELDOUT_MEAN episode:70/500, travel time:209.0495654008439 (n=3)
+episode:71/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:0.6340804100036621, rewards:-3.194999525282118, queue:5.541840277777778, delay:0.046049573686387804, throughput:707
+episode:71/500, real avg travel time:205.92786421499292
+episode:71/500, median wait:25.0 (n=707)
+episode:72/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:0.6331844925880432, rewards:-3.666110568576389, queue:5.581944444444445, delay:0.05002146297030979, throughput:728
+episode:72/500, real avg travel time:212.47115384615384
+episode:72/500, median wait:28.0 (n=728)
+episode:73/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:0.6299534440040588, rewards:-3.8394449869791667, queue:5.595486111111111, delay:0.048445701599121094, throughput:786
+episode:73/500, real avg travel time:211.3562340966921
+episode:73/500, median wait:26.5 (n=786)
+episode:74/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:0.6342345476150513, rewards:-3.6455563015407986, queue:5.493576388888889, delay:0.0423177613152398, throughput:699
+episode:74/500, real avg travel time:209.05150214592274
+episode:74/500, median wait:25.0 (n=699)
+episode:75/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:0.6264756917953491, rewards:-3.463333468967014, queue:5.587152777777778, delay:0.04740032619900174, throughput:727
+episode:75/500, real avg travel time:215.3617606602476
+episode:75/500, median wait:28.0 (n=727)
+episode:76/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:0.6249566674232483, rewards:-3.334444851345486, queue:5.530208333333333, delay:0.04545796712239583, throughput:727
+episode:76/500, real avg travel time:209.55845942228336
+episode:76/500, median wait:28.0 (n=727)
+episode:77/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:0.6225305199623108, rewards:-3.852222357855903, queue:5.566145833333334, delay:0.04936104350619846, throughput:739
+episode:77/500, real avg travel time:211.68200270635995
+episode:77/500, median wait:27.0 (n=739)
+episode:78/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:0.6205974817276001, rewards:-3.581110297309028, queue:5.524305555555555, delay:0.045189253489176434, throughput:749
+episode:78/500, real avg travel time:206.10814419225633
+episode:78/500, median wait:25.0 (n=749)
+episode:79/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:0.6216199398040771, rewards:-3.389443630642361, queue:5.536111111111111, delay:0.04522052341037326, throughput:718
+episode:79/500, real avg travel time:211.40529247910862
+episode:79/500, median wait:30.0 (n=718)
+cycle_mean cycle=7 m_prev=27.45 m_curr=26.95 rel=-0.0182 delta=-0.50 flat=True improved=False patience=1/3
+episode:80/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:0.6155673265457153, rewards:-3.317776828342014, queue:5.482465277777778, delay:0.04206135802798801, throughput:678
+episode:80/500, real avg travel time:205.09734513274336
+episode:80/500, median wait:24.0 (n=678)
+HELDOUT episode:80/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:207.39106145251398, rewards:-3.7477783203125, queue:5.519965277777778, delay:0.04392858611212836, throughput:716
+HELDOUT episode:80/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:27.0
+HELDOUT episode:80/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:212.97733333333332, rewards:-4.1299997965494795, queue:5.577604166666666, delay:0.04863796234130859, throughput:750
+HELDOUT episode:80/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:27.0
+HELDOUT episode:80/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:211.87654320987653, rewards:-3.910000271267361, queue:5.559375, delay:0.047059747907850474, throughput:729
+HELDOUT episode:80/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:26.0
+HELDOUT_MEAN episode:80/500, travel time:210.7483126652413 (n=3)
+episode:81/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:0.6070441603660583, rewards:-3.780556233723958, queue:5.572743055555556, delay:0.046644539303249785, throughput:716
+episode:81/500, real avg travel time:213.77374301675977
+episode:81/500, median wait:29.0 (n=716)
+episode:82/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:0.6136468052864075, rewards:-3.5766669379340277, queue:5.564583333333333, delay:0.047803105248345266, throughput:725
+episode:82/500, real avg travel time:212.1255172413793
+episode:82/500, median wait:28.0 (n=725)
+episode:83/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:0.6113443970680237, rewards:-3.739445326063368, queue:5.590277777777778, delay:0.049387719896104604, throughput:781
+episode:83/500, real avg travel time:211.9897567221511
+episode:83/500, median wait:25.0 (n=781)
+episode:84/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:0.6137549877166748, rewards:-2.980554877387153, queue:5.477256944444444, delay:0.040597838825649685, throughput:696
+episode:84/500, real avg travel time:205.058908045977
+episode:84/500, median wait:21.0 (n=696)
+episode:85/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:0.6076175570487976, rewards:-3.212222629123264, queue:5.562326388888889, delay:0.04549738566080729, throughput:734
+episode:85/500, real avg travel time:213.87057220708448
+episode:85/500, median wait:28.0 (n=734)
+episode:86/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:0.6100082397460938, rewards:-3.860000949435764, queue:5.573090277777778, delay:0.04630196889241536, throughput:724
+episode:86/500, real avg travel time:213.96408839779005
+episode:86/500, median wait:26.0 (n=724)
+episode:87/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:0.6103973984718323, rewards:-3.7627773708767362, queue:5.518923611111111, delay:0.04496967527601454, throughput:742
+episode:87/500, real avg travel time:206.36253369272237
+episode:87/500, median wait:26.0 (n=742)
+episode:88/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:0.6084015965461731, rewards:-4.215000745985243, queue:5.5421875, delay:0.04396461645762126, throughput:746
+episode:88/500, real avg travel time:202.19839142091152
+episode:88/500, median wait:23.0 (n=746)
+episode:89/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:0.6090415120124817, rewards:-3.3277774386935763, queue:5.543923611111111, delay:0.04729684193929037, throughput:721
+episode:89/500, real avg travel time:211.92649098474342
+episode:89/500, median wait:27.0 (n=721)
+cycle_mean cycle=8 m_prev=26.95 m_curr=25.70 rel=-0.0464 delta=-1.25 flat=True improved=False patience=2/3
+episode:90/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_00.rou.xml
+step:1800/1800, q_loss:0.6060818433761597, rewards:-3.408332994249132, queue:5.522743055555556, delay:0.04275328318277995, throughput:680
+episode:90/500, real avg travel time:209.73529411764707
+episode:90/500, median wait:26.5 (n=680)
+HELDOUT episode:90/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:211.30575035063114, rewards:-3.621111043294271, queue:5.548611111111111, delay:0.04586509068806966, throughput:713
+HELDOUT episode:90/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:28.0
+HELDOUT episode:90/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:211.36048064085446, rewards:-3.5088880750868054, queue:5.5491319444444445, delay:0.0470980962117513, throughput:749
+HELDOUT episode:90/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:25.0
+HELDOUT episode:90/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:210.4366391184573, rewards:-3.413332790798611, queue:5.564409722222222, delay:0.047530916002061635, throughput:726
+HELDOUT episode:90/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:24.0
+HELDOUT_MEAN episode:90/500, travel time:211.0342900366476 (n=3)
+episode:91/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_01.rou.xml
+step:1800/1800, q_loss:0.6048853397369385, rewards:-3.0533338758680557, queue:5.539930555555555, delay:0.044899574915568036, throughput:715
+episode:91/500, real avg travel time:210.36223776223775
+episode:91/500, median wait:26.0 (n=715)
+episode:92/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_02.rou.xml
+step:1800/1800, q_loss:0.6017545461654663, rewards:-3.6283335367838543, queue:5.523263888888889, delay:0.04476776123046875, throughput:733
+episode:92/500, real avg travel time:206.47339699863574
+episode:92/500, median wait:24.0 (n=733)
+episode:93/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_03.rou.xml
+step:1800/1800, q_loss:0.6029301285743713, rewards:-3.638888888888889, queue:5.606597222222222, delay:0.04942598872714572, throughput:780
+episode:93/500, real avg travel time:213.7423076923077
+episode:93/500, median wait:27.0 (n=780)
+episode:94/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_04.rou.xml
+step:1800/1800, q_loss:0.6058576107025146, rewards:-3.0511111789279513, queue:5.510763888888889, delay:0.04402710596720378, throughput:695
+episode:94/500, real avg travel time:209.8388489208633
+episode:94/500, median wait:26.0 (n=695)
+episode:95/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_05.rou.xml
+step:1800/1800, q_loss:0.6018602848052979, rewards:-3.010555691189236, queue:5.567708333333333, delay:0.046436617109510636, throughput:727
+episode:95/500, real avg travel time:211.16781292984868
+episode:95/500, median wait:24.0 (n=727)
+episode:96/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_06.rou.xml
+step:1800/1800, q_loss:0.6050778031349182, rewards:-3.2872222900390624, queue:5.545486111111111, delay:0.04643440776401096, throughput:726
+episode:96/500, real avg travel time:210.93112947658403
+episode:96/500, median wait:27.0 (n=726)
+episode:97/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_07.rou.xml
+step:1800/1800, q_loss:0.6049025654792786, rewards:-3.638333468967014, queue:5.6140625, delay:0.04910018179151747, throughput:735
+episode:97/500, real avg travel time:216.41904761904763
+episode:97/500, median wait:31.0 (n=735)
+episode:98/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_08.rou.xml
+step:1800/1800, q_loss:0.6032463312149048, rewards:-3.589443630642361, queue:5.569444444444445, delay:0.04666793611314562, throughput:754
+episode:98/500, real avg travel time:210.3580901856764
+episode:98/500, median wait:26.0 (n=754)
+episode:99/500, train_demand:raw_data/grid4x4/od_hubs/demand_set/train_09.rou.xml
+step:1800/1800, q_loss:0.6105816960334778, rewards:-3.3188890245225693, queue:5.528125, delay:0.04492046568128798, throughput:718
+episode:99/500, real avg travel time:210.9623955431755
+episode:99/500, median wait:29.0 (n=718)
+cycle_mean cycle=9 m_prev=25.70 m_curr=26.65 rel=+0.0370 delta=+0.95 flat=True improved=False patience=3/3
+early_stop at episode 99/500 (cycle_mean wait, m=26.65, best ATT=208.00 at episode 60, source=heldout)
+reloaded best checkpoint from episode 60 (ATT=208.00, source=heldout)
+HELDOUT episode:500/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:210.13769123783032, rewards:-3.896112060546875, queue:5.519965277777778, delay:0.04389064576890733, throughput:719
+HELDOUT episode:500/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:29.0
+Saved 780 vehicle trip records to data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/l2_odh_posthetero/logger/new_metrics_hold_00.csv (ATT=210.14s, completion=92.2%)
+HELDOUT episode:500/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:207.76305220883535, rewards:-4.127222018771701, queue:5.5543402777777775, delay:0.04815913306342231, throughput:747
+HELDOUT episode:500/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:27.0
+Saved 817 vehicle trip records to data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/l2_odh_posthetero/logger/new_metrics_hold_01.csv (ATT=207.76s, completion=91.4%)
+HELDOUT episode:500/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:211.01381215469613, rewards:-3.8477776421440972, queue:5.571701388888889, delay:0.049669075012207034, throughput:724
+HELDOUT episode:500/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:29.0
+Saved 795 vehicle trip records to data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/l2_odh_posthetero/logger/new_metrics_hold_02.csv (ATT=211.01s, completion=91.1%)
+HELDOUT_MEAN episode:500/500, travel time:209.63818520045393 (n=3)
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, travel time:211.5874125874126, rewards:-4.020555962456597, queue:5.536458333333333, delay:0.04442362785339356, throughput:715
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_00.rou.xml, median wait:26.0
+Saved 780 vehicle trip records to data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/l2_odh_posthetero/logger/new_metrics_best_hold_00.csv (ATT=211.59s, completion=91.7%)
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, travel time:211.1818181818182, rewards:-4.093332926432292, queue:5.567534722222222, delay:0.049716642167833114, throughput:748
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_01.rou.xml, median wait:28.0
+Saved 817 vehicle trip records to data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/l2_odh_posthetero/logger/new_metrics_best_hold_01.csv (ATT=211.18s, completion=91.6%)
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, travel time:207.1611111111111, rewards:-3.8227776421440973, queue:5.568402777777778, delay:0.047199153900146486, throughput:720
+HELDOUT episode:60/500, demand:raw_data/grid4x4/od_hubs/demand_set/hold_02.rou.xml, median wait:28.0
+Saved 795 vehicle trip records to data/output_data/tsc/sumo_presslight_odh_l2/sumo4x4/l2_odh_posthetero/logger/new_metrics_best_hold_02.csv (ATT=207.16s, completion=90.6%)
+HELDOUT_MEAN episode:60/500, travel time:209.97678062678062 (n=3)
+Total time taken: 2004.4989097118378
